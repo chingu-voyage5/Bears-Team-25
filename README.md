@@ -1,2 +1,1 @@
-# Bears-Team-25
-Add-project-description-here | Voyage-5 | chingu.io
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
