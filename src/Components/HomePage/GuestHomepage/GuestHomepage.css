@@ -9,3 +9,12 @@ h1{
 	margin-left:10%;
 	margin-right: 10%;
 }
+.text{
+	font-size:1.1rem;
+}
+.text>p{
+	font-size:1.1rem;
+	line-height: 1.5rem;
+	font-weight: 500;
+	color:#111;
+}
