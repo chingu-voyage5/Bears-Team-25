@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import logo from "../../Common/Images/Background.png";
 import "./GuestHomepage.css";
 
@@ -45,7 +46,43 @@ class GuestHomepage extends Component {
 				alt={contents.alt}
 			/>
 		));
-		return <div className="guest-homepage">{rowsList}</div>;
+		return (
+			<div className="guest-homepage">
+				<FeatureRow
+					heading={data.details[0].heading}
+					content={data.details[0].content}
+				/>
+				<TryItOutRow />
+				{rowsList}
+			</div>
+		);
+	}
+}
+
+class TryItOutRow extends Component {
+	render() {
+		const heading =
+			"IFTTT helps your apps and devices work together in new ways";
+		const content =
+			"We’ll show you some of our favorite pairings. Just turn on what you like and we’ll make it happen for you.";
+		return (
+			<div className="try-out-row feature-row text">
+				<Grid container spacing={24}>
+					<Grid item sm={12}>
+						<div className="text-center">
+							<h1>{heading}</h1>
+						</div>
+					</Grid>
+					<Grid item sm={5} className="text">
+						<p>{content}</p>
+					</Grid>
+					<Grid item sm={4} />
+					<Grid item sm={3}>
+						<Button variant="outlined" className="try-it-button">Try it out today</Button>
+					</Grid>
+				</Grid>
+			</div>
+		);
 	}
 }
 
@@ -70,6 +107,7 @@ class FeatureRow extends Component {
 					</div>
 				</Grid>
 			);
+
 		const SecondContent =
 			alt == "Y" ? (
 				<Grid item sm={5}>
@@ -83,13 +121,12 @@ class FeatureRow extends Component {
 					<img src={logo} className="logo" />
 				</Grid>
 			);
+
 		return (
 			<div className="feature-row">
 				<Grid container spacing={24}>
 					{FirstContent}
-
 					<Grid item sm={2} />
-
 					{SecondContent}
 				</Grid>
 			</div>
