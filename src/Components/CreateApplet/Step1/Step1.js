@@ -13,52 +13,40 @@ import "./Step1.css";
 class Step1 extends Component {
 	render() {
 		const ServiceList = {
-			people: [
+			list: [
 				{
 					name: "Mail",
-					color: "red"
+					color: "maroon"
 				},
 				{
-					name: "Mail",
-					color: "red"
+					name: "Twitter",
+					color: "blue"
 				},
 				{
-					name: "Mail",
-					color: "red"
+					name: "Facebook",
+					color: "Green"
 				},
 				{
-					name: "Mail",
-					color: "red"
+					name: "Youtube",
+					color: "maroon"
 				},
 				{
-					name: "Mail",
-					color: "red"
+					name: "Google+",
+					color: "green"
 				},
 				{
-					name: "Mail",
-					color: "red"
-				},
-				{
-					name: "Mail",
-					color: "red"
-				},
-				{
-					name: "Mail",
-					color: "red"
-				},
-				{
-					name: "Mail",
-					color: "red"
+					name: "Instagram",
+					color: "blue"
 				}
 			]
 		};
 
-		const createServiceList = ServiceList.people.map(service => (
+		const createServiceList = ServiceList.list.map(service => (
 			<Grid item sm={3}>
-				<Card className="card">
+				<Card className="card" style={{backgroundColor:service.color}}>
 					<div className="text-center media-icon">
 						<CardMedia>
-							<FontAwesomeIcon icon={faCoffee} size="6x" />
+							<FontAwesomeIcon icon={faCoffee} size="6x" style={{color:"#fff"}}/>
 						</CardMedia>
 					</div>
 					<CardContent>
@@ -67,6 +55,7 @@ class Step1 extends Component {
 							variant="headline"
 							className="text-center"
 							component="h2"
+							style={{color:"#fff"}}
 						>
 							{service.name}
 						</Typography>
