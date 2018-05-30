@@ -4,6 +4,20 @@
 	margin-top: 5%;
 }
 .action-card{
-	width:220px;
-	height: 220px;
+	width:275px;
+	height:225px;
+	padding-top: 25px;
+	background-color:rgb(0,121,191)!important;
+}
+.action-card h1{
+    font-weight: 800;
+    line-height: 1.125;
+    color:#fff;
+}
+.action-card p{
+	color: rgba(255,255,255,0.8);
+    font-size: 1.11rem;
+    font-weight: 700;
+    margin-top: 1em;
+    font-family: "Avenir Next W01", "Avenir Next", "Avenir", helvetica, arial, sans-serif;
 }

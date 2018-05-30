@@ -18,7 +18,7 @@ class ActionCard extends Component {
 							<Typography
 								gutterBottom
 								variant="headline"
-								component="h2"
+								component="h1"
 							>
 								{action.heading}
 							</Typography>
