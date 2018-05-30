@@ -1,3 +1,11 @@
 .text-center{
 	text-align: center;
 }
+.step{
+	margin-left:5%;
+	margin-right:5%;
+}
+.card{
+	height: 220px;
+	width:220px;
+}

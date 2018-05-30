@@ -27,7 +27,6 @@ class CreateApplet extends Component {
 		return (
 			<div className="create-applet">
 				<Step1 currentStep={currentStep} />
-				<button onClick={this._next}>Next</button>
 			</div>
 		);
 	}
