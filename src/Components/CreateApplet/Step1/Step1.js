@@ -6,27 +6,61 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import logo from "../../Common/Images/Background.png";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import faCoffee from "@fortawesome/fontawesome-free-solid/faCoffee";
 import "./Step1.css";
 
 class Step1 extends Component {
 	render() {
-		const ServiceList = [
-			"Mail",
-			"Clock",
-			"Twitter",
-			"Github",
-			"Youtube",
-			"Gmail",
-			"Instagram",
-			"Facebook",
-			"Google+",
-			"Pininterest"
-		];
+		const ServiceList = {
+			people: [
+				{
+					name: "Mail",
+					color: "red"
+				},
+				{
+					name: "Mail",
+					color: "red"
+				},
+				{
+					name: "Mail",
+					color: "red"
+				},
+				{
+					name: "Mail",
+					color: "red"
+				},
+				{
+					name: "Mail",
+					color: "red"
+				},
+				{
+					name: "Mail",
+					color: "red"
+				},
+				{
+					name: "Mail",
+					color: "red"
+				},
+				{
+					name: "Mail",
+					color: "red"
+				},
+				{
+					name: "Mail",
+					color: "red"
+				}
+			]
+		};
 
-		const createServiceList = ServiceList.map(service => (
+		const createServiceList = ServiceList.people.map(service => (
 			<Grid item sm={3}>
 				<Card className="card">
-					<CardMedia image={logo} />
+					<div className="text-center media-icon">
+						<CardMedia>
+							<FontAwesomeIcon icon={faCoffee} size="6x" />
+						</CardMedia>
+					</div>
 					<CardContent>
 						<Typography
 							gutterBottom
@@ -34,7 +68,7 @@ class Step1 extends Component {
 							className="text-center"
 							component="h2"
 						>
-							{service}
+							{service.name}
 						</Typography>
 					</CardContent>
 				</Card>
