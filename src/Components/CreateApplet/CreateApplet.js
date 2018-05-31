@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 // import Step1 from "./Step1/Step1";
 // import Step2 from "./Step2/Step2";
-import Step3 from "./Step3/Step3";
+// import Step3 from "./Step3/Step3";
+// import Step4 from "./Step4/Step4";
+import Step5 from "./Step5/Step5";
 
 class CreateApplet extends Component {
 	constructor(props) {
@@ -26,7 +28,7 @@ class CreateApplet extends Component {
 		let currentStep = this.state.currentStep;
 		return (
 			<div className="create-applet">
-				<Step3 currentStep={currentStep} />
+				<Step5 currentStep={currentStep} />
 			</div>
 		);
 	}

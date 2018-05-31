@@ -1,0 +1,51 @@
+.center-button{
+	margin-left: auto!important;
+	margin-right: auto!important;
+}
+.action-field-card{
+	margin-top: 5%;
+}
+.card{
+	border:1px solid black!important;
+	background-color: #730AFF!important;
+	width:375px;
+	height:500px;
+	margin-left: auto!important;
+	margin-right: auto!important;
+}
+.white-text{
+	color:white;
+	text-align:left;
+}
+.white-button{
+	background-color: white!important;
+	color:black!important;
+}
+.label{
+	margin-right:10px;
+}
+.data-field{
+	margin-top: 40px;
+	text-align: left;
+}
+.add-btn{
+	margin-top: 10px!important;
+	border-radius: 10px !important;
+}
+.data-field input{
+	border:3px solid lightblue;
+	border-radius: 5px;
+	width:100%;
+}
+.data-field textarea{
+	border:6px solid lightblue;
+	border-radius: 10px;
+	width:100%;
+	height:40px;
+}
+.submit-btn{
+	border-radius: 50px!important;
+}
+.right-align{
+	text-align: right;
+}
