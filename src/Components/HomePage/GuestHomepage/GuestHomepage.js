@@ -7,12 +7,6 @@ import "./GuestHomepage.css";
 const data = {
 	details: [
 		{
-			heading: "A world that works for you",
-			content:
-				"IFTTT is the free way to get all your apps and devices talking to each other. Not everything on the internet plays nice, so we're on a mission to build a more connected world.",
-			alt: "N"
-		},
-		{
 			heading: "Post your photo anywhere and see it everywhere",
 			content:
 				"We help social media play nice together. Never tweet a link instead of a picture again!",
@@ -78,7 +72,9 @@ class TryItOutRow extends Component {
 					</Grid>
 					<Grid item sm={4} />
 					<Grid item sm={3}>
-						<Button variant="outlined" className="try-it-button">Try it out today</Button>
+						<Button variant="outlined" className="try-it-button">
+							Try it out today
+						</Button>
 					</Grid>
 				</Grid>
 			</div>
@@ -92,18 +88,28 @@ class FeatureRow extends Component {
 
 		this.state = {};
 	}
+	// <img src={logo} className="logo" />
 	render() {
 		const alt = this.props.alt;
 		const FirstContent =
 			alt == "Y" ? (
-				<Grid item sm={5}>
-					<img src={logo} className="logo" />
+				<Grid item sm={5} className="image1">
+					<div >
+					</div>
 				</Grid>
 			) : (
 				<Grid item sm={4}>
 					<div className="text">
 						<h1>{this.props.heading}</h1>
 						<p>{this.props.content}</p>
+						<Button
+							variant="raised"
+							color="primary"
+							size="large"
+							className="add-btn submit-btn"
+						>
+							Try it out
+						</Button>
 					</div>
 				</Grid>
 			);
@@ -114,6 +120,14 @@ class FeatureRow extends Component {
 					<div className="text">
 						<h1>{this.props.heading}</h1>
 						<p>{this.props.content}</p>
+						<Button
+							variant="raised"
+							color="primary"
+							size="large"
+							className="add-btn submit-btn"
+						>
+							Try it out
+						</Button>
 					</div>
 				</Grid>
 			) : (

@@ -1,3 +1,6 @@
+.guest-homepage{
+	margin-bottom: 10%;
+}
 .logo{
 	margin-top:10%;
 	width:115%;
@@ -26,4 +29,16 @@ h1{
 	border-radius: 35px!important;
 	border:2px solid black!important;
 	font-size: 1.2rem!important;
+}
+.submit-btn{
+	border-radius: 50px!important;
+}
+.add-btn{
+	margin-top: 10px!important;
+	border-radius: 10px !important;
+}
+.image1{
+	background-image: url(../../Common/Images/Background.png);
+	width: inherit;
+	height: inherit;
 }
