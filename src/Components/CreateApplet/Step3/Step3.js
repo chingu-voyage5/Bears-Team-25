@@ -35,7 +35,7 @@ class Step1 extends Component {
 		};
 
 		return (
-			<div className="step">
+			<div className="step-3">
 				<div className="text-center">
 					<h1>Choose action service</h1>
 				</div>

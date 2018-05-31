@@ -40,7 +40,7 @@ class ActionFieldCard extends Component {
 							<span className="white-text">Send me an email</span>
 						</Typography>
 						<Typography component="p">
-							<span className="white-text">
+							<span className="white-text text">
 								This Action will send you an HTML based email.
 								Images and links are supported.
 							</span>

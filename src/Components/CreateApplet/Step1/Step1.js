@@ -35,14 +35,13 @@ class Step1 extends Component {
 		};
 
 		return (
-			<div className="step">
+			<div className="step-1">
 				<div className="text-center">
 					<h1>Choose a service</h1>
 				</div>
 				<div className="text-center">
 					<p>Step 1 of 6</p>
 				</div>
-
 				<ServiceCard json={ServiceList} />
 			</div>
 		);

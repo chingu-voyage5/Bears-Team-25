@@ -1,4 +1,4 @@
-textarea{
+.step-6 textarea{
 	border: 0.25em solid #eee;
 	background: none;
 	color: white;
@@ -17,9 +17,13 @@ textarea{
 .totalChars{
 	text-align:right;
 }
-.card{
+.step-6 .card{
 	height: auto;
 	background-color: rgb(51,51,51)!important;
+	width:375px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 .card-footer{
 	background: rgba(0,0,0,0.2);
