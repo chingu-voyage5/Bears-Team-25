@@ -30,46 +30,44 @@ class ActionFieldCard extends Component {
 	render() {
 		return (
 			<div className="action-field-card">
-						<Card className="card">
-							<CardContent className="white-text">
-								<Typography
-									gutterBottom
-									variant="headline"
-									component="h1"
-								>
-									<span className="white-text">
-										Send me an email
-									</span>
-								</Typography>
-								<Typography component="p">
-									<span className="white-text">
-										This Action will send you an HTML based
-										email. Images and links are supported.
-									</span>
-								</Typography>
-								<DataField
-									label="Subject:"
-									input="input"
-									btnText="button-text"
-								/>
-								<DataField
-									label="Body:"
-									input="textArea"
-									btnText="button-text"
-								/>
-							</CardContent>
-							<CardActions>
-								<div className="center-button">
-									<Button
-										className="white-button submit-btn add-btn"
-										size="large"
-										color="primary"
-									>
-										Create action
-									</Button>
-								</div>
-							</CardActions>
-						</Card>
+				<Card className="card">
+					<CardContent className="white-text">
+						<Typography
+							gutterBottom
+							variant="headline"
+							component="h1"
+						>
+							<span className="white-text">Send me an email</span>
+						</Typography>
+						<Typography component="p">
+							<span className="white-text">
+								This Action will send you an HTML based email.
+								Images and links are supported.
+							</span>
+						</Typography>
+						<DataField
+							label="Subject:"
+							input="input"
+							btnText="button-text"
+						/>
+						<DataField
+							label="Body:"
+							input="textArea"
+							btnText="button-text"
+						/>
+					</CardContent>
+					<CardActions>
+						<div className="center-button">
+							<Button
+								className="white-button submit-btn add-btn"
+								size="large"
+								color="primary"
+							>
+								Create action
+							</Button>
+						</div>
+					</CardActions>
+				</Card>
 			</div>
 		);
 	}
@@ -93,13 +91,13 @@ const DataField = props => {
 			<strong className="label">{props.label}</strong>
 			{dataBox}
 			<div className="right-align">
-			<Button
-				className="white-button add-btn"
-				size="small"
-				color="primary"
-			>
-				Add ingredient
-			</Button>
+				<Button
+					className="white-button add-btn"
+					size="small"
+					color="primary"
+				>
+					Add ingredient
+				</Button>
 			</div>
 		</div>
 	);
