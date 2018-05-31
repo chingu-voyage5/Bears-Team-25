@@ -42,9 +42,8 @@ class Step1 extends Component {
 				<div className="text-center">
 					<p>Step 1 of 6</p>
 				</div>
-				
-					<ServiceCard json={ServiceList}/>
-				
+
+				<ServiceCard json={ServiceList} />
 			</div>
 		);
 	}
