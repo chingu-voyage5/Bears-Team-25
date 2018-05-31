@@ -29,7 +29,7 @@ class CreateApplet extends Component {
 		let currentStep = this.state.currentStep;
 		return (
 			<div className="create-applet">
-				<Step6 currentStep={currentStep} />
+				<Step4 currentStep={currentStep} />
 			</div>
 		);
 	}

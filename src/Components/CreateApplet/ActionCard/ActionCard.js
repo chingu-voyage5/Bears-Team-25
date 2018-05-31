@@ -15,16 +15,12 @@ class ActionCard extends Component {
 				<Grid item sm={3}>
 					<Card className="action-card">
 						<CardContent>
-							<Typography
-								gutterBottom
-								variant="headline"
-								component="h1"
-							>
+							<h2>
 								{action.heading}
-							</Typography>
-							<Typography component="p">
+							</h2>
+							<p>
 								{action.content}
-							</Typography>
+							</p>
 						</CardContent>
 					</Card>
 				</Grid>

@@ -7,12 +7,14 @@
 	width:275px;
 	height:225px;
 	padding-top: 25px;
-	background-color:rgb(0,121,191)!important;
+	background-color: rgb(36, 104, 255)!important;
 }
-.action-card h1{
+.action-card h2{
     font-weight: 800;
     line-height: 1.125;
     color:#fff;
+    line-height: 1.125;
+
 }
 .action-card p{
 	color: rgba(255,255,255,0.8);
