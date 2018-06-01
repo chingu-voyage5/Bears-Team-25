@@ -1,4 +1,4 @@
-.step-6 textarea{
+ .step-6 textarea{
 	border: 0.25em solid #eee;
 	background: none;
 	color: white;
@@ -29,10 +29,10 @@
 	background: rgba(0,0,0,0.2);
 	color:white;
 }
-.inline{
+.step-6 .inline{
 	display: inline-flex;
 }
-.text-inline{
+.step-6 .text-inline{
 	margin-right: 5px;
 }
 .step-6 .center-button{
