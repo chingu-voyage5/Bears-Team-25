@@ -16,7 +16,7 @@ class Step5 extends Component {
 		return (
 			<div className="step-5">
 				<div className="text-center">
-					<ActionFieldCard />
+					<ActionFieldCard afterValid={this.props.afterValid}/>
 				</div>
 			</div>
 		);
@@ -24,6 +24,17 @@ class Step5 extends Component {
 }
 
 class ActionFieldCard extends Component {
+	constructor(props) {
+	  super(props);
+	
+	  this.state = {};
+	  this._validate=this._validate.bind(this);
+	}
+	_validate() {
+		// a sanitized version of state can be passed instead
+		this.props.afterValid(this.state);
+		console.log("Clicked");
+	}
 	render() {
 		return (
 			<div className="action-field-card">
@@ -59,6 +70,7 @@ class ActionFieldCard extends Component {
 								className="white-button submit-btn add-btn"
 								size="large"
 								color="primary"
+								onClick={this._validate}
 							>
 								Create action
 							</Button>

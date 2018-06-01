@@ -4,6 +4,17 @@ import ServiceCard from "../ServiceCard/ServiceCard";
 import "./Step3.css";
 
 class Step1 extends Component {
+	constructor(props) {
+	  super(props);
+	
+	  this.state = {};
+	  this._validate=this._validate.bind(this);
+	}
+	_validate() {
+		// a sanitized version of state can be passed instead
+		this.props.afterValid(this.state);
+		console.log("Clicked");
+	}
 	render() {
 		const ServiceList = {
 			list: [
@@ -38,7 +49,7 @@ class Step1 extends Component {
 		}
 		return (
 			<div className="step-3">
-				<ServiceCard json={ServiceList} />
+				<ServiceCard json={ServiceList} validate={this._validate}/>
 			</div>
 		);
 	}
