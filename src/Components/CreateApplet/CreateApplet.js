@@ -17,7 +17,7 @@ class CreateApplet extends Component {
 	_next(data) {
 		let currentStep = this.state.currentStep;
 		if (currentStep >= 6) {
-			currentStep = 6;
+			currentStep = 4;
 		} else {
 			currentStep = currentStep + 1;
 		}
@@ -36,7 +36,11 @@ class CreateApplet extends Component {
 				<div className="text-center">
 					<p>Step {this.state.currentStep} of 6</p>
 				</div>
-				
+				<Step1 currentStep={currentStep} afterValid={this._next}/>
+				<Step2 currentStep={currentStep} afterValid={this._next}/>
+				<Step3 currentStep={currentStep} afterValid={this._next}/>
+				<Step4 currentStep={currentStep} afterValid={this._next}/>
+				<Step5 currentStep={currentStep} afterValid={this._next}/>
 				<Step6 currentStep={currentStep} afterValid={this._next}/>
 			</div>
 		);
@@ -46,8 +50,3 @@ class CreateApplet extends Component {
 export default CreateApplet;
 
 
-// <Step1 currentStep={currentStep} afterValid={this._next}/>
-// 				<Step2 currentStep={currentStep} afterValid={this._next}/>
-// 				<Step3 currentStep={currentStep} afterValid={this._next}/>
-// 				<Step4 currentStep={currentStep} afterValid={this._next}/>
-// 				<Step5 currentStep={currentStep} afterValid={this._next}/>

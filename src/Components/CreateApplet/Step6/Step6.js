@@ -16,13 +16,23 @@ class Step6 extends Component {
 		}
 		return (
 			<div className="step-6">
-				<ReviewCard validate={this._validate} />
+				<ReviewCard afterValid={this.props.afterValid} />
 			</div>
 		);
 	}
 }
 
 class ReviewCard extends Component {
+	constructor(props) {
+	  super(props);
+	  this.state = {};
+	  this._validate=this._validate.bind(this);
+	}
+	_validate() {
+		// a sanitized version of state can be passed instead
+		this.props.afterValid(this.state);
+		console.log("Clicked");
+	}
 	render() {
 		return (
 			<div className="review-card">
@@ -42,7 +52,7 @@ class ReviewCard extends Component {
 					</CardContent>
 				</Card>
 				<div className="center-button submit-button">
-					<Button variant="raised" size="large" color="primary">
+					<Button variant="raised" size="large" color="primary" onClick={this._validate}>
 						Finish
 					</Button>
 				</div>
