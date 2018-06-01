@@ -2,6 +2,15 @@ import React,{Component} from "react";
 import ActionCard from "../ActionCard/ActionCard";
 
 class Step2 extends Component{
+	constructor(props) {
+	  super(props);
+	  this.state = {};
+	  this._validate=this._validate.bind(this);
+	}
+	_validate() {
+		this.props.afterValid(this.state);
+		console.log("Clicked");
+	}
 	render(){
 		const TriggerList = {
 			list: [
@@ -36,7 +45,7 @@ class Step2 extends Component{
 		}
 		return(
 			<div className="step-2">
-				<ActionCard json={TriggerList} />
+				<ActionCard json={TriggerList} validate={this._validate}/>
 			</div>
 		);
 	}

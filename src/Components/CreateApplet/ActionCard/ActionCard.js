@@ -13,7 +13,7 @@ class ActionCard extends Component {
 	render() {
 		const ActionList = this.props.json.list.map(action => (
 				<Grid item sm={3}>
-					<Card className="action-card">
+					<Card className="action-card"  onClick={this.props.validate}>
 						<CardContent>
 							<h2>
 								{action.heading}
