@@ -10,14 +10,14 @@ class CreateApplet extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			currentStep: 6
+			currentStep: 1
 		};
 		this._next=this._next.bind(this);
 	}
 	_next(data) {
 		let currentStep = this.state.currentStep;
 		if (currentStep >= 6) {
-			currentStep = 4;
+			currentStep = 1;
 		} else {
 			currentStep = currentStep + 1;
 		}
