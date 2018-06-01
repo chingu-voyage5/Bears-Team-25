@@ -33,7 +33,9 @@ class Step1 extends Component {
 				}
 			]
 		};
-
+		if (this.props.currentStep !== 3) {
+			return null;
+		}
 		return (
 			<div className="step-3">
 				<ServiceCard json={ServiceList} />

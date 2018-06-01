@@ -31,6 +31,9 @@ class Step4 extends Component{
 				}
 			]
 		};
+		if (this.props.currentStep !== 4) {
+			return null;
+		}
 		return(
 			<div className="step-2">
 				<ActionCard json={TriggerList} />

@@ -10,6 +10,9 @@ import "./Step5.css";
 
 class Step5 extends Component {
 	render() {
+		if (this.props.currentStep !== 5) {
+			return null;
+		}
 		return (
 			<div className="step-5">
 				<div className="text-center">

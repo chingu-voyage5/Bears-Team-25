@@ -37,6 +37,11 @@ class CreateApplet extends Component {
 					<p>Step {this.state.currentStep} of 6</p>
 				</div>
 				<Step1 currentStep={currentStep} afterValid={this._next}/>
+				<Step2 currentStep={currentStep} afterValid={this._next}/>
+				<Step3 currentStep={currentStep} afterValid={this._next}/>
+				<Step4 currentStep={currentStep} afterValid={this._next}/>
+				<Step5 currentStep={currentStep} afterValid={this._next}/>
+				<Step6 currentStep={currentStep} afterValid={this._next}/>
 			</div>
 		);
 	}

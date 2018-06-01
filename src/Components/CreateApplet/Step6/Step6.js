@@ -10,6 +10,9 @@ import './Step6.css';
 
 class Step6 extends Component {
 	render() {
+		if (this.props.currentStep !== 6) {
+			return null;
+		}
 		return (
 			<div className="step-6">
 				<ReviewCard />
