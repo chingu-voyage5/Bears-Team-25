@@ -36,12 +36,6 @@ class Step1 extends Component {
 
 		return (
 			<div className="step-3">
-				<div className="text-center">
-					<h1>Choose action service</h1>
-				</div>
-				<div className="text-center">
-					<p>Step 3 of 6</p>
-				</div>
 				<ServiceCard json={ServiceList} />
 			</div>
 		);

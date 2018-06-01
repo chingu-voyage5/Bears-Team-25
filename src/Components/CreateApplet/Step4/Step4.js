@@ -33,12 +33,6 @@ class Step4 extends Component{
 		};
 		return(
 			<div className="step-2">
-				<div className="text-center">
-					<h1>Choose an action</h1>
-				</div>
-				<div className="text-center">
-					<p>Step 4 of 6</p>
-				</div>
 				<ActionCard json={TriggerList} />
 			</div>
 		);

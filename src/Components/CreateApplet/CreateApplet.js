@@ -10,7 +10,7 @@ class CreateApplet extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			currentStep: 0
+			currentStep: 1
 		};
 	}
 	_next(data) {
@@ -29,7 +29,13 @@ class CreateApplet extends Component {
 		let currentStep = this.state.currentStep;
 		return (
 			<div className="create-applet">
-				<Step4 currentStep={currentStep} />
+				<div className="text-center">
+					<h1>Choose a service</h1>
+				</div>
+				<div className="text-center">
+					<p>Step {this.state.currentStep} of 6</p>
+				</div>
+				<Step1 currentStep={currentStep} />
 			</div>
 		);
 	}

@@ -12,12 +12,6 @@ class Step6 extends Component {
 	render() {
 		return (
 			<div className="step-6">
-				<div className="text-center">
-					<h1>Review and finish</h1>
-				</div>
-				<div className="text-center">
-					<p>Step 6 of 6</p>
-				</div>
 				<ReviewCard />
 			</div>
 		);

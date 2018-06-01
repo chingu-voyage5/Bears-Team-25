@@ -13,12 +13,6 @@ class Step5 extends Component {
 		return (
 			<div className="step-5">
 				<div className="text-center">
-					<h1>Action Field</h1>
-				</div>
-				<div className="text-center">
-					<p>Step 5 of 6</p>
-				</div>
-				<div className="text-center">
 					<ActionFieldCard />
 				</div>
 			</div>
