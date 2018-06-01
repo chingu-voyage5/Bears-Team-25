@@ -18,9 +18,34 @@ class MyApplet extends Component {
 		this.state = {};
 	}
 	render() {
+		const appletList = {
+			list: [
+				{
+					content:
+						"If every hour at 00 minutes past the hour, then send me an email at randomemail@gmail.com"
+				},
+				{
+					content:
+						"If every hour at 00 minutes past the hour, then send me an email at randomemail@gmail.com"
+				},
+				{
+					content:
+						"If every hour at 00 minutes past the hour, then send me an email at randomemail@gmail.com"
+				},
+				{
+					content:
+						"If every hour at 00 minutes past the hour, then send me an email at randomemail@gmail.com"
+				}
+			]
+		};
+		const AppletList = appletList.list.map(applet => (
+			<AppletCard content={applet.content} />
+		));
 		return (
 			<div className="my-applet">
-				<AppletCard />
+				<Grid container spacing={24}>
+					{AppletList}
+				</Grid>
 			</div>
 		);
 	}
@@ -36,37 +61,44 @@ class AppletCard extends Component {
 		this.setState({ [name]: event.target.checked });
 	};
 	render() {
+		console.log(this.props.content);
 		return (
-			<div className="applet-card">
-				<Card className="card">
-					<CardContent className="white-text">
-						<ServiceLogo />
-						<TextArea />
-					</CardContent>
-					<CardContent className="card-footer">
-						<Grid container spacing={24}>
-						<Grid sm={8}>
-						<span className="left-align">
-							Running:<Switch
-								checked={this.state.checkedB}
-								onChange={this.handleChange("checkedB")}
-								value="checkedB"
-								color="primary"
-							/>
-						</span>
-						</Grid>
-						<Grid sm={4}>
-						<span className="right-align">
-							<span className="inline">
-								<span className="text-inline">Works with</span>{" "}
-								<AssignmentIcon className="icon"/>
-							</span>
-						</span>
-						</Grid>
-						</Grid>
-					</CardContent>
-				</Card>
-			</div>
+			<Grid item sm={4}>
+				<div className="applet-card">
+					<Card className="card">
+						<CardContent className="white-text">
+							<ServiceLogo />
+							<TextArea content={this.props.content} />
+						</CardContent>
+						<CardContent className="card-footer">
+							<Grid container spacing={24}>
+								<Grid item sm={7}>
+									<span className="left-align">
+										Running:<Switch
+											checked={this.state.checkedB}
+											onChange={this.handleChange(
+												"checkedB"
+											)}
+											value="checkedB"
+											color="primary"
+										/>
+									</span>
+								</Grid>
+								<Grid item sm={5}>
+									<span className="right-align">
+										<span className="inline">
+											<span className="text-inline">
+												Works with
+											</span>{" "}
+											<AssignmentIcon className="icon" />
+										</span>
+									</span>
+								</Grid>
+							</Grid>
+						</CardContent>
+					</Card>
+				</div>
+			</Grid>
 		);
 	}
 }
@@ -75,10 +107,7 @@ class TextArea extends Component {
 	render() {
 		return (
 			<div className="text-area">
-				<textarea>
-					If every hour at 00 minutes past the hour, then send me an
-					email at randomemail@gmail.com
-				</textarea>
+				<textarea>{this.props.content}</textarea>
 			</div>
 		);
 	}
