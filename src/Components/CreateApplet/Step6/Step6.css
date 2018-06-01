@@ -35,3 +35,15 @@
 .text-inline{
 	margin-right: 5px;
 }
+.step-6 .center-button{
+	text-align: center;
+}
+.step-6 .submit-button{
+	margin-top: 2.5%!important;
+}
+.step-6 .submit-button>button{
+	border-radius: 30px!important;
+}
+.review-card{
+	margin-top:2%;
+}

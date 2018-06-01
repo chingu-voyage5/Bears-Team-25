@@ -3,10 +3,11 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import './Step6.css';
+import "./Step6.css";
 
 class Step6 extends Component {
 	render() {
@@ -15,7 +16,7 @@ class Step6 extends Component {
 		}
 		return (
 			<div className="step-6">
-				<ReviewCard />
+				<ReviewCard validate={this._validate} />
 			</div>
 		);
 	}
@@ -33,24 +34,33 @@ class ReviewCard extends Component {
 					</CardContent>
 					<CardContent className="card-footer">
 						<div className="right-align">
-						<span className="inline"><span className="text-inline">Works with</span> <AssignmentIcon /></span>
+							<span className="inline">
+								<span className="text-inline">Works with</span>{" "}
+								<AssignmentIcon />
+							</span>
 						</div>
 					</CardContent>
 				</Card>
+				<div className="center-button submit-button">
+					<Button variant="raised" size="large" color="primary">
+						Finish
+					</Button>
+				</div>
 			</div>
 		);
 	}
 }
 
-const UserName=props=>(
-	<p className="user-name">by Anshul2166</p>
-);
+const UserName = props => <p className="user-name">by Anshul2166</p>;
 
-class TextArea extends Component{
+class TextArea extends Component {
 	render() {
 		return (
 			<div className="text-area">
-				<textarea>If every hour at 00 minutes past the hour, then send me an email at randomemail@gmail.com</textarea>
+				<textarea>
+					If every hour at 00 minutes past the hour, then send me an
+					email at randomemail@gmail.com
+				</textarea>
 				<p className="totalChars">94/140</p>
 			</div>
 		);

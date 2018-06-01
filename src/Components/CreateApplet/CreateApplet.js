@@ -10,7 +10,7 @@ class CreateApplet extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			currentStep: 5
+			currentStep: 6
 		};
 		this._next=this._next.bind(this);
 	}
@@ -36,7 +36,7 @@ class CreateApplet extends Component {
 				<div className="text-center">
 					<p>Step {this.state.currentStep} of 6</p>
 				</div>
-				<Step5 currentStep={currentStep} afterValid={this._next}/>
+				
 				<Step6 currentStep={currentStep} afterValid={this._next}/>
 			</div>
 		);
@@ -44,3 +44,10 @@ class CreateApplet extends Component {
 }
 
 export default CreateApplet;
+
+
+// <Step1 currentStep={currentStep} afterValid={this._next}/>
+// 				<Step2 currentStep={currentStep} afterValid={this._next}/>
+// 				<Step3 currentStep={currentStep} afterValid={this._next}/>
+// 				<Step4 currentStep={currentStep} afterValid={this._next}/>
+// 				<Step5 currentStep={currentStep} afterValid={this._next}/>
