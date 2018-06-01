@@ -12,6 +12,7 @@ class CreateApplet extends Component {
 		this.state = {
 			currentStep: 1
 		};
+		this._next=this._next.bind(this);
 	}
 	_next(data) {
 		let currentStep = this.state.currentStep;
@@ -20,7 +21,7 @@ class CreateApplet extends Component {
 		} else {
 			currentStep = currentStep + 1;
 		}
-
+		console.log("Clicked1");
 		this.setState({
 			currentStep: currentStep
 		});
@@ -35,7 +36,7 @@ class CreateApplet extends Component {
 				<div className="text-center">
 					<p>Step {this.state.currentStep} of 6</p>
 				</div>
-				<Step1 currentStep={currentStep} />
+				<Step1 currentStep={currentStep} afterValid={this._next}/>
 			</div>
 		);
 	}

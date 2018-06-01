@@ -19,7 +19,7 @@ class ServiceCard extends Component{
 
 		const createServiceList = ServiceList.list.map(service => (
 			<Grid item sm={3}>
-				<Card className="card" style={{backgroundColor:service.color}}>
+				<Card className="card" style={{backgroundColor:service.color}} onClick={this.props.validate}>
 					<div className="text-center media-icon">
 						<CardMedia>
 							<FontAwesomeIcon icon={faCoffee} size="6x" style={{color:"#fff"}}/>
