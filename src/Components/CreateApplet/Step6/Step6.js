@@ -1,3 +1,5 @@
+//Renders the step 6 for create-applet
+
 import React, { Component } from "react";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -9,6 +11,8 @@ import Avatar from "@material-ui/core/Avatar";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import "./Step6.css";
 
+
+//Main class to be exported
 class Step6 extends Component {
 	render() {
 		if (this.props.currentStep !== 6) {
@@ -22,6 +26,7 @@ class Step6 extends Component {
 	}
 }
 
+//This is the individual card that the user sees to confirm his applet
 class ReviewCard extends Component {
 	constructor(props) {
 	  super(props);
@@ -61,8 +66,10 @@ class ReviewCard extends Component {
 	}
 }
 
+//renders the username
 const UserName = props => <p className="user-name">by Anshul2166</p>;
 
+//renders the text-area containing the action and trigger of applet
 class TextArea extends Component {
 	render() {
 		return (
@@ -77,6 +84,7 @@ class TextArea extends Component {
 	}
 }
 
+//Renders the logo 
 class ServiceLogo extends Component {
 	render() {
 		return (

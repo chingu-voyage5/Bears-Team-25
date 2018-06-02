@@ -23,6 +23,7 @@ class Step5 extends Component {
 	}
 }
 
+//Renders an individual action-field-card
 class ActionFieldCard extends Component {
 	constructor(props) {
 	  super(props);
@@ -82,6 +83,7 @@ class ActionFieldCard extends Component {
 	}
 }
 
+//Renders the data field component, containing the heading of input, the input/textarea and the add ingredient button
 const DataField = props => {
 	const dataBox =
 		props.input == "input" ? (

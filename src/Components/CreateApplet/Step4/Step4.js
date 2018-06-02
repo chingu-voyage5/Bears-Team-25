@@ -1,3 +1,5 @@
+//Renders the step 4 for create-applet
+
 import React,{Component} from "react";
 import ActionCard from "../ActionCard/ActionCard";
 

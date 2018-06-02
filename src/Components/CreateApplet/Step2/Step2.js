@@ -1,3 +1,5 @@
+//Renders the step 2 for create-applet
+
 import React,{Component} from "react";
 import ActionCard from "../ActionCard/ActionCard";
 
@@ -8,6 +10,7 @@ class Step2 extends Component{
 	  this._validate=this._validate.bind(this);
 	}
 	_validate() {
+		//validates and sends to next
 		this.props.afterValid(this.state);
 		console.log("Clicked");
 	}

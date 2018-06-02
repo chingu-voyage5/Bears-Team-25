@@ -23,3 +23,7 @@
     margin-top: 1em;
     font-family: "Avenir Next W01", "Avenir Next", "Avenir", helvetica, arial, sans-serif;
 }
+
+.action-card{
+	cursor: pointer;
+}

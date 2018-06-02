@@ -1,3 +1,5 @@
+//Renders the step 1 for create-applet
+
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import ServiceCard from "../ServiceCard/ServiceCard";
