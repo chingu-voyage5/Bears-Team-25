@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import logo from "../../Common/Images/Background.png";
+// import logo from "../../Common/Images/Background.png";
+import video from "../../../Videos/How_IFTTT_Works.mp4";
 import "./GuestHomepage.css";
 
 const data = {
@@ -10,19 +11,22 @@ const data = {
 			heading: "Post your photo anywhere and see it everywhere",
 			content:
 				"We help social media play nice together. Never tweet a link instead of a picture again!",
-			alt: "Y"
+			alt: "Y",
+			img:require('../../Common/Images/Background.png')
 		},
 		{
 			heading: "A world that works for you",
 			content:
 				"IFTTT is the free way to get all your apps and devices talking to each other. Not everything on the internet plays nice, so we're on a mission to build a more connected world.",
-			alt: "N"
+			alt: "N",
+			img:require('../../Common/Images/Background.png')
 		},
 		{
 			heading: "Make your voice assistant more personal",
 			content:
 				"Just say the word, and we’ll help you stay in-sync across systems as you go through your day.",
-			alt: "Y"
+			alt: "Y",
+			img:require('../../Common/Images/Background.png')
 		}
 	]
 };
@@ -38,6 +42,7 @@ class GuestHomepage extends Component {
 				heading={contents.heading}
 				content={contents.content}
 				alt={contents.alt}
+				img={contents.img}
 			/>
 		));
 		return (
@@ -45,10 +50,22 @@ class GuestHomepage extends Component {
 				<FeatureRow
 					heading={data.details[0].heading}
 					content={data.details[0].content}
+					img={data.details[0].img}
 				/>
+				<VideoRow />
 				<TryItOutRow />
 				{rowsList}
 			</div>
+		);
+	}
+}
+
+class VideoRow extends Component {
+	render() {
+		return (
+			<video width="320" height="200">
+				<source src={video} type="video/mp4" />
+			</video>
 		);
 	}
 }
@@ -91,11 +108,12 @@ class FeatureRow extends Component {
 	// <img src={logo} className="logo" />
 	render() {
 		const alt = this.props.alt;
+		const logo=this.props.img;
+
 		const FirstContent =
 			alt == "Y" ? (
-				<Grid item sm={5} className="image1">
-					<div >
-					</div>
+				<Grid item sm={5} >
+					<img src={logo} className="logo" />
 				</Grid>
 			) : (
 				<Grid item sm={4}>
