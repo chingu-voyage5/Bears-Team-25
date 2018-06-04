@@ -3,11 +3,10 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import {createStore} from 'redux';
-import reducer from "./store/reducer";
+import store from './store/store';
 import App from "./Components/App/App";
 import "./index.css";
 
-const store=createStore(reducer);
 
 ReactDOM.render(
 	<Provider store={store}>
