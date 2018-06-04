@@ -16,13 +16,19 @@ class ServiceCard extends Component{
 	constructor(props) {
 	  super(props);
 	  this.state = {};
+	  this._validate=this._validate.bind(this);
+	}
+	_validate(e){
+		e.preventDefault();
+		console.log(e.currentTarget.getAttribute('value'));
+		console.log("Clicked");      
 	}
 	render(){
 		const ServiceList=this.props.json;
 
 		const createServiceList = ServiceList.list.map(service => (
 			<Grid item sm={3}>
-				<Card className="card" style={{backgroundColor:service.color}} onClick={this.props.validate}>
+				<Card className="card" value={service.name} style={{backgroundColor:service.color}} onClick={((e)=>this._validate(e))}>
 					<div className="text-center media-icon">
 						<CardMedia>
 							<FontAwesomeIcon icon={faCoffee} size="6x" style={{color:"#fff"}}/>
