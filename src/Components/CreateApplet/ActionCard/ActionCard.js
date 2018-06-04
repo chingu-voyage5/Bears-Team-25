@@ -11,13 +11,24 @@ import './ActionCard.css';
 class ActionCard extends Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {};
+		this._validate=this._validate.bind(this);
+	}
+	_validate(action){
+		const heading=action.heading;
+		const content=action.content;
+
+		if(this.props.step==="2"){
+			this.props.validate("triggerHeading",heading,"triggerContent",content);
+		}
+		else{
+			this.props.validate("actionHeading",heading,"actionContent",content);	
+		}
 	}
 	render() {
 		const ActionList = this.props.json.trello.map(action => (
 				<Grid item sm={3}>
-					<Card className="action-card"  onClick={this.props.validate}>
+					<Card className="action-card" onClick={()=>this._validate(action)}>
 						<CardContent>
 							<h2>
 								{action.heading}

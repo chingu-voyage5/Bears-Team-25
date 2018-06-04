@@ -13,26 +13,57 @@ class CreateApplet extends Component {
 		this.state = {
 			currentStep: 1
 		};
+		this._changeStep=this._changeStep.bind(this);
 		this._next=this._next.bind(this);
+		this._doubleNext=this._doubleNext.bind(this);
+		this._setAction=this._setAction.bind(this);
+		this._finish=this._finish.bind(this);
 	}
 
 	//function describing what should happen when going to next page
-	_next(key,value) {
+	_changeStep(){
 		let currentStep = this.state.currentStep;
 		if (currentStep >= 6) {
 			currentStep = 1;
 		} else {
 			currentStep = currentStep + 1;
 		}
+		this.setState({
+			currentStep: currentStep,
+		});
+	}
+
+	_next(key,value) {
+		this._changeStep();
 		console.log("Clicked1");
 		console.log(key+" "+value);
 		this.setState({
-			currentStep: currentStep,
 			[key]:value
 		},()=>{
 			console.log(this.state);
 		});
 	}
+
+	_doubleNext(key1,value1,key2,value2){
+		this._changeStep();
+		this.setState({
+			[key1]:value1,
+			[key2]:value2
+		},()=>{
+			console.log(this.state);
+		});
+	}
+
+	_setAction(obj){
+		this._changeStep();
+		console.log("Step 5");	
+	}
+
+	_finish(obj){
+		this._changeStep();
+		console.log("Done");	
+	}
+
 	render() {
 		let currentStep = this.state.currentStep;//current step in create-applet
 
@@ -47,11 +78,11 @@ class CreateApplet extends Component {
 					<p>Step {this.state.currentStep} of 6</p>
 				</div>
 				<Step1 currentStep={currentStep} afterValid={this._next} step="1"/>
-				<Step2 currentStep={currentStep} afterValid={this._next} step="2"/>
+				<Step2 currentStep={currentStep} afterValid={this._doubleNext} step="2"/>
 				<Step3 currentStep={currentStep} afterValid={this._next} step="3"/>
-				<Step4 currentStep={currentStep} afterValid={this._next} step="4"/>
-				<Step5 currentStep={currentStep} afterValid={this._next}/>
-				<Step6 currentStep={currentStep} afterValid={this._next}/>
+				<Step4 currentStep={currentStep} afterValid={this._doubleNext} step="4"/>
+				<Step5 currentStep={currentStep} afterValid={this._setAction}/>
+				<Step6 currentStep={currentStep} afterValid={this._finish}/>
 			</div>
 		);
 	}

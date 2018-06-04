@@ -10,10 +10,10 @@ class Step2 extends Component{
 	  this.state = {};
 	  this._validate=this._validate.bind(this);
 	}
-	_validate() {
+	_validate(key1,value1,key2,value2) {
 		//validates and sends to next
-		this.props.afterValid(this.state);
-		console.log("Clicked");
+		this.props.afterValid(key1,value1,key2,value2);
+		console.log("Clicked Step2");
 	}
 	render(){
 		const TriggerList = this.props.TriggerList;
@@ -23,7 +23,7 @@ class Step2 extends Component{
 		}
 		return(
 			<div className="step-2">
-				<ActionCard json={TriggerList} validate={this._validate}/>
+				<ActionCard json={TriggerList} validate={this._validate} step="2"/>
 			</div>
 		);
 	}
