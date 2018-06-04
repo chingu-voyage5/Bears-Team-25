@@ -13,10 +13,9 @@ class Step1 extends Component {
 	  this.state = {};
 	  this._validate=this._validate.bind(this);
 	}
-	_validate() {
+	_validate(value) {
 		// a sanitized version of state can be passed instead
-		this.props.afterValid(this.state);
-		console.log("Clicked");
+		this.props.afterValid("serviceTo",value);
 	}
 	render() {
 		if (this.props.currentStep !== 1) {

@@ -20,8 +20,10 @@ class ServiceCard extends Component{
 	}
 	_validate(e){
 		e.preventDefault();
-		console.log(e.currentTarget.getAttribute('value'));
-		console.log("Clicked");      
+		// console.log(e.currentTarget.getAttribute('value'));
+		let value=e.currentTarget.getAttribute('value')
+		this.props.validate(value);
+
 	}
 	render(){
 		const ServiceList=this.props.json;

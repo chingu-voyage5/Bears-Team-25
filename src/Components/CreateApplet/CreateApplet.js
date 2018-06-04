@@ -17,7 +17,7 @@ class CreateApplet extends Component {
 	}
 
 	//function describing what should happen when going to next page
-	_next(data) {
+	_next(key,value) {
 		let currentStep = this.state.currentStep;
 		if (currentStep >= 6) {
 			currentStep = 1;
@@ -25,8 +25,12 @@ class CreateApplet extends Component {
 			currentStep = currentStep + 1;
 		}
 		console.log("Clicked1");
+		console.log(key+" "+value);
 		this.setState({
-			currentStep: currentStep
+			currentStep: currentStep,
+			[key]:value
+		},()=>{
+			console.log(this.state);
 		});
 	}
 	render() {
@@ -42,10 +46,10 @@ class CreateApplet extends Component {
 				<div className="text-center">
 					<p>Step {this.state.currentStep} of 6</p>
 				</div>
-				<Step1 currentStep={currentStep} afterValid={this._next}/>
-				<Step2 currentStep={currentStep} afterValid={this._next}/>
-				<Step3 currentStep={currentStep} afterValid={this._next}/>
-				<Step4 currentStep={currentStep} afterValid={this._next}/>
+				<Step1 currentStep={currentStep} afterValid={this._next} step="1"/>
+				<Step2 currentStep={currentStep} afterValid={this._next} step="2"/>
+				<Step3 currentStep={currentStep} afterValid={this._next} step="3"/>
+				<Step4 currentStep={currentStep} afterValid={this._next} step="4"/>
 				<Step5 currentStep={currentStep} afterValid={this._next}/>
 				<Step6 currentStep={currentStep} afterValid={this._next}/>
 			</div>
