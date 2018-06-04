@@ -15,7 +15,7 @@ class Step1 extends Component {
 	}
 	_validate(value) {
 		// a sanitized version of state can be passed instead
-		this.props.afterValid("serviceTo",value);
+		this.props.afterValid("serviceFrom",value);
 	}
 	render() {
 		if (this.props.currentStep !== 1) {

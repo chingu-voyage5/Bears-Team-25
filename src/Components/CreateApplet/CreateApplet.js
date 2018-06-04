@@ -41,6 +41,7 @@ class CreateApplet extends Component {
 			[key]:value
 		},()=>{
 			console.log(this.state);
+			console.log("Step 1/3");
 		});
 	}
 
