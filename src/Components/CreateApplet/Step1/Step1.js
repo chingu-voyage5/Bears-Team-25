@@ -1,6 +1,7 @@
 //Renders the step 1 for create-applet
 
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import Grid from "@material-ui/core/Grid";
 import ServiceCard from "../ServiceCard/ServiceCard";
 import "./Step1.css";
@@ -18,43 +19,22 @@ class Step1 extends Component {
 		console.log("Clicked");
 	}
 	render() {
-		const ServiceList = {
-			list: [
-				{
-					name: "Mail",
-					color: "maroon"
-				},
-				{
-					name: "Twitter",
-					color: "blue"
-				},
-				{
-					name: "Facebook",
-					color: "Green"
-				},
-				{
-					name: "Youtube",
-					color: "maroon"
-				},
-				{
-					name: "Google+",
-					color: "green"
-				},
-				{
-					name: "Instagram",
-					color: "blue"
-				}
-			]
-		};
 		if (this.props.currentStep !== 1) {
 			return null;
 		}
+		const serviceList=this.props.serviceList;
 		return (
 			<div className="step-1">
-				<ServiceCard json={ServiceList} validate={this._validate}/>
+				<ServiceCard json={serviceList} validate={this._validate}/>
 			</div>
 		);
 	}
 }
 
-export default Step1;
+const mapStateToProps=state=>{
+	return{
+		serviceList:state.serviceList
+	}
+}
+
+export default connect(mapStateToProps)(Step1);
