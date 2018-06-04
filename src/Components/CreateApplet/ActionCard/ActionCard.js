@@ -15,7 +15,7 @@ class ActionCard extends Component {
 		this.state = {};
 	}
 	render() {
-		const ActionList = this.props.json.list.map(action => (
+		const ActionList = this.props.json.trello.map(action => (
 				<Grid item sm={3}>
 					<Card className="action-card"  onClick={this.props.validate}>
 						<CardContent>

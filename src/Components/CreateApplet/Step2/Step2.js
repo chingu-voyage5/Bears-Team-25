@@ -1,6 +1,7 @@
 //Renders the step 2 for create-applet
 
 import React,{Component} from "react";
+import { connect } from 'react-redux';
 import ActionCard from "../ActionCard/ActionCard";
 
 class Step2 extends Component{
@@ -15,34 +16,8 @@ class Step2 extends Component{
 		console.log("Clicked");
 	}
 	render(){
-		const TriggerList = {
-			list: [
-				{
-					heading:"Card added to board",
-					content:"This trigger fires every time a card is added to a board"
-				},
-				{
-					heading:"Card added to board",
-					content:"This trigger fires every time a card is added to a board"
-				},
-				{
-					heading:"Card added to board",
-					content:"This trigger fires every time a card is added to a board"
-				},
-				{
-					heading:"Card added to board",
-					content:"This trigger fires every time a card is added to a board"
-				},
-				{
-					heading:"Card added to board",
-					content:"This trigger fires every time a card is added to a board"
-				},
-				{
-					heading:"Card added to board",
-					content:"This trigger fires every time a card is added to a board"
-				}
-			]
-		};
+		const TriggerList = this.props.TriggerList;
+
 		if (this.props.currentStep !== 2) {
 			return null;
 		}
@@ -53,4 +28,11 @@ class Step2 extends Component{
 		);
 	}
 }
-export default Step2;
+
+const mapStateToProps=state=>{
+	return{
+		TriggerList:state.serviceTrigger
+	}
+}
+
+export default connect(mapStateToProps)(Step2);
