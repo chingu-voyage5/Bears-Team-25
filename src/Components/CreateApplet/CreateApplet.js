@@ -56,7 +56,16 @@ class CreateApplet extends Component {
 	}
 
 	_setAction(obj){
+		console.log(obj);
+		console.log(obj.field);
 		this._changeStep();
+		this.setState({
+			heading:obj.field[0].heading,
+			content:obj.field[0].content
+		},()=>{
+			console.log(this.state);
+		});
+
 		console.log("Step 5");	
 	}
 
@@ -83,7 +92,7 @@ class CreateApplet extends Component {
 				<Step3 currentStep={currentStep} afterValid={this._next} step="3"/>
 				<Step4 currentStep={currentStep} afterValid={this._doubleNext} step="4"/>
 				<Step5 currentStep={currentStep} afterValid={this._setAction}/>
-				<Step6 currentStep={currentStep} afterValid={this._finish}/>
+				<Step6 currentStep={currentStep} data={this.state} afterValid={this._finish}/>
 			</div>
 		);
 	}
@@ -92,3 +101,5 @@ class CreateApplet extends Component {
 export default CreateApplet;
 
 
+
+				

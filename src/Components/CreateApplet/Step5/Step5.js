@@ -28,13 +28,32 @@ class ActionFieldCard extends Component {
 	constructor(props) {
 	  super(props);
 	
-	  this.state = {};
+	  this.state = {
+	  	heading:"",
+	  	data:""
+	  };
+
 	  this._validate=this._validate.bind(this);
+	  this.updateInputValueHeading=this.updateInputValueHeading.bind(this);
+	  this.updateInputValueContent=this.updateInputValueContent.bind(this);
+	}
+	updateInputValueHeading(evt){
+		this.setState({heading:evt.target.value});
+	}
+	updateInputValueContent(evt){
+		this.setState({data:evt.target.value});
 	}
 	_validate() {
 		// a sanitized version of state can be passed instead
-		this.props.afterValid(this.state);
-		console.log("Clicked");
+		let json={};
+		let key='field';
+		json[key]=[];
+		let payload={
+			heading:this.state.heading,
+			content:this.state.data
+		};
+		json[key].push(payload);
+		this.props.afterValid(json);
 	}
 	render() {
 		return (
@@ -58,11 +77,15 @@ class ActionFieldCard extends Component {
 							label="Subject:"
 							input="input"
 							btnText="button-text"
+							value={this.state.heading}
+							updateInputValue={this.updateInputValueHeading}
 						/>
 						<DataField
 							label="Body:"
 							input="textArea"
 							btnText="button-text"
+							value={this.state.data}
+							updateInputValue={this.updateInputValueContent}
 						/>
 					</CardContent>
 					<CardActions>
@@ -89,11 +112,11 @@ const DataField = props => {
 		props.input == "input" ? (
 			<span className="text-center">
 				<br />
-				<input />
+				<input value={props.value} onChange={evt => props.updateInputValue(evt)} />
 			</span>
 		) : (
 			<div className="text-center">
-				<textarea />
+				<textarea value={props.value} onChange={evt => props.updateInputValue(evt)}/>
 			</div>
 		);
 
