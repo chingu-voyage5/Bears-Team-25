@@ -76,7 +76,6 @@ class CreateApplet extends Component {
 
 	render() {
 		let currentStep = this.state.currentStep;//current step in create-applet
-
 		//returns the step which is the currentstep
 		//each step component, example, step1 checks if the current step matches with it, like here if current step is 1 then only step1 should be be returned or shown, and all else return null
 		return (

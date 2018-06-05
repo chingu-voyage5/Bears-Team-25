@@ -18,9 +18,10 @@ class Step6 extends Component {
 		if (this.props.currentStep !== 6) {
 			return null;
 		}
+		console.log(this.props.data);
 		return (
 			<div className="step-6">
-				<ReviewCard afterValid={this.props.afterValid} />
+				<ReviewCard data={this.props.data} afterValid={this.props.afterValid} />
 			</div>
 		);
 	}
@@ -39,12 +40,13 @@ class ReviewCard extends Component {
 		console.log("Clicked");
 	}
 	render() {
+		const data=this.props.data;
 		return (
 			<div className="review-card">
 				<Card className="card">
 					<CardContent className="white-text">
 						<ServiceLogo />
-						<TextArea />
+						<TextArea content={data.content} />
 						<UserName />
 					</CardContent>
 					<CardContent className="card-footer">
@@ -75,8 +77,7 @@ class TextArea extends Component {
 		return (
 			<div className="text-area">
 				<textarea>
-					If every hour at 00 minutes past the hour, then send me an
-					email at randomemail@gmail.com
+					{this.props.content}
 				</textarea>
 				<p className="totalChars">94/140</p>
 			</div>
