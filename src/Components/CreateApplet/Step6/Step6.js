@@ -41,12 +41,16 @@ class ReviewCard extends Component {
 	}
 	render() {
 		const data=this.props.data;
+		const action=data.actionHeading;
+		const trigger=data.triggerHeading;
+
+		let content="If "+trigger+" then "+action;
 		return (
 			<div className="review-card">
 				<Card className="card">
 					<CardContent className="white-text">
 						<ServiceLogo />
-						<TextArea content={data.content} />
+						<TextArea content={content} />
 						<UserName />
 					</CardContent>
 					<CardContent className="card-footer">
