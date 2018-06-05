@@ -11,9 +11,9 @@ class Step4 extends Component{
 	  this.state = {};
 	  this._validate=this._validate.bind(this);
 	}
-	_validate() {
+	_validate(key1,value1,key2,value2) {
 		// a sanitized version of state can be passed instead
-		this.props.afterValid(this.state);
+		this.props.afterValid(key1,value1,key2,value2);
 		console.log("Clicked");
 	}
 	render(){

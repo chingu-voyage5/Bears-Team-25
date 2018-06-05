@@ -22,6 +22,7 @@ class ActionCard extends Component {
 			this.props.validate("triggerHeading",heading,"triggerContent",content);
 		}
 		else{
+			console.log("Step 4 jgkgjglglk");
 			this.props.validate("actionHeading",heading,"actionContent",content);	
 		}
 	}
