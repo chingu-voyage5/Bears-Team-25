@@ -5,3 +5,8 @@
 .service-card{
 	margin-top:2.5%;
 }
+.media-icon svg{
+	height: 75px;
+	width: 75px;
+	fill:white;
+}

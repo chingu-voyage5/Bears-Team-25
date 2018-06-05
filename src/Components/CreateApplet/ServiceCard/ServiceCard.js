@@ -9,6 +9,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import faCoffee from "@fortawesome/fontawesome-free-solid/faCoffee";
+import * as Icons from "../../Common/Icons/Icons";
 import './ServiceCard.css';
 
 class ServiceCard extends Component{
@@ -19,21 +20,17 @@ class ServiceCard extends Component{
 	}
 	_validate(e){
 		e.preventDefault();
-		// console.log(e.currentTarget.getAttribute('value'));
 		let value=e.currentTarget.getAttribute('value')
 		this.props.validate(value);
 
 	}
 	render(){
 		const ServiceList=this.props.json;
-
 		const createServiceList = ServiceList.list.map(service => (
 			<Grid item sm={3}>
 				<Card className="card" value={service.name} style={{backgroundColor:service.color}} onClick={((e)=>this._validate(e))}>
 					<div className="text-center media-icon">
-						
-							<FontAwesomeIcon icon={faCoffee} size="6x" style={{color:"#fff"}}/>
-						
+							<Icons.FacebookIcon />
 					</div>
 					<CardContent>
 						<Typography
