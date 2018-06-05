@@ -13,13 +13,10 @@ class Step2 extends Component{
 	_validate(key1,value1,key2,value2) {
 		//validates and sends to next
 		this.props.afterValid(key1,value1,key2,value2);
-		console.log("Clicked Step2");
 	}
 	render(){
 		const service=this.props.service;
 		const TriggerList = this.props.TriggerList[service];
-		console.log(service);
-		console.log("Somjfkfk");
 		if (this.props.currentStep !== 2) {
 			return null;
 		}

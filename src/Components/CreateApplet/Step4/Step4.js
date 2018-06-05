@@ -14,13 +14,10 @@ class Step4 extends Component{
 	_validate(key1,value1,key2,value2) {
 		// a sanitized version of state can be passed instead
 		this.props.afterValid(key1,value1,key2,value2);
-		console.log("Clicked");
 	}
 	render(){
 		const service=this.props.service;
 		const serviceAction = this.props.serviceAction[service];
-		console.log(serviceAction);
-		console.log("here");
 
 		if (this.props.currentStep !== 4) {
 			return null;

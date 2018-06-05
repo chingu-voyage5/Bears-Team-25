@@ -5,7 +5,6 @@ import React,{Component} from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
@@ -32,9 +31,9 @@ class ServiceCard extends Component{
 			<Grid item sm={3}>
 				<Card className="card" value={service.name} style={{backgroundColor:service.color}} onClick={((e)=>this._validate(e))}>
 					<div className="text-center media-icon">
-						<CardMedia>
+						
 							<FontAwesomeIcon icon={faCoffee} size="6x" style={{color:"#fff"}}/>
-						</CardMedia>
+						
 					</div>
 					<CardContent>
 						<Typography

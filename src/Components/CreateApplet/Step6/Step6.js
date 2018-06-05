@@ -18,7 +18,6 @@ class Step6 extends Component {
 		if (this.props.currentStep !== 6) {
 			return null;
 		}
-		console.log(this.props.data);
 		return (
 			<div className="step-6">
 				<ReviewCard data={this.props.data} afterValid={this.props.afterValid} />
@@ -37,7 +36,6 @@ class ReviewCard extends Component {
 	_validate() {
 		// a sanitized version of state can be passed instead
 		this.props.afterValid(this.state);
-		console.log("Clicked");
 	}
 	render() {
 		const data=this.props.data;

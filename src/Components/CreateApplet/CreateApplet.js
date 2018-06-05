@@ -35,13 +35,8 @@ class CreateApplet extends Component {
 
 	_next(key,value) {
 		this._changeStep();
-		console.log("Clicked1");
-		console.log(key+" "+value);
 		this.setState({
 			[key]:value
-		},()=>{
-			console.log(this.state);
-			console.log("Step 1/3");
 		});
 	}
 
@@ -50,28 +45,19 @@ class CreateApplet extends Component {
 		this.setState({
 			[key1]:value1,
 			[key2]:value2
-		},()=>{
-			console.log(this.state);
 		});
 	}
 
 	_setAction(obj){
-		console.log(obj);
-		console.log(obj.field);
 		this._changeStep();
 		this.setState({
 			heading:obj.field[0].heading,
 			content:obj.field[0].content
-		},()=>{
-			console.log(this.state);
 		});
-
-		console.log("Step 5");	
 	}
 
 	_finish(obj){
 		this._changeStep();
-		console.log("Done");	
 	}
 
 	render() {
