@@ -1,6 +1,5 @@
 //Renders the action card:- card for particular trigger/action
 //Used in step2 and 4 of create-applet
-
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
@@ -22,12 +21,11 @@ class ActionCard extends Component {
 			this.props.validate("triggerHeading",heading,"triggerContent",content);
 		}
 		else{
-			console.log("Step 4 jgkgjglglk");
 			this.props.validate("actionHeading",heading,"actionContent",content);	
 		}
 	}
 	render() {
-		const ActionList = this.props.json.trello.map(action => (
+		const ActionList = this.props.json.map(action => (
 				<Grid item sm={3}>
 					<Card className="action-card" onClick={()=>this._validate(action)}>
 						<CardContent>

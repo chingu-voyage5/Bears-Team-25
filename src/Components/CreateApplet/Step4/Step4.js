@@ -17,13 +17,17 @@ class Step4 extends Component{
 		console.log("Clicked");
 	}
 	render(){
-		const TriggerList = this.props.TriggerList;
+		const service="mail";
+		const serviceAction = this.props.serviceAction[service];
+		console.log(serviceAction);
+		console.log("here");
+
 		if (this.props.currentStep !== 4) {
 			return null;
 		}
 		return(
 			<div className="step-4">
-				<ActionCard json={TriggerList} validate={this._validate}/>
+				<ActionCard json={serviceAction} validate={this._validate}/>
 			</div>
 		);
 	}
@@ -31,7 +35,7 @@ class Step4 extends Component{
 
 const mapStateToProps=state=>{
 	return{
-		TriggerList:state.serviceTrigger
+		serviceAction:state.serviceAction
 	}
 }
 
