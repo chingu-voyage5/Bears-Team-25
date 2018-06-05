@@ -1,3 +1,7 @@
 .service-card .card{
 	cursor: pointer;
+	margin-bottom:6%;
+}
+.service-card{
+	margin-top:2.5%;
 }

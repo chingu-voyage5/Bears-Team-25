@@ -17,7 +17,7 @@ class Step4 extends Component{
 		console.log("Clicked");
 	}
 	render(){
-		const service="mail";
+		const service=this.props.service;
 		const serviceAction = this.props.serviceAction[service];
 		console.log(serviceAction);
 		console.log("here");

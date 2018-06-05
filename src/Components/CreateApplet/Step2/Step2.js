@@ -16,8 +16,10 @@ class Step2 extends Component{
 		console.log("Clicked Step2");
 	}
 	render(){
-		const TriggerList = this.props.TriggerList.trello;
-
+		const service=this.props.service;
+		const TriggerList = this.props.TriggerList[service];
+		console.log(service);
+		console.log("Somjfkfk");
 		if (this.props.currentStep !== 2) {
 			return null;
 		}

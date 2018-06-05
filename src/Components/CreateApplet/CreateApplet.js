@@ -87,9 +87,9 @@ class CreateApplet extends Component {
 					<p>Step {this.state.currentStep} of 6</p>
 				</div>
 				<Step1 currentStep={currentStep} afterValid={this._next} step="1"/>
-				<Step2 currentStep={currentStep} afterValid={this._doubleNext} step="2"/>
+				<Step2 currentStep={currentStep} service={this.state.serviceFrom} afterValid={this._doubleNext} step="2"/>
 				<Step3 currentStep={currentStep} afterValid={this._next} step="3"/>
-				<Step4 currentStep={currentStep} afterValid={this._doubleNext} step="4"/>
+				<Step4 currentStep={currentStep} service={this.state.serviceTo} afterValid={this._doubleNext} step="4"/>
 				<Step5 currentStep={currentStep} afterValid={this._setAction}/>
 				<Step6 currentStep={currentStep} data={this.state} afterValid={this._finish}/>
 			</div>

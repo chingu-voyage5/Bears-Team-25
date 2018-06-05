@@ -18,17 +18,25 @@ const initialState = {
 				color: "maroon"
 			},
 			{
+				name: "Instagram",
+				color: "blue"
+			},
+			{
 				name: "Google+",
 				color: "green"
 			},
 			{
-				name: "Instagram",
-				color: "blue"
-			}
+				name:"Trello",
+				color:"blue"
+			},
+			{
+				name: "Date and Time",
+				color: "Brown"
+			},		
 		]
 	},
 	serviceTrigger: {
-		trello: [
+		Trello: [
 			{
 				heading: "Card added to board",
 				content:
@@ -62,7 +70,7 @@ const initialState = {
 		]
 	},
 	serviceAction: {
-		mail: [
+		Mail: [
 			{
 				heading: "Send me an email",
 				content:
