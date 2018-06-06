@@ -26,13 +26,13 @@ const initialState = {
 				color: "green"
 			},
 			{
-				name:"Trello",
-				color:"blue"
+				name: "Trello",
+				color: "blue"
 			},
 			{
 				name: "Date and Time",
 				color: "Brown"
-			},		
+			}
 		]
 	},
 	serviceTrigger: {
@@ -77,7 +77,53 @@ const initialState = {
 					"This Action will send you an HTML based email. Images and links are supported."
 			}
 		]
-	}
+	},
+	appletList: [
+		{
+			actionHeading: "Send me an email",
+			actionContent:
+				"This Action will send you an HTML based email. Images and links are supported.",
+			content: "Random content",
+			heading: "Random content",
+			triggerHeading: "Add a Card to trello",
+			triggerContent: "A card has been added to trello board of yours",
+			serviceFrom: "Trello",
+			serviceTo: "Mail"
+		},
+		{
+			actionHeading: "Send me an email",
+			actionContent:
+				"This Action will send you an HTML based email. Images and links are supported.",
+			content: "Random content",
+			heading: "Random content",
+			triggerHeading: "Add a Card to trello",
+			triggerContent: "A card has been added to trello board of yours",
+			serviceFrom: "Trello",
+			serviceTo: "Mail"
+		},
+		{
+			actionHeading: "Send me an email",
+			actionContent:
+				"This Action will send you an HTML based email. Images and links are supported.",
+			content: "Random content",
+			heading: "Random content",
+			triggerHeading: "Add a Card to trello",
+			triggerContent: "A card has been added to trello board of yours",
+			serviceFrom: "Trello",
+			serviceTo: "Mail"
+		},
+		{
+			actionHeading: "Send me an email",
+			actionContent:
+				"This Action will send you an HTML based email. Images and links are supported.",
+			content: "Random content",
+			heading: "Random content",
+			triggerHeading: "Add a Card to trello",
+			triggerContent: "A card has been added to trello board of yours",
+			serviceFrom: "Trello",
+			serviceTo: "Mail"
+		}
+	]
 };
 
 export default initialState;

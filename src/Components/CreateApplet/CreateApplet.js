@@ -58,6 +58,7 @@ class CreateApplet extends Component {
 
 	_finish(obj){
 		this._changeStep();
+		console.log(this.state);
 	}
 
 	render() {

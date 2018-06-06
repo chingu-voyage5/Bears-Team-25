@@ -9,6 +9,7 @@ import Avatar from "@material-ui/core/Avatar";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Switch from "@material-ui/core/Switch";
 import Grid from "@material-ui/core/Grid";
+import { connect } from 'react-redux';
 import "./MyApplet.css";
 
 class MyApplet extends Component {
@@ -18,27 +19,9 @@ class MyApplet extends Component {
 		this.state = {};
 	}
 	render() {
-		const appletList = {
-			list: [
-				{
-					content:
-						"If every hour at 00 minutes past the hour, then send me an email at randomemail@gmail.com"
-				},
-				{
-					content:
-						"If every hour at 00 minutes past the hour, then send me an email at randomemail@gmail.com"
-				},
-				{
-					content:
-						"If every hour at 00 minutes past the hour, then send me an email at randomemail@gmail.com"
-				},
-				{
-					content:
-						"If every hour at 00 minutes past the hour, then send me an email at randomemail@gmail.com"
-				}
-			]
-		};
-		const AppletList = appletList.list.map(applet => (
+		const appletList =this.props.appletList;
+		console.log(appletList);
+		const AppletList = appletList.map(applet => (
 			<AppletCard content={applet.content} />
 		));
 		return (
@@ -125,4 +108,10 @@ class ServiceLogo extends Component {
 	}
 }
 
-export default MyApplet;
+const mapStateToProps=state=>{
+	return{
+		appletList:state.appletList
+	}
+}
+
+export default connect(mapStateToProps)(MyApplet);
