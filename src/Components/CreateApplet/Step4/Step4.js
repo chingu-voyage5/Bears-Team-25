@@ -32,7 +32,7 @@ class Step4 extends Component{
 
 const mapStateToProps=state=>{
 	return{
-		serviceAction:state.serviceAction
+		serviceAction:state.initial.serviceAction
 	}
 }
 

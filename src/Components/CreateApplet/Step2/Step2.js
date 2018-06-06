@@ -30,7 +30,7 @@ class Step2 extends Component{
 
 const mapStateToProps=state=>{
 	return{
-		TriggerList:state.serviceTrigger
+		TriggerList:state.initial.serviceTrigger
 	}
 }
 

@@ -30,7 +30,7 @@ class Step3 extends Component {
 
 const mapStateToProps=state=>{
 	return{
-		serviceList:state.serviceList
+		serviceList:state.initial.serviceList
 	}
 }
 
