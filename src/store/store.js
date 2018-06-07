@@ -1,14 +1,16 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import createReducer from "../reducers/createReducer";
-import changeReducer from "../reducers/changeReducer";
-import initialReducer from "../reducers/initialReducer";
+import serviceReducer from "../reducers/serviceReducer";
+import actionReducer from "../reducers/actionReducer";
+import triggerReducer from "../reducers/triggerReducer";
 import initialState from "./initialState";
 
 const rootReducer = combineReducers({
-  initial:initialReducer,
+  action:actionReducer,
   create: createReducer,
-  change: changeReducer
+  service:serviceReducer,
+  trigger: triggerReducer
 });
 
 const middlewares = applyMiddleware(thunk);

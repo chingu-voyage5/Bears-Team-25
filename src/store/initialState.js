@@ -1,84 +1,80 @@
 const initialState = {
-	initial: {
-		serviceList: {
-			list: [
-				{
-					name: "Mail",
-					color: "maroon"
-				},
-				{
-					name: "Twitter",
-					color: "blue"
-				},
-				{
-					name: "Facebook",
-					color: "Green"
-				},
-				{
-					name: "Youtube",
-					color: "maroon"
-				},
-				{
-					name: "Instagram",
-					color: "blue"
-				},
-				{
-					name: "Google+",
-					color: "green"
-				},
-				{
-					name: "Trello",
-					color: "blue"
-				},
-				{
-					name: "Date and Time",
-					color: "Brown"
-				}
-			]
+	service: [
+		{
+			name: "Mail",
+			color: "maroon"
 		},
-		serviceTrigger: {
-			Trello: [
-				{
-					heading: "Card added to board",
-					content:
-						"This trigger fires every time a card is added to a board"
-				},
-				{
-					heading: "Card added to board",
-					content:
-						"This trigger fires every time a card is added to a board"
-				},
-				{
-					heading: "Card added to board",
-					content:
-						"This trigger fires every time a card is added to a board"
-				},
-				{
-					heading: "Card added to board",
-					content:
-						"This trigger fires every time a card is added to a board"
-				},
-				{
-					heading: "Card added to board",
-					content:
-						"This trigger fires every time a card is added to a board"
-				},
-				{
-					heading: "Card added to board",
-					content:
-						"This trigger fires every time a card is added to a board"
-				}
-			]
+		{
+			name: "Twitter",
+			color: "blue"
 		},
-		serviceAction: {
-			Mail: [
-				{
-					heading: "Send me an email",
-					content:
-						"This Action will send you an HTML based email. Images and links are supported."
-				}
-			]
+		{
+			name: "Facebook",
+			color: "Green"
+		},
+		{
+			name: "Youtube",
+			color: "maroon"
+		},
+		{
+			name: "Instagram",
+			color: "blue"
+		},
+		{
+			name: "Google+",
+			color: "green"
+		},
+		{
+			name: "Trello",
+			color: "blue"
+		},
+		{
+			name: "Date and Time",
+			color: "Brown"
 		}
+	],
+	trigger: {
+		Trello: [
+			{
+				heading: "Card added to board",
+				content:
+					"This trigger fires every time a card is added to a board"
+			},
+			{
+				heading: "Card added to board",
+				content:
+					"This trigger fires every time a card is added to a board"
+			},
+			{
+				heading: "Card added to board",
+				content:
+					"This trigger fires every time a card is added to a board"
+			},
+			{
+				heading: "Card added to board",
+				content:
+					"This trigger fires every time a card is added to a board"
+			},
+			{
+				heading: "Card added to board",
+				content:
+					"This trigger fires every time a card is added to a board"
+			},
+			{
+				heading: "Card added to board",
+				content:
+					"This trigger fires every time a card is added to a board"
+			}
+		]
+	},
+	action: {
+		Mail: [
+			{
+				heading: "Send me an email",
+				content:
+					"This Action will send you an HTML based email. Images and links are supported."
+			}
+		]
 	},
 	create: {
 		appletList: [
@@ -92,7 +88,8 @@ const initialState = {
 				triggerContent:
 					"A card has been added to trello board of yours",
 				serviceFrom: "Trello",
-				serviceTo: "Mail"
+				serviceTo: "Mail",
+				condition:"On"
 			},
 			{
 				actionHeading: "Send me an email",
@@ -104,7 +101,8 @@ const initialState = {
 				triggerContent:
 					"A card has been added to trello board of yours",
 				serviceFrom: "Trello",
-				serviceTo: "Mail"
+				serviceTo: "Mail",
+				condition:"On"
 			},
 			{
 				actionHeading: "Send me an email",
@@ -116,7 +114,8 @@ const initialState = {
 				triggerContent:
 					"A card has been added to trello board of yours",
 				serviceFrom: "Trello",
-				serviceTo: "Mail"
+				serviceTo: "Mail",
+				condition:"On"
 			},
 			{
 				actionHeading: "Send me an email",
@@ -128,11 +127,11 @@ const initialState = {
 				triggerContent:
 					"A card has been added to trello board of yours",
 				serviceFrom: "Trello",
-				serviceTo: "Mail"
+				serviceTo: "Mail",
+				condition:"On"
 			}
 		]
-	},
-	change: {}
+	}
 };
 
 export default initialState;

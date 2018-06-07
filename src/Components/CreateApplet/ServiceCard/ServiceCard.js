@@ -26,7 +26,7 @@ class ServiceCard extends Component{
 	}
 	render(){
 		const ServiceList=this.props.json;
-		const createServiceList = ServiceList.list.map(service => (
+		const createServiceList = ServiceList.map(service => (
 			<Grid item sm={3}>
 				<Card className="card" value={service.name} style={{backgroundColor:service.color}} onClick={((e)=>this._validate(e))}>
 					<div className="text-center media-icon">
