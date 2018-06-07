@@ -1,3 +1,5 @@
+//This page renders all the applets currently used by user
+
 import React, { Component } from "react";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";

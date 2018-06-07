@@ -1,3 +1,5 @@
+//reducer for all applet creation
+
 import * as ACTIONS from "../actions/actionTypes";
 
 const createReducer = (state = {}, action) => {
