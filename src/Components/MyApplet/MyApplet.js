@@ -110,7 +110,7 @@ class ServiceLogo extends Component {
 
 const mapStateToProps=state=>{
 	return{
-		appletList:state.appletList
+		appletList:state.create.appletList
 	}
 }
 

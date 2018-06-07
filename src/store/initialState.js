@@ -78,7 +78,9 @@ const initialState = {
 						"This Action will send you an HTML based email. Images and links are supported."
 				}
 			]
-		},
+		}
+	},
+	create: {
 		appletList: [
 			{
 				actionHeading: "Send me an email",
@@ -130,7 +132,6 @@ const initialState = {
 			}
 		]
 	},
-	create: {},
 	change: {}
 };
 

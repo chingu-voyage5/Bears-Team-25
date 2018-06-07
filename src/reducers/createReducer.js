@@ -3,10 +3,10 @@ import * as ACTIONS from "../actions/actionTypes";
 const createReducer = (state = {}, action) => {
 	switch (action.type) {
 		case ACTIONS.CREATE_APPLET:
-			console.log("Here");
+			let details=action.payload;
 			return {
 				...state,
-				appletList: action.payload
+				appletList: state.appletList.concat(action.payload)
 			};
 		default:
 			return state;
