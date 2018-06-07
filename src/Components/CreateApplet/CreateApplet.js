@@ -5,7 +5,9 @@ import Step3 from "./Step3/Step3";
 import Step4 from "./Step4/Step4";
 import Step5 from "./Step5/Step5";
 import Step6 from "./Step6/Step6";
-
+import * as createActions from "../../actions/createActions";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 //Main page in which create-applet happens
 class CreateApplet extends Component {
 	constructor(props) {
@@ -59,6 +61,7 @@ class CreateApplet extends Component {
 	_finish(obj){
 		this._changeStep();
 		console.log(this.state);
+		this.props.createActions.addApplet(this.state);
 	}
 
 	render() {
@@ -84,7 +87,13 @@ class CreateApplet extends Component {
 	}
 }
 
-export default CreateApplet;
+const mapActionsToProps=(dispatch)=>{
+	return({
+		createActions:bindActionCreators(createActions,dispatch)
+	});
+}
+
+export default connect(null,mapActionsToProps)(CreateApplet);
 
 
 

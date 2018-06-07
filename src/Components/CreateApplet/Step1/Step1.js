@@ -22,7 +22,6 @@ class Step1 extends Component {
 			return null;
 		}
 		const serviceList=this.props.serviceList;
-		console.log(serviceList);
 		return (
 			<div className="step-1">
 				<ServiceCard json={serviceList} validate={this._validate}/>
