@@ -7,8 +7,6 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
-import faCoffee from "@fortawesome/fontawesome-free-solid/faCoffee";
 import * as Icons from "../../Common/Icons/Icons";
 import './ServiceCard.css';
 
