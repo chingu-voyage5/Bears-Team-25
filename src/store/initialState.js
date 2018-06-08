@@ -21,7 +21,7 @@ const initialState = {
 			color: "blue"
 		},
 		{
-			name: "Google+",
+			name: "Github",
 			color: "green"
 		},
 		{
@@ -117,6 +117,16 @@ const initialState = {
 				content:
 					"This trigger fires everytime when you post a video on Instagram"
 			}
+		],
+		Github:[
+			{
+				heading:"Any new issue",
+				content:"This trigger fires every time any new issue is opened in a repository you own or collabrate with"
+			},
+			{
+				heading:"New Pull request for specified repository",
+				content:"This Trigger fires everytime a pull request is opened for a repository you specify"
+			}
 		]
 	},
 	action: {
@@ -125,6 +135,34 @@ const initialState = {
 				heading: "Send me an email",
 				content:
 					"This Action will send you an HTML based email. Images and links are supported."
+			}
+		],
+		Twitter:[
+			{
+				heading: "Post an image with tweet",
+				content:
+					"This action will tweet along with linked image"	
+			},
+			{
+				heading: "Post a tweet",
+				content:
+					"This Action will post a new tweet"	
+			}
+		],
+		Facebook:[
+			{
+				heading:"Create a status message",
+				content:"This action will add a plain text status on Facebook"
+			},
+			{
+				heading:"Create a link post",
+				content:"This action will create new link post on Facebook"
+			}
+		],
+		Github:[
+			{
+				heading:"Create an issue",
+				content:"This action will create an issue in your specified repository"
 			}
 		]
 	},

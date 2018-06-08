@@ -1,20 +1,20 @@
 .Actions{
-	margin-left: 10%;
-	margin-right: 10%;
+	margin-left: 7.5%;
+	margin-right: 7.5%;
 	margin-top: 5%;
 }
 .action-card{
 	width:275px;
-	height:225px;
-	padding-top: 25px;
+	height:250px;
+	padding-top: 5px;
 	background-color: rgb(36, 104, 255)!important;
+	margin-right: 2.5%;
 }
 .action-card h2{
     font-weight: 800;
     line-height: 1.125;
     color:#fff;
     line-height: 1.125;
-
 }
 .action-card p{
 	color: rgba(255,255,255,0.8);

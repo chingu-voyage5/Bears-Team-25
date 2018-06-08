@@ -4,7 +4,7 @@ import GuestHomepage from "./GuestHomepage/GuestHomepage";
 
 class Homepage extends Component{
 	render(){
-		const auth=true;
+		const auth=false;
 		const Page=auth?(<LoggedUserHomePage />):(<GuestHomepage />)
 		return(
 			<div className="homepage">
