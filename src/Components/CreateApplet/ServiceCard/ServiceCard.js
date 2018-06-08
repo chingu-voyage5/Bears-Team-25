@@ -16,26 +16,25 @@ class ServiceCard extends Component {
 		this.state = {};
 		this._validate = this._validate.bind(this);
 	}
-	_validate(e) {
-		e.preventDefault();
-		let value = e.currentTarget.getAttribute("value");
+	_validate(service) {
+		let value = service.name;
+		console.log(value);
 		this.props.validate(value);
 	}
 	render() {
 		const ServiceList = this.props.json;
 		const createServiceList = ServiceList.map(function(service, index) {
-			console.log("Inside render");
 			let serviceName=service.name+"Icon";
 			serviceName = serviceName.replace(/&/g,"");
-			console.log(serviceName);
 			const IconName=Icons[serviceName];
+
 			return (
 				<Grid item sm={3}>
 					<Card
 						className="card"
 						value={service.name}
 						style={{ backgroundColor: service.color }}
-						onClick={e => this._validate(e)}
+						onClick={this._validate.bind(this,service)}
 					>
 						<div className="text-center media-icon">
 							<IconName />
@@ -54,7 +53,7 @@ class ServiceCard extends Component {
 					</Card>
 				</Grid>
 			);
-		});
+		}.bind(this));
 
 		return (
 			<div className="service-card">
