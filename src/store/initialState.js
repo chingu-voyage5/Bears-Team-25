@@ -29,8 +29,8 @@ const initialState = {
 			color: "blue"
 		},
 		{
-			name: "Date and Time",
-			color: "Brown"
+			name:"Date&Time",
+			color:"green"
 		}
 	],
 	trigger: {

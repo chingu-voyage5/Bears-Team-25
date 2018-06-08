@@ -25,7 +25,9 @@ class ServiceCard extends Component {
 		const ServiceList = this.props.json;
 		const createServiceList = ServiceList.map(function(service, index) {
 			console.log("Inside render");
-			const serviceName="TwitterIcon";
+			let serviceName=service.name+"Icon";
+			serviceName = serviceName.replace(/&/g,"");
+			console.log(serviceName);
 			const IconName=Icons[serviceName];
 			return (
 				<Grid item sm={3}>
