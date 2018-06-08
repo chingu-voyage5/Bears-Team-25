@@ -40,7 +40,7 @@ class Footer extends Component {
               <ul>
                 <li>Most Viewed</li>
                 <li>High Rated</li>
-                <li>Recommended Projects</li>
+                <li>Recommended Applets</li>
                 <li>New Additions</li>
               </ul>
             </div>
@@ -50,7 +50,7 @@ class Footer extends Component {
                 <li>My Account</li>
                 <li>Community</li>
                 <li>Github</li>
-                <li>chingu.io</li>
+                <li>Feedback</li>
               </ul>
             </div>
           </div>
