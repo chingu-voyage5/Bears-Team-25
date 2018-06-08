@@ -89,7 +89,7 @@ const initialState = {
 					"A card has been added to trello board of yours",
 				serviceFrom: "Trello",
 				serviceTo: "Mail",
-				condition:"On"
+				condition: "On"
 			},
 			{
 				actionHeading: "Send me an email",
@@ -102,7 +102,7 @@ const initialState = {
 					"A card has been added to trello board of yours",
 				serviceFrom: "Trello",
 				serviceTo: "Mail",
-				condition:"On"
+				condition: "On"
 			},
 			{
 				actionHeading: "Send me an email",
@@ -115,7 +115,7 @@ const initialState = {
 					"A card has been added to trello board of yours",
 				serviceFrom: "Trello",
 				serviceTo: "Mail",
-				condition:"On"
+				condition: "On"
 			},
 			{
 				actionHeading: "Send me an email",
@@ -128,7 +128,61 @@ const initialState = {
 					"A card has been added to trello board of yours",
 				serviceFrom: "Trello",
 				serviceTo: "Mail",
-				condition:"On"
+				condition: "On"
+			}
+		],
+		allAppletList: [
+			{
+				actionHeading: "Send me an email",
+				actionContent:
+					"This Action will send you an HTML based email. Images and links are supported.",
+				content: "Random content",
+				heading: "Random content",
+				triggerHeading: "Add a Card to trello",
+				triggerContent:
+					"A card has been added to trello board of yours",
+				serviceFrom: "Trello",
+				serviceTo: "Mail",
+				condition: "On"
+			},
+			{
+				actionHeading: "Send me an email",
+				actionContent:
+					"This Action will send you an HTML based email. Images and links are supported.",
+				content: "Random content",
+				heading: "Random content",
+				triggerHeading: "Add a Card to trello",
+				triggerContent:
+					"A card has been added to trello board of yours",
+				serviceFrom: "Trello",
+				serviceTo: "Mail",
+				condition: "On"
+			},
+			{
+				actionHeading: "Send me an email",
+				actionContent:
+					"This Action will send you an HTML based email. Images and links are supported.",
+				content: "Random content",
+				heading: "Random content",
+				triggerHeading: "Add a Card to trello",
+				triggerContent:
+					"A card has been added to trello board of yours",
+				serviceFrom: "Trello",
+				serviceTo: "Mail",
+				condition: "On"
+			},
+			{
+				actionHeading: "Send me an email",
+				actionContent:
+					"This Action will send you an HTML based email. Images and links are supported.",
+				content: "Random content",
+				heading: "Random content",
+				triggerHeading: "Add a Card to trello",
+				triggerContent:
+					"A card has been added to trello board of yours",
+				serviceFrom: "Trello",
+				serviceTo: "Mail",
+				condition: "On"
 			}
 		]
 	}

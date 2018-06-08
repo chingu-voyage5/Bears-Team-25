@@ -22,7 +22,6 @@ class AppletCard extends Component {
 		this.setState({ [name]: event.target.checked });
 	};
 	render() {
-		console.log(this.props.content);
 		return (
 			<Grid item sm={4}>
 				<div className="applet-card">

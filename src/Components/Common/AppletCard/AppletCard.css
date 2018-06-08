@@ -17,8 +17,8 @@
 .applet-card .card{
 	height: auto;
 	background-color: rgb(51,51,51)!important;
-	width:375px;
-	height: auto;
+	width:350px;
+	margin-top:5%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -35,9 +35,6 @@
 .applet-card .submit-button>button{
 	border-radius: 30px!important;
 }
-.review-card{
-	margin-top:2%;
-}
 .inline-text{
 	margin-right: 5px;
 }
@@ -48,8 +45,4 @@
 .inline svg{
 	position: relative;
 	top:6px;
-}
-.applet-card .card{
-	margin-top:5%;
-	margin-right: 2.5%;
 }
