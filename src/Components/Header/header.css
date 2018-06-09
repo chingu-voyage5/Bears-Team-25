@@ -1,0 +1,66 @@
+.ifttt-logo {
+    margin-left: 15em;
+    margin-right: 15px;
+}
+
+.auth-buttons {
+    margin-left: auto;
+    margin-right: 15em;
+}
+
+
+.profile-icon {
+    margin-left: auto;
+    margin-right: 15em;
+}
+
+@media screen and (max-width: 992px) {
+    .ifttt-logo {
+        margin-left: 0;
+    }
+    .auth-buttons {
+        margin-right: 0;
+    }
+    .profile-icon{
+        margin-right: 0;
+    }
+  }
+  
+
+a {
+text-decoration: none;
+outline: none;
+}
+
+a:active {
+	opacity: 0.5
+}
+
+span {
+    text-decoration: none;
+}
+
+
+
+
+
+
+.button-text {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+.navLinkActiveStyle {
+    font-weight: 'bold';
+    opacity: 0.5
+}
+
+.navLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-style: normal;
+    margin-right: 0.6em;
+}

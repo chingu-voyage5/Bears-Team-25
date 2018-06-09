@@ -6,13 +6,15 @@ import actionReducer from "../reducers/actionReducer";
 import triggerReducer from "../reducers/triggerReducer";
 import activityReducer from "../reducers/activityReducer";
 import initialState from "./initialState";
+import authReducer from '../reducers/authReducer';
 
 const rootReducer = combineReducers({
   action:actionReducer,
   activity:activityReducer,
   create: createReducer,
   service:serviceReducer,
-  trigger: triggerReducer
+  trigger: triggerReducer,
+  auth: authReducer
 });
 
 const middlewares = applyMiddleware(thunk);

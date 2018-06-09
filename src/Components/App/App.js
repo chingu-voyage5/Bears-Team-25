@@ -5,12 +5,14 @@ import CreateApplet from "../CreateApplet/CreateApplet";
 import MyApplet from "../MyApplet/MyApplet";
 import Footer from "../Footer/Footer";
 import Activity from "../Activity/Activity";
+import Header from '../Header/header';
 import "./App.css";
 
 class App extends Component {
 	render() {
 		return (
 			<div className="App">
+				<Header />
 				<Switch>
 					<Route exact path="/" component={Homepage} />
 					<Route path="/createapplet" component={CreateApplet} />
