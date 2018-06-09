@@ -11,7 +11,7 @@ class SignInPage extends React.Component {
     render() {
         const { login, auth, isFetching } = this.props;
         if (auth) {
-            return <Redirect to='/discover' />
+            return <Redirect to='/' />
         }
         else {
             return <div className='screen-center'>

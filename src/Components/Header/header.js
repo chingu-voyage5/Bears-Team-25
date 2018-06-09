@@ -65,13 +65,13 @@ class Header extends React.Component {
         return <div className='header-container'>
             <AppBar position="static" color={auth ? "primary" : 'default'}>
                 <Toolbar>
-                    <Link className="ifttt-logo" to={auth ? "/discover" : '/'}>
+                    <Link className="ifttt-logo" to={auth ? "/" : '/'}>
                         <svg fill={auth ? "white" : '#262326'} height="17" viewBox="0 0 332 88" xmlns="http://www.w3.org/2000/svg"><title>Home</title>
                             <path d={IFTTT_ICON}></path></svg>
                     </Link>
                     {auth && (
                         <i >
-                            <NavLinkContainer to='/discover' title='Discover'  icon={<Visibility />}  />
+                            <NavLinkContainer to='/' title='Discover'  icon={<Visibility />}  />
                             <NavLinkContainer to='/search' title='Search' icon={<Search />} />
                             <NavLinkContainer to='/myapplets' title='My Applets'  icon={<Apps />} />
                             <NavLinkContainer to='/activity' title='Activity'  icon={<Subject />} />

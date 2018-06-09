@@ -11,7 +11,7 @@ var SignUpPage = props => {
     const { dispatch, handleSubmit, isFetching, userEmail, valid } = props
 
     if (userEmail) {
-        return <Redirect to='/discover' />
+        return <Redirect to='/' />
     }
     else {
         return (

@@ -10,7 +10,7 @@ import {renderTextField, validatePassAndEmail} from '../../commonFunctions/formF
 var SignInUsingPasswordPage = props => {
     const { dispatch, handleSubmit, isFetching, userEmail,  valid} = props;
     if (userEmail) {
-        return <Redirect to='/discover' />
+        return <Redirect to='/' />
     }
     else {
         return (
