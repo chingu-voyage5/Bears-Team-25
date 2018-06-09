@@ -1,8 +1,20 @@
 .activity-page .icon svg{
 	position: relative;
-	top:31%;
+	top:22%;
 	width:40px;
 	height: 40px;
 	margin-left: auto;
 	float:right;
+}
+.acitivty-card{
+	margin-top: 1%;
+}
+.activity-card .service-name{
+	margin-left: 2%;
+}
+.activity-card svg{
+	width:40px;
+	height: 40px;
+	position: relative;
+	top:18%;
 }

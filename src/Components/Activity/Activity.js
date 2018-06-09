@@ -8,23 +8,49 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import FacebookIcon from "mdi-react/FacebookIcon";
+import * as Icons from "../Common/Icons/Icons";
 import "./Activity.css";
 
 class Activity extends Component {
 	render() {
 		const activityList = this.props.activityList;
+		const allActivityList = activityList.map((activity) => 
+			<ActivityRow serviceName={activity.serviceName} />
+		);
 		return (
-			<div className="activity-page">
+			<div className='activity-page'>
+				{allActivityList}
+			</div>
+		);
+	}
+}
+
+class ActivityRow extends Component{
+	render() {
+		return (
+			<div className="activity-row">
 				<Grid container spacing={24}>
 					<Grid item sm={1} className="icon">
 						<FacebookIcon />
 					</Grid>
 					<Grid item sm={11}>
-						<h1>Service Connected</h1>
+						<CardContent>
+							<Typography variant="headline">
+								Service Connected
+							</Typography>
+							<Typography
+								variant="subheading"
+								color="textSecondary"
+							>
+								Jun 08,2018
+							</Typography>
+						</CardContent>
 					</Grid>
+				</Grid>
+				<Grid container spacing={24}>
 					<Grid item sm={1} />
 					<Grid item sm={11}>
-						<ActivityCard />
+						<ActivityCard serviceName={this.props.serviceName} />
 					</Grid>
 				</Grid>
 			</div>
@@ -34,24 +60,28 @@ class Activity extends Component {
 
 class ActivityCard extends Component {
 	render() {
+		let serviceName=this.props.serviceName;
+		let serviceNameIcon = serviceName + "Icon";
+		const IconName = Icons[serviceNameIcon];
 		return (
-			<div>
+			<div className="activity-card">
 				<Card>
-					<CardMedia
-						image="/static/images/cards/contemplative-reptile.jpg"
-						title="Contemplative Reptile"
-					/>
-					<CardContent>	
+					<CardContent>
 						<Typography
 							gutterBottom
 							variant="headline"
-							component="h2"
+							component="h1"
 						>
-							Lizard
+							<Grid container spacing={24}>
+							<Grid item sm={8}>
+								<IconName /><span className="service-name">{serviceName}</span>
+							</Grid>
+							</Grid>
+
 						</Typography>
 					</CardContent>
 					<CardContent className="card-footer">
-						You connected the github service
+						You connected the {serviceName} service
 					</CardContent>
 				</Card>
 			</div>

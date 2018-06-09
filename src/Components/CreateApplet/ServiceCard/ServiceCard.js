@@ -27,7 +27,6 @@ class ServiceCard extends Component {
 			let serviceName=service.name+"Icon";
 			serviceName = serviceName.replace(/&/g,"");
 			const IconName=Icons[serviceName];
-
 			return (
 				<Grid item sm={3}>
 					<Card
