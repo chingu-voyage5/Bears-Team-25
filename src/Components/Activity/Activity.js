@@ -7,7 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import FacebookIcon from "mdi-react/FacebookIcon";
+import AssignmentIcon from "mdi-react/AssignmentIcon";
 import * as Icons from "../Common/Icons/Icons";
 import "./Activity.css";
 
@@ -31,7 +31,7 @@ class ActivityRow extends Component{
 			<div className="activity-row">
 				<Grid container spacing={24}>
 					<Grid item sm={1} className="icon">
-						<FacebookIcon />
+						<AssignmentIcon />
 					</Grid>
 					<Grid item sm={11}>
 						<CardContent>

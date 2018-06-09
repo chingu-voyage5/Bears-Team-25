@@ -6,6 +6,9 @@
 	margin-left: auto;
 	float:right;
 }
+.activity-page .icon{
+	padding-right: 0px!important;
+}
 .acitivty-card{
 	margin-top: 1%;
 }
