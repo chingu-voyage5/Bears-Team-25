@@ -6,13 +6,17 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Visibility from '@material-ui/icons/Visibility';
+import Search from '@material-ui/icons/Search';
+import Apps from '@material-ui/icons/Apps';
+import Subject from '@material-ui/icons/Subject';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
-import Icon from "@material-ui/core/Icon";
 import './header.css'
 import { withRouter } from 'react-router-dom'
 import { logout, setUserEmail } from '../../actions/loginActions'
+import App from '../App/App';
 
 
 
@@ -21,7 +25,7 @@ class NavLinkContainer extends React.Component {
         const { icon, title, to } = this.props;
         return <NavLink className="navLink" activeStyle={{ fontWeight: 'bold', opacity: 0.5 }}
             to={to}>
-            <Icon>{icon}</Icon>
+            {icon}
             <Hidden only="xs"><span className='button-text'>{title}</span></ Hidden>
         </NavLink>
     }
@@ -68,10 +72,10 @@ class Header extends React.Component {
                     </Link>
                     {auth && (
                         <i >
-                            <NavLinkContainer to='/discover' title='Discover' icon='visibility' />
-                            <NavLinkContainer to='/search' title='Search' icon='search' />
-                            <NavLinkContainer to='/myapplets' title='My Applets' icon='apps' />
-                            <NavLinkContainer to='/activity' title='Activity' icon='subject' />
+                            <NavLinkContainer to='/discover' title='Discover'  icon={<Visibility />}  />
+                            <NavLinkContainer to='/search' title='Search' icon={<Search />} />
+                            <NavLinkContainer to='/myapplets' title='My Applets'  icon={<Apps />} />
+                            <NavLinkContainer to='/activity' title='Activity'  icon={<Subject />} />
                         </i>)}
 
                     {auth && (

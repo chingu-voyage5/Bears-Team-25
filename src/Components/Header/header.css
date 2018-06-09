@@ -1,17 +1,17 @@
 .ifttt-logo {
-    margin-left: 15em;
+    margin-left: 10em;
     margin-right: 15px;
 }
 
 .auth-buttons {
     margin-left: auto;
-    margin-right: 15em;
+    margin-right: 10em;
 }
 
 
 .profile-icon {
     margin-left: auto;
-    margin-right: 15em;
+    margin-right: 10em;
 }
 
 @media screen and (max-width: 992px) {
