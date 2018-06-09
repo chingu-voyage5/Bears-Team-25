@@ -49,7 +49,7 @@ class ActivityRow extends Component{
 				</Grid>
 				<Grid container spacing={24}>
 					<Grid item sm={1} />
-					<Grid item sm={11}>
+					<Grid item sm={8}>
 						<ActivityCard serviceName={this.props.serviceName} />
 					</Grid>
 				</Grid>
@@ -65,7 +65,7 @@ class ActivityCard extends Component {
 		const IconName = Icons[serviceNameIcon];
 		return (
 			<div className="activity-card">
-				<Card>
+				<Card className="card">
 					<CardContent>
 						<Typography
 							gutterBottom

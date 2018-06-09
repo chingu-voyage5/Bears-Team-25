@@ -9,12 +9,24 @@
 .acitivty-card{
 	margin-top: 1%;
 }
+.activity-card .card{
+	border:1px solid black;
+	margin-left:2.5%;
+	border-radius: 10px;
+	background-color: #4078c0;
+}
 .activity-card .service-name{
 	margin-left: 2%;
+	color:white;
+	font-weight: 550;
 }
 .activity-card svg{
 	width:40px;
 	height: 40px;
 	position: relative;
 	top:18%;
+	fill: white;
+}
+.activity-row{
+	margin-top: 5%;
 }
