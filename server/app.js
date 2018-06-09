@@ -3,18 +3,19 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+var appRoot = require('app-root-path');
 var favicon = require('serve-favicon');
 
 const index = require('./routes/index');
 
 const app = express();
 
-app.use(favicon(path.join('./public/favicon.ico')));
+app.use(favicon(path.join(appRoot.path, 'build/favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(appRoot.path,'build')));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,7 +23,7 @@ app.set('view engine', 'jade');
 
 app.use('/api', index);
 app.get('*', (req, res) => {
-  res.sendFile('build/index.html', { root: global });
+  res.sendFile(path.join(appRoot.path, 'build/index.html'));
 });
 
 // catch 404 and forward to error handler
