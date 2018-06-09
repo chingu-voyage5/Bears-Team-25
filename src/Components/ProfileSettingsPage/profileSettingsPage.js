@@ -17,7 +17,7 @@ var ProfileSettingsPage = props => {
     }
     else {
         return (
-            <div className='screen-center' style={{ textAlign: 'start' }}>
+            <div className='screen-center settings' style={{ textAlign: 'start' }}>
                 <form onSubmit={(values => dispatch(handleSubmit(values)))}>
                     <div>
                         <h2 className='form-title'> Account</h2>

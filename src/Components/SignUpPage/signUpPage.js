@@ -15,7 +15,7 @@ var SignUpPage = props => {
     }
     else {
         return (
-            <div className='screen-center'>
+            <div className='screen-center sign'>
                 <form onSubmit={(values => dispatch(handleSubmit(values)))}>
                     <h1 style={{ marginBottom: 0 }}>
                         Sign Up

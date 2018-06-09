@@ -14,7 +14,7 @@ class SignInPage extends React.Component {
             return <Redirect to='/' />
         }
         else {
-            return <div className='screen-center'>
+            return <div className='screen-center social-sign'>
                 <h2 style={{ fontSize: '2em' }}>
                     Get started with <svg fill='#262326' height="1em" viewBox="0 0 332 88"
                         xmlns="http://www.w3.org/2000/svg"><title>Home</title><path d={IFTTT_ICON}>

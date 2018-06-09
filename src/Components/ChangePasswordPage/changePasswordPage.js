@@ -23,7 +23,7 @@ var ChangePasswordForm = props => {
     }
     else {
         return (
-            <div className='screen-center' style={{ textAlign: 'start' }}>
+            <div className='screen-center change' style={{ textAlign: 'start' }}>
                 <form onSubmit={(values => dispatch(handleSubmit(values)))}>
                     <h1 style={{ marginTop: 0 }}> Change password</h1>
                     <div style={{ marginBottom: '0.6em' }}>

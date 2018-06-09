@@ -66,7 +66,7 @@ class Header extends React.Component {
             <AppBar position="static" color={auth ? "primary" : 'default'}>
                 <Toolbar>
                     <Link className="ifttt-logo" to={auth ? "/" : '/'}>
-                        <svg fill={auth ? "white" : '#262326'} height="17" viewBox="0 0 332 88" xmlns="http://www.w3.org/2000/svg"><title>Home</title>
+                        <svg fill={auth ? "white" : '#262326'} height="1.7em" viewBox="0 0 332 88" xmlns="http://www.w3.org/2000/svg"><title>Home</title>
                             <path d={IFTTT_ICON}></path></svg>
                     </Link>
                     {auth && (
@@ -74,7 +74,7 @@ class Header extends React.Component {
                             <NavLinkContainer to='/' title='Discover'  icon={<Visibility />}  />
                             <NavLinkContainer to='/search' title='Search' icon={<Search />} />
                             <NavLinkContainer to='/myapplets' title='My Applets'  icon={<Apps />} />
-                            <NavLinkContainer to='/activity' title='Activity'  icon={<Subject />} />
+                            <NavLinkContainer  to='/activity' title='Activity'  icon={<Subject />} />
                         </i>)}
 
                     {auth && (
@@ -88,7 +88,7 @@ class Header extends React.Component {
                                 style={{ textTransform: 'none' }}
                             >
                                 <AccountCircle />
-                                <Hidden smDown><span className='button-text'>{userEmail}</span></ Hidden>
+                                <Hidden smDown><span className='useremail-button-text'>{userEmail}</span></ Hidden>
                             </Button>
                             <Menu
                                 id="menu-appbar"

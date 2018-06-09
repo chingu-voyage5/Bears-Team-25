@@ -9,21 +9,41 @@ body {
 .screen-center {
 	font-size: 27px;
 	text-align: center;
-	position: absolute;
-	top: 50%;
 	justify-content: center;
-	margin: auto;
-	left: 50%;
-	transform: translate(-50%, -50%);
 	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
 	font-family: Avenir Next W01, Avenir Next, Avenir, helvetica, arial, sans-serif;
 	min-width: 280px;
 	width: 25em;
 	max-width: 90%;
-  
-  }
-  
-  
+	}
+	
+.screen-center.social-sign {
+		margin-top: 10em;
+		margin-bottom: 10em;
+	}
+
+.screen-center.sign {
+		margin-top: 10em;
+		margin-bottom: 10em;
+	}
+
+	.screen-center.settings {
+		margin-top: 5em;
+		margin-bottom: 8em;
+	}
+
+	.screen-center.deletion {
+		margin-top: 10em;
+		margin-bottom: 13em;
+	}
+
+	.screen-center.change {
+		margin-top: 7em;
+		margin-bottom: 7em;
+	}
+
   .submit-button {
 	border-radius: 0.2em!important;
 	font-size: 1.5em!important;

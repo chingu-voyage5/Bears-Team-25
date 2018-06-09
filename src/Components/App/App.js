@@ -31,9 +31,8 @@ class App extends Component {
 					<Route path="/createapplet" component={CreateApplet} />
 					<Route path="/myapplets" component={MyApplet} />
 					<Route path="/activity" component={Activity} />
-
 				</Switch>
-				{/* <Footer />  deleted until styling fixed*/}
+				<Footer />
 				<Snackbar />
 			</div>
 		);

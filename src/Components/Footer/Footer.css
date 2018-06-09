@@ -8,8 +8,9 @@
 
 .footer {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  margin: 0;
+  margin: auto;
   max-width: 1200px;
   width: 100%;
 }
