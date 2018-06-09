@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
 import './ActionCard.css';
 
 class ActionCard extends Component {
@@ -25,8 +24,9 @@ class ActionCard extends Component {
 		}
 	}
 	render() {
+		console.log(this.props.json);
 		const ActionList = this.props.json.map(action => (
-				<Grid item sm={3}>
+				<Grid item md={4} sm={6}>
 					<Card className="action-card" onClick={()=>this._validate(action)}>
 						<CardContent>
 							<h2>

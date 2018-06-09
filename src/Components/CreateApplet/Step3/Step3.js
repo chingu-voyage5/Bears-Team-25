@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import Grid from "@material-ui/core/Grid";
 import ServiceCard from "../ServiceCard/ServiceCard";
 import "./Step3.css";
 

@@ -4,10 +4,12 @@ import createReducer from "../reducers/createReducer";
 import serviceReducer from "../reducers/serviceReducer";
 import actionReducer from "../reducers/actionReducer";
 import triggerReducer from "../reducers/triggerReducer";
+import activityReducer from "../reducers/activityReducer";
 import initialState from "./initialState";
 
 const rootReducer = combineReducers({
   action:actionReducer,
+  activity:activityReducer,
   create: createReducer,
   service:serviceReducer,
   trigger: triggerReducer
