@@ -1,0 +1,37 @@
+
+.link-acc-image {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.5em;
+}
+
+.social-link-container {
+    align-content: center;
+    display: flex;
+    direction: ltr;
+    justify-content: flex-start;
+    margin-bottom: 0.8em;
+    margin-top: 0.8em;
+    box-align: center;
+    -webkit-box-align: center; 
+    box-sizing: border-box;
+}
+
+.social-link {
+    cursor: pointer;
+    color: #09f;
+    font-weight: 700; 
+  }
+
+  .social-link-wrapper {
+    font-size: 1em;
+    margin-right: auto;
+  }
+
+.title-link {
+    color: #09f;
+    font-weight: 600;
+    font-size: 1em;
+    margin-top: 0;
+  }
+ 

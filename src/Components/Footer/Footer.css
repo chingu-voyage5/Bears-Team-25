@@ -8,10 +8,10 @@
 
 .footer {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  margin: 0 auto;
+  margin: auto;
   max-width: 1200px;
-  padding: 20px;
   width: 100%;
 }
 

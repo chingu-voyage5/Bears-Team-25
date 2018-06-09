@@ -12,9 +12,9 @@ class Footer extends Component {
     return (
       <div className="footer-overlay">
         <div className="footer">
-          <div className="footer__logo1">
+          {/* <div className="footer__logo1">
               <img src={logo} alt="Project Showcase" />
-          </div>
+          </div> */}
           <div className="footer__links">
             <div className="footer__links__column">
               <div>CONNECT</div>
@@ -43,7 +43,7 @@ class Footer extends Component {
                 <li>New Additions</li>
               </ul>
             </div>
-            <div className="footer__links__column">
+            <div className="footer__links__column" style={{marginRight: 0}}>
               <div>ACCOUNTS</div>
               <ul>
                 <li>My Account</li>

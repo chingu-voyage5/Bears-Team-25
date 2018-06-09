@@ -4,3 +4,100 @@ body {
 	font-family: "Avenir Next W01", "Avenir Next", "Avenir", helvetica, arial,
 		sans-serif;
 }
+
+
+.screen-center {
+	font-size: 27px;
+	text-align: center;
+	justify-content: center;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: Avenir Next W01, Avenir Next, Avenir, helvetica, arial, sans-serif;
+	min-width: 280px;
+	width: 25em;
+	max-width: 90%;
+	}
+	
+.screen-center.social-sign {
+		margin-top: 10em;
+		margin-bottom: 10em;
+	}
+
+.screen-center.sign {
+		margin-top: 10em;
+		margin-bottom: 10em;
+	}
+
+	.screen-center.settings {
+		margin-top: 5em;
+		margin-bottom: 8em;
+	}
+
+	.screen-center.deletion {
+		margin-top: 10em;
+		margin-bottom: 13em;
+	}
+
+	.screen-center.change {
+		margin-top: 7em;
+		margin-bottom: 7em;
+	}
+
+  .submit-button {
+	border-radius: 0.2em!important;
+	font-size: 1.5em!important;
+	margin-bottom: 0.5em!important;
+	min-width: 280px!important;
+	width: 8em!important;
+	max-width: 90%!important;
+  }
+  .input-field {
+	border-radius: 0.2em!important; 
+	font-size: 2.5em!important; 
+	margin-bottom: 0.4em!important;
+  }
+  
+  .link {
+	color: inherit;
+	opacity: 0.7!important;
+	font-weight: 800!important;
+	font-size: 1em!important;
+  }
+  
+  .bottom-link{
+	display: block;
+	color: inherit;
+	font-weight: 600; 
+	font-size: 0.65em;
+	margin-top: 0;
+	margin-bottom: 0;
+	opacity: 0.5;
+  }
+  
+  
+  .bottom-link-container {
+	text-align: center;
+	justify-content: center;
+  }
+  
+  
+  .form-title {
+	margin-top: 0;
+	margin-bottom: 0;
+  } 
+  
+  
+  @media screen and (max-width: 992px) {
+	.screen-center {
+		font-size: 20px;
+	}
+  }
+  
+  @media screen and (max-width: 767px) {
+	.screen-center {
+		font-size: 12px;
+	}
+  }
+  
+  
