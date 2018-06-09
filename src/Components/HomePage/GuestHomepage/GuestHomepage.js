@@ -126,9 +126,9 @@ class FeatureRow extends Component {
 
 		//list first content according to whether image or text should be in first column
 		const FirstContent =
-			alt == "Y" ? (
+			alt === "Y" ? (
 				<Grid item sm={5} >
-					<img src={logo} className="logo" />
+					<img src={logo} className="logo" alt="logo"/>
 				</Grid>
 			) : (
 				<Grid item sm={4}>
@@ -148,7 +148,7 @@ class FeatureRow extends Component {
 			);
 
 		const SecondContent =
-			alt == "Y" ? (
+			alt === "Y" ? (
 				<Grid item sm={5}>
 					<div className="text">
 						<h1>{this.props.heading}</h1>
@@ -165,7 +165,7 @@ class FeatureRow extends Component {
 				</Grid>
 			) : (
 				<Grid item sm={6}>
-					<img src={logo} className="logo" />
+					<img src={logo} className="logo" alt="logo"/>
 				</Grid>
 			);
 

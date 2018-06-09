@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";	
 import Typography from "@material-ui/core/Typography";
 import "./Step5.css";
 
@@ -109,7 +107,7 @@ class ActionFieldCard extends Component {
 //Renders the data field component, containing the heading of input, the input/textarea and the add ingredient button
 const DataField = props => {
 	const dataBox =
-		props.input == "input" ? (
+		props.input === "input" ? (
 			<span className="text-center">
 				<br />
 				<input value={props.value} onChange={evt => props.updateInputValue(evt)} />

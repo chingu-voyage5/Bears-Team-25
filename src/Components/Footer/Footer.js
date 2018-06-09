@@ -3,7 +3,6 @@
  * First column just show company logo
  * Rest all columns (.footer_links) contain all kind of links which have been seperated into another 4 columns.
  **/
-import { Link } from "react-router-dom";
 import React, { Component } from "react";
 import logo from "../Common/Images/ifttt-banner.png";
 import "./Footer.css";
