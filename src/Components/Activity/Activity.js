@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import AssignmentIcon from "mdi-react/AssignmentIcon";
 import * as Icons from "../Common/Icons/Icons";
+import * as Colors from "../Common/Colors/Colors";
 import "./Activity.css";
 
 class Activity extends Component {
@@ -65,7 +66,7 @@ class ActivityCard extends Component {
 		const IconName = Icons[serviceNameIcon];
 		return (
 			<div className="activity-card">
-				<Card className="card">
+				<Card className="card" style={{backgroundColor:Colors[serviceName]}}>
 					<CardContent>
 						<Typography
 							gutterBottom
