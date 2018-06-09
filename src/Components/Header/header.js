@@ -22,7 +22,7 @@ import { logout, setUserEmail } from '../../actions/loginActions'
 class NavLinkContainer extends React.Component {
     render() {
         const { icon, title, to } = this.props;
-        return <NavLink className="navLink" activeStyle={{ fontWeight: 'bold', opacity: 0.5 }}
+        return <NavLink className="navLink" exact={(to === '/')? true : false} activeStyle={{ fontWeight: 'bold', opacity: 0.5 }}
             to={to}>
             {icon}
             <Hidden only="xs"><span className='button-text'>{title}</span></ Hidden>
@@ -65,7 +65,7 @@ class Header extends React.Component {
         return <div className='header-container'>
             <AppBar position="static" color={auth ? "primary" : 'default'}>
                 <Toolbar>
-                    <Link className="ifttt-logo" to={auth ? "/" : '/'}>
+                    <Link className="ifttt-logo" to="/">
                         <svg fill={auth ? "white" : '#262326'} height="1.7em" viewBox="0 0 332 88" xmlns="http://www.w3.org/2000/svg"><title>Home</title>
                             <path d={IFTTT_ICON}></path></svg>
                     </Link>
