@@ -75,8 +75,8 @@ class GuestHomepage extends Component {
 class VideoRow extends Component {
 	render() {
 		return (
-			<div style={{textAlign: 'center'}}>
-			<video width="90%" height="600" playsInline autoPlay muted  loop>
+			<div style={{textAlign: 'center', marginBottom: 0, marginTop:0, paddingBottom: 0}}>
+			<video width="70%" height="auto" playsInline autoPlay muted  loop>
 				 <source src={video} type="video/mp4" />
 				Your browser does not support the video tag.
 		  </video>
