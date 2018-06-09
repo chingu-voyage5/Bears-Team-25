@@ -9,6 +9,7 @@ import Header from '../Header/header';
 import SignInPage from '../SignInPage/signInPage';
 import Snackbar from '../Snackbar/snackbar';
 import SignInUsingPasswordPage from '../SignInWithPasswordPage/signInUsingPasswordPage';
+import SignUpPage from '../SignUpPage/signUpPage';
 import "./App.css";
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
 					<Route exact path="/" component={Homepage} />
 					<Route path='/login' component={SignInPage} />
 					<Route path='/sign_in' component={SignInUsingPasswordPage} />
+					<Route path='/join' component={SignUpPage} />
 					<Route path="/createapplet" component={CreateApplet} />
 					<Route path="/myapplets" component={MyApplet} />
 					<Route path="/activity" component={Activity} />
