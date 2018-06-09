@@ -11,12 +11,14 @@
     "cross-fetch": "^2.2.1",
     "debug": "^3.1.0",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "install": "^0.11.0",
     "jade": "^1.11.0",
     "mdi-react": "^3.4.0",
     "mongoose": "^5.1.4",
     "morgan": "^1.9.0",
     "npm": "^6.1.0",
+    "passport": "^0.4.0",
     "path": "^0.12.7",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
@@ -34,7 +36,7 @@
   },
   "scripts": {
     "start": "concurrently \"react-scripts start\" \"nodemon server/bin/www\"",
-    "build":  "react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
