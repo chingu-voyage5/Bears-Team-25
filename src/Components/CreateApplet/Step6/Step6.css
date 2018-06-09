@@ -1,0 +1,49 @@
+ .step-6 textarea{
+	border: 0.25em solid #eee;
+	background: none;
+	color: white;
+    border-color: rgba(255,255,255,0.2);
+	border-radius: 10px;
+	width: -webkit-fill-available;
+	height:115px;
+	margin: 2.5%;
+	margin-right: 2.5%;
+	font-size: 1.125em;
+    line-height: 1.5;
+    font-family: "Avenir Next W01", "Avenir Next", "Avenir", helvetica, arial, sans-serif;
+    font-weight: 700;
+    padding: 1em;
+}
+.totalChars{
+	text-align:right;
+}
+.step-6 .card{
+	height: auto;
+	background-color: rgb(51,51,51)!important;
+	width:375px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+.card-footer{
+	background: rgba(0,0,0,0.2);
+	color:white;
+}
+.step-6 .inline{
+	display: inline-flex;
+}
+.step-6 .text-inline{
+	margin-right: 5px;
+}
+.step-6 .center-button{
+	text-align: center;
+}
+.step-6 .submit-button{
+	margin-top: 2.5%!important;
+}
+.step-6 .submit-button>button{
+	border-radius: 30px!important;
+}
+.review-card{
+	margin-top:2%;
+}

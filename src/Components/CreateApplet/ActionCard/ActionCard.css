@@ -1,0 +1,29 @@
+.Actions{
+	margin-left: 7.5%;
+	margin-right: 7.5%;
+	margin-top: 5%;
+}
+.action-card{
+	width:275px;
+	height:250px;
+	padding-top: 5px;
+	background-color: rgb(36, 104, 255)!important;
+	margin-right: 2.5%;
+}
+.action-card h2{
+    font-weight: 800;
+    line-height: 1.125;
+    color:#fff;
+    line-height: 1.125;
+}
+.action-card p{
+	color: rgba(255,255,255,0.8);
+    font-size: 1.11rem;
+    font-weight: 700;
+    margin-top: 1em;
+    font-family: "Avenir Next W01", "Avenir Next", "Avenir", helvetica, arial, sans-serif;
+}
+
+.action-card{
+	cursor: pointer;
+}

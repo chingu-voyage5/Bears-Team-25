@@ -1,0 +1,14 @@
+.text-center{
+	text-align: center;
+}
+.step-3{
+	margin-left:5%;
+	margin-right:5%;
+}
+.step-3 .card{
+	height: 220px;
+	width:220px;
+}
+.media-icon{
+	margin-top: 35px!important;
+}
