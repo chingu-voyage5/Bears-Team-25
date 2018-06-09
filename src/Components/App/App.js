@@ -12,6 +12,7 @@ import SignInUsingPasswordPage from '../SignInWithPasswordPage/signInUsingPasswo
 import SignUpPage from '../SignUpPage/signUpPage';
 import ChangePasswordPage from '../ChangePasswordPage/changePasswordPage';
 import ProfileSettingsPage from '../ProfileSettingsPage/profileSettingsPage';
+import AccountDeletionPage from '../AccountDeletionPage/accountDeletionPage'
 import "./App.css";
 
 class App extends Component {
@@ -26,9 +27,11 @@ class App extends Component {
 					<Route path='/join' component={SignUpPage} />
 					<Route path='/settings' component={ProfileSettingsPage} />
 					<Route path='/change_password' component={ChangePasswordPage} />
+					<Route path='/account_deletion' component={AccountDeletionPage} />
 					<Route path="/createapplet" component={CreateApplet} />
 					<Route path="/myapplets" component={MyApplet} />
 					<Route path="/activity" component={Activity} />
+
 				</Switch>
 				{/* <Footer />  deleted until styling fixed*/}
 				<Snackbar />
