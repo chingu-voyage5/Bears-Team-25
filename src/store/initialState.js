@@ -275,7 +275,24 @@ const initialState = {
 				condition: "On"
 			}
 		]
-	}
+	},
+	activity:[
+		{
+			Date:"Jun 08",
+			Time:"7:20 PM",
+			ServiceName:"Instagram",
+		},
+		{
+			Date:"Jun 05",
+			Time:"11:00 PM",
+			ServiceName:"Github",
+		},
+		{
+			Date:"Jun 01",
+			Time:"4:20 AM",
+			ServiceName:"Twitter",
+		}
+	]
 };
 
 export default initialState;
