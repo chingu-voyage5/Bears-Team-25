@@ -8,6 +8,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import * as Icons from "../../Common/Icons/Icons";
+import * as Colors from "../../Common/Colors/Colors";
 import "./ServiceCard.css";
 
 class ServiceCard extends Component {
@@ -24,15 +25,16 @@ class ServiceCard extends Component {
 	render() {
 		const ServiceList = this.props.json;
 		const createServiceList = ServiceList.map(function(service, index) {
-			let serviceName=service.name+"Icon";
+			let serviceName=service.name;
 			serviceName = serviceName.replace(/&/g,"");
-			const IconName=Icons[serviceName];
+			let serviceIcon=serviceName+"Icon";
+			const IconName=Icons[serviceIcon];
 			return (
 				<Grid item sm={3}>
 					<Card
 						className="card"
 						value={service.name}
-						style={{ backgroundColor: service.color }}
+						style={{ backgroundColor: Colors[serviceName] }}
 						onClick={this._validate.bind(this,service)}
 					>
 						<div className="text-center media-icon">
