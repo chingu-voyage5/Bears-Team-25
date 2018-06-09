@@ -278,17 +278,17 @@ const initialState = {
 	},
 	activity:[
 		{
-			date:"Jun 08",
+			date:"Jun 08,2018",
 			time:"7:20 PM",
 			serviceName:"Instagram",
 		},
 		{
-			date:"Jun 05",
+			date:"Jun 05,2018",
 			time:"11:00 PM",
 			serviceName:"Github",
 		},
 		{
-			date:"Jun 01",
+			date:"Jun 01,2018",
 			time:"4:20 AM",
 			serviceName:"Twitter",
 		}

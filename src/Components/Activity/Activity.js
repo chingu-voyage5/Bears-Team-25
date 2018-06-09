@@ -16,7 +16,7 @@ class Activity extends Component {
 	render() {
 		const activityList = this.props.activityList;
 		const allActivityList = activityList.map((activity) => 
-			<ActivityRow serviceName={activity.serviceName} />
+			<ActivityRow activity={activity}/>
 		);
 		return (
 			<div className='activity-page'>
@@ -43,7 +43,7 @@ class ActivityRow extends Component{
 								variant="subheading"
 								color="textSecondary"
 							>
-								Jun 08,2018
+								{this.props.activity.date}
 							</Typography>
 						</CardContent>
 					</Grid>
@@ -51,7 +51,7 @@ class ActivityRow extends Component{
 				<Grid container spacing={24}>
 					<Grid item sm={1} />
 					<Grid item sm={8}>
-						<ActivityCard serviceName={this.props.serviceName} />
+						<ActivityCard serviceName={this.props.activity.serviceName} />
 					</Grid>
 				</Grid>
 			</div>
