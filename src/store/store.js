@@ -9,6 +9,7 @@ import activityReducer from "../reducers/activityReducer";
 import initialState from "./initialState";
 import authReducer from '../reducers/authReducer';
 import snackbarReducer from '../reducers/snackbarReducer';
+import changePasswordReducer from '../reducers/changePasswordReducer';
 
 const rootReducer = combineReducers({
   action:actionReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   trigger: triggerReducer,
   auth: authReducer,
   snackbar: snackbarReducer,
+  changePassword: changePasswordReducer,
   form: reduxFormReducer
 });
 
