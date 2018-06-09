@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { change_password } from '../../actions/changePasswordActions';
 import { Redirect } from 'react-router';
-import { renderTextField, validatePasswords } from '../formFunctions';
+import { renderTextField, validatePasswords } from '../../commonFunctions/formFunctions';
 import { successOff } from '../../actions/changePasswordActions';
 
 var ChangePasswordForm = props => {

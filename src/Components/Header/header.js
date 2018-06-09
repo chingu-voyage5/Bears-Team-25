@@ -16,7 +16,6 @@ import Hidden from '@material-ui/core/Hidden';
 import './header.css'
 import { withRouter } from 'react-router-dom'
 import { logout, setUserEmail } from '../../actions/loginActions'
-import App from '../App/App';
 
 
 

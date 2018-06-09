@@ -10,6 +10,7 @@ import initialState from "./initialState";
 import authReducer from '../reducers/authReducer';
 import snackbarReducer from '../reducers/snackbarReducer';
 import changePasswordReducer from '../reducers/changePasswordReducer';
+import profileSettingsReducer from '../reducers/profileSettingsReducer';
 
 const rootReducer = combineReducers({
   action:actionReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   snackbar: snackbarReducer,
   changePassword: changePasswordReducer,
+  profileSettings: profileSettingsReducer,
   form: reduxFormReducer
 });
 
