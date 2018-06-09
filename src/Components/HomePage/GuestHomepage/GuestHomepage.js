@@ -7,14 +7,14 @@ import video from "../../../Videos/How_IFTTT_Works.mp4";
 import "./GuestHomepage.css";
 
 const data = {
-	header:[
-	{
-		heading: "A world that works for you",
+	header: [
+		{
+			heading: "A world that works for you",
 			content:
 				"IFTTT is the free way to get all your apps and devices talking to each other. Not everything on the internet plays nice, so we're on a mission to build a more connected world.",
 			alt: "N",
-			img:require('../../Common/Images/world.jpg')
-	}
+			img: require('../../Common/Images/world.jpg')
+		}
 	],
 	details: [
 		{
@@ -22,21 +22,21 @@ const data = {
 			content:
 				"Build a smart home that responds to every cue—from locking your front door to welcoming the delivery guy.",
 			alt: "Y",
-			img:require('../../Common/Images/dominos-ifttt.jpg')
+			img: require('../../Common/Images/dominos-ifttt.jpg')
 		},
 		{
 			heading: "Post your photo anywhere and see it everywhere",
 			content:
 				"We help social media play nice together. Never tweet a link instead of a picture again!",
 			alt: "N",
-			img:require('../../Common/Images/IFTTTLogoTiles.jpg')
+			img: require('../../Common/Images/IFTTTLogoTiles.jpg')
 		},
 		{
 			heading: "Make your voice assistant more personal",
 			content:
 				"Just say the word, and we’ll help you stay in-sync across systems as you go through your day.",
 			alt: "Y",
-			img:require('../../Common/Images/AssistantIFTTT.jpg')
+			img: require('../../Common/Images/AssistantIFTTT.jpg')
 		}
 	]
 };
@@ -75,9 +75,12 @@ class GuestHomepage extends Component {
 class VideoRow extends Component {
 	render() {
 		return (
-			<video width="320" height="200">
-				<source src={video} type="video/mp4" />
-			</video>
+			<div style={{textAlign: 'center'}}>
+			<video width="90%" height="600" playsinline autoPlay muted  loop>
+				 <source src={video} type="video/mp4" />
+				Your browser does not support the video tag.
+		  </video>
+		  </div>
 		);
 	}
 }
@@ -122,7 +125,7 @@ class FeatureRow extends Component {
 	// <img src={logo} className="logo" />
 	render() {
 		const alt = this.props.alt;//if yes, then image will be in first column and text in second column
-		const logo=this.props.img;//logo of image for that feature row
+		const logo = this.props.img;//logo of image for that feature row
 
 		//list first content according to whether image or text should be in first column
 		const FirstContent =
@@ -131,21 +134,21 @@ class FeatureRow extends Component {
 					<img src={logo} className="logo" alt="logo"/>
 				</Grid>
 			) : (
-				<Grid item sm={4}>
-					<div className="text">
-						<h1>{this.props.heading}</h1>
-						<p>{this.props.content}</p>
-						<Button
-							variant="raised"
-							color="primary"
-							size="large"
-							className="add-btn submit-btn"
-						>
-							Try it out
+					<Grid item sm={4}>
+						<div className="text">
+							<h1>{this.props.heading}</h1>
+							<p>{this.props.content}</p>
+							<Button
+								variant="raised"
+								color="primary"
+								size="large"
+								className="add-btn submit-btn"
+							>
+								Try it out
 						</Button>
-					</div>
-				</Grid>
-			);
+						</div>
+					</Grid>
+				);
 
 		const SecondContent =
 			alt === "Y" ? (
@@ -164,10 +167,12 @@ class FeatureRow extends Component {
 					</div>
 				</Grid>
 			) : (
+
 				<Grid item sm={6}>
 					<img src={logo} className="logo" alt="logo"/>
 				</Grid>
 			);
+
 
 		return (
 			<div className="feature-row">
