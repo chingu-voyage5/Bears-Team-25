@@ -8,6 +8,7 @@ import Activity from "../Activity/Activity";
 import Header from '../Header/header';
 import SignInPage from '../SignInPage/signInPage';
 import Snackbar from '../Snackbar/snackbar';
+import SignInUsingPasswordPage from '../SignInWithPasswordPage/signInUsingPasswordPage';
 import "./App.css";
 
 class App extends Component {
@@ -17,13 +18,13 @@ class App extends Component {
 				<Header />
 				<Switch>
 					<Route exact path="/" component={Homepage} />
-					
 					<Route path='/login' component={SignInPage} />
+					<Route path='/sign_in' component={SignInUsingPasswordPage} />
 					<Route path="/createapplet" component={CreateApplet} />
 					<Route path="/myapplets" component={MyApplet} />
 					<Route path="/activity" component={Activity} />
 				</Switch>
-				{/* <Footer />  until styling fixed*/}
+				{/* <Footer />  deleted until styling fixed*/}
 				<Snackbar />
 			</div>
 		);

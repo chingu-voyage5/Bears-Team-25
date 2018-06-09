@@ -76,7 +76,7 @@ class VideoRow extends Component {
 	render() {
 		return (
 			<div style={{textAlign: 'center'}}>
-			<video width="90%" height="600" playsinline autoPlay muted  loop>
+			<video width="90%" height="600" playsInline autoPlay muted  loop>
 				 <source src={video} type="video/mp4" />
 				Your browser does not support the video tag.
 		  </video>

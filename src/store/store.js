@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
+import { reducer as reduxFormReducer } from 'redux-form';
 import createReducer from "../reducers/createReducer";
 import serviceReducer from "../reducers/serviceReducer";
 import actionReducer from "../reducers/actionReducer";
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   service:serviceReducer,
   trigger: triggerReducer,
   auth: authReducer,
-  snackbar: snackbarReducer
+  snackbar: snackbarReducer,
+  form: reduxFormReducer
 });
 
 const middlewares = applyMiddleware(thunk);
