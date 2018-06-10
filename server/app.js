@@ -21,18 +21,30 @@ db.once('open', function () {
   console.log('connected to mongoDB');
 });
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
 app.use(favicon(path.join(appRoot.path, 'build/favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(appRoot.path, 'build')));
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// required for passport
+app.use(session({
+  secret: process.env.SECRET, // session secret
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 
+
+// including all routes from index and serve them through /api path
 app.use('/api', index);
+// if not API request, serve files from build folder (React SPA)
+app.use(express.static(path.join(appRoot.path, 'build')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(appRoot.path, 'build/index.html'));
 });

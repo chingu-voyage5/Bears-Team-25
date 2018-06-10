@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/message', function(req, res, next) {
-  res.json('Welcome To React');
-});
+// subroutes
+const users = require('./users');
+
+// paths to subroutes (`api/${path}`)
+router.use('/users', users)
+
 
 module.exports = router;
