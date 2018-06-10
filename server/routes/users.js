@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../models/users');
 
 // full path is api/users/login
-router.get('/login', function(req, res, next) {
+router.post('/login', function(req, res, next) {
     res.json('Trying to sign in');
   });
 

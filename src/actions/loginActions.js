@@ -57,7 +57,7 @@ export function login(values = {}) {
         // First dispatch: the app state is updated to inform
         dispatch(login_on());
 
-        fetch('https://reqres.in/api/users', {
+        fetch('http://localhost:3001/api/users/login', {
             method: "post",
             headers: {
                 'Accept': 'application/json',
