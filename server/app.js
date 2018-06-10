@@ -8,6 +8,9 @@ var favicon = require('serve-favicon');
 const mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
+const cors = require("cors");
+const corsOptions = require('./config/cors')
+
 require('dotenv').load(); // loading .env file
 
 const index = require('./routes/index');
@@ -29,6 +32,11 @@ app.use(favicon(path.join(appRoot.path, 'build/favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// enabling CORS for development
+app.use(cors(corsOptions));
+
+
 app.use(cookieParser());
 
 // required for passport
