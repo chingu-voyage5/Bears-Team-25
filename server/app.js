@@ -11,17 +11,15 @@ var session = require('express-session');
 require('dotenv').load(); // loading .env file
 
 const index = require('./routes/index');
-
 const app = express();
 
-// Connect TO MongoDB though Mlab. Commented out till shared account for team created 
 
-// mongoose.connect(process.env.URI);
-// var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function () {
-//   console.log('connected to mongoDB');
-// });
+mongoose.connect(process.env.URI);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  console.log('connected to mongoDB');
+});
 
 app.use(favicon(path.join(appRoot.path, 'build/favicon.ico')));
 app.use(logger('dev'));
