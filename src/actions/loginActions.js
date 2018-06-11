@@ -64,7 +64,7 @@ export function login(values = {}) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: values.email,
+                username: values.email,
                 password: values.password
             })
         })
@@ -78,8 +78,8 @@ export function login(values = {}) {
                 },
                 error => {
                     console.log(error);
-                    dispatch(login_failure(error))
-                    dispatch(login_failure_snackbar(error))
+                    // dispatch(login_failure(error))
+                    // dispatch(login_failure_snackbar(error))
                 }
             )
     }

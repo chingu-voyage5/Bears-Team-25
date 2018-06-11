@@ -43,19 +43,20 @@ export function sign_up(values) {
         // First dispatch: the app state is updated to inform
         dispatch(signUp_on());
 
-        fetch("https://reqres.in/api/users", {
+        fetch("http://localhost:3001/api/users/signup", {
             method: "post",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: values.email,
+                username: values.email,
                 password: values.password
             })
         })
             .then(
                 json => {
+                    console.log(json)
                     json.userEmail = 'fetchedUserEmail@gmail.com'
                     localStorage.setItem('userEmail', json.userEmail)
                     // updating upp state with result 
@@ -64,8 +65,8 @@ export function sign_up(values) {
                 },
                 error => {
                     console.log(error);
-                    dispatch(signUp_failure(error))
-                    dispatch(signUp_failure_snackbar(error))
+                    // dispatch(signUp_failure(error))
+                    // dispatch(signUp_failure_snackbar(error))
                 }
             )
     }
