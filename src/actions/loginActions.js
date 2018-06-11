@@ -78,7 +78,7 @@ export function login(values = {}) {
                 },
                 error => {
 
-                    dispatch(login_success({jsuserEmail :'fetchedUserEmail@gmail.com'}))
+                    dispatch(login_success({userEmail :'fetchedUserEmail@gmail.com'}))
                     dispatch(login_success_snackbar())
                 }
             )
