@@ -1,0 +1,39 @@
+.guest-homepage{
+	margin-bottom: 10%;
+}
+.logo{
+	margin-top:10%;
+	width:115%;
+}
+h1{
+	font-size:2.75rem;
+}
+.feature-row{
+	margin-left:10%;
+	margin-right: 10%;
+	margin-top: 5%;
+}
+.text{
+	font-size:1.1rem;
+}
+.text>p{
+	font-size:1.2rem;
+	line-height: 1.5rem;
+	font-weight: 500;
+	color:#111;
+}
+.text-center{
+	text-align: center;
+}
+.try-it-button{
+	border-radius: 35px!important;
+	border:2px solid black!important;
+	font-size: 1.2rem!important;
+}
+.submit-btn{
+	border-radius: 50px!important;
+}
+.add-btn{
+	margin-top: 10px!important;
+	border-radius: 10px !important;
+}
