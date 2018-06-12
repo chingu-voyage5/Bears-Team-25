@@ -12,8 +12,8 @@ import "./Activity.css";
 class Activity extends Component {
 	render() {
 		const activityList = this.props.activityList;
-		const allActivityList = activityList.map((activity) => 
-			<ActivityRow activity={activity}/>
+		const allActivityList = activityList.map((activity, i) => 
+			<ActivityRow key={`activity-row-${i}`} activity={activity}/>
 		);
 		return (
 			<div className='activity-page'>

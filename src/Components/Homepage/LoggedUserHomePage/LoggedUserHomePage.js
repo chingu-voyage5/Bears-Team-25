@@ -7,8 +7,8 @@ import "./LoggedUserHomePage.css";
 class LoggedUserHomePage extends Component {
 	render() {
 		const appletList = this.props.allAppletList;
-		const AppletList = appletList.map(applet => (
-			<AppletCard content={applet.content} />
+		const AppletList = appletList.map( (applet, i) => (
+			<AppletCard key={`appletCard-${i}`}  content={applet.content} />
 		));
 		return (
 			<div className="logged-home-page">

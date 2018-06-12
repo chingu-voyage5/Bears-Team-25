@@ -29,7 +29,7 @@ class ServiceCard extends Component {
 			let serviceIcon=serviceName+"Icon";
 			const IconName=Icons[serviceIcon];
 			return (
-				<Grid item sm={3}>
+				<Grid key={`server-list-${index}`} item sm={3}>
 					<Card
 						className="card"
 						value={service.name}

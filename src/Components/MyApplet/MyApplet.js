@@ -14,8 +14,8 @@ class MyApplet extends Component {
 	}
 	render() {
 		const appletList =this.props.appletList;
-		const AppletList = appletList.map(applet => (
-			<AppletCard content={applet.content} />
+		const AppletList = appletList.map( (applet, i) => (
+			<AppletCard key={`applet-list-${i}`} content={applet.content} />
 		));
 		return (
 			<div className="my-applet">

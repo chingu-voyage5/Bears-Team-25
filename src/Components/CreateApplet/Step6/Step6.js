@@ -74,10 +74,10 @@ const UserName = props => <p className="user-name">by Anshul2166</p>;
 class TextArea extends Component {
 	render() {
 		return (
-			<div className="text-area">
-				<textarea>
+			<div className="text-area" defaultValue={this.props.content}>
+				{/* <textarea>
 					{this.props.content}
-				</textarea>
+				</textarea> */}
 				<p className="totalChars">94/140</p>
 			</div>
 		);
