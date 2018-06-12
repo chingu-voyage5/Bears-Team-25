@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { login } from '../../actions/loginActions';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import {renderTextField, validatePassAndEmail} from '../../commonFunctions/formFunctions';
+import {renderTextField, validatePassAndUsername} from '../../commonFunctions/formFunctions';
 
 var SignInUsingPasswordPage = props => {
     const { dispatch, handleSubmit, isFetching, userEmail,  valid} = props;
@@ -20,7 +20,7 @@ var SignInUsingPasswordPage = props => {
                         Sign In
                     </h1>
                     <div>
-                        <Field fullWidth className='input-field' name="email" component={renderTextField} label="Email" />
+                        <Field fullWidth className='input-field' name="username" component={renderTextField} label="Enter your username or email" />
                     </div>
                     <div>
                         <Field fullWidth className='input-field' name="password" type='password' component={renderTextField} label="Password" />
@@ -39,7 +39,7 @@ var SignInUsingPasswordPage = props => {
 
 SignInUsingPasswordPage = reduxForm({
     form: 'signInUsingPassForm', // a unique identifier for this form
-    validate: validatePassAndEmail
+    validate: validatePassAndUsername
 })(SignInUsingPasswordPage)
 
 function mapStateToProps(state) {

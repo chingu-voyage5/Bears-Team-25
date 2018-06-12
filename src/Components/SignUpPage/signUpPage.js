@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { sign_up } from '../../actions/signUpActions';
 import { Redirect } from 'react-router';
-import {renderTextField, validatePassAndEmail} from '../../commonFunctions/formFunctions';
+import {renderTextField, validatePassUsernameEmail} from '../../commonFunctions/formFunctions';
 
 var SignUpPage = props => {
     const { dispatch, handleSubmit, isFetching, userEmail, valid } = props
@@ -20,8 +20,11 @@ var SignUpPage = props => {
                     <h1 style={{ marginBottom: 0 }}>
                         Sign Up
                 </h1>
+                <div>
+                        <Field fullWidth className='input-field'  name="username" component={renderTextField} label="Username" />
+                    </div>
                     <div>
-                        <Field fullWidth className='input-field'  name="email" component={renderTextField} label="Email" />
+                        <Field fullWidth className='input-field'  name="email" component={renderTextField} label="Email (optional)" />
                     </div>
                     <div>
                         <Field fullWidth className='input-field' name="password" type='password' component={renderTextField} label="Password" />
@@ -38,7 +41,7 @@ var SignUpPage = props => {
 
 SignUpPage = reduxForm({
     form: 'SignUpForm', // a unique identifier for this form
-    validate: validatePassAndEmail
+    validate: validatePassUsernameEmail
 })(SignUpPage)
 
 
