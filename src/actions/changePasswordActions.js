@@ -10,8 +10,7 @@ function change_password_on() {
 
 function change_password_success(json) {
     return {
-        type: ACTIONS.CHANGING_PASS_SUCCESS,
-        userEmail: json.userEmail,
+        type: ACTIONS.CHANGING_PASS_SUCCESS
     }
 }
 

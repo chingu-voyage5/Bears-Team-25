@@ -7,16 +7,18 @@ export default function authReducer(state = {
 }, action) {
     switch (action.type) {
         case ACTIONS.LOGOUT:
-            localStorage.removeItem('userEmail');
+            localStorage.removeItem('name');
+            localStorage.removeItem('email');
             return {
                 ...state,
                 auth: false,
-                userEmail: null
+                name: null
             }
         case ACTIONS.SET_USER_FROM_LOCALSTORAGE:
             return {
                 ...state,
-                userEmail: action.userEmail,
+                name: action.name,
+                email: action.email,
                 auth: true
             }
         case ACTIONS.LOGIN:
@@ -33,7 +35,7 @@ export default function authReducer(state = {
             return {
                 ...state,
                 login: { isFetching: false },
-                userEmail: action.userEmail,
+                name: action.name,
                 auth: true,
                 success: true
             }
@@ -52,7 +54,7 @@ export default function authReducer(state = {
             return {
                 ...state,
                 signUp: { isFetching: false, success: true },
-                userEmail: action.userEmail,
+                name: action.name,
                 auth: true
             }
         default:

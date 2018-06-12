@@ -8,8 +8,8 @@ import { Redirect } from 'react-router';
 import {renderTextField, validatePassAndUsername} from '../../commonFunctions/formFunctions';
 
 var SignInUsingPasswordPage = props => {
-    const { dispatch, handleSubmit, isFetching, userEmail,  valid} = props;
-    if (userEmail) {
+    const { dispatch, handleSubmit, isFetching, name,  valid} = props;
+    if (name) {
         return <Redirect to='/' />
     }
     else {
@@ -46,7 +46,7 @@ function mapStateToProps(state) {
     return {
         onSubmit: values => login(values),
         isFetching: state.auth.login.isFetching,
-        userEmail: state.auth.userEmail
+        name: state.auth.name
     }
 }
 

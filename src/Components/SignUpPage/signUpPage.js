@@ -8,9 +8,9 @@ import { Redirect } from 'react-router';
 import {renderTextField, validatePassUsernameEmail} from '../../commonFunctions/formFunctions';
 
 var SignUpPage = props => {
-    const { dispatch, handleSubmit, isFetching, userEmail, valid } = props
+    const { dispatch, handleSubmit, isFetching, name, valid } = props
 
-    if (userEmail) {
+    if (name) {
         return <Redirect to='/' />
     }
     else {
@@ -50,7 +50,7 @@ function mapStateToProps(state) {
         auth: state.auth.auth,
         onSubmit: values => sign_up(values),
         isFetching: state.auth.signUp.isFetching,
-        userEmail: state.auth.userEmail,
+        name: state.auth.name,
     }
 }
 

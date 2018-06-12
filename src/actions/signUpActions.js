@@ -10,7 +10,7 @@ function signUp_on() {
 function signUp_success(user) {
   return {
     type: ACTIONS.SIGN_UP_SUCCESS,
-    userEmail: user.name
+    name: user.name
   };
 }
 
@@ -49,7 +49,10 @@ export function sign_up(values) {
         email: values.email
       })
       .then(response => {
-        dispatch(signUp_success(response.data.user));
+        let user = response.data.user
+        localStorage.setItem("name",  user.name);
+        localStorage.setItem("email", user.email);
+        dispatch(signUp_success(user));
         dispatch(signUp_success_snackbar());
       })
       .catch(error => {

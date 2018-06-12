@@ -11,7 +11,7 @@ function account_deletion_on() {
 function account_deletion_success(json) {
     return {
         type: ACTIONS.ACCOUNT_DELETION_SUCCESS,
-        userEmail: json.userEmail,
+        name: json.name,
     }
 }
 
@@ -57,9 +57,6 @@ export function delete_account(values) {
         })
             .then(
                 json => {
-                    json.userEmail = 'fetchedUserEmail@gmail.com'
-                    localStorage.setItem('userEmail', json.userEmail)
-                    // updating upp state with result 
                     dispatch(logout())
                     dispatch(account_deletion_success(json))
                     dispatch(account_deletion_success_snackbar())

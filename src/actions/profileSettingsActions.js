@@ -10,8 +10,7 @@ function change_email_on() {
 
 function change_email_success(json) {
     return {
-        type: ACTIONS.CHANGING_EMAIL_SUCCESS,
-        userEmail: json.userEmail,
+        type: ACTIONS.CHANGING_EMAIL_SUCCESS
     }
 }
 

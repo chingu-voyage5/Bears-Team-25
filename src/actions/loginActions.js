@@ -10,7 +10,7 @@ function login_on() {
 function login_success(user) {
   return {
     type: ACTIONS.LOGIN_SUCCESS,
-    userEmail: user.name
+    name: user.name
   };
 }
 
@@ -43,10 +43,13 @@ export function logout() {
   };
 }
 
-export function setUserEmail(userEmail) {
+export function setUsersCredentials() {
+  let name = localStorage.getItem("name");
+  let email = localStorage.getItem("email");
   return {
     type: ACTIONS.SET_USER_FROM_LOCALSTORAGE,
-    userEmail: userEmail
+    name: name,
+    email: email
   };
 }
 
@@ -62,7 +65,13 @@ export function login(values) {
         email: values.email
       })
       .then(response => {
-        dispatch(login_success(response.data.user));
+        let user = response.data.user;
+        localStorage.setItem("name", user.name);
+        if (user.email === undefined) {
+          user.email = '';
+        }
+        localStorage.setItem("email", user.email);
+        dispatch(login_success(user));
         dispatch(login_success_snackbar());
       })
       .catch(error => {
