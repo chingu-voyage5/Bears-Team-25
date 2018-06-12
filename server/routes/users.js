@@ -17,10 +17,9 @@ router.post('/login', function (req, res, next) {
           console.log('error when logging in');
           return next(err);
         }
-        console.log('success');
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json({ success: true, status: 'You have successfully signed in!', user: { name: req.user.name, id: req.user._id } });
+        res.json({ success: true, status: 'You have successfully signed in!', user: { name: req.user.name, id: req.user._id, email: req.user.local.email } });
         return
       });
     }
@@ -38,7 +37,6 @@ router.post('/login', function (req, res, next) {
 
 
 router.post('/signup', function (req, res, next) {
-  console.log('req.body', req.body)
   passport.authenticate('local-signup', function (err, user, info) {
     if (err) {
       console.log(err);
@@ -49,12 +47,12 @@ router.post('/signup', function (req, res, next) {
         if (err) { return next(err); }
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json({ success: true, status: 'You have successfully signed up!', user: { name: req.user.name, id: req.user._id } });
+        console.log('req.user', req.user)
+        res.json({ success: true, status: 'You have successfully signed up!', user: { name: req.user.name,  id: req.user._id, email: req.user.local.email } });
         return
       });
     }
     else {
-      console.log(info)
       res.statusCode = 401;
       res.setHeader('Content-Type', 'application/json');
       res.json({ success: false, status: info.message });

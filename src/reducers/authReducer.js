@@ -15,6 +15,7 @@ export default function authReducer(state = {
                 name: null
             }
         case ACTIONS.SET_USER_FROM_LOCALSTORAGE:
+            console.log(action.name, action.email)
             return {
                 ...state,
                 name: action.name,
@@ -36,8 +37,10 @@ export default function authReducer(state = {
                 ...state,
                 login: { isFetching: false },
                 name: action.name,
+                email: action.email,
                 auth: true,
-                success: true
+                success: true,
+                
             }
 
         case ACTIONS.SIGN_UP:
@@ -55,6 +58,7 @@ export default function authReducer(state = {
                 ...state,
                 signUp: { isFetching: false, success: true },
                 name: action.name,
+                email: action.email,
                 auth: true
             }
         default:

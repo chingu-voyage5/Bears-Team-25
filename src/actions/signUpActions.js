@@ -10,7 +10,8 @@ function signUp_on() {
 function signUp_success(user) {
   return {
     type: ACTIONS.SIGN_UP_SUCCESS,
-    name: user.name
+    name: user.name,
+    email: user.email
   };
 }
 

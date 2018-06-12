@@ -10,7 +10,8 @@ function login_on() {
 function login_success(user) {
   return {
     type: ACTIONS.LOGIN_SUCCESS,
-    name: user.name
+    name: user.name,
+    email: user.email
   };
 }
 
@@ -68,7 +69,7 @@ export function login(values) {
         let user = response.data.user;
         localStorage.setItem("name", user.name);
         if (user.email === undefined) {
-          user.email = '';
+          user.email = "";
         }
         localStorage.setItem("email", user.email);
         dispatch(login_success(user));
