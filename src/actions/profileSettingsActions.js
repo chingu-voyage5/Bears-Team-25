@@ -1,5 +1,5 @@
-import fetch from 'cross-fetch';
 import * as ACTIONS from "./actionTypes";
+const axios = require("axios");
 
 function change_email_on() {
     return {

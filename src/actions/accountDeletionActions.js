@@ -1,6 +1,6 @@
-import fetch from 'cross-fetch';
 import * as ACTIONS from "./actionTypes";
 import {logout} from './loginActions'
+const axios = require("axios");
 
 function account_deletion_on() {
     return {

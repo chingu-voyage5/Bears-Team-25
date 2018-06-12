@@ -17,6 +17,7 @@ router.post('/login', function (req, res, next) {
           console.log('error when logging in');
           return next(err);
         }
+        console.log('success');
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json({ success: true, status: 'You have successfully signed in!', user: { name: req.user.name, id: req.user._id } });
@@ -37,6 +38,7 @@ router.post('/login', function (req, res, next) {
 
 
 router.post('/signup', function (req, res, next) {
+  console.log('req.body', req.body)
   passport.authenticate('local-signup', function (err, user, info) {
     if (err) {
       console.log(err);
@@ -52,6 +54,7 @@ router.post('/signup', function (req, res, next) {
       });
     }
     else {
+      console.log(info)
       res.statusCode = 401;
       res.setHeader('Content-Type', 'application/json');
       res.json({ success: false, status: info.message });

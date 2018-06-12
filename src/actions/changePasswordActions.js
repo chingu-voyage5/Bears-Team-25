@@ -1,5 +1,6 @@
-import fetch from 'cross-fetch';
 import * as ACTIONS from "./actionTypes";
+const axios = require("axios");
+
 
 function change_password_on() {
     return {
@@ -44,36 +45,37 @@ export function successOff() {
 }
 
 export function change_password(values) {
+}
 
-    return function (dispatch) {
+//     return function (dispatch) {
 
-        // First dispatch: the app state is updated to inform
-        dispatch(change_password_on());
+//         // First dispatch: the app state is updated to inform
+//         dispatch(change_password_on());
 
 
         
-        fetch("https://reqres.in/api/users", {
-            method: "post",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: values.email,
-                password: values.password
-            })
-        })
-            .then(
-                json => {
-                    // updating upp state with result 
-                    dispatch(change_password_success(json))
-                    dispatch(change_password_success_snackbar())
-                },
-                error => {
-                    console.log(error);
-                    dispatch(change_password_failure(error))
-                    dispatch(change_password_failure_snackbar(error))
-                }
-            )
-    }
-}
+//         fetch("https://reqres.in/api/users", {
+//             method: "post",
+//             headers: {
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({
+//                 email: values.email,
+//                 password: values.password
+//             })
+//         })
+//             .then(
+//                 json => {
+//                     // updating upp state with result 
+//                     dispatch(change_password_success(json))
+//                     dispatch(change_password_success_snackbar())
+//                 },
+//                 error => {
+//                     console.log(error);
+//                     dispatch(change_password_failure(error))
+//                     dispatch(change_password_failure_snackbar(error))
+//                 }
+//             )
+//     }
+// }
