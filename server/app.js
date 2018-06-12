@@ -17,6 +17,7 @@ const index = require('./routes/index');
 const app = express();
 
 
+
 mongoose.connect(process.env.URI);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -38,6 +39,9 @@ app.use(cors(corsOptions));
 
 
 app.use(cookieParser());
+
+// configure passport
+require('./config/passport');
 
 // required for passport
 app.use(session({

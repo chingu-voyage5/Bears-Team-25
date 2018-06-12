@@ -48,8 +48,9 @@ class GuestHomepage extends Component {
 		this.state = {};
 	}
 	render() {
-		const rowsList = data.details.map(contents => (
+		const rowsList = data.details.map((contents,i) => (
 			<FeatureRow
+				key = {`rowList-${i}`}
 				heading={contents.heading}
 				content={contents.content}
 				alt={contents.alt}

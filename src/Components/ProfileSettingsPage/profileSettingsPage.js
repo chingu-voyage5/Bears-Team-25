@@ -75,7 +75,7 @@ function mapStateToProps(state) {
     return {
         isFBLinked: state.profileSettings.isFBLinked,
         isGoogleLinked: state.profileSettings.isGoogleLinked,
-        initialValues: { email: state.auth.userEmail, password: 'password' },
+        initialValues: { email: state.auth.email, password: 'password' },
         auth: state.auth.auth,
         onSubmit: values => change_email(values),
         isFetching: state.profileSettings.isFetching

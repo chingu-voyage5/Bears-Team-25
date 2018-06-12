@@ -61,8 +61,8 @@ class AppletCard extends Component {
 class TextArea extends Component {
 	render() {
 		return (
-			<div className="text-area">
-				<textarea>{this.props.content}</textarea>
+			<div className="text-area" >
+			<textarea defaultValue={this.props.content}></textarea>
 			</div>
 		);
 	}

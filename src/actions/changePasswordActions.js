@@ -1,5 +1,6 @@
-import fetch from 'cross-fetch';
 import * as ACTIONS from "./actionTypes";
+const axios = require("axios");
+
 
 function change_password_on() {
     return {
@@ -9,8 +10,7 @@ function change_password_on() {
 
 function change_password_success(json) {
     return {
-        type: ACTIONS.CHANGING_PASS_SUCCESS,
-        userEmail: json.userEmail,
+        type: ACTIONS.CHANGING_PASS_SUCCESS
     }
 }
 
@@ -44,36 +44,23 @@ export function successOff() {
 }
 
 export function change_password(values) {
-
-    return function (dispatch) {
-
-        // First dispatch: the app state is updated to inform
-        dispatch(change_password_on());
-
-
-        
-        fetch("https://reqres.in/api/users", {
-            method: "post",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: values.email,
-                password: values.password
-            })
+    console.log(values);
+    return function(dispatch) {
+      // First dispatch: the app state is updated to inform
+      dispatch(change_password_on());
+      axios
+        .post("https://reqres.in/api/users", {
+            oldPassword: values.currentPassword,
+            password: values.password2
         })
-            .then(
-                json => {
-                    // updating upp state with result 
-                    dispatch(change_password_success(json))
-                    dispatch(change_password_success_snackbar())
-                },
-                error => {
-                    console.log(error);
-                    dispatch(change_password_failure(error))
-                    dispatch(change_password_failure_snackbar(error))
-                }
-            )
-    }
-}
+        .then(() => {
+            dispatch(change_password_success());
+            dispatch(change_password_success_snackbar());
+        })
+        .catch(error => {
+          error = error.response.data.status;
+          dispatch(change_password_failure(error));
+          dispatch(change_password_failure_snackbar(error));
+        });
+    };
+  }

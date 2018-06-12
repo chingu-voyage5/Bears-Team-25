@@ -59,7 +59,7 @@ function mapStateToProps(state) {
     return {
         onSubmit: values => change_password(values),
         isFetching: state.changePassword.isFetching,
-        userEmail: state.auth.userEmail,
+        name: state.auth.name,
         success: state.changePassword.success,
         auth: state.auth.auth
     }

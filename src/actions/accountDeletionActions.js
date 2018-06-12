@@ -1,6 +1,6 @@
-import fetch from 'cross-fetch';
 import * as ACTIONS from "./actionTypes";
 import {logout} from './loginActions'
+const axios = require("axios");
 
 function account_deletion_on() {
     return {
@@ -8,10 +8,9 @@ function account_deletion_on() {
     }
 }
 
-function account_deletion_success(json) {
+function account_deletion_success() {
     return {
-        type: ACTIONS.ACCOUNT_DELETION_SUCCESS,
-        userEmail: json.userEmail,
+        type: ACTIONS.ACCOUNT_DELETION_SUCCESS
     }
 }
 
@@ -39,37 +38,24 @@ function account_deletion_failure_snackbar(error) {
 }
 
 export function delete_account(values) {
-
-    return function (dispatch) {
-
-        // First dispatch: the app state is updated to inform
-        dispatch(account_deletion_on());
-
-        fetch("https://reqres.in/api/users", {
-            method: "post",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                password: values.password
-            })
+    console.log(values);
+    return function(dispatch) {
+      // First dispatch: the app state is updated to inform
+      dispatch(account_deletion_on());
+      axios
+        .post("https://reqres.in/api/users", {
+          password: values.password
         })
-            .then(
-                json => {
-                    json.userEmail = 'fetchedUserEmail@gmail.com'
-                    localStorage.setItem('userEmail', json.userEmail)
-                    // updating upp state with result 
-                    dispatch(logout())
-                    dispatch(account_deletion_success(json))
-                    dispatch(account_deletion_success_snackbar())
-                },
-                error => {
-                    console.log(error);
-                    dispatch(account_deletion_failure(error))
-                    dispatch(account_deletion_failure_snackbar(error))
-                }
-            )
-    }
-}
+        .then(() => {
+            dispatch(logout())
+            dispatch(account_deletion_success())
+            dispatch(account_deletion_success_snackbar())
+        })
+        .catch(error => {
+          error = error.response.data.status;
+          dispatch(account_deletion_failure(error))
+          dispatch(account_deletion_failure_snackbar(error))
+        });
+    };
+  }
 
