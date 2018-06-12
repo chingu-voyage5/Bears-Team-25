@@ -52,7 +52,12 @@ export function delete_account(values) {
             dispatch(account_deletion_success_snackbar())
         })
         .catch(error => {
-          error = error.response.data.status;
+            if (error.response) {
+                error = error.response.data.status
+            } 
+            else {
+                error='Something wrong with server'
+            }
           dispatch(account_deletion_failure(error))
           dispatch(account_deletion_failure_snackbar(error))
         });

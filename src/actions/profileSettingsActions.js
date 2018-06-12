@@ -62,7 +62,12 @@ export function change_email(values) {
         dispatch(change_email_success_snackbar());
       })
       .catch(error => {
-        error = error.response.data.status;
+        if (error.response) {
+          error = error.response.data.status
+        } 
+        else {
+          error='Something wrong with server'
+        }
         dispatch(change_email_failure(error));
         dispatch(change_email_failure_snackbar(error));
       });

@@ -56,7 +56,6 @@ export function setUsersCredentials() {
 
 
 export function login(values) {
-  console.log(values);
   return function(dispatch) {
     // First dispatch: the app state is updated to inform
     dispatch(login_on());
@@ -77,7 +76,12 @@ export function login(values) {
         dispatch(login_success_snackbar());
       })
       .catch(error => {
-        error = error.response.data.status;
+        if (error.response) {
+          error = error.response.data.status
+        } 
+        else {
+          error='Something wrong with server'
+        }
         dispatch(login_failure(error));
         dispatch(login_failure_snackbar(error));
       });

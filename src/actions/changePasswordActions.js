@@ -58,7 +58,12 @@ export function change_password(values) {
             dispatch(change_password_success_snackbar());
         })
         .catch(error => {
-          error = error.response.data.status;
+            if (error.response) {
+                error = error.response.data.status
+            } 
+            else {
+                error='Something wrong with server'
+            }
           dispatch(change_password_failure(error));
           dispatch(change_password_failure_snackbar(error));
         });

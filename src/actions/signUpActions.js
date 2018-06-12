@@ -57,7 +57,12 @@ export function sign_up(values) {
         dispatch(signUp_success_snackbar());
       })
       .catch(error => {
-        error = error.response.data.status
+        if (error.response) {
+          error = error.response.data.status
+        } 
+        else {
+          error='Something wrong with server'
+        }
         dispatch(signUp_failure(error));
         dispatch(signUp_failure_snackbar(error));
       });
