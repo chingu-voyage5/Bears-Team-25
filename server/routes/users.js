@@ -115,4 +115,28 @@ router.post("/change_password", isLoggedIn, function(req, res, next) {
   });
 });
 
+router.post("/delete_account", isLoggedIn, function(req, res, next) {
+  User.findById(req.user._id, function(err, user) {
+    if (err) {
+      return res.json({ success: false, status: err });
+    }
+    // checking if provided password is valid
+    if (user.validPassword(req.body.password)) {
+      User.findByIdAndRemove(req.user._id, function (err, user) {
+        if (err) {
+            return res.json({ success: false, status: err })
+        }
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({ success: false, status: 'Account succesfully deleted' });
+        return;
+    });
+    } else {
+      res.statusCode = 401;
+      res.setHeader("Content-Type", "application/json");
+      return res.json({ success: false, status: "Wrong password" });
+    }
+  });
+});
+
 module.exports = router;
