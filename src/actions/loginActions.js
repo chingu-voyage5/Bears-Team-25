@@ -64,7 +64,7 @@ export function login(values) {
         username: values.username,
         password: values.password,
         email: values.email
-      })
+      }, {withCredentials: true})
       .then(response => {
         let user = response.data.user;
         localStorage.setItem("name", user.name);

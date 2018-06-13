@@ -49,11 +49,12 @@ export function change_password(values) {
       // First dispatch: the app state is updated to inform
       dispatch(change_password_on());
       axios
-        .post("https://reqres.in/api/users", {
+        .post("http://localhost:3001/api/users/change_password", {
             oldPassword: values.currentPassword,
             password: values.password2
-        })
-        .then(() => {
+        }, {withCredentials: true})
+        .then((json) => {
+            console.log(json)
             dispatch(change_password_success());
             dispatch(change_password_success_snackbar());
         })
