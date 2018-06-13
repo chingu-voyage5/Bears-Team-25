@@ -8,9 +8,9 @@ function isLoggedIn(req, res, next) {
     return next();
   } else {
     console.log("You are not logged in!");
-    var err = new Error("You are not logged in!");
-    err.status = 403;
-    next(err);
+    res.statusCode = 401;
+    res.setHeader("Content-Type", "application/json");
+    res.json({ success: false, status: "You are not logged in!" });
   }
 }
 
@@ -80,6 +80,13 @@ router.post("/signup", function(req, res, next) {
       res.json({ success: false, status: info.message });
     }
   })(req, res, next);
+});
+
+router.get('/logout', function (req, res) {
+  console.log('logout successfull')
+  req.logout();
+  res.statusCode = 200;
+  res.json({ success: true, status: 'You have successfully logged out!' })
 });
 
 router.post("/change_password", isLoggedIn, function(req, res, next) {
