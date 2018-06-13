@@ -43,9 +43,9 @@ export function delete_account(values) {
       // First dispatch: the app state is updated to inform
       dispatch(account_deletion_on());
       axios
-        .post("https://reqres.in/api/users", {
+        .post("http://localhost:3001/api/users/delete_account", {
           password: values.password
-        })
+        }, {withCredentials: true})
         .then(() => {
             dispatch(logout())
             dispatch(account_deletion_success())
