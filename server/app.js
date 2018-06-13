@@ -8,8 +8,7 @@ var favicon = require('serve-favicon');
 const mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
-const cors = require("cors");
-const corsOptions = require('./config/cors')
+const cors = require('./config/cors')
 
 require('dotenv').load(); // loading .env file
 
@@ -35,7 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // enabling CORS for development
-app.use(cors(corsOptions));
+app.use(cors.corsWithOptions);
 
 
 app.use(cookieParser());
