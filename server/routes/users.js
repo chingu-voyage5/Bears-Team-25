@@ -1,6 +1,7 @@
 var passport = require("passport");
 var express = require("express");
 var router = express.Router();
+var User = require("../models/users");
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -82,8 +83,36 @@ router.post("/signup", function(req, res, next) {
 });
 
 router.post("/change_password", isLoggedIn, function(req, res, next) {
- console.log('request')
- return res.json({message: "Hello"});
+  User.findById(req.user._id, function(err, user) {
+    if (err) {
+      return res.json({ success: false, status: err });
+    }
+    // checking if provided password is valid
+    if (user.validPassword(req.body.oldPassword)) {
+      // if valid - change it to the new password
+      user.local.password = user.generateHash(req.body.password);
+      user.save().then(
+        user => {
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "application/json");
+          res.json({
+            success: true,
+            status: "Password successfully changed"
+          });
+          return;
+        },
+        err => {
+          console.log(err);
+          return next(err);
+        }
+      );
+      // if not valid - send error message
+    } else {
+      res.statusCode = 401;
+      res.setHeader("Content-Type", "application/json");
+      return res.json({ success: false, status: "Wrong password" });
+    }
+  });
 });
 
 module.exports = router;
