@@ -20,11 +20,12 @@ function change_email_failure(error) {
   };
 }
 
-function change_email_success_snackbar() {
+function change_email_success_snackbar(email) {
   return {
     type: ACTIONS.RENDER_SNACKBAR,
     styling: "success",
-    text: "You've successfully changed email!"
+    text: "You've successfully changed email!",
+    email : email
   };
 }
 
@@ -54,11 +55,13 @@ export function change_email(values) {
     // First dispatch: the app state is updated to inform
     dispatch(change_email_on());
     axios
-      .post("https://reqres.in/api/users", {
+      .post("http://localhost:3001/api/users/change_email", {
         email: values.email
-      })
-      .then(() => {
-        dispatch(change_email_success());
+      }, {withCredentials: true})
+      .then((json) => {
+        let email = json.data.email
+        localStorage.setItem("email", email);
+        dispatch(change_email_success(json.data.email));
         dispatch(change_email_success_snackbar());
       })
       .catch(error => {

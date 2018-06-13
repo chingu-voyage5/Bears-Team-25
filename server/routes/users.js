@@ -122,20 +122,63 @@ router.post("/delete_account", isLoggedIn, function(req, res, next) {
     }
     // checking if provided password is valid
     if (user.validPassword(req.body.password)) {
-      User.findByIdAndRemove(req.user._id, function (err, user) {
+      User.findByIdAndRemove(req.user._id, function(err, user) {
         if (err) {
-            return res.json({ success: false, status: err })
+          return res.json({ success: false, status: err });
         }
         res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json({ success: false, status: 'Account succesfully deleted' });
+        res.setHeader("Content-Type", "application/json");
+        res.json({ success: false, status: "Account succesfully deleted" });
         return;
-    });
+      });
     } else {
       res.statusCode = 401;
       res.setHeader("Content-Type", "application/json");
       return res.json({ success: false, status: "Wrong password" });
     }
+  });
+});
+
+router.post("/change_email", isLoggedIn, function(req, res, next) {
+  // checking if provided email already in use
+  User.findOne({ "local.email": req.body.email }, function(err, user) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    // if user with such email exist - send error message
+    if (user) {
+      res.statusCode = 401;
+      res.setHeader("Content-Type", "application/json");
+      return res.json({
+        success: false,
+        status: "This email is already in use"
+      });
+    }
+
+    //
+    User.findById(req.user._id, function(err, user) {
+      if (err) {
+        return res.json({ success: false, status: err });
+      }
+      user.local.email = req.body.email;
+      user.save().then(
+        user => {
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "application/json");
+          res.json({
+            success: true,
+            status: "Email successfully changed",
+            email: user.local.email
+          });
+          return;
+        },
+        err => {
+          console.log(err);
+          return next(err);
+        }
+      );
+    });
   });
 });
 

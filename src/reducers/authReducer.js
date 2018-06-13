@@ -3,7 +3,8 @@ import * as ACTIONS from "../actions/actionTypes"
 export default function authReducer(state = {
     auth: false,
     login: { isFetching: false },
-    signUp: { isFetching: false }
+    signUp: { isFetching: false },
+    emailChanging: {isFetching: false}
 }, action) {
     switch (action.type) {
         case ACTIONS.LOGOUT:
@@ -60,6 +61,22 @@ export default function authReducer(state = {
                 name: action.name,
                 email: action.email,
                 auth: true
+            }
+        case ACTIONS.CHANGING_EMAIL:
+            return {
+              ...state,
+              emailChanging: { isFetching: true},
+              email: action.email
+            }
+        case ACTIONS.CHANGING_EMAIL_FAILURE:
+            return {
+              ...state,
+              emailChanging: { isFetching: false, error: action.error },
+            }
+          case ACTIONS.CHANGING_EMAIL_SUCCESS:
+            return {
+              ...state,
+              emailChanging: { isFetching: false, error: action.error },
             }
         default:
             return state;

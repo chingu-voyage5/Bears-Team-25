@@ -78,7 +78,7 @@ function mapStateToProps(state) {
         initialValues: { email: state.auth.email, password: 'password' },
         auth: state.auth.auth,
         onSubmit: values => change_email(values),
-        isFetching: state.profileSettings.isFetching
+        isFetching: state.auth.emailChanging.isFetching
     }
 }
 
