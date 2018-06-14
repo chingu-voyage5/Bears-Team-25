@@ -82,11 +82,11 @@ router.post("/signup", function(req, res, next) {
   })(req, res, next);
 });
 
-router.get('/logout', function (req, res) {
-  console.log('logout successfull')
+router.get("/logout", function(req, res) {
+  console.log("logout successfull");
   req.logout();
   res.statusCode = 200;
-  res.json({ success: true, status: 'You have successfully logged out!' })
+  res.json({ success: true, status: "You have successfully logged out!" });
 });
 
 router.post("/change_password", isLoggedIn, function(req, res, next) {
@@ -188,5 +188,22 @@ router.post("/change_email", isLoggedIn, function(req, res, next) {
     });
   });
 });
+
+// facebook -------------------------------
+
+// send to facebook to do the authentication
+app.get(
+  "/auth/facebook",
+  passport.authenticate("facebook", { scope: ["public_profile", "email"] })
+);
+
+// handle the callback after facebook has authenticated the user
+app.get(
+  "/auth/facebook/callback",
+  passport.authenticate("facebook", {
+    successRedirect: "/",
+    failureRedirect: "/login"
+  })
+);
 
 module.exports = router;
