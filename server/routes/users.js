@@ -8,9 +8,9 @@ function isLoggedIn(req, res, next) {
     return next();
   } else {
     console.log("You are not logged in!");
-    var err = new Error("You are not logged in!");
-    err.status = 403;
-    next(err);
+    res.statusCode = 401;
+    res.setHeader("Content-Type", "application/json");
+    res.json({ success: false, status: "You are not logged in!" });
   }
 }
 
@@ -82,6 +82,13 @@ router.post("/signup", function(req, res, next) {
   })(req, res, next);
 });
 
+router.get('/logout', function (req, res) {
+  console.log('logout successfull')
+  req.logout();
+  res.statusCode = 200;
+  res.json({ success: true, status: 'You have successfully logged out!' })
+});
+
 router.post("/change_password", isLoggedIn, function(req, res, next) {
   User.findById(req.user._id, function(err, user) {
     if (err) {
@@ -122,20 +129,63 @@ router.post("/delete_account", isLoggedIn, function(req, res, next) {
     }
     // checking if provided password is valid
     if (user.validPassword(req.body.password)) {
-      User.findByIdAndRemove(req.user._id, function (err, user) {
+      User.findByIdAndRemove(req.user._id, function(err, user) {
         if (err) {
-            return res.json({ success: false, status: err })
+          return res.json({ success: false, status: err });
         }
         res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json({ success: false, status: 'Account succesfully deleted' });
+        res.setHeader("Content-Type", "application/json");
+        res.json({ success: false, status: "Account succesfully deleted" });
         return;
-    });
+      });
     } else {
       res.statusCode = 401;
       res.setHeader("Content-Type", "application/json");
       return res.json({ success: false, status: "Wrong password" });
     }
+  });
+});
+
+router.post("/change_email", isLoggedIn, function(req, res, next) {
+  // checking if provided email already in use
+  User.findOne({ "local.email": req.body.email }, function(err, user) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    // if user with such email exist - send error message
+    if (user) {
+      res.statusCode = 401;
+      res.setHeader("Content-Type", "application/json");
+      return res.json({
+        success: false,
+        status: "This email is already in use"
+      });
+    }
+
+    //
+    User.findById(req.user._id, function(err, user) {
+      if (err) {
+        return res.json({ success: false, status: err });
+      }
+      user.local.email = req.body.email;
+      user.save().then(
+        user => {
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "application/json");
+          res.json({
+            success: true,
+            status: "Email successfully changed",
+            email: user.local.email
+          });
+          return;
+        },
+        err => {
+          console.log(err);
+          return next(err);
+        }
+      );
+    });
   });
 });
 
