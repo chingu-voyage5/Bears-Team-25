@@ -7,7 +7,7 @@ const appletReducer = (state = {}, action) => {
 		case ACTIONS.LIST_APPLET:
 			return {
 				...state,
-				appletList: action.payload
+				appletList:state.appletList.concat(action.payload)
 			};
 		default:
 			return state;
