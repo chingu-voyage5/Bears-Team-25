@@ -125,3 +125,30 @@ export function login(values) {
       });
   };
 }
+
+export function fetchUsersCredentials() {
+  return function(dispatch) {
+    axios
+      .get("http://localhost:3001/api/users/user")
+      .then(response => {
+        console.log(user)
+        let user = response.data.user;
+        if (user) {
+          localStorage.setItem("name", user.name);
+          if (user.email === undefined) {
+            user.email = "";
+          }
+          localStorage.setItem("email", user.email);
+          dispatch(login_success(user));
+        }
+      })
+      .catch(error => {
+        if (error.response) {
+          error = error.response.data.status;
+        } else {
+          error = "Something wrong with server";
+        }
+        console.log(error);
+      });
+  };
+}

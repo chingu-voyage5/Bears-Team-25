@@ -13,16 +13,25 @@ export default function authReducer(state = {
             return {
                 ...state,
                 auth: false,
-                name: null
+                name: null,
+                email: null
             }
         case ACTIONS.SET_USER_FROM_LOCALSTORAGE:
-            console.log(action.name, action.email)
+        if (action.name){
             return {
                 ...state,
                 name: action.name,
                 email: action.email,
                 auth: true
             }
+        }
+        else {
+            return {
+                ...state,
+                auth: false
+            }
+        }
+      
         case ACTIONS.LOGIN:
             return {
                 ...state,

@@ -14,7 +14,16 @@ function isLoggedIn(req, res, next) {
   }
 }
 
-// full path is api/users/login
+// this route is just used to get the user basic info
+router.get('/user', (req, res, next) => {
+	if (req.user) {
+		return res.json({ user: {name: req.user.name, email: req.user.local.email }})
+	} else {
+		return res.json({ user: null })
+	}
+})
+
+
 router.post("/login", function(req, res, next) {
   passport.authenticate("local-login", function(err, user, info) {
     if (err) {
@@ -201,7 +210,7 @@ router.get(
 router.get(
   "/auth/facebook/callback",
   passport.authenticate("facebook", {
-    successRedirect: "/myapplets",
+    successRedirect: "/",
     failureRedirect: "/login"
   })
 );
@@ -218,6 +227,7 @@ router.get(
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
+    successRedirect: "/",
     failureRedirect: "/login"
   })
 );
