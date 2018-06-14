@@ -4,7 +4,7 @@ export const CREATE_APPLET='CREATE_APPLET';
 export const OFF_APPLET='OFF_APPLET';
 export const ON_APPLET='ON_APPLET';
 export const SHOW_APPLET='SHOW_APPLET';
-
+export const LIST_APPLET="LIST_APPLET";
 
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';

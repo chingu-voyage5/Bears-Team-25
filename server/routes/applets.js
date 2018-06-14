@@ -20,11 +20,11 @@ appletRouter.route('/')
     })
     .post((req, res, next) => {
         Applet.create(req.body)
-            .then((dish) => {
-                console.log('Dish Created ', dish);
+            .then((applet) => {
+                console.log('Applet Created ', applet);
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
-                res.json(dish);
+                res.json(applet);
             }, (err) => next(err))
             .catch((err) => next(err));
     })

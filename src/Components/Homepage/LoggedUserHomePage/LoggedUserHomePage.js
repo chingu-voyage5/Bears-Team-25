@@ -2,11 +2,17 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import AppletCard from "../../Common/AppletCard/AppletCard";
 import { connect } from "react-redux";
+import * as listAppletAction from "../../../actions/listAppletAction";
+import { bindActionCreators } from "redux";
 import "./LoggedUserHomePage.css";
 
 class LoggedUserHomePage extends Component {
+	componentDidMount() {
+    	this.props.listActions.listApplets();
+  	}
 	render() {
 		const appletList = this.props.allAppletList;
+		console.log(appletList);
 		const AppletList = appletList.map( (applet, i) => (
 			<AppletCard key={`appletCard-${i}`}  content={applet.content} />
 		));
@@ -25,8 +31,15 @@ class LoggedUserHomePage extends Component {
 
 const mapStateToProps = state => {
 	return {
-		allAppletList: state.create.allAppletList
+		allAppletList: state.applet.appletList
 	};
 };
 
-export default connect(mapStateToProps)(LoggedUserHomePage);
+const mapActionsToProps = dispatch => {
+  return {
+    listActions: bindActionCreators(listAppletAction, dispatch)
+  };
+};
+
+
+export default connect(mapStateToProps,mapActionsToProps)(LoggedUserHomePage);

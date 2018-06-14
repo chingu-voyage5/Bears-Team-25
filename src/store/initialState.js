@@ -29,8 +29,8 @@ const initialState = {
 			color: "blue"
 		},
 		{
-			name:"Date&Time",
-			color:"green"
+			name: "Date&Time",
+			color: "green"
 		}
 	],
 	trigger: {
@@ -118,14 +118,16 @@ const initialState = {
 					"This trigger fires everytime when you post a video on Instagram"
 			}
 		],
-		Github:[
+		Github: [
 			{
-				heading:"Any new issue",
-				content:"This trigger fires every time any new issue is opened in a repository you own or collabrate with"
+				heading: "Any new issue",
+				content:
+					"This trigger fires every time any new issue is opened in a repository you own or collabrate with"
 			},
 			{
-				heading:"New Pull request for specified repository",
-				content:"This Trigger fires everytime a pull request is opened for a repository you specify"
+				heading: "New Pull request for specified repository",
+				content:
+					"This Trigger fires everytime a pull request is opened for a repository you specify"
 			}
 		]
 	},
@@ -137,32 +139,31 @@ const initialState = {
 					"This Action will send you an HTML based email. Images and links are supported."
 			}
 		],
-		Twitter:[
+		Twitter: [
 			{
 				heading: "Post an image with tweet",
-				content:
-					"This action will tweet along with linked image"	
+				content: "This action will tweet along with linked image"
 			},
 			{
 				heading: "Post a tweet",
-				content:
-					"This Action will post a new tweet"	
+				content: "This Action will post a new tweet"
 			}
 		],
-		Facebook:[
+		Facebook: [
 			{
-				heading:"Create a status message",
-				content:"This action will add a plain text status on Facebook"
+				heading: "Create a status message",
+				content: "This action will add a plain text status on Facebook"
 			},
 			{
-				heading:"Create a link post",
-				content:"This action will create new link post on Facebook"
+				heading: "Create a link post",
+				content: "This action will create new link post on Facebook"
 			}
 		],
-		Github:[
+		Github: [
 			{
-				heading:"Create an issue",
-				content:"This action will create an issue in your specified repository"
+				heading: "Create an issue",
+				content:
+					"This action will create an issue in your specified repository"
 			}
 		]
 	},
@@ -220,47 +221,27 @@ const initialState = {
 				serviceTo: "Mail",
 				condition: "On"
 			}
-		],
-		allAppletList: [
-			{
-				actionHeading: "Send me an email",
-				actionContent:
-					"This Action will send you an HTML based email. Images and links are supported.",
-				content: "Random content",
-				heading: "Random content",
-				triggerHeading: "Add a Card to trello",
-				triggerContent:
-					"A card has been added to trello board of yours",
-				serviceFrom: "Trello",
-				serviceTo: "Mail",
-				condition: "On"
-			},
-			{
-				actionHeading: "Send me an email",
-				actionContent:
-					"This Action will send you an HTML based email. Images and links are supported.",
-				content: "Random content",
-				heading: "Random content",
-				triggerHeading: "Add a Card to trello",
-				triggerContent:
-					"A card has been added to trello board of yours",
-				serviceFrom: "Trello",
-				serviceTo: "Mail",
-				condition: "On"
-			},
-			{
-				actionHeading: "Send me an email",
-				actionContent:
-					"This Action will send you an HTML based email. Images and links are supported.",
-				content: "Random content",
-				heading: "Random content",
-				triggerHeading: "Add a Card to trello",
-				triggerContent:
-					"A card has been added to trello board of yours",
-				serviceFrom: "Trello",
-				serviceTo: "Mail",
-				condition: "On"
-			},
+		]
+	},
+	activity: [
+		{
+			date: "Jun 08,2018",
+			time: "7:20 PM",
+			serviceName: "Instagram"
+		},
+		{
+			date: "Jun 05,2018",
+			time: "11:00 PM",
+			serviceName: "Github"
+		},
+		{
+			date: "Jun 01,2018",
+			time: "4:20 AM",
+			serviceName: "Twitter"
+		}
+	],
+	applet: {
+		appletList: [
 			{
 				actionHeading: "Send me an email",
 				actionContent:
@@ -275,24 +256,7 @@ const initialState = {
 				condition: "On"
 			}
 		]
-	},
-	activity:[
-		{
-			date:"Jun 08,2018",
-			time:"7:20 PM",
-			serviceName:"Instagram",
-		},
-		{
-			date:"Jun 05,2018",
-			time:"11:00 PM",
-			serviceName:"Github",
-		},
-		{
-			date:"Jun 01,2018",
-			time:"4:20 AM",
-			serviceName:"Twitter",
-		}
-	]
+	}
 };
 
 export default initialState;

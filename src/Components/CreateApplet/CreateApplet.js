@@ -79,13 +79,11 @@ class CreateApplet extends Component {
 			content: obj.content,
 			heading: obj.heading
 		};
-		console.log(appletData);
 		return appletData;
 	}
 
 	_finish(obj) {
 		this._changeStep();
-		// console.log(this.state);
 		let appletData=this.modifyData(this.state);
 		this.props.createActions.addApplet(appletData);
 	}
