@@ -241,21 +241,7 @@ const initialState = {
 		}
 	],
 	applet: {
-		appletList: [
-			{
-				actionHeading: "Send me an email",
-				actionContent:
-					"This Action will send you an HTML based email. Images and links are supported.",
-				content: "Random content",
-				heading: "Random content",
-				triggerHeading: "Add a Card to trello",
-				triggerContent:
-					"A card has been added to trello board of yours",
-				serviceFrom: "Trello",
-				serviceTo: "Mail",
-				condition: "On"
-			}
-		]
+		appletList: []
 	}
 };
 
