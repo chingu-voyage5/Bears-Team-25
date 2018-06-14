@@ -19,11 +19,12 @@ class SignInPage extends React.Component {
                         xmlns="http://www.w3.org/2000/svg"><title>Home</title><path d={IFTTT_ICON}>
                         </path></svg></h2>
                 <div>
-                
+                <a href="http://localhost:3001/api/users/auth/google" target='_self'>
                 <Button fullWidth disabled={isFetching}  variant="raised" className='social-button googleButton' >
                         <SvgIcon style={{ fontSize: "2em" }} className='svg-icon'><path fill="white" d={GOOGLE_ICON} />
                         </SvgIcon >Continue with Google
                 </Button>
+                </a>
                 </div>
                 <div>
                     <a href="http://localhost:3001/api/users/auth/facebook" target='_self'>

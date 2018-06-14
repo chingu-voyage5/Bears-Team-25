@@ -201,7 +201,23 @@ router.get(
 router.get(
   "/auth/facebook/callback",
   passport.authenticate("facebook", {
-    successRedirect: "/",
+    successRedirect: "/myapplets",
+    failureRedirect: "/login"
+  })
+);
+
+// google ---------------------------------
+
+// send to google to do the authentication
+router.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+// the callback after google has authenticated the user
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
     failureRedirect: "/login"
   })
 );
