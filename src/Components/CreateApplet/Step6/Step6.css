@@ -36,6 +36,8 @@
 	margin-right: 5px;
 }
 .step-6 .center-button{
+	margin-left: auto;
+	margin-right: auto;
 	text-align: center;
 }
 .step-6 .submit-button{

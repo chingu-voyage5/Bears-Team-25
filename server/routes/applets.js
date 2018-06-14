@@ -33,13 +33,8 @@ appletRouter.route('/')
         res.end('PUT operation not supported on /Applet');
     })
     .delete((req, res, next) => {
-        Applet.remove({})
-            .then((resp) => {
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'application/json');
-                res.json(resp);
-            }, (err) => next(err))
-            .catch((err) => next(err));
+        res.statusCode = 403;
+        res.end('Delete operation not supported on /Applet');
     });
 
 module.exports = appletRouter;
