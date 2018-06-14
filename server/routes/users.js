@@ -192,13 +192,13 @@ router.post("/change_email", isLoggedIn, function(req, res, next) {
 // facebook -------------------------------
 
 // send to facebook to do the authentication
-app.get(
+router.get(
   "/auth/facebook",
   passport.authenticate("facebook", { scope: ["public_profile", "email"] })
 );
 
 // handle the callback after facebook has authenticated the user
-app.get(
+router.get(
   "/auth/facebook/callback",
   passport.authenticate("facebook", {
     successRedirect: "/",
