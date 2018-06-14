@@ -5,8 +5,7 @@ var router = express.Router();
 const users = require('./users');
 const applets=require('./applets');
 // paths to subroutes (`api/${path}`)
-router.use('/users', users)
-router.use('/applets', applets)
-
+router.use('/users', users);
+router.use('/applets', applets);
 
 module.exports = router;

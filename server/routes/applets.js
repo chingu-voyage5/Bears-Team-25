@@ -1,63 +1,45 @@
-var passport = require('passport');
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
-// // full path is api/users/login
-// router.post('/login', function (req, res, next) {
-//   passport.authenticate('local-login', function (err, user, info) {
-//     if (err) {
-//       console.log(err);
-//       return next(err);
-//     }
-//     if (user) {
-//       req.logIn(user, function (err) {
-//         if (err) {
-//           console.log('error when logging in');
-//           return next(err);
-//         }
-//         res.statusCode = 200;
-//         res.setHeader('Content-Type', 'application/json');
-//         res.json({ success: true, status: 'You have successfully signed in!', user: { name: req.user.name, id: req.user._id, email: req.user.local.email } });
-//         return
-//       });
-//     }
-//     else {
-//       res.statusCode = 401;
-//       res.setHeader('Content-Type', 'application/json');
-//       res.json({ success: false, status: info.message });
-//       return;
+const Applet = require('../models/applet');
 
-//     }
+const appletRouter = express.Router();
 
-//   })(req, res, next);
-// });
+appletRouter.use(bodyParser.json());
 
+appletRouter.route('/')
+    .get((req, res, next) => {
+        Applet.find({})
+            .then((Applet) => {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(Applet);
+            }, (err) => next(err))
+            .catch((err) => next(err));
+    })
+    .post((req, res, next) => {
+        Applet.create(req.body)
+            .then((dish) => {
+                console.log('Dish Created ', dish);
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(dish);
+            }, (err) => next(err))
+            .catch((err) => next(err));
+    })
+    .put((req, res, next) => {
+        res.statusCode = 403;
+        res.end('PUT operation not supported on /Applet');
+    })
+    .delete((req, res, next) => {
+        Applet.remove({})
+            .then((resp) => {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(resp);
+            }, (err) => next(err))
+            .catch((err) => next(err));
+    });
 
-
-// router.post('/signup', function (req, res, next) {
-//   passport.authenticate('local-signup', function (err, user, info) {
-//     if (err) {
-//       console.log(err);
-//       return next(err);
-//     }
-//     if (user) {
-//       req.logIn(user, function (err) {
-//         if (err) { return next(err); }
-//         res.statusCode = 200;
-//         res.setHeader('Content-Type', 'application/json');
-//         console.log('req.user', req.user)
-//         res.json({ success: true, status: 'You have successfully signed up!', user: { name: req.user.name,  id: req.user._id, email: req.user.local.email } });
-//         return
-//       });
-//     }
-//     else {
-//       res.statusCode = 401;
-//       res.setHeader('Content-Type', 'application/json');
-//       res.json({ success: false, status: info.message });
-//     }
-
-//   })(req, res, next);
-// });
-
-
-module.exports = router;
+module.exports = appletRouter;
