@@ -1,17 +1,10 @@
 import * as ACTIONS from "./actionTypes";
+import {setUsersCredentials} from './loginActions';
 const axios = require("axios");
 
 function signUp_on() {
   return {
     type: ACTIONS.SIGN_UP
-  };
-}
-
-function signUp_success(user) {
-  return {
-    type: ACTIONS.SIGN_UP_SUCCESS,
-    name: user.name,
-    email: user.email
   };
 }
 
@@ -50,13 +43,18 @@ export function sign_up(values) {
         email: values.email
       })
       .then(response => {
-        let user = response.data.user
-        localStorage.setItem("name",  user.name);
-        localStorage.setItem("email", user.email);
-        dispatch(signUp_success(user));
+        console.log('signed up')
+        let user = response.data.user;
+        if (user) {
+          if (user.email === undefined) {
+            user.email = "";
+          }
+        dispatch(setUsersCredentials(user));
+        }
         dispatch(signUp_success_snackbar());
       })
       .catch(error => {
+        console.log(error)
         if (error.response) {
           error = error.response.data.status
         } 
