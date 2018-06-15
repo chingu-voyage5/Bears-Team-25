@@ -9,7 +9,7 @@ import { renderTextField, validatePasswords } from '../../commonFunctions/formFu
 import { successOff } from '../../actions/changePasswordActions';
 
 var ChangePasswordForm = props => {
-    const { handleSubmit, dispatch, success, successOff, valid, isFetching, auth } = props;
+    const { handleSubmit, dispatch, success, successOff, valid, isFetching } = props;
 
     let name = localStorage.getItem('name')
     if (success) {
@@ -59,9 +59,7 @@ function mapStateToProps(state) {
     return {
         onSubmit: values => change_password(values),
         isFetching: state.changePassword.isFetching,
-        name: state.auth.name,
         success: state.changePassword.success,
-        auth: state.auth.auth
     }
 }
 

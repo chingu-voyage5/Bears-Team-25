@@ -8,15 +8,29 @@ function login_on() {
 }
 
 export function setUsersCredentials(user) {
-  console.log(user)
-  return {
-    type: ACTIONS.SET_USERS_CREDENTIALS,
-    name: user.name,
-    email: user.email,
-    isFBLinked: user.isFBLinked,
-    isGoogleLinked: user.isGoogleLinked
-  };
+  if (user){
+    return {
+      type: ACTIONS.SET_USERS_CREDENTIALS,
+      name: user.name,
+      email: user.email,
+      isFBLinked: user.isFBLinked,
+      isGoogleLinked: user.isGoogleLinked,
+      auth: true
+    };
+  }
+  else {
+    return {
+      type: ACTIONS.SET_USERS_CREDENTIALS,
+      name: null,
+      email: null,
+      isFBLinked: false,
+      isGoogleLinked: false,
+      auth: false
+    };
+  }
+ 
 }
+
 
 function login_success_snackbar() {
   return {
@@ -110,9 +124,9 @@ export function login(values) {
           localStorage.setItem('name', user.name)
           if (user.email === undefined) {
             user.email = "";
-          }
-        dispatch(setUsersCredentials(user));
+          }   
         }
+        dispatch(setUsersCredentials(user));
         dispatch(login_success_snackbar());
       })
       .catch(error => {
@@ -143,13 +157,14 @@ export function fetchUsersCredentials() {
         }
       })
       .catch(error => {
+        console.log(error)
         if (error.response) {
           error = error.response.data.status;
         } else {
           error = "Something wrong with server";
         }
         localStorage.removeItem('name')
-        console.log(error);
+        dispatch(setUsersCredentials(null));
       });
   };
 }

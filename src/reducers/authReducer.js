@@ -57,7 +57,7 @@ export default function authReducer(state = {
                 email: action.email,
                 isFBLinked: action.isFBLinked,
                 isGoogleLinked: action.isGoogleLinked,
-                auth: true,
+                auth: action.auth,
                 success: true           
             }
 
