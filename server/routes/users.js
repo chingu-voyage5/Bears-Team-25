@@ -16,10 +16,12 @@ function isLoggedIn(req, res, next) {
 
 // this route is just used to get the user basic info
 router.get("/user", isLoggedIn, (req, res, next) => {
-  console.log(req.user);
   if (req.user) {
+    let isGoogleLinked, isFBLinked
+    (req.user.gogle) ? (isGoogleLinked = true) : (isGoogleLinked = false);
+    (req.user.facebook) ? (isFBLinked = true) : (isFBLinked = false);
     return res.json({
-      user: { name: req.user.name, email: req.user.local.email }
+      user: { name: req.user.name, email: req.user.local.email, isGoogleLinked: isGoogleLinked, isFBLinked: isFBLinked }
     });
   } else {
     return res.json({ user: null });
@@ -205,7 +207,7 @@ router.post("/change_email", isLoggedIn, function(req, res, next) {
 // send to facebook to do the authentication
 router.get(
   "/auth/facebook",
-  passport.authenticate("facebook", { scope: ["public_profile", "email"] })
+  passport.authenticate("facebook", {display: 'popup', scope: ["public_profile", "email"] })
 );
 
 // handle the callback after facebook has authenticated the user
@@ -222,7 +224,7 @@ router.get(
 // send to google to do the authentication
 router.get(
   "/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
+  passport.authenticate("google", {display: 'popup', scope: ["profile", "email"] })
 );
 
 // the callback after google has authenticated the user

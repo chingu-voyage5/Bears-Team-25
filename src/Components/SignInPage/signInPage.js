@@ -7,8 +7,26 @@ import { Redirect } from 'react-router';
 import './signInPage.css';
 
 class SignInPage extends React.Component {
+    handleClick() {
+        const url = 'http://localhost:3001/api/users/auth/google';
+        const name = '_blank'
+        const specs = 'width=500,height=500';
+        var childwindow = window.open(url, name, specs); 
+        var timer = setInterval(function () {
+            if (childwindow.closed) {
+                clearInterval(timer);
+                window.location.reload();
+            }
+        }, 1000);
+    }
+
     render() {
-        const { login, auth, isFetching } = this.props;
+
+
+        const {  auth, isFetching } = this.props;
+
+     
+
         if (auth) {
             return <Redirect to='/' />
         }
@@ -19,12 +37,12 @@ class SignInPage extends React.Component {
                         xmlns="http://www.w3.org/2000/svg"><title>Home</title><path d={IFTTT_ICON}>
                         </path></svg></h2>
                 <div>
-                <a href="http://localhost:3001/api/users/auth/google" target='_self'>
-                <Button fullWidth disabled={isFetching}  variant="raised" className='social-button googleButton' >
+                {/* <a href="http://localhost:3001/api/users/auth/google"> */}
+                <Button fullWidth disabled={isFetching} onClick={this.handleClick} variant="raised" className='social-button googleButton' >
                         <SvgIcon style={{ fontSize: "2em" }} className='svg-icon'><path fill="white" d={GOOGLE_ICON} />
                         </SvgIcon >Continue with Google
                 </Button>
-                </a>
+                {/* </a> */}
                 </div>
                 <div>
                     <a href="http://localhost:3001/api/users/auth/facebook" target='_self'>
