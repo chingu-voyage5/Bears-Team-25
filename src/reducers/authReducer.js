@@ -12,10 +12,19 @@ export default function authReducer(state = {
             localStorage.removeItem('email');
             return {
                 ...state,
-                auth: false,
                 name: null,
                 email: null
             }
+        case ACTIONS.LOGOUT_SUCCESS:
+            return {
+                ...state,
+                auth: false
+            }
+        case ACTIONS.LOGOUT_FAILURE:
+            return {
+                ...state,
+                auth: false
+            }    
         case ACTIONS.SET_USER_FROM_LOCALSTORAGE:
         if (action.name){
             return {

@@ -15,7 +15,8 @@ function isLoggedIn(req, res, next) {
 }
 
 // this route is just used to get the user basic info
-router.get('/user', (req, res, next) => {
+router.get('/user',isLoggedIn, (req, res, next) => {
+  console.log(req.user)
 	if (req.user) {
 		return res.json({ user: {name: req.user.name, email: req.user.local.email }})
 	} else {
@@ -91,12 +92,16 @@ router.post("/signup", function(req, res, next) {
   })(req, res, next);
 });
 
-router.get("/logout", function(req, res) {
-  console.log("logout successfull");
-  req.logout();
-  res.statusCode = 200;
-  res.json({ success: true, status: "You have successfully logged out!" });
-});
+router.get('/logout', (req, res) => {
+	if (req.user) {
+    req.logout();
+		req.session.destroy()
+		res.clearCookie('connect.sid') // clean up session info from client-side
+		return res.json({ msg: 'logging you out' })
+	} else {
+		return res.json({ msg: 'no user to log out!' })
+	}
+})
 
 router.post("/change_password", isLoggedIn, function(req, res, next) {
   User.findById(req.user._id, function(err, user) {
@@ -210,7 +215,7 @@ router.get(
 router.get(
   "/auth/facebook/callback",
   passport.authenticate("facebook", {
-    successRedirect: "/",
+    successRedirect: "http://localhost:3000/",
     failureRedirect: "/login"
   })
 );
@@ -227,7 +232,7 @@ router.get(
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    successRedirect: "/",
+    successRedirect: "http://localhost:3000/",
     failureRedirect: "/login"
   })
 );

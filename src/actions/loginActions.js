@@ -44,6 +44,18 @@ function logout_local() {
   };
 }
 
+function logout_success() {
+  return {
+    type: ACTIONS.LOGOUT_SUCCESS
+  };
+}
+
+function logout_failure() {
+  return {
+    type: ACTIONS.LOGOUT_FAILURE
+  };
+}
+
 function logout_success_snackbar() {
   return {
     type: ACTIONS.RENDER_SNACKBAR,
@@ -65,8 +77,9 @@ export function logout() {
     // First dispatch: the app state is updated to inform
     dispatch(logout_local());
     axios
-      .get("http://localhost:3001/api/users/logout")
+      .get("http://localhost:3001/api/users/logout",{withCredentials: true})
       .then(() => {
+        dispatch(logout_success())
         dispatch(logout_success_snackbar());
       })
       .catch(error => {
@@ -75,7 +88,7 @@ export function logout() {
         } else {
           error = "Something wrong with server";
         }
-        dispatch(logout_failure_snackbar(error));
+        dispatch(logout_failure());
       });
   };
 }
@@ -129,7 +142,7 @@ export function login(values) {
 export function fetchUsersCredentials() {
   return function(dispatch) {
     axios
-      .get("http://localhost:3001/api/users/user")
+      .get("http://localhost:3001/api/users/user", {withCredentials: true})
       .then(response => {
         console.log(user)
         let user = response.data.user;
