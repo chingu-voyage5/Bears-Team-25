@@ -75,10 +75,9 @@ export const validatePasswords = values => {
 
 export const validatePassUsernameEmail = values => {
     const errors = {};
-    const requiredFields = ["username", "password", "email"];
+    const requiredFields = ["username", "password"];
     requiredFields.forEach(field => {
-        console.log(field)
-      if (field !== 'email' && !values[field]) {
+      if (!values[field]) {
         errors[field] = "Required";
       }
     });

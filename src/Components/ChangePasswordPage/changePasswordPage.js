@@ -28,7 +28,7 @@ var ChangePasswordForm = props => {
                     <h1 style={{ marginTop: 0 }}> Change password</h1>
                     <div style={{ marginBottom: '0.6em' }}>
                         <h4 className='form-title'> Current password</h4>
-                        <Field fullWidth className='input-field' name="currentPassword" type='password' component={renderTextField} />
+                        <Field fullWidth className='input-field'label="Use any if don't have password"  name="currentPassword" type='password' component={renderTextField} />
                     </div >
                     <div style={{ marginBottom: '0.6em' }}>
                         <h4 className='form-title'> New password</h4>

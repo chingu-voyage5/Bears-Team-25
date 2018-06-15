@@ -15,15 +15,16 @@ function isLoggedIn(req, res, next) {
 }
 
 // this route is just used to get the user basic info
-router.get('/user',isLoggedIn, (req, res, next) => {
-  console.log(req.user)
-	if (req.user) {
-		return res.json({ user: {name: req.user.name, email: req.user.local.email }})
-	} else {
-		return res.json({ user: null })
-	}
-})
-
+router.get("/user", isLoggedIn, (req, res, next) => {
+  console.log(req.user);
+  if (req.user) {
+    return res.json({
+      user: { name: req.user.name, email: req.user.local.email }
+    });
+  } else {
+    return res.json({ user: null });
+  }
+});
 
 router.post("/login", function(req, res, next) {
   passport.authenticate("local-login", function(err, user, info) {
@@ -92,48 +93,44 @@ router.post("/signup", function(req, res, next) {
   })(req, res, next);
 });
 
-router.get('/logout', (req, res) => {
-	if (req.user) {
+router.get("/logout", (req, res) => {
+  if (req.user) {
     req.logout();
-		req.session.destroy()
-		res.clearCookie('connect.sid') // clean up session info from client-side
-		return res.json({ msg: 'logging you out' })
-	} else {
-		return res.json({ msg: 'no user to log out!' })
-	}
-})
+    req.session.destroy();
+    res.clearCookie("connect.sid"); // clean up session info from client-side
+    return res.json({ msg: "logging you out" });
+  } else {
+    return res.json({ msg: "no user to log out!" });
+  }
+});
 
 router.post("/change_password", isLoggedIn, function(req, res, next) {
-  User.findById(req.user._id, function(err, user) {
-    if (err) {
-      return res.json({ success: false, status: err });
-    }
-    // checking if provided password is valid
-    if (user.validPassword(req.body.oldPassword)) {
-      // if valid - change it to the new password
-      user.local.password = user.generateHash(req.body.password);
-      user.save().then(
-        user => {
-          res.statusCode = 200;
-          res.setHeader("Content-Type", "application/json");
-          res.json({
-            success: true,
-            status: "Password successfully changed"
-          });
-          return;
-        },
-        err => {
-          console.log(err);
-          return next(err);
-        }
-      );
-      // if not valid - send error message
-    } else {
-      res.statusCode = 401;
-      res.setHeader("Content-Type", "application/json");
-      return res.json({ success: false, status: "Wrong password" });
-    }
-  });
+  var user = req.user;
+  // checking if don't have current local password or provided password is valid
+  if (!user.local.password || user.validPassword(req.body.oldPassword)) {
+    // if true - assign new password
+    user.local.password = user.generateHash(req.body.password);
+    user.save().then(
+      user => {
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json({
+          success: true,
+          status: "Password successfully changed"
+        });
+        return;
+      },
+      err => {
+        console.log(err);
+        return next(err);
+      }
+    );
+    // if not valid - send error message
+  } else {
+    res.statusCode = 401;
+    res.setHeader("Content-Type", "application/json");
+    return res.json({ success: false, status: "Wrong password" });
+  }
 });
 
 router.post("/delete_account", isLoggedIn, function(req, res, next) {
