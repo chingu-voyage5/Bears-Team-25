@@ -43,9 +43,9 @@ export function sign_up(values) {
         email: values.email
       })
       .then(response => {
-        console.log('signed up')
         let user = response.data.user;
         if (user) {
+          localStorage.setItem('name', user.name)
           if (user.email === undefined) {
             user.email = "";
           }

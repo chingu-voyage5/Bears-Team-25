@@ -20,10 +20,13 @@ export default function authReducer(state = {
           isGoogleLinked: !state.isGoogleLinked
         }
         case ACTIONS.LOGOUT:
+        localStorage.removeItem('name');
             return {
                 ...state,
                 name: null,
-                email: null
+                email: null,
+                isFBLinked: false,
+                isGoogleLinked: false
             }
         case ACTIONS.LOGOUT_SUCCESS:
             return {

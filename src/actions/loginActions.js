@@ -107,6 +107,7 @@ export function login(values) {
       .then(response => {
         let user = response.data.user;
         if (user) {
+          localStorage.setItem('name', user.name)
           if (user.email === undefined) {
             user.email = "";
           }
@@ -134,6 +135,7 @@ export function fetchUsersCredentials() {
         let user = response.data.user;
         console.log(user)
         if (user) {
+          localStorage.setItem('name', user.name)
           if (user.email === undefined) {
             user.email = "";
           }
@@ -146,6 +148,7 @@ export function fetchUsersCredentials() {
         } else {
           error = "Something wrong with server";
         }
+        localStorage.removeItem('name')
         console.log(error);
       });
   };

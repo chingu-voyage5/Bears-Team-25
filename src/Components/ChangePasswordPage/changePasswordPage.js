@@ -11,14 +11,14 @@ import { successOff } from '../../actions/changePasswordActions';
 var ChangePasswordForm = props => {
     const { handleSubmit, dispatch, success, successOff, valid, isFetching, auth } = props;
 
-
+    let name = localStorage.getItem('name')
     if (success) {
         setTimeout(function () {
             successOff();
         }, 100);
         return <Redirect to='/settings' />
     }
-    else if (!auth) {
+    else if (!name) {
         return <Redirect to='/' />
     }
     else {
