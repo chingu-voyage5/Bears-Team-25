@@ -18,8 +18,8 @@ function isLoggedIn(req, res, next) {
 router.get("/user", isLoggedIn, (req, res, next) => {
   if (req.user) {
     let isGoogleLinked, isFBLinked
-    (req.user.gogle) ? (isGoogleLinked = true) : (isGoogleLinked = false);
-    (req.user.facebook) ? (isFBLinked = true) : (isFBLinked = false);
+    (req.user.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
+    (req.user.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
     return res.json({
       user: { name: req.user.name, email: req.user.local.email, isGoogleLinked: isGoogleLinked, isFBLinked: isFBLinked }
     });
@@ -42,14 +42,13 @@ router.post("/login", function(req, res, next) {
         }
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
+        let isGoogleLinked, isFBLinked; 
+        (req.user.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
+        (req.user.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
         res.json({
           success: true,
           status: "You have successfully signed in!",
-          user: {
-            name: req.user.name,
-            id: req.user._id,
-            email: req.user.local.email
-          }
+          user: { name: req.user.name, email: req.user.local.email, isGoogleLinked: isGoogleLinked, isFBLinked: isFBLinked }
         });
         return;
       });
@@ -75,15 +74,13 @@ router.post("/signup", function(req, res, next) {
         }
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        console.log("req.user", req.user);
+        let isGoogleLinked, isFBLinked
+        (req.user.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
+        (req.user.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
         res.json({
           success: true,
           status: "You have successfully signed up!",
-          user: {
-            name: req.user.name,
-            id: req.user._id,
-            email: req.user.local.email
-          }
+          user: { name: req.user.name, email: req.user.local.email, isGoogleLinked: isGoogleLinked, isFBLinked: isFBLinked }
         });
         return;
       });
