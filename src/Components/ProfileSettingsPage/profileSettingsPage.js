@@ -73,12 +73,12 @@ ProfileSettingsPage = reduxForm({
 
 function mapStateToProps(state) {
     return {
-        isFBLinked: state.auth.isFBLinked,
-        isGoogleLinked: state.auth.isGoogleLinked,
+        isFBLinked: state.profileSettings.isFBLinked,
+        isGoogleLinked: state.profileSettings.isGoogleLinked,
         initialValues: { email: state.auth.email, password: 'password' },
         auth: state.auth.auth,
         onSubmit: values => change_email(values),
-        isFetching: state.auth.profileSettings.isFetching
+        isFetching: state.auth.emailChanging.isFetching
     }
 }
 
