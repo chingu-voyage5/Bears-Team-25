@@ -41,7 +41,7 @@ export function sign_up(values) {
         username: values.username,
         password: values.password,
         email: values.email
-      })
+      }, {withCredentials: true})
       .then(response => {
         let user = response.data.user;
         if (user) {
