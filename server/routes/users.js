@@ -29,10 +29,23 @@ router.get("/user", isLoggedIn, (req, res, next) => {
 });
 
 router.post("/unlink", isLoggedIn, (req, res, next) => {
-  console.log(req.body.social)
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "application/json");
-  res.json('hello')
+  user = req.user;
+  var social = req.body.social;
+  if (social)  {
+    user[social] = undefined;
+    }
+  user.save().then(
+    () => {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.json({status: "Account successfully unlinked" });
+      return;
+    },
+    err => {
+      console.log(err);
+      return next(err);
+    }
+  );
 });
 
 router.post("/login", function(req, res, next) {
@@ -143,6 +156,11 @@ router.post("/delete_account", isLoggedIn, function(req, res, next) {
   User.findById(req.user._id, function(err, user) {
     if (err) {
       return res.json({ success: false, status: err });
+    }
+    if (!user.local.password) {
+      res.statusCode = 401;
+      res.setHeader("Content-Type", "application/json");
+      return res.json({ success: false, status: "You don't have password." });
     }
     // checking if provided password is valid
     if (user.validPassword(req.body.password)) {
