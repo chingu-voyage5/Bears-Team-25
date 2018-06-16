@@ -67,14 +67,17 @@ class ProfileSettingsPage extends React.Component {
                 alt="Google account is linked"
                 src="//web-assets.ifttt.com/assets/web/social-signon/google-21c9ddc5a9057bbbeadee3865e7b7fe40483807a0e1c6dda34eae0dd683be1d0.svg"
               />
-              <span className="social-link-wrapper">
-                {isGoogleLinked && <span>Google account is linked</span>}
-                {!isGoogleLinked && <span>Google account is not linked</span>}
-              </span>
-              <span onClick={linkOrUnlinkGoogle} className="social-link">
-                {isGoogleLinked && <span>Unlink</span>}
-                {!isGoogleLinked && <span>Link</span>}
-              </span>
+
+              {isGoogleLinked && <span className='social-status-container'>
+              <span className="social-link-status-wrapper">Google account is linked</span>
+              <span onClick={linkOrUnlinkGoogle} className="social-link">Unlink</span>
+              </span>}
+
+              {!isGoogleLinked && <span className='social-status-container'>
+               <span className="social-link-status-wrapper">Google account is not linked</span>
+              <span onClick={linkOrUnlinkGoogle} className="social-link">Link</span>
+              </span>}
+
             </div>
             <div className="social-link-container">
               <img
@@ -83,14 +86,15 @@ class ProfileSettingsPage extends React.Component {
                 alt="Facebook is not linked"
                 src="//web-assets.ifttt.com/assets/web/social-signon/facebook-d8dad9fdd6856071e5e5cd323995a9cbb5c7380aabde8898845b769a998c9846.svg"
               />
-              <span className="social-link-wrapper">
-                {isFBLinked && <span>Facebook is linked</span>}
-                {!isFBLinked && <span>Facebook is not linked</span>}
-              </span>
-              <span onClick={linkOrUnlinkFB} className="social-link">
-                {isFBLinked && <span>Unlink</span>}
-                {!isFBLinked && <span>Link</span>}
-              </span>
+             {isFBLinked && <span className='social-status-container'>
+              <span className="social-link-status-wrapper">Facebook account is linked</span>
+              <span onClick={linkOrUnlinkFB} className="social-link">Unlink</span>
+              </span>}
+
+              {!isFBLinked && <span className='social-status-container'>
+               <span className="social-link-status-wrapper">Facebook account is not linked</span>
+              <span onClick={linkOrUnlinkFB} className="social-link">Link</span>
+              </span>}
             </div>
 
             <div className="bottom-link-container">
