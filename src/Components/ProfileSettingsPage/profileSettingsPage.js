@@ -4,29 +4,32 @@ import { Field, reduxForm } from "redux-form";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import "./profileSettingsPage.css";
-import { change_email } from "../../actions/profileSettingsActions";
+import { change_email, unlink } from "../../actions/profileSettingsActions";
 import { Redirect } from "react-router";
 import {
   renderTextField,
   validatePassAndEmail
 } from "../../commonFunctions/formFunctions";
-import {
-  linkOrUnlinkFB,
-  linkOrUnlinkGoogle
-} from "../../actions/profileSettingsActions";
+
 
 class ProfileSettingsPage extends React.Component {
+
+  unlinkFb = () => {
+    const { unlink } = this.props;
+    unlink('facebook');
+  }
+  unlinkGoogle = () => {
+    const { unlink } = this.props;
+    unlink('google');
+  }
   render() {
-    const {
+    const {  
       handleSubmit,
       isFBLinked,
       isGoogleLinked,
-      linkOrUnlinkFB,
-      linkOrUnlinkGoogle,
       valid,
       isFetching,
-      dispatch,
-      auth
+      dispatch
     } = this.props;
     let name = localStorage.getItem('name')
     if (!name) {
@@ -70,12 +73,12 @@ class ProfileSettingsPage extends React.Component {
 
               {isGoogleLinked && <span className='social-status-container'>
               <span className="social-link-status-wrapper">Google account is linked</span>
-              <span onClick={linkOrUnlinkGoogle} className="social-link">Unlink</span>
+              <span onClick={this.unlinkGoogle} className="social-link">Unlink</span>
               </span>}
 
               {!isGoogleLinked && <span className='social-status-container'>
                <span className="social-link-status-wrapper">Google account is not linked</span>
-              <span onClick={linkOrUnlinkGoogle} className="social-link">Link</span>
+              <a href="http://localhost:3001/api/users/auth/google"  className="social-link">Link</a>
               </span>}
 
             </div>
@@ -88,12 +91,12 @@ class ProfileSettingsPage extends React.Component {
               />
              {isFBLinked && <span className='social-status-container'>
               <span className="social-link-status-wrapper">Facebook account is linked</span>
-              <span onClick={linkOrUnlinkFB} className="social-link">Unlink</span>
+              <span onClick={this.unlinkFb} className="social-link">Unlink</span>
               </span>}
 
               {!isFBLinked && <span className='social-status-container'>
                <span className="social-link-status-wrapper">Facebook account is not linked</span>
-              <span onClick={linkOrUnlinkFB} className="social-link">Link</span>
+              <a href="http://localhost:3001/api/users/auth/facebook"  className="social-link">Link</a>
               </span>}
             </div>
 
@@ -137,5 +140,5 @@ function mapStateToProps(state) {
 
 export default (ProfileSettingsPage = connect(
   mapStateToProps,
-  { linkOrUnlinkFB, linkOrUnlinkGoogle }
+  { unlink}
 )(ProfileSettingsPage));

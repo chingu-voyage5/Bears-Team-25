@@ -28,6 +28,13 @@ router.get("/user", isLoggedIn, (req, res, next) => {
   }
 });
 
+router.post("/unlink", isLoggedIn, (req, res, next) => {
+  console.log(req.body.social)
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "application/json");
+  res.json('hello')
+});
+
 router.post("/login", function(req, res, next) {
   passport.authenticate("local-login", function(err, user, info) {
     if (err) {

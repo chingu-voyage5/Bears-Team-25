@@ -157,7 +157,6 @@ export function fetchUsersCredentials() {
         }
       })
       .catch(error => {
-        console.log(error)
         if (error.response) {
           error = error.response.data.status;
         } else {
