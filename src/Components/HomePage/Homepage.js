@@ -3,6 +3,7 @@ import LoggedUserHomePage from "./LoggedUserHomePage/LoggedUserHomePage";
 import GuestHomepage from "./GuestHomepage/GuestHomepage";
 import { connect } from 'react-redux';
 
+
 class Homepage extends Component{
 	render(){
 		const {auth}=this.props

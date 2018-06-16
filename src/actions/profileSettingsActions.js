@@ -60,7 +60,6 @@ export function change_email(values) {
       }, {withCredentials: true})
       .then((json) => {
         let email = json.data.email
-        localStorage.setItem("email", email);
         dispatch(change_email_success(json.data.email));
         dispatch(change_email_success_snackbar());
       })

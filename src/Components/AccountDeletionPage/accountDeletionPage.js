@@ -9,7 +9,8 @@ import {renderTextField, validateOnlyPass} from '../../commonFunctions/formFunct
 
 var AccountDeletionPage = props => {
     const { handleSubmit, valid, isFetching, dispatch, auth } = props;
-    if (!auth) {
+    let name = localStorage.getItem('name')
+    if (!name) {
         return <Redirect to='/' />
     }
     else {

@@ -15,7 +15,7 @@ import Button from "@material-ui/core/Button";
 import Hidden from "@material-ui/core/Hidden";
 import "./header.css";
 import { withRouter } from "react-router-dom";
-import { logout, setUsersCredentials } from "../../actions/loginActions";
+import { logout, fetchUsersCredentials  } from "../../actions/loginActions";
 
 class NavLinkContainer extends React.Component {
   render() {
@@ -37,6 +37,10 @@ class NavLinkContainer extends React.Component {
 }
 
 class Header extends React.Component {
+  componentDidMount() {
+		const {fetchUsersCredentials} = this.props;
+		fetchUsersCredentials();
+	}
   state = {
     anchorEl: null
   };
@@ -53,13 +57,6 @@ class Header extends React.Component {
     const { logout } = this.props;
     this.setState({ anchorEl: null }, logout);
   };
-
-  componentWillMount() {
-    const { setUsersCredentials, name } = this.props;
-    if (!name) {
-      setUsersCredentials();
-    }
-  }
 
   render() {
     const { auth, name } = this.props;
@@ -176,7 +173,7 @@ function mapStateToProps(state) {
 export default withRouter(
   connect(
     mapStateToProps,
-    { logout, setUsersCredentials }
+    { logout, fetchUsersCredentials }
   )(Header)
 );
 

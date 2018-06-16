@@ -7,13 +7,30 @@ function login_on() {
   };
 }
 
-function login_success(user) {
-  return {
-    type: ACTIONS.LOGIN_SUCCESS,
-    name: user.name,
-    email: user.email
-  };
+export function setUsersCredentials(user) {
+  if (user){
+    return {
+      type: ACTIONS.SET_USERS_CREDENTIALS,
+      name: user.name,
+      email: user.email,
+      isFBLinked: user.isFBLinked,
+      isGoogleLinked: user.isGoogleLinked,
+      auth: true
+    };
+  }
+  else {
+    return {
+      type: ACTIONS.SET_USERS_CREDENTIALS,
+      name: null,
+      email: null,
+      isFBLinked: false,
+      isGoogleLinked: false,
+      auth: false
+    };
+  }
+ 
 }
+
 
 function login_success_snackbar() {
   return {
@@ -44,6 +61,18 @@ function logout_local() {
   };
 }
 
+function logout_success() {
+  return {
+    type: ACTIONS.LOGOUT_SUCCESS
+  };
+}
+
+function logout_failure() {
+  return {
+    type: ACTIONS.LOGOUT_FAILURE
+  };
+}
+
 function logout_success_snackbar() {
   return {
     type: ACTIONS.RENDER_SNACKBAR,
@@ -52,21 +81,14 @@ function logout_success_snackbar() {
   };
 }
 
-function logout_failure_snackbar(error) {
-  return {
-    type: ACTIONS.RENDER_SNACKBAR,
-    styling: "error",
-    text: error
-  };
-}
-
 export function logout() {
   return function(dispatch) {
     // First dispatch: the app state is updated to inform
     dispatch(logout_local());
     axios
-      .get("http://localhost:3001/api/users/logout")
+      .get("http://localhost:3001/api/users/logout",{withCredentials: true})
       .then(() => {
+        dispatch(logout_success())
         dispatch(logout_success_snackbar());
       })
       .catch(error => {
@@ -75,20 +97,12 @@ export function logout() {
         } else {
           error = "Something wrong with server";
         }
-        dispatch(logout_failure_snackbar(error));
+        dispatch(logout_failure());
       });
   };
 }
 
-export function setUsersCredentials() {
-  let name = localStorage.getItem("name");
-  let email = localStorage.getItem("email");
-  return {
-    type: ACTIONS.SET_USER_FROM_LOCALSTORAGE,
-    name: name,
-    email: email
-  };
-}
+
 
 export function login(values) {
   return function(dispatch) {
@@ -106,12 +120,13 @@ export function login(values) {
       )
       .then(response => {
         let user = response.data.user;
-        localStorage.setItem("name", user.name);
-        if (user.email === undefined) {
-          user.email = "";
+        if (user) {
+          localStorage.setItem('name', user.name)
+          if (user.email === undefined) {
+            user.email = "";
+          }   
         }
-        localStorage.setItem("email", user.email);
-        dispatch(login_success(user));
+        dispatch(setUsersCredentials(user));
         dispatch(login_success_snackbar());
       })
       .catch(error => {
@@ -122,6 +137,34 @@ export function login(values) {
         }
         dispatch(login_failure(error));
         dispatch(login_failure_snackbar(error));
+      });
+  };
+}
+
+export function fetchUsersCredentials() {
+  return function(dispatch) {
+    axios
+      .get("http://localhost:3001/api/users/user", {withCredentials: true})
+      .then(response => {
+        let user = response.data.user;
+        console.log(user)
+        if (user) {
+          localStorage.setItem('name', user.name)
+          if (user.email === undefined) {
+            user.email = "";
+          }
+        dispatch(setUsersCredentials(user));
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        if (error.response) {
+          error = error.response.data.status;
+        } else {
+          error = "Something wrong with server";
+        }
+        localStorage.removeItem('name')
+        dispatch(setUsersCredentials(null));
       });
   };
 }

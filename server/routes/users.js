@@ -3,7 +3,31 @@ var express = require("express");
 var router = express.Router();
 var User = require("../models/users");
 
-// full path is api/users/login
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    console.log("You are not logged in!");
+    res.statusCode = 401;
+    res.setHeader("Content-Type", "application/json");
+    res.json({ success: false, status: "You are not logged in!" });
+  }
+}
+
+// this route is just used to get the user basic info
+router.get("/user", isLoggedIn, (req, res, next) => {
+  if (req.user) {
+    let isGoogleLinked, isFBLinked
+    (req.user.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
+    (req.user.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
+    return res.json({
+      user: { name: req.user.name, email: req.user.local.email, isGoogleLinked: isGoogleLinked, isFBLinked: isFBLinked }
+    });
+  } else {
+    return res.json({ user: null });
+  }
+});
+
 router.post("/login", function(req, res, next) {
   passport.authenticate("local-login", function(err, user, info) {
     if (err) {
@@ -18,14 +42,13 @@ router.post("/login", function(req, res, next) {
         }
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
+        let isGoogleLinked, isFBLinked; 
+        (req.user.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
+        (req.user.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
         res.json({
           success: true,
           status: "You have successfully signed in!",
-          user: {
-            name: req.user.name,
-            id: req.user._id,
-            email: req.user.local.email
-          }
+          user: { name: req.user.name, email: req.user.local.email, isGoogleLinked: isGoogleLinked, isFBLinked: isFBLinked }
         });
         return;
       });
@@ -51,15 +74,13 @@ router.post("/signup", function(req, res, next) {
         }
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        console.log("req.user", req.user);
+        let isGoogleLinked, isFBLinked
+        (req.user.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
+        (req.user.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
         res.json({
           success: true,
           status: "You have successfully signed up!",
-          user: {
-            name: req.user.name,
-            id: req.user._id,
-            email: req.user.local.email
-          }
+          user: { name: req.user.name, email: req.user.local.email, isGoogleLinked: isGoogleLinked, isFBLinked: isFBLinked }
         });
         return;
       });
@@ -71,44 +92,44 @@ router.post("/signup", function(req, res, next) {
   })(req, res, next);
 });
 
-router.get('/logout', function (req, res) {
-  console.log('logout successfull')
-  req.logout();
-  res.statusCode = 200;
-  res.json({ success: true, status: 'You have successfully logged out!' })
+router.get("/logout", (req, res) => {
+  if (req.user) {
+    req.logout();
+    req.session.destroy();
+    res.clearCookie("connect.sid"); // clean up session info from client-side
+    return res.json({ msg: "logging you out" });
+  } else {
+    return res.json({ msg: "no user to log out!" });
+  }
 });
 
 router.post("/change_password", isLoggedIn, function(req, res, next) {
-  User.findById(req.user._id, function(err, user) {
-    if (err) {
-      return res.json({ success: false, status: err });
-    }
-    // checking if provided password is valid
-    if (user.validPassword(req.body.oldPassword)) {
-      // if valid - change it to the new password
-      user.local.password = user.generateHash(req.body.password);
-      user.save().then(
-        user => {
-          res.statusCode = 200;
-          res.setHeader("Content-Type", "application/json");
-          res.json({
-            success: true,
-            status: "Password successfully changed"
-          });
-          return;
-        },
-        err => {
-          console.log(err);
-          return next(err);
-        }
-      );
-      // if not valid - send error message
-    } else {
-      res.statusCode = 401;
-      res.setHeader("Content-Type", "application/json");
-      return res.json({ success: false, status: "Wrong password" });
-    }
-  });
+  var user = req.user;
+  // checking if don't have current local password or provided password is valid
+  if (!user.local.password || user.validPassword(req.body.oldPassword)) {
+    // if true - assign new password
+    user.local.password = user.generateHash(req.body.password);
+    user.save().then(
+      user => {
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json({
+          success: true,
+          status: "Password successfully changed"
+        });
+        return;
+      },
+      err => {
+        console.log(err);
+        return next(err);
+      }
+    );
+    // if not valid - send error message
+  } else {
+    res.statusCode = 401;
+    res.setHeader("Content-Type", "application/json");
+    return res.json({ success: false, status: "Wrong password" });
+  }
 });
 
 router.post("/delete_account", isLoggedIn, function(req, res, next) {
@@ -177,5 +198,39 @@ router.post("/change_email", isLoggedIn, function(req, res, next) {
     });
   });
 });
+
+// facebook -------------------------------
+
+// send to facebook to do the authentication
+router.get(
+  "/auth/facebook",
+  passport.authenticate("facebook", {display: 'popup', scope: ["public_profile", "email"] })
+);
+
+// handle the callback after facebook has authenticated the user
+router.get(
+  "/auth/facebook/callback",
+  passport.authenticate("facebook", {
+    successRedirect: "http://localhost:3000/",
+    failureRedirect: "/login"
+  })
+);
+
+// google ---------------------------------
+
+// send to google to do the authentication
+router.get(
+  "/auth/google",
+  passport.authenticate("google", {display: 'popup', scope: ["profile", "email"] })
+);
+
+// the callback after google has authenticated the user
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "http://localhost:3000/",
+    failureRedirect: "/login"
+  })
+);
 
 module.exports = router;

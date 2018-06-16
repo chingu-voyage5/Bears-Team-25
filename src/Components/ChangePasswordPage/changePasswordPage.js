@@ -9,16 +9,16 @@ import { renderTextField, validatePasswords } from '../../commonFunctions/formFu
 import { successOff } from '../../actions/changePasswordActions';
 
 var ChangePasswordForm = props => {
-    const { handleSubmit, dispatch, success, successOff, valid, isFetching, auth } = props;
+    const { handleSubmit, dispatch, success, successOff, valid, isFetching } = props;
 
-
+    let name = localStorage.getItem('name')
     if (success) {
         setTimeout(function () {
             successOff();
         }, 100);
         return <Redirect to='/settings' />
     }
-    else if (!auth) {
+    else if (!name) {
         return <Redirect to='/' />
     }
     else {
@@ -28,7 +28,7 @@ var ChangePasswordForm = props => {
                     <h1 style={{ marginTop: 0 }}> Change password</h1>
                     <div style={{ marginBottom: '0.6em' }}>
                         <h4 className='form-title'> Current password</h4>
-                        <Field fullWidth className='input-field' name="currentPassword" type='password' component={renderTextField} />
+                        <Field fullWidth className='input-field'label="Use any if don't have password"  name="currentPassword" type='password' component={renderTextField} />
                     </div >
                     <div style={{ marginBottom: '0.6em' }}>
                         <h4 className='form-title'> New password</h4>
@@ -59,9 +59,7 @@ function mapStateToProps(state) {
     return {
         onSubmit: values => change_password(values),
         isFetching: state.changePassword.isFetching,
-        name: state.auth.name,
         success: state.changePassword.success,
-        auth: state.auth.auth
     }
 }
 
