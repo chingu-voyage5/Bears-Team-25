@@ -2,8 +2,6 @@ var passport = require('passport');
 var express = require('express');
 var router = express.Router();
 
-
-
 // full path is api/users/login
 router.post('/login', function (req, res, next) {
   passport.authenticate('local-login', function (err, user, info) {
