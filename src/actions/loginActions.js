@@ -38,9 +38,45 @@ function login_failure_snackbar(error) {
   };
 }
 
-export function logout() {
+function logout_local() {
   return {
     type: ACTIONS.LOGOUT
+  };
+}
+
+function logout_success_snackbar() {
+  return {
+    type: ACTIONS.RENDER_SNACKBAR,
+    styling: "success",
+    text: "You've successfully logged out"
+  };
+}
+
+function logout_failure_snackbar(error) {
+  return {
+    type: ACTIONS.RENDER_SNACKBAR,
+    styling: "error",
+    text: error
+  };
+}
+
+export function logout() {
+  return function(dispatch) {
+    // First dispatch: the app state is updated to inform
+    dispatch(logout_local());
+    axios
+      .get("http://localhost:3001/api/users/logout")
+      .then(() => {
+        dispatch(logout_success_snackbar());
+      })
+      .catch(error => {
+        if (error.response) {
+          error = error.response.data.status;
+        } else {
+          error = "Something wrong with server";
+        }
+        dispatch(logout_failure_snackbar(error));
+      });
   };
 }
 
@@ -54,17 +90,20 @@ export function setUsersCredentials() {
   };
 }
 
-
 export function login(values) {
   return function(dispatch) {
     // First dispatch: the app state is updated to inform
     dispatch(login_on());
     axios
-      .post("http://localhost:3001/api/users/login", {
-        username: values.username,
-        password: values.password,
-        email: values.email
-      })
+      .post(
+        "http://localhost:3001/api/users/login",
+        {
+          username: values.username,
+          password: values.password,
+          email: values.email
+        },
+        { withCredentials: true }
+      )
       .then(response => {
         let user = response.data.user;
         localStorage.setItem("name", user.name);
@@ -77,14 +116,12 @@ export function login(values) {
       })
       .catch(error => {
         if (error.response) {
-          error = error.response.data.status
-        } 
-        else {
-          error='Something wrong with server'
+          error = error.response.data.status;
+        } else {
+          error = "Something wrong with server";
         }
         dispatch(login_failure(error));
         dispatch(login_failure_snackbar(error));
       });
   };
 }
-
