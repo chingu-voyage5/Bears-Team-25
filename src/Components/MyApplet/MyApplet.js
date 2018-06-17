@@ -4,16 +4,22 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import { connect } from 'react-redux';
 import AppletCard from "../Common/AppletCard/AppletCard";
+import * as myAppletActions from "../../actions/myAppletActions";
+import { bindActionCreators } from "redux";
 import "./MyApplet.css";
 
 class MyApplet extends Component {
+	componentDidMount() {
+    	this.props.myApplet.myAppletActions();
+  	}
 	constructor(props) {
 		super(props);
-
 		this.state = {};
 	}
 	render() {
 		const appletList =this.props.appletList;
+		console.log("The applet list");
+		console.log(appletList);
 		const AppletList = appletList.map( (applet, i) => (
 			<AppletCard key={`applet-list-${i}`} content={applet.content} />
 		));
@@ -32,8 +38,12 @@ class MyApplet extends Component {
 
 const mapStateToProps=state=>{
 	return{
-		appletList:state.create.appletList
+		appletList:state.applet.myApplet
 	}
 }
-
-export default connect(mapStateToProps)(MyApplet);
+const mapActionsToProps = dispatch => {
+  return {
+    myApplet: bindActionCreators(myAppletActions, dispatch)
+  };
+};
+export default connect(mapStateToProps,mapActionsToProps)(MyApplet);

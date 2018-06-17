@@ -241,7 +241,9 @@ const initialState = {
 		}
 	],
 	applet: {
-		appletList: []
+		appletList: [],
+		myApplet: [
+		]
 	}
 };
 

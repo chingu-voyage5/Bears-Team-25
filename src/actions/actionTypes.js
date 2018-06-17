@@ -5,6 +5,7 @@ export const OFF_APPLET='OFF_APPLET';
 export const ON_APPLET='ON_APPLET';
 export const SHOW_APPLET='SHOW_APPLET';
 export const LIST_APPLET="LIST_APPLET";
+export const SHOW_MY_APPLET="SHOW_MY_APPLET";
 
 export const SET_USERS_CREDENTIALS = 'SET_USERS_CREDENTIALS';
 

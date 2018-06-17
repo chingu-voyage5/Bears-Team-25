@@ -7,6 +7,7 @@ const appletRouter = express.Router();
 let User = require("../models/users");
 appletRouter.use(bodyParser.json());
 let userObj = null;
+
 appletRouter.use(function(req, res, next) {
     console.log(req.session); //showing only cookie
     console.log(req.sessionID);

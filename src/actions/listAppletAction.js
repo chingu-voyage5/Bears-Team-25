@@ -8,7 +8,7 @@ export function listApplets() {
 	// };
 	   return dispatch => {
 		axios
-			.get("/applets")
+			.get("/applets",{ withCredentials: true })
 			.then(allApplets => {
 				console.log("Done");
 				dispatch({
