@@ -4,21 +4,24 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const Applet = require("../models/applet");
 const appletRouter = express.Router();
-
+let User = require("../models/users");
 appletRouter.use(bodyParser.json());
-
+let userObj = null;
 appletRouter.use(function(req, res, next) {
-    console.log(req.session);//showing only cookie
+    console.log(req.session); //showing only cookie
     console.log(req.sessionID);
     console.log("Here in Router");
-    console.log(req.session.passport);//showing undefined
-    passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
-            console.log(user);
-            done(err, user);
-        });
+    console.log(req.session.passport); //showing undefined
+    // passport.deserializeUser(function(id, done) {
+    User.findById(req.session.passport.user, function(err, user) {
+        console.log(user._id);
+        userObj = user;
+        console.log("Printing the user obj id");
+        console.log(userObj._id);
+    }).then(r => {
+        next();
     });
-    next();
+    // });
 });
 
 appletRouter
@@ -36,16 +39,32 @@ appletRouter
             .catch(err => next(err));
     })
     .post((req, res, next) => {
+        let id = null;
         Applet.create(req.body)
             .then(
                 applet => {
                     console.log("Applet Created ", applet);
-                    res.statusCode = 200;
-                    res.setHeader("Content-Type", "application/json");
-                    res.json(applet);
+                    id = applet._id;
+                    console.log("Here is the id " + id);
                 },
                 err => next(err)
             )
+            .then(r => {
+                User.findOneAndUpdate(
+                    { _id: userObj._id },
+                    { $push: { appletIds: id } }
+                )
+                    .then(
+                        update => {
+                            console.log(update);
+                            res.statusCode = 200;
+                            res.setHeader("Content-Type", "application/json");
+                            res.json(r);
+                        },
+                        err => next(err)
+                    )
+                    .catch(err => next(err));
+            })
             .catch(err => next(err));
     })
     .put((req, res, next) => {
