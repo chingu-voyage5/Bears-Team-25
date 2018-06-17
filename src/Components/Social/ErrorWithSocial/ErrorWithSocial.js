@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
-import { renderSocialError } from "../../actions/snackbarActions";
+import { renderSocialError } from "../../../actions/snackbarActions";
 
 class ErrorWithSocial extends Component {
   renderSnackbar = () => {

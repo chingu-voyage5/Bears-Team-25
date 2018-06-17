@@ -13,8 +13,8 @@ import SignUpPage from '../SignUpPage/signUpPage';
 import ChangePasswordPage from '../ChangePasswordPage/changePasswordPage';
 import ProfileSettingsPage from '../ProfileSettingsPage/profileSettingsPage';
 import AccountDeletionPage from '../AccountDeletionPage/accountDeletionPage'
-import ErrorWithSocial from '../ErrorWithSocial/ErrorWithSocial';
-import SuccessWithSocial from '../SuccessWithSocial/SuccessWithSocial';
+import ErrorWithSocial from '../Social/ErrorWithSocial/ErrorWithSocial';
+import SuccessWithSocial from '../Social/SuccessWithSocial/SuccessWithSocial';
 import "./App.css";
 
 class App extends Component {

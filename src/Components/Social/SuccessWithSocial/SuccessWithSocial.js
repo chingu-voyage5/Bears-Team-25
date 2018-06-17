@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
-import { renderSocialSuccess } from "../../actions/snackbarActions";
+import { renderSocialSuccess } from "../../../actions/snackbarActions";
 
 class SuccessWithSocial extends Component {
   renderSnackbar = () => {
