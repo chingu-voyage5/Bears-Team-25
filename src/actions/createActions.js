@@ -6,7 +6,7 @@ import axios from "./axiosInstances"; // Pre configured axios instance
 export function addApplet(appletData) {
 	return dispatch => {
 		axios
-			.post("/applets", appletData)
+			.post("/applets", appletData,{ withCredentials: true })
 			.then(r => {
 				dispatch({
 					type: ACTIONS.CREATE_APPLET,
