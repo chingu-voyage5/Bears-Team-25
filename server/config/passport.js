@@ -291,7 +291,9 @@ passport.use(
             if (err) return done(err);
             // check if this google account is already in use, if it exists, don't link account
             if (googleUser) {
-              return done(null, user);
+              return done(null, user,{
+                message: "error/This account already in use."
+              })
             }
             user.google.id = profile.id;
             user.google.token = token;

@@ -17,7 +17,7 @@ function isLoggedIn(req, res, next) {
 // this route is just used to get the user basic info
 router.get("/user", isLoggedIn, (req, res, next) => {
   if (req.user) {
-    let isGoogleLinked, isFBLinked
+    let isGoogleLinked, isFBLinked;
     (req.user.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
     (req.user.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
     return res.json({
@@ -233,13 +233,34 @@ router.get(
 );
 
 // handle the callback after facebook has authenticated the user
-router.get(
-  "/auth/facebook/callback",
-  passport.authenticate("facebook", {
-    successRedirect: "http://localhost:3000/",
-    failureRedirect: "/login"
-  })
-);
+
+router.get("/auth/facebook/callback", function(req, res, next) {
+  passport.authenticate("facebook", function(err, user, info) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    if (user) {
+      req.logIn(user, function(err) {
+        if (err) {
+          console.log("error when logging in");
+          return next(err);
+        }
+        message = info.message
+        if (message) {
+          res.redirect('http://localhost:3000/' + info.message)
+        }
+        else {
+          res.redirect('http://localhost:3000/')
+        }
+        return;
+      });
+    } else {
+      res.redirect('http://localhost:3000/login')
+      return;
+    }
+  })(req, res, next);
+});
 
 // google ---------------------------------
 
@@ -249,13 +270,33 @@ router.get(
   passport.authenticate("google", {display: 'popup', scope: ["profile", "email"] })
 );
 
-// the callback after google has authenticated the user
-router.get(
-  "/auth/google/callback",
-  passport.authenticate("google", {
-    successRedirect: "http://localhost:3000/",
-    failureRedirect: "/login"
-  })
-);
+
+router.get("/auth/google/callback", function(req, res, next) {
+  passport.authenticate("google", function(err, user, info) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    if (user) {
+      req.logIn(user, function(err) {
+        if (err) {
+          console.log("error when logging in");
+          return next(err);
+        }
+        message = info.message
+        if (message) {
+          res.redirect('http://localhost:3000/' + info.message)
+        }
+        else {
+          res.redirect('http://localhost:3000/')
+        }
+        return;
+      });
+    } else {
+      res.redirect('http://localhost:3000/login')
+      return;
+    }
+  })(req, res, next);
+});
 
 module.exports = router;
