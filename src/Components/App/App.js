@@ -13,6 +13,8 @@ import SignUpPage from '../SignUpPage/signUpPage';
 import ChangePasswordPage from '../ChangePasswordPage/changePasswordPage';
 import ProfileSettingsPage from '../ProfileSettingsPage/profileSettingsPage';
 import AccountDeletionPage from '../AccountDeletionPage/accountDeletionPage'
+import ErrorWithSocial from '../ErrorWithSocial/ErrorWithSocial';
+import SuccessWithSocial from '../SuccessWithSocial/SuccessWithSocial';
 import "./App.css";
 
 class App extends Component {
@@ -31,6 +33,8 @@ class App extends Component {
 					<Route path="/createapplet" component={CreateApplet} />
 					<Route path="/myapplets" component={MyApplet} />
 					<Route path="/activity" component={Activity} />
+					<Route path="/error/:message" component={ErrorWithSocial} />
+					<Route path="/success/:message" component={SuccessWithSocial} />
 				</Switch>
 				<Footer />
 				<Snackbar />

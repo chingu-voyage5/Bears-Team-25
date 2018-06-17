@@ -223,7 +223,9 @@ passport.use(
             profile.name.givenName + " " + profile.name.familyName;
             user.save(function(err) {
             if (err) return done(err);
-            return done(null, user);
+            return done(null, user,{
+              message: "success/You successfully linked your Facebook account."
+            });
           });
         });
       }
@@ -305,7 +307,9 @@ passport.use(
             ).toLowerCase(); // pull the first email
             user.save(function(err) {
               if (err) return done(err);
-              return done(null, user);
+              return done(null, user,{
+                message: "success/You successfully linked your Google account."
+              });
             });
           });
         }
