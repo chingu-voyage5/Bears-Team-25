@@ -213,7 +213,9 @@ passport.use(
         User.findOne({ "facebook.id": profile.id }, function(err, FBUser) {
           if (err) return done(err);
           if (FBUser) {
-            return done(null, user);
+            return done(null, user,{
+              message: "error/This account already in use."
+            })
           }
           user.facebook.id = profile.id;
           user.facebook.token = token;
