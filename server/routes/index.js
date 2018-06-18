@@ -10,5 +10,6 @@ const myactivity=require("./myactivity");
 router.use('/users', users);
 router.use('/applets', applets);
 router.use('/myapplets',myapplets);
+router.use('/myactivity',myactivity);
 
 module.exports = router;

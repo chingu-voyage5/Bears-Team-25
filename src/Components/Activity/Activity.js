@@ -7,11 +7,17 @@ import Typography from "@material-ui/core/Typography";
 import AssignmentIcon from "mdi-react/AssignmentIcon";
 import * as Icons from "../Common/Icons/Icons";
 import * as Colors from "../Common/Colors/Colors";
+import * as myActivityActions from "../../actions/myActivityActions";
+import { bindActionCreators } from "redux";
 import "./Activity.css";
 
 class Activity extends Component {
+	componentWillMount() {
+    	this.props.myActivity.myActivityActions();
+  	}
 	render() {
 		const activityList = this.props.activityList;
+		console.log(activityList);
 		const allActivityList = activityList.map((activity, i) => 
 			<ActivityRow key={`activity-row-${i}`} activity={activity}/>
 		);
@@ -25,6 +31,8 @@ class Activity extends Component {
 
 class ActivityRow extends Component{
 	render() {
+		var date = new Date(this.props.activity.date);
+		date=date.toLocaleString();
 		return (
 			<div className="activity-row">
 				<Grid container spacing={24}>
@@ -40,7 +48,7 @@ class ActivityRow extends Component{
 								variant="subheading"
 								color="textSecondary"
 							>
-								{this.props.activity.date}
+								{date}
 							</Typography>
 						</CardContent>
 					</Grid>
@@ -48,7 +56,7 @@ class ActivityRow extends Component{
 				<Grid container spacing={24}>
 					<Grid item sm={1} />
 					<Grid item sm={8}>
-						<ActivityCard serviceName={this.props.activity.serviceName} />
+						<ActivityCard serviceName={this.props.activity.serviceFrom} />
 					</Grid>
 				</Grid>
 			</div>
@@ -60,7 +68,9 @@ class ActivityCard extends Component {
 	render() {
 		let serviceName=this.props.serviceName;
 		let serviceNameIcon = serviceName + "Icon";
+		console.log(serviceNameIcon);
 		const IconName = Icons[serviceNameIcon];
+
 		return (
 			<div className="activity-card">
 				<Card className="card" style={{backgroundColor:Colors[serviceName]}}>
@@ -89,8 +99,12 @@ class ActivityCard extends Component {
 
 const mapStateToProps = state => {
 	return {
-		activityList: state.activity
+		activityList: state.activity.activityList
 	};
 };
-
-export default connect(mapStateToProps)(Activity);
+const mapActionsToProps = dispatch => {
+  return {
+    myActivity: bindActionCreators(myActivityActions, dispatch)
+  };
+};
+export default connect(mapStateToProps,mapActionsToProps)(Activity);

@@ -8,6 +8,7 @@ export function myActivityActions() {
 			.get("/myactivity",{ withCredentials: true })
 			.then(allActivity => {
 				console.log("Done in myActivityActions");
+				console.log(allActivity);
 				dispatch({
 					type: ACTIONS.SHOW_MY_ACTIVITY,
 					payload: allActivity.data
