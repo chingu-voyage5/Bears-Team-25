@@ -16,7 +16,8 @@ class Activity extends Component {
     	this.props.myActivity.myActivityActions();
   	}
 	render() {
-		const activityList = this.props.activityList;
+		let activityList = this.props.activityList;
+		activityList.reverse();
 		console.log(activityList);
 		const allActivityList = activityList.map((activity, i) => 
 			<ActivityRow key={`activity-row-${i}`} activity={activity}/>
