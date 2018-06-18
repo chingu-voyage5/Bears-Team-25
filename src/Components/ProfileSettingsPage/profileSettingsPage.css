@@ -23,7 +23,7 @@
     font-weight: 700; 
   }
 
-  .social-link-wrapper {
+  .social-link-status-wrapper {
     font-size: 1em;
     margin-right: auto;
   }
@@ -34,4 +34,9 @@
     font-size: 1em;
     margin-top: 0;
   }
+.social-status-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
  
