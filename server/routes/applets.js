@@ -74,10 +74,5 @@ appletRouter
 		res.statusCode = 403;
 		res.end("Delete operation not supported on /Applet");
 	});
-appletRouter.use(function(err, req, res, next) {
-	res.status(err.status || 500);
-	res.send("error");
-	console.log(err);
-});
 
 module.exports = appletRouter;
