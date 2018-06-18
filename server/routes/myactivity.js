@@ -33,11 +33,5 @@ myactivtiyRouter.route("/").get((req, res, next) => {
 	});
 });
 
-//check if any error occured in the code
-myactivtiyRouter.use(function(err, req, res, next) {
-	res.status(err.status || 500);
-	res.send("error");
-	console.log(err);
-});
 
 module.exports = myactivtiyRouter;
