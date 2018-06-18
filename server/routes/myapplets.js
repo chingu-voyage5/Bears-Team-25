@@ -7,6 +7,7 @@ const myappletRouter = express.Router();
 let User = require("../models/users");
 myappletRouter.use(bodyParser.json());
 var userObj = null;
+
 myappletRouter.use(function(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
@@ -17,6 +18,7 @@ myappletRouter.use(function(req, res, next) {
 		res.json({ success: false, status: "You are not logged in here!" });
 	}
 });
+
 myappletRouter.use(function(req, res, next) {
 	console.log(req);
 	console.log("Here in MyRouter");
@@ -34,26 +36,26 @@ myappletRouter.use(function(req, res, next) {
 });
 
 myappletRouter.route("/").get((req, res, next) => {
+	let allApplets = [];
 	for (applet_id of userObj.appletIds) {
 		console.log(applet_id);
-		Applet.find({})
+		Applet.findOne({ _id: applet_id })
 			.then(
 				Applet => {
-					res.statusCode = 200;
-					res.setHeader("Content-Type", "application/json");
-					res.json(Applet);
+					allApplets.concat(Applet);
 				},
 				err => next(err)
 			)
 			.then(r => {
-				console.log("Showing userObj");
-				console.log(userObj);
-				res.statusCode = 200;
-				res.setHeader("Content-Type", "application/json");
-				res.json(userObj.appletIds);
+				console.log("Done getting the applets");
 			})
 			.catch(err => next(err));
 	}
+	console.log("Showing all Applets");
+	console.log(allApplets);
+	res.statusCode = 200;
+	res.setHeader("Content-Type", "application/json");
+	res.json(allApplets);
 });
 myappletRouter.use(function(err, req, res, next) {
 	res.status(err.status || 500);

@@ -2,7 +2,8 @@
 import * as ACTIONS from "../actions/actionTypes";
 
 const appletReducer = (state = {}, action) => {
-	// console.log(action.type);
+	console.log("Here in redcuer with "+action.type);
+	console.log(action.payload);
 	switch (action.type) {
 		case ACTIONS.LIST_APPLET:
 			return {
@@ -12,7 +13,7 @@ const appletReducer = (state = {}, action) => {
 		case ACTIONS.SHOW_MY_APPLET:
 			return {
 				...state,
-				myApplet: state.myApplet.concat(action.payload)
+				myApplet: action.payload
 			};
 		default:
 			return state;

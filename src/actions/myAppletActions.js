@@ -7,7 +7,7 @@ export function myAppletActions() {
 		axios
 			.get("/myapplets",{ withCredentials: true })
 			.then(allApplets => {
-				console.log("Done");
+				console.log("Done in myAppletActions");
 				dispatch({
 					type: ACTIONS.SHOW_MY_APPLET,
 					payload: allApplets.data
