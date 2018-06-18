@@ -8,7 +8,7 @@ const appletReducer = (state = {}, action) => {
 		case ACTIONS.LIST_APPLET:
 			return {
 				...state,
-				appletList: state.appletList.concat(action.payload)
+				appletList: action.payload
 			};
 		case ACTIONS.SHOW_MY_APPLET:
 			return {

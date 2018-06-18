@@ -9,7 +9,7 @@ import { bindActionCreators } from "redux";
 import "./MyApplet.css";
 
 class MyApplet extends Component {
-	componentDidMount() {
+	componentWillMount() {
     	this.props.myApplet.myAppletActions();
   	}
 	constructor(props) {

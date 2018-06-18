@@ -7,7 +7,7 @@ import { bindActionCreators } from "redux";
 import "./LoggedUserHomePage.css";
 
 class LoggedUserHomePage extends Component {
-	componentDidMount() {
+	componentWillMount() {
     	this.props.listActions.listApplets();
   	}
 	render() {
