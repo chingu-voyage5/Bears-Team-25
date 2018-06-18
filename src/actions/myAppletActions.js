@@ -1,6 +1,9 @@
+//actions for myapplet page are here
+
 import * as ACTIONS from "./actionTypes";
 import axios from "./axiosInstances"; // Pre configured axios instance
 
+//lists out all the user's applet
 export function myAppletActions() {
 	console.log("Inside myAppletActions");
 	   return dispatch => {

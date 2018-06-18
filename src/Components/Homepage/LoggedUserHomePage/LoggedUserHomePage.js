@@ -12,7 +12,6 @@ class LoggedUserHomePage extends Component {
   	}
 	render() {
 		const appletList = this.props.allAppletList;
-		console.log(appletList);
 		const AppletList = appletList.map( (applet, i) => (
 			<AppletCard key={`appletCard-${i}`}  content={applet.content} />
 		));

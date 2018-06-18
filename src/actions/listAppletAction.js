@@ -1,11 +1,10 @@
+//actions for discover page
+
 import * as ACTIONS from "./actionTypes";
 import axios from "./axiosInstances"; // Pre configured axios instance
 
+//list out all the applets by all users,i.e, global applets
 export function listApplets() {
-	// return {
-	// 	type: ACTIONS.LIST_APPLET,
-	// 	payload: axios.get("applets")
-	// };
 	   return dispatch => {
 		axios
 			.get("/applets",{ withCredentials: true })

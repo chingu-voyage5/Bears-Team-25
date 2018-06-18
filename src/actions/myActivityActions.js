@@ -1,8 +1,10 @@
+//all actions for activity are listed here
+
 import * as ACTIONS from "./actionTypes";
 import axios from "./axiosInstances"; // Pre configured axios instance
 
+//returns all the acitvity for an user
 export function myActivityActions() {
-	console.log("Inside myActivityActions");
 	   return dispatch => {
 		axios
 			.get("/myactivity",{ withCredentials: true })

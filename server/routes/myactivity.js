@@ -9,6 +9,7 @@ myactivtiyRouter.use(bodyParser.json());
 var userObj = null;
 var async = require("async");
 
+//check if the user is authenticated
 myactivtiyRouter.use(function(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
@@ -20,16 +21,10 @@ myactivtiyRouter.use(function(req, res, next) {
 	}
 });
 
+//find the particular user by their id
 myactivtiyRouter.route("/").get((req, res, next) => {
-	console.log(req);
-	console.log("Here in MyActivity");
-	console.log(req.session.passport); //showing undefined
-	// passport.deserializeUser(function(id, done) {
 	User.findById(req.session.passport.user, function(err, user) {
-		console.log(user._id);
 		userObj = user;
-		console.log("Printing the user obj activity");
-		console.log(userObj.activity);
 		res.statusCode = 200;
 		res.setHeader("Content-Type", "application/json");
 		res.json(userObj.activity);
@@ -38,6 +33,7 @@ myactivtiyRouter.route("/").get((req, res, next) => {
 	});
 });
 
+//check if any error occured in the code
 myactivtiyRouter.use(function(err, req, res, next) {
 	res.status(err.status || 500);
 	res.send("error");

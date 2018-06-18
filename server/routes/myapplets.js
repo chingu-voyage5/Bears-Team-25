@@ -21,39 +21,29 @@ myappletRouter.use(function(req, res, next) {
 });
 
 myappletRouter.use(function(req, res, next) {
-	console.log(req);
-	console.log("Here in MyRouter");
-	console.log(req.session.passport); //showing undefined
-	// passport.deserializeUser(function(id, done) {
+	//find the particular user and store his details
 	User.findById(req.session.passport.user, function(err, user) {
-		console.log(user._id);
 		userObj = user;
-		console.log("Printing the user obj id");
-		console.log(userObj._id);
 	}).then(r => {
 		next();
 	});
-	// });
 });
 
 myappletRouter.route("/").get((req, res, next) => {
 	let allApplets = [];
+	//For each element in userObj.appletIds, the function in second parameter is called and when it's code, the third paramter function is called.
+	//Done to have it wait will the particular applet is found out, else the process return before that
 	async.each(
 		userObj.appletIds,
-		// 2nd param is the function that each item is passed to
 		(applet_id, callback) => {
-			console.log("Here is the id " + mongoose.Types.ObjectId(applet_id));
-			console.log("Here is the applet ");
 			Applet.findOne({ _id: mongoose.Types.ObjectId(applet_id) })
 				.then(
 					Applet => {
-						console.log(Applet)
 						allApplets.push(Applet);
 					},
 					err => next(err)
 				)
 				.then(r => {
-					console.log("Done getting the applets");
 					callback(null);
 				})
 				.catch(err => next(err));
@@ -61,19 +51,11 @@ myappletRouter.route("/").get((req, res, next) => {
 		// 3rd param is the function to call when everything's done
 		function(err) {
 			// All tasks are done now
-			console.log("Showing all Applets");
-			console.log(allApplets);
 			res.statusCode = 200;
 			res.setHeader("Content-Type", "application/json");
 			res.json(allApplets);
 		}
 	);
-});
-
-myappletRouter.use(function(err, req, res, next) {
-	res.status(err.status || 500);
-	res.send("error");
-	console.log(err);
 });
 
 module.exports = myappletRouter;

@@ -10,7 +10,7 @@ import "./MyApplet.css";
 
 class MyApplet extends Component {
 	componentWillMount() {
-    	this.props.myApplet.myAppletActions();
+    	this.props.myApplet.myAppletActions();//gets all the applets to the redux store
   	}
 	constructor(props) {
 		super(props);
@@ -18,8 +18,6 @@ class MyApplet extends Component {
 	}
 	render() {
 		const appletList =this.props.appletList;
-		console.log("The applet list");
-		console.log(appletList);
 		const AppletList = appletList.map( (applet, i) => (
 			<AppletCard key={`applet-list-${i}`} content={applet.content} />
 		));

@@ -1,7 +1,6 @@
-//reducer for all services
+//reducer for all activity-related
 import * as ACTIONS from "../actions/actionTypes";
 const activityReducer = (state = {}, action) => {
-	console.log("In activityReducer with " + action.type);
 	switch (action.type) {
 		case ACTIONS.SHOW_MY_ACTIVITY:
 			return {

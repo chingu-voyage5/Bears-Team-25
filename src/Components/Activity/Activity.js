@@ -18,7 +18,6 @@ class Activity extends Component {
 	render() {
 		let activityList = this.props.activityList;
 		activityList.reverse();
-		console.log(activityList);
 		const allActivityList = activityList.map((activity, i) => 
 			<ActivityRow key={`activity-row-${i}`} activity={activity}/>
 		);
@@ -32,8 +31,8 @@ class Activity extends Component {
 
 class ActivityRow extends Component{
 	render() {
-		var date = new Date(this.props.activity.date);
-		date=date.toLocaleString();
+		var date = new Date(this.props.activity.date);//get date from timestamp
+		date=date.toLocaleString();//get date in user-readable format
 		return (
 			<div className="activity-row">
 				<Grid container spacing={24}>

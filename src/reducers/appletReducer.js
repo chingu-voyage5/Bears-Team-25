@@ -2,15 +2,15 @@
 import * as ACTIONS from "../actions/actionTypes";
 
 const appletReducer = (state = {}, action) => {
-	console.log("Here in redcuer with "+action.type);
-	console.log(action.payload);
 	switch (action.type) {
 		case ACTIONS.LIST_APPLET:
+			//for listing out all applets
 			return {
 				...state,
 				appletList: action.payload
 			};
 		case ACTIONS.SHOW_MY_APPLET:
+			//listing out only user's applet
 			return {
 				...state,
 				myApplet: action.payload
