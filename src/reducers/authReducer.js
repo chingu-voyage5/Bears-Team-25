@@ -9,15 +9,16 @@ export default function authReducer(state = {
     isGoogleLinked: false
 }, action) {
     switch (action.type) {
-        case ACTIONS.LINK_FB:
+        case ACTIONS.UNLINK_FB:
+        console.log('unling fb')
         return {
           ...state,
-          isFBLinked: !state.isFBLinked
+          isFBLinked: false
         }
-        case ACTIONS.LINK_GOOGLE:
+        case ACTIONS.UNLINK_GOOGLE:
          return {
           ...state,
-          isGoogleLinked: !state.isGoogleLinked
+          isGoogleLinked: false
         }
         case ACTIONS.LOGOUT:
         localStorage.removeItem('name');

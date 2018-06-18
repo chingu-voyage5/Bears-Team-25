@@ -37,15 +37,78 @@ function change_email_failure_snackbar(error) {
   };
 }
 
-export function linkOrUnlinkFB() {
+export function unlinkFB() {
   return {
-    type: ACTIONS.LINK_FB
+    type: ACTIONS.UNLINK_FB
   };
 }
 
-export function linkOrUnlinkGoogle() {
+function unlinkGoogle() {
   return {
-    type: ACTIONS.LINK_GOOGLE
+    type: ACTIONS.UNLINK_GOOGLE
+  };
+}
+
+function unlinkGoogle_success(error) {
+  return {
+    type: ACTIONS.RENDER_SNACKBAR,
+    styling: "success",
+    text: "You've successfully unlinked Google account."
+  };
+}
+
+function unlinkFB_success() {
+  return {
+    type: ACTIONS.RENDER_SNACKBAR,
+    styling: "success",
+    text: "You've successfully unlinked Facebook account."
+  };
+}
+
+function unlinkFB_failure(error) {
+  return {
+    type: ACTIONS.RENDER_SNACKBAR,
+    styling: "error",
+    error: error
+  };
+}
+
+function unlinkGoogle_failure(error) {
+  return {
+    type: ACTIONS.RENDER_SNACKBAR,
+    styling: "error",
+    error: error
+  };
+}
+
+function unlinkFB() {
+  return {
+    type: ACTIONS.UNLINK_FB
+  }
+}
+
+export function unlink(social) {
+  return function(dispatch) {
+    axios
+      .post("http://localhost:3001/api/users/unlink", {
+        social: social
+      }, {withCredentials: true})
+      .then((json) => {
+        console.log(json.data);
+        (social === 'facebook') ? (dispatch(unlinkFB()) && dispatch(unlinkFB_success())): 
+        (dispatch(unlinkGoogle()) && dispatch(unlinkGoogle_success()));
+      })
+      .catch(error => {
+        console.log(error)
+        if (error.response) {
+          error = error.response.data.status
+        } 
+        else {
+          error='Something wrong with server'
+        }
+        (social === 'facebook') ? dispatch(unlinkFB_failure(error)):
+         dispatch(unlinkGoogle_failure(error));
+      });
   };
 }
 
@@ -60,7 +123,7 @@ export function change_email(values) {
       }, {withCredentials: true})
       .then((json) => {
         let email = json.data.email
-        dispatch(change_email_success(json.data.email));
+        dispatch(change_email_success(email));
         dispatch(change_email_success_snackbar());
       })
       .catch(error => {

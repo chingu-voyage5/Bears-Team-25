@@ -146,7 +146,7 @@ export function login(values) {
 export function fetchUsersCredentials() {
   return function(dispatch) {
     axios
-      .get("http://localhost:3001/api/users/user", {withCredentials: true})
+      .get(`http://localhost:3001/api/users/user?timestamp=${new Date().getTime()}`, {withCredentials: true})
       .then(response => {
         let user = response.data.user;
         console.log(user)
@@ -159,7 +159,6 @@ export function fetchUsersCredentials() {
         }
       })
       .catch(error => {
-        console.log(error)
         if (error.response) {
           error = error.response.data.status;
         } else {
