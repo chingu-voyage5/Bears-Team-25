@@ -26,6 +26,12 @@ var userSchema = mongoose.Schema({
         {
             type: String
         }
+    ],
+    activity:[
+    	{
+    		date:{ type: Date, default: Date.now },
+    		serviceFrom:String
+    	}
     ]
     
 });

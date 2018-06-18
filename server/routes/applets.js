@@ -41,19 +41,27 @@ appletRouter
     })
     .post((req, res, next) => {
         let id = null;
+        let service = null;
         Applet.create(req.body)
             .then(
                 applet => {
                     console.log("Applet Created ", applet);
                     id = applet._id;
+                    service = applet.option.watchFrom;
                     console.log("Here is the id " + id);
+                    console.log("Here is the service " + service);
                 },
                 err => next(err)
             )
             .then(r => {
                 User.findOneAndUpdate(
                     { _id: userObj._id },
-                    { $push: { appletIds: id.toString() } }
+                    {
+                        $push: {
+                            appletIds: id.toString(),
+                            activity: { date: Date.now(), serviceFrom: service }
+                        }
+                    }
                 )
                     .then(
                         update => {
