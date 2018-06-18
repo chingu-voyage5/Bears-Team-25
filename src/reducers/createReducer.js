@@ -4,6 +4,7 @@ import * as ACTIONS from "../actions/actionTypes";
 
 const createReducer = (state = {}, action) => {
 	switch (action.type) {
+		//create an applet
 		case ACTIONS.CREATE_APPLET:
 			return {
 				...state,
