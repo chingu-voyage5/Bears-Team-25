@@ -47,7 +47,7 @@ export function delete_account(values) {
           password: values.password
         }, {withCredentials: true})
         .then(() => {
-            dispatch(logout())
+            dispatch(logout(true))
             dispatch(account_deletion_success())
             dispatch(account_deletion_success_snackbar())
         })

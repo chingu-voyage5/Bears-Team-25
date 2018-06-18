@@ -81,7 +81,7 @@ function logout_success_snackbar() {
   };
 }
 
-export function logout() {
+export function logout(withoutSnackbar = false) {
   return function(dispatch) {
     // First dispatch: the app state is updated to inform
     dispatch(logout_local());
@@ -89,7 +89,9 @@ export function logout() {
       .get("http://localhost:3001/api/users/logout",{withCredentials: true})
       .then(() => {
         dispatch(logout_success())
-        dispatch(logout_success_snackbar());
+        if (!withoutSnackbar) {
+          dispatch(logout_success_snackbar());
+        }
       })
       .catch(error => {
         if (error.response) {
