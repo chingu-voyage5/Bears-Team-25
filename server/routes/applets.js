@@ -53,7 +53,7 @@ appletRouter
             .then(r => {
                 User.findOneAndUpdate(
                     { _id: userObj._id },
-                    { $push: { appletIds: id } }
+                    { $push: { appletIds: id.toString() } }
                 )
                     .then(
                         update => {
