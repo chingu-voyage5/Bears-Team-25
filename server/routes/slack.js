@@ -33,7 +33,7 @@ router.get("/sendMessage", isLoggedIn, (req, res, next) => {
         as_user: true
       },
       {
-        headers: {'Authorization': "Bearer " +  process.env.slackToken}
+        headers: {'Authorization': "Bearer " +  req.user.slack.token}
    }
 
     )
