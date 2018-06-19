@@ -5,37 +5,12 @@ import { connect } from "react-redux";
 import * as listAppletAction from "../../../actions/listAppletAction";
 import { bindActionCreators } from "redux";
 import "./LoggedUserHomePage.css";
-import Button from "@material-ui/core/Button";
-const axios = require("axios");
+import Slack from '../../Slack/slack';
 
 class LoggedUserHomePage extends Component {
   componentWillMount() {
     this.props.listActions.listApplets();
   }
-  sendMessage = () => {
-    axios
-      .get("http://localhost:3001/api/slack/sendMessage", {
-        withCredentials: true
-      })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-  fetchChannels = () => {
-    axios
-      .get("http://localhost:3001/api/slack/fetchChannels", {
-        withCredentials: true
-      })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
   render() {
     const appletList = this.props.allAppletList;
     const AppletList = appletList.map((applet, i) => (
@@ -49,17 +24,7 @@ class LoggedUserHomePage extends Component {
         <Grid container spacing={24}>
           {AppletList}
         </Grid>
-
-        <Button onClick={this.sendMessage} variant="raised" color="primary">
-          send message
-        </Button>
-        <Button onClick={this.fetchChannels} variant="raised" color="primary">
-          fetch channels
-        </Button>
-        <a href="http://localhost:3001/api/slack/auth/">
-          <Button variant="raised" >Slack
-          </Button>
-        </a>
+        <Slack />
       </div>
     );
   }
