@@ -14,14 +14,20 @@ function isLoggedIn(req, res, next) {
   }
 }
 
+function extractUserInfo(userFromReq) {
+  let isGoogleLinked, isFBLinked, isSlackToken
+  (userFromReq.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
+  (userFromReq.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
+  (userFromReq.slack.token) ? (isSlackToken = true) : (isSlackToken = false);
+  return userInfo = { name: userFromReq.name, email: userFromReq.local.email, isGoogleLinked: isGoogleLinked, isFBLinked: isFBLinked,
+  isSlackToken: isSlackToken }
+}
+
 // this route is just used to get the user basic info
 router.get("/user", isLoggedIn, (req, res, next) => {
   if (req.user) {
-    let isGoogleLinked, isFBLinked;
-    (req.user.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
-    (req.user.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
     return res.json({
-      user: { name: req.user.name, email: req.user.local.email, isGoogleLinked: isGoogleLinked, isFBLinked: isFBLinked }
+      user: extractUserInfo(req.user)
     });
   } else {
     return res.json({ user: null });
@@ -62,13 +68,10 @@ router.post("/login", function(req, res, next) {
         }
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        let isGoogleLinked, isFBLinked; 
-        (req.user.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
-        (req.user.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
         res.json({
           success: true,
           status: "You have successfully signed in!",
-          user: { name: req.user.name, email: req.user.local.email, isGoogleLinked: isGoogleLinked, isFBLinked: isFBLinked }
+          user: extractUserInfo(req.user)
         });
         return;
       });
@@ -94,13 +97,10 @@ router.post("/signup", function(req, res, next) {
         }
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        let isGoogleLinked, isFBLinked
-        (req.user.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
-        (req.user.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
         res.json({
           success: true,
           status: "You have successfully signed up!",
-          user: { name: req.user.name, email: req.user.local.email, isGoogleLinked: isGoogleLinked, isFBLinked: isFBLinked }
+          user: extractUserInfo(req.user)
         });
         return;
       });

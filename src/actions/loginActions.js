@@ -15,6 +15,7 @@ export function setUsersCredentials(user) {
       email: user.email,
       isFBLinked: user.isFBLinked,
       isGoogleLinked: user.isGoogleLinked,
+      isSlackToken: user.isSlackToken,
       auth: true
     };
   }
