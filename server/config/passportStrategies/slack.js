@@ -8,12 +8,14 @@ module.exports = function(passport) {
         clientSecret: JSON.parse(process.env.slack).clientSecret,
         callbackURL:
           process.env.baseURL + JSON.parse(process.env.slack).callbackURL,
-        skipUserProfile: true, // false is default
+        skipUserProfile: false, // false is default
         scope: [
-          //   "identity.basic",
+          "identity.basic",
           //   "identity.email",
           //   "identity.avatar",
           //   "identity.team",
+          "users:read",
+          "channels:read",
           "chat:write:user"
         ],
         passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not) // default
@@ -28,7 +30,8 @@ module.exports = function(passport) {
             return done(null, user);
           });
         } else {
-          return done();
+          const error = new Error ('User should be logged in');
+          return done(error, null);
         }
       }
     )

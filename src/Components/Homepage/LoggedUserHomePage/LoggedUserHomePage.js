@@ -24,6 +24,18 @@ class LoggedUserHomePage extends Component {
         console.log(error);
       });
   };
+  fetchChannels = () => {
+    axios
+      .get("http://localhost:3001/api/slack/fetchChannels", {
+        withCredentials: true
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
   render() {
     const appletList = this.props.allAppletList;
     const AppletList = appletList.map((applet, i) => (
@@ -40,6 +52,9 @@ class LoggedUserHomePage extends Component {
 
         <Button onClick={this.sendMessage} variant="raised" color="primary">
           send message
+        </Button>
+        <Button onClick={this.fetchChannels} variant="raised" color="primary">
+          fetch channels
         </Button>
         <a href="http://localhost:3001/api/slack/auth/">
           <Button variant="raised" >Slack

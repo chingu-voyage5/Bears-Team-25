@@ -15,34 +15,79 @@ function isLoggedIn(req, res, next) {
   }
 }
 
-router.get('/auth', passport.authorize('Slack'));
+router.get("/auth", passport.authorize("Slack"));
 
-router.get('/auth/callback',
-  passport.authenticate('Slack', { failureRedirect: 'http://localhost:3000/login' }),
-  (req, res) => res.redirect('http://localhost:3000/') // Successful authentication, redirect home.
+router.get(
+  "/auth/callback",
+  passport.authenticate("Slack", {
+    failureRedirect: "http://localhost:3000/login"
+  }),
+  (req, res) => res.redirect("http://localhost:3000/") // Successful authentication, redirect home.
 );
 
-
 router.get("/sendMessage", isLoggedIn, (req, res, next) => {
-  axios
-    .post(
-      "https://slack.com/api/chat.postMessage",
-      {
-        channel:'random',
-        text: 'hello world',
-        as_user: true
-      },
-      {
-        headers: {'Authorization': "Bearer " +  req.user.slack.token}
-   }
+  let token = req.user.slack.token;
+  if (token) {
+    axios
+      .post(
+        "https://slack.com/api/chat.postMessage",
+        {
+          channel: "random",
+          text: "hello world",
+          as_user: true
+        },
+        {
+          headers: { Authorization: "Bearer " + req.user.slack.token }
+        }
+      )
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  } else {
+    res.redirect("http://localhost:3001/slack/auth");
+    return;
+  }
+});
 
-    )
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+router.get("/fetchChannels", isLoggedIn, (req, res, next) => {
+  let token = req.user.slack.token;
+  if (token) {
+    axios
+      .get("https://slack.com/api/channels.list", {
+        headers: { Authorization: "Bearer " + req.user.slack.token }
+      })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  } else {
+    res.redirect("http://localhost:3001/slack/auth");
+    return;
+  }
+});
+
+router.get("/fetchUsers", isLoggedIn, (req, res, next) => {
+  let token = req.user.slack.token;
+  if (token) {
+    axios
+      .get("https://slack.com/api/users.list", {
+        headers: { Authorization: "Bearer " + req.user.slack.token }
+      })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  } else {
+    res.redirect("http://localhost:3001/slack/auth");
+    return;
+  }
 });
 
 module.exports = router;
