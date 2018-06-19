@@ -15,12 +15,20 @@ function isLoggedIn(req, res, next) {
   }
 }
 
+router.get('/auth', passport.authorize('Slack'));
+
+router.get('/auth/callback',
+  passport.authenticate('Slack', { failureRedirect: 'http://localhost:3000/login' }),
+  (req, res) => res.redirect('http://localhost:3000/') // Successful authentication, redirect home.
+);
+
+
 router.get("/sendMessage", isLoggedIn, (req, res, next) => {
   axios
     .post(
       "https://slack.com/api/chat.postMessage",
       {
-        channel:'general',
+        channel:'random',
         text: 'hello world',
         as_user: true
       },
