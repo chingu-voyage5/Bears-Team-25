@@ -8,9 +8,9 @@ module.exports = function(passport) {
         clientSecret: JSON.parse(process.env.slack).clientSecret,
         callbackURL:
           process.env.baseURL + JSON.parse(process.env.slack).callbackURL,
-        skipUserProfile: false, // false is default
+        skipUserProfile: true, // false is default
         scope: [
-          "identity.basic",
+          // "identity.basic",
           //   "identity.email",
           //   "identity.avatar",
           //   "identity.team",

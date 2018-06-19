@@ -3,7 +3,7 @@ var localLogin = require("./passportStrategies/localLogin");
 var localSignUp = require('./passportStrategies/localSignUp');
 var facebookAuth = require('./passportStrategies/faceboookAuth');
 var googleAuth = require('./passportStrategies/googleAuth');
-var slack = require('./passportStrategies/slack');
+var slack = require('./passportStrategies/slackStrategy');
 var User = require("../models/users");
 
 // =========================================================================

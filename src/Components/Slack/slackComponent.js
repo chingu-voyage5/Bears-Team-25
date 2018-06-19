@@ -39,11 +39,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapActionsToProps = dispatch => {
-  return {};
-};
 
 export default connect(
-  mapStateToProps,
-  mapActionsToProps
+  mapStateToProps
 )(Slack);

@@ -27,13 +27,15 @@ router.get(
 
 router.get("/sendMessage", isLoggedIn, (req, res, next) => {
   let token = req.user.slack.token;
+  let text = 'hello world';
+  let channel = 'random';
   if (token) {
     axios
       .post(
         "https://slack.com/api/chat.postMessage",
         {
-          channel: "random",
-          text: "hello world",
+          channel: channel,
+          text: text,
           as_user: true
         },
         {
@@ -89,5 +91,7 @@ router.get("/fetchUsers", isLoggedIn, (req, res, next) => {
     return;
   }
 });
+
+
 
 module.exports = router;

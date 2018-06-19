@@ -6,7 +6,7 @@ const users = require('./users');
 const applets=require('./applets');
 const myapplets=require('./myapplets');
 const myactivity=require("./myactivity");
-const slack = require('./slack');
+const slack = require('./slackRoute');
 // paths to subroutes (`api/${path}`)
 router.use('/users', users);
 router.use('/applets', applets);

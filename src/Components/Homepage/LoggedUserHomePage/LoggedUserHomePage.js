@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import * as listAppletAction from "../../../actions/listAppletAction";
 import { bindActionCreators } from "redux";
 import "./LoggedUserHomePage.css";
-import Slack from '../../Slack/slack';
+import Slack from '../../Slack/slackComponent';
 
 class LoggedUserHomePage extends Component {
   componentWillMount() {
