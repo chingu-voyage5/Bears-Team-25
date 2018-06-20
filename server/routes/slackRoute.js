@@ -43,10 +43,13 @@ router.get("/sendMessage", isLoggedIn, (req, res, next) => {
         }
       )
       .then(response => {
-        console.log(response.data);
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(response.data);
       })
-      .catch(error => {
-        console.log(error);
+      .catch(err => {
+        console.log(err);
+        return next(err);
       });
   } else {
     res.redirect("http://localhost:3001/slack/auth");
@@ -62,10 +65,13 @@ router.get("/fetchChannels", isLoggedIn, (req, res, next) => {
         headers: { Authorization: "Bearer " + req.user.slack.token }
       })
       .then(response => {
-        console.log(response.data);
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(response.data);
       })
-      .catch(error => {
-        console.log(error);
+      .catch(err => {
+        console.log(err);
+        return next(err);
       });
   } else {
     res.redirect("http://localhost:3001/slack/auth");
@@ -81,10 +87,13 @@ router.get("/fetchUsers", isLoggedIn, (req, res, next) => {
         headers: { Authorization: "Bearer " + req.user.slack.token }
       })
       .then(response => {
-        console.log(response.data);
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(response.data);
       })
-      .catch(error => {
-        console.log(error);
+      .catch(err => {
+        console.log(err);
+        return next(err);
       });
   } else {
     res.redirect("http://localhost:3001/slack/auth");
