@@ -248,7 +248,7 @@ router.get("/auth/facebook/callback", function(req, res, next) {
         }
         message = info.message
         if (message) {
-          res.redirect('http://localhost:3000/' + info.message)
+          res.redirect('http://localhost:3000/' + info.message);
         }
         else {
           res.redirect('http://localhost:3000/')
