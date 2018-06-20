@@ -25,17 +25,18 @@ router.get(
   (req, res) => res.redirect("http://localhost:3000/") // Successful authentication, redirect home.
 );
 
-router.get("/sendMessage", isLoggedIn, (req, res, next) => {
+router.post("/sendMessage", isLoggedIn, (req, res, next) => {
   let token = req.user.slack.token;
-  let text = 'hello world';
-  let channel = 'random';
+  let message = req.body.message || "hello world";
+  let to = req.body.to || 'general';
+ //console.log(message, to)
   if (token) {
     axios
       .post(
         "https://slack.com/api/chat.postMessage",
         {
-          channel: channel,
-          text: text,
+          channel: to,
+          text: message,
           as_user: true
         },
         {
@@ -57,50 +58,31 @@ router.get("/sendMessage", isLoggedIn, (req, res, next) => {
   }
 });
 
-router.get("/fetchChannels", isLoggedIn, (req, res, next) => {
+router.get("/fetchUsersAndChannels", isLoggedIn, (req, res, next) => {
   let token = req.user.slack.token;
   if (token) {
-    axios
-      .get("https://slack.com/api/channels.list", {
-        headers: { Authorization: "Bearer " + req.user.slack.token }
-      })
-      .then(response => {
+    async function fetchUsersAndChannels() {
+      try {
+        const usersPromise = axios("https://slack.com/api/users.list", {
+          headers: { Authorization: "Bearer " + req.user.slack.token }
+        });
+        const channelsPromise = axios("https://slack.com/api/channels.list", {
+          headers: { Authorization: "Bearer " + req.user.slack.token }
+        });
+        const [users, channels] = await Promise.all([
+          usersPromise,
+          channelsPromise
+        ]);
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        res.json(response.data);
-      })
-      .catch(err => {
+        res.json({ users: users.data.members, channels: channels.data.channels });
+      } catch (e) {
         console.log(err);
         return next(err);
-      });
-  } else {
-    res.redirect("http://localhost:3001/slack/auth");
-    return;
+      }
+    }
+    fetchUsersAndChannels();
   }
 });
-
-router.get("/fetchUsers", isLoggedIn, (req, res, next) => {
-  let token = req.user.slack.token;
-  if (token) {
-    axios
-      .get("https://slack.com/api/users.list", {
-        headers: { Authorization: "Bearer " + req.user.slack.token }
-      })
-      .then(response => {
-        res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json");
-        res.json(response.data);
-      })
-      .catch(err => {
-        console.log(err);
-        return next(err);
-      });
-  } else {
-    res.redirect("http://localhost:3001/slack/auth");
-    return;
-  }
-});
-
-
 
 module.exports = router;
