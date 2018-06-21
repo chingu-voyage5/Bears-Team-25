@@ -229,7 +229,7 @@ router.post("/change_email", isLoggedIn, function(req, res, next) {
 // send to facebook to do the authentication
 router.get(
   "/auth/facebook",
-  passport.authenticate("facebook", {display: 'popup', scope: ["public_profile", "email"] })
+  passport.authenticate("facebook", { scope: ["public_profile", "email"] })
 );
 
 // handle the callback after facebook has authenticated the user
@@ -267,7 +267,7 @@ router.get("/auth/facebook/callback", function(req, res, next) {
 // send to google to do the authentication
 router.get(
   "/auth/google",
-  passport.authenticate("google", {display: 'popup', scope: ["profile", "email"] })
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
 

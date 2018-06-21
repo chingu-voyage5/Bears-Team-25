@@ -101,7 +101,11 @@ class Slack extends Component {
             <Button variant="raised">Slack</Button>
           </a>
         )}
+        <a href="http://localhost:3001/api/gmail/auth/">
+            <Button variant="raised">gmail connect</Button>
+          </a>
       </div>
+      
     );
   }
 }

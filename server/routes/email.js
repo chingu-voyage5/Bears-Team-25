@@ -8,7 +8,7 @@ const app = express();
 
 //getting the authentication with the following scope
 mailRouter.get("/auth", passport.authenticate("gmail", {
-	scope: ["https://www.googleapis.com/auth/gmail.send"],//scope that send mail
+	scope: ["profile", "email", "https://www.googleapis.com/auth/gmail.send"],//scope that send mail
 	accessType: "offline",
 	approvalPrompt: "force"
 }));
