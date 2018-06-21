@@ -64,7 +64,6 @@ transporter.on("token", token => {
 });
 
 mailRouter.post("/sendMail", isLoggedIn, (req, res, next) => {
-  console.log('message', req.body.message);
   const mailOptions = {
     from: req.user.gmail.email, // sender address
     to: "4ruslan.k@gmail.com", // list of receivers
@@ -97,4 +96,5 @@ mailRouter.post("/sendMail", isLoggedIn, (req, res, next) => {
   });
 });
 
-module.exports = mailRouter;
+exports.mailRouter = mailRouter;
+exports.transporter = transporter;

@@ -35,6 +35,36 @@ const sendMessage = (values) => {
     });
 };
 
+
+const sendMailAndMessage = (values) => {
+  let source = values.Channel
+  let user = values.DM;
+  let channel = values.channels;
+  let message = values.message;
+  let to = null;
+  if (source === 'DM') {
+    to = user;
+  }
+  else {
+    to = channel;
+  }
+  axios
+    .post("http://localhost:3001/api/integrations/sendMessageThroughSlackAndGmail",
+     {to: to, message: message},
+    {
+      withCredentials: true
+    })
+    .then(response => {
+      console.log('message sent');
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+
+
+
 const sendMail = (message) => {
   axios
   .post("http://localhost:3001/api/gmail/sendMail", 
@@ -125,7 +155,7 @@ class Slack extends Component {
           </a>
             )}
             {isGmailToken && (
-            <Button disabled = {!message} onClick = {() => sendMail(message)} variant="raised">send mail</Button>
+            <Button color="primary" disabled = {!message} onClick = {() => sendMail(message)} variant="raised">send mail</Button>
           )}
       </div>
            
@@ -141,7 +171,7 @@ Slack = reduxForm({
 
 const mapStateToProps = state => {
   return {
-    onSubmit: (values)  => sendMessage(values),
+    onSubmit: (values)  => sendMailAndMessage(values),
     isSlackToken: state.auth.isSlackToken,
     isGmailToken: state.auth.isGmailToken,
     source: selector(state, 'Channel'),
