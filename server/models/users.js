@@ -38,7 +38,9 @@ var userSchema = mongoose.Schema({
     },
     gmail: {
         token: String,
-        refreshToken: String
+        expires: String,
+        refreshToken: String,
+        email: String
     }
     
 });

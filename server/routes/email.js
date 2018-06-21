@@ -3,65 +3,98 @@ const nodemailer = require("nodemailer");
 const express = require("express");
 const passport = require("passport");
 const mailRouter = express.Router();
+var User = require("../models/users");
 require("dotenv").config();
 const app = express();
 
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    console.log("You are not logged in!");
+    res.statusCode = 401;
+    res.setHeader("Content-Type", "application/json");
+    res.json({ success: false, status: "You are not logged in!" });
+  }
+}
+
 //getting the authentication with the following scope
-mailRouter.get("/auth", passport.authenticate("gmail", {
-	scope: ["profile", "email", "https://www.googleapis.com/auth/gmail.send"],//scope that send mail
-	accessType: "offline",
-	approvalPrompt: "force"
-}));
+mailRouter.get(
+  "/auth",
+  passport.authenticate("gmail", {
+    scope: ["profile", "email", "https://mail.google.com/"], //scope that send mail
+    accessType: "offline",
+    approvalPrompt: "force"
+  })
+);
 
 mailRouter.get(
-	"/auth/callback",
-	passport.authenticate("gmail", {
-	  failureRedirect: "http://localhost:3000/login"
-	}),
-	(req, res) => res.redirect("http://localhost:3000/") // Successful authentication, redirect home.
-  );
+  "/auth/callback",
+  passport.authenticate("gmail", {
+    failureRedirect: "http://localhost:3000/login"
+  }),
+  (req, res) => res.redirect("http://localhost:3000/") // Successful authentication, redirect home.
+);
 
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    type: "OAuth2",
+    clientId: JSON.parse(process.env.googleAuth).clientID,
+    clientSecret: JSON.parse(process.env.googleAuth).clientSecret
+  }
+});
 
+// launches every time when new access token issued
+transporter.on("token", token => {
+  User.findOne({ "gmail.email": token.user }, function(err, user) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    // if user with such email exist - send error message
+    if (user) {
+      user.gmail.token = token.accessToken;
+      user.gmail.expires = token.expires;
+      user.save().then(user, err => {
+        console.log(err);
+        return next(err);
+      });
+    }
+  });
+});
 
-// //creates a simple account to send mail
-// nodemailer.createTestAccount((err, account) => {
-// 	// create reusable transporter object using the default SMTP transport
-// 	let transporter = nodemailer.createTransport({
-// 		service: "Gmail",
-// 		auth: {
-// 			// user: process.env.STRUSERNAME, // generated ethereal user
-// 			// pass: process.env.PASSWORD // generated ethereal password
-// 			type: "OAuth2",
-// 			user: process.env.STRUSERNAME,//replace with username of the user
-// 			scope: "https://www.googleapis.com/auth/gmail.send",
-// 			clientId: process.env.clientID,
-// 			clientSecret: process.env.clientSecret,
-// 			refreshToken: activeToken.refresh_token
-// 		}
-// 	});
+mailRouter.get("/sendMail", isLoggedIn, (req, res, next) => {
+  const mailOptions = {
+    from: req.user.gmail.email, // sender address
+    to: "4ruslan.k@gmail.com", // list of receivers
+    subject: "Hello", // Subject line
+    text: "Hello world?", // plain text body
+    html: "<b>Hello world?</b>", // html body
+    auth: {
+      user: req.user.gmail.email,
+      refreshToken: req.user.gmail.refreshToken,
+	  accessToken: req.user.gmail.token,
+	  expires: req.user.gmail.expires
+    }
+  };
 
-// 	// setup email data with unicode symbols
-// 	let mailOptions = {
-// 		from: "bearsteam25voyage5@gmail.com", // sender address
-// 		to: "anshuldubey2166@gmail.com", // list of receivers
-// 		subject: "Hello", // Subject line
-// 		text: "Hello world?", // plain text body
-// 		html: "<b>Hello world?</b>" // html body
-// 	};
-
-// 	// send mail with defined transport object
-// 	transporter.sendMail(mailOptions, (error, info) => {
-// 		if (error) {
-// 			return console.log(error);
-// 		}
-// 		console.log("Message sent: %s", info.messageId);
-// 		// Preview only available when sending through an Ethereal account
-// 		console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-
-// 		// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-// 		// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-// 	});
-// });
-
+  // send mail with defined transport object
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      return next(error);
+    }
+    console.log("Message sent: %s", info.messageId);
+    // Preview only available when sending through an Ethereal account
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+	res.statusCode = 200;
+	res.setHeader("Content-Type", "application/json");
+	res.json({
+	  success: true,
+	  status: "Email successfully sent"
+	});
+  });
+});
 
 module.exports = mailRouter;

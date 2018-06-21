@@ -13,9 +13,11 @@ module.exports = function(passport) {
         passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
       },
       function(req, token, refreshToken, profile, done) {
+        console.log(profile)
         var user = req.user;
         if (user) {
           user.gmail.token = token;
+          user.gmail.email = (profile.emails[0].value || "").toLowerCase();
           user.gmail.refreshToken = refreshToken;
           user.save(function(err) {
             if (err) return done(err);
