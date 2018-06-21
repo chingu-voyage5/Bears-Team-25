@@ -21,7 +21,6 @@ const sendMessage = (values) => {
   else {
     to = channel;
   }
-  // console.log(source, user, channel, message)
   axios
     .post("http://localhost:3001/api/slack/sendMessage",
      {to: to, message: message},
@@ -35,6 +34,21 @@ const sendMessage = (values) => {
       console.log(error);
     });
 };
+
+const sendMail = () => {
+  axios
+  .get("http://localhost:3001/api/gmail/sendMail", {
+    withCredentials: true
+  })
+  .then(response => {
+    console.log('email sent')
+  })
+  .catch(error => {
+    console.log(error);
+  });
+}
+
+
 class Slack extends Component {
 
   constructor(props) {
@@ -106,7 +120,11 @@ class Slack extends Component {
             <Button variant="raised">gmail connect</Button>
           </a>
             )}
+            {isGmailToken && (
+            <Button onClick = {sendMail} variant="raised">send mail</Button>
+          )}
       </div>
+           
       
     );
   }
