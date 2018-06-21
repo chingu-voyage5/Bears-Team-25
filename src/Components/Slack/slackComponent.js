@@ -35,9 +35,13 @@ const sendMessage = (values) => {
     });
 };
 
-const sendMail = () => {
+const sendMail = (message) => {
   axios
-  .get("http://localhost:3001/api/gmail/sendMail", {
+  .post("http://localhost:3001/api/gmail/sendMail", 
+  {
+    message: message
+  },
+  {
     withCredentials: true
   })
   .then(response => {
@@ -75,13 +79,13 @@ class Slack extends Component {
       });
   };
   render() {
-    const { isSlackToken, source, handleSubmit, channel, user, isGmailToken} = this.props;
+    const { isSlackToken, source, handleSubmit, channel, user, isGmailToken, message} = this.props;
     const {users, channels } = this.state;
    // console.log(source, channel, user);
     const usersToRender = users.map( (user, index) => 
-      <MenuItem key = {`menuItem-${index}`} value={user.id}>{user.name}</MenuItem>)
+      <MenuItem key = {`user-${index}`} value={user.id}>{user.name}</MenuItem>)
     const channelsToRender = channels.map( (channel, index) => 
-      <MenuItem key = {`menuItem-${index}`} value={channel.id}>{channel.name}</MenuItem>)
+      <MenuItem key = {`channel-${index}`} value={channel.id}>{channel.name}</MenuItem>)
     return (
       <div>
         {isSlackToken && (
@@ -121,7 +125,7 @@ class Slack extends Component {
           </a>
             )}
             {isGmailToken && (
-            <Button onClick = {sendMail} variant="raised">send mail</Button>
+            <Button disabled = {!message} onClick = {() => sendMail(message)} variant="raised">send mail</Button>
           )}
       </div>
            
@@ -142,7 +146,8 @@ const mapStateToProps = state => {
     isGmailToken: state.auth.isGmailToken,
     source: selector(state, 'Channel'),
     channel: selector(state, 'channels'),
-    user: selector(state, 'DM')
+    user: selector(state, 'DM'),
+    message: selector(state, 'message')
   };
 };
 

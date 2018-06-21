@@ -58,24 +58,24 @@ transporter.on("token", token => {
       user.gmail.expires = token.expires;
       user.save().then(user, err => {
         console.log(err);
-        return next(err);
       });
     }
   });
 });
 
-mailRouter.get("/sendMail", isLoggedIn, (req, res, next) => {
+mailRouter.post("/sendMail", isLoggedIn, (req, res, next) => {
+  console.log('message', req.body.message);
   const mailOptions = {
     from: req.user.gmail.email, // sender address
     to: "4ruslan.k@gmail.com", // list of receivers
     subject: "Hello", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
+    text: req.body.message, // plain text body
+    html: `<b>${req.body.message}</b>`, // html body
     auth: {
       user: req.user.gmail.email,
       refreshToken: req.user.gmail.refreshToken,
-	  accessToken: req.user.gmail.token,
-	  expires: req.user.gmail.expires
+      accessToken: req.user.gmail.token,
+      expires: req.user.gmail.expires
     }
   };
 
@@ -88,12 +88,12 @@ mailRouter.get("/sendMail", isLoggedIn, (req, res, next) => {
     console.log("Message sent: %s", info.messageId);
     // Preview only available when sending through an Ethereal account
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-	res.statusCode = 200;
-	res.setHeader("Content-Type", "application/json");
-	res.json({
-	  success: true,
-	  status: "Email successfully sent"
-	});
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json({
+      success: true,
+      status: "Email successfully sent"
+    });
   });
 });
 
