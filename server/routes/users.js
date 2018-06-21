@@ -19,8 +19,9 @@ function extractUserInfo(userFromReq) {
   (userFromReq.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
   (userFromReq.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
   (userFromReq.slack.token) ? (isSlackToken = true) : (isSlackToken = false);
+  (userFromReq.gmail.refreshToken) ? (isGmailToken = true) : (isGmailToken = false);
   return userInfo = { name: userFromReq.name, email: userFromReq.local.email, isGoogleLinked: isGoogleLinked, isFBLinked: isFBLinked,
-  isSlackToken: isSlackToken }
+  isSlackToken: isSlackToken, isGmailToken: isGmailToken }
 }
 
 // this route is just used to get the user basic info

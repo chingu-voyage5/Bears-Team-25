@@ -61,7 +61,7 @@ class Slack extends Component {
       });
   };
   render() {
-    const { isSlackToken, source, handleSubmit, channel, user} = this.props;
+    const { isSlackToken, source, handleSubmit, channel, user, isGmailToken} = this.props;
     const {users, channels } = this.state;
    // console.log(source, channel, user);
     const usersToRender = users.map( (user, index) => 
@@ -101,9 +101,11 @@ class Slack extends Component {
             <Button variant="raised">Slack</Button>
           </a>
         )}
+         {!isGmailToken && (
         <a href="http://localhost:3001/api/gmail/auth/">
             <Button variant="raised">gmail connect</Button>
           </a>
+            )}
       </div>
       
     );
@@ -119,6 +121,7 @@ const mapStateToProps = state => {
   return {
     onSubmit: (values)  => sendMessage(values),
     isSlackToken: state.auth.isSlackToken,
+    isGmailToken: state.auth.isGmailToken,
     source: selector(state, 'Channel'),
     channel: selector(state, 'channels'),
     user: selector(state, 'DM')

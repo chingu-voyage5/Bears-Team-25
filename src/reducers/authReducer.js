@@ -59,6 +59,7 @@ export default function authReducer(state = {
                 isFBLinked: action.isFBLinked,
                 isGoogleLinked: action.isGoogleLinked,
                 isSlackToken: action.isSlackToken,
+                isGmailToken: action.isGmailToken,
                 auth: action.auth,
                 success: true           
             }
