@@ -15,7 +15,7 @@ const sendMessage = (values) => {
   let channel = values.channels;
   let message = values.message;
   let to = null;
-  if (source == 'DM') {
+  if (source === 'DM') {
     to = user;
   }
   else {
@@ -79,14 +79,14 @@ class Slack extends Component {
               <MenuItem  value='Channels'>Channels</MenuItem>
             </Field>
             </div>
-            { (source =='DM') &&
+            { (source === 'DM') &&
             <div>
             <Field   name="DM" component={renderSelectField} label="Favorite Color">
                 {usersToRender}
             </Field>
             </div>}
             
-            { (source =='Channels') &&
+            { (source === 'Channels') &&
             <div>
             <Field  name="channels" component={renderSelectField} label="Favorite Color">
                 {channelsToRender}
