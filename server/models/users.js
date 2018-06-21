@@ -32,7 +32,10 @@ var userSchema = mongoose.Schema({
     		date:{ type: Date, default: Date.now },
     		serviceFrom:String
     	}
-    ]
+    ],
+    slack: {
+        token: String
+    }
     
 });
 

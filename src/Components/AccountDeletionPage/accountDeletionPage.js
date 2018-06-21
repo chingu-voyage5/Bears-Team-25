@@ -8,7 +8,7 @@ import { Redirect } from 'react-router'
 import {renderTextField, validateOnlyPass} from '../../commonFunctions/formFunctions';
 
 var AccountDeletionPage = props => {
-    const { handleSubmit, valid, isFetching, dispatch, auth } = props;
+    const { handleSubmit, valid, isFetching, dispatch} = props;
     let name = localStorage.getItem('name')
     if (!name) {
         return <Redirect to='/' />
@@ -41,8 +41,7 @@ AccountDeletionPage = reduxForm({
 function mapStateToProps(state) {
     return {
         onSubmit: values => delete_account(values),
-        isFetching: state.accountDeletion.isFetching,
-        auth: state.auth.auth
+        isFetching: state.accountDeletion.isFetching
     }
 }
 

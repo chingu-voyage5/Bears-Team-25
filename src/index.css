@@ -18,6 +18,10 @@ body {
 	width: 25em;
 	max-width: 90%;
 	}
+
+.select-field {
+	margin-bottom: 2em;
+}
 	
 .screen-center.social-sign {
 		margin-top: 10em;

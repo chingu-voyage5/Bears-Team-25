@@ -1,5 +1,6 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
+import TextField from "@material-ui/core/TextField"
+import Select from '@material-ui/core/Select';
 
 export const renderTextField = ({
   input,
@@ -19,9 +20,29 @@ export const renderTextField = ({
   />
 );
 
+export  const renderSelectField = ({ input, label, meta: { touched, error }, children }) => (
+  <Select
+    className = 'select-field'
+    label={label}
+    error={touched && typeof error !== "undefined"}
+    {...input}
+    children={children}/>
+)
+
 export const validatePassAndUsername = values => {
   const errors = {};
   const requiredFields = ["password", "email"];
+  requiredFields.forEach(field => {
+    if (!values[field]) {
+      errors[field] = "Required";
+    }
+  });
+  return errors;
+};
+
+export const validateMessage = values => {
+  const errors = {};
+  const requiredFields = ["message"];
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = "Required";

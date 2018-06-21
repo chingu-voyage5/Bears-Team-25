@@ -81,11 +81,6 @@ function unlinkGoogle_failure(error) {
   };
 }
 
-function unlinkFB() {
-  return {
-    type: ACTIONS.UNLINK_FB
-  }
-}
 
 export function unlink(social) {
   return function(dispatch) {
