@@ -4,6 +4,7 @@ var localSignUp = require('./passportStrategies/localSignUp');
 var facebookAuth = require('./passportStrategies/faceboookAuth');
 var googleAuth = require('./passportStrategies/googleAuth');
 var slack = require('./passportStrategies/slackStrategy');
+var gmail = require('./passportStrategies/gmail')
 var User = require("../models/users");
 
 // =========================================================================
@@ -30,6 +31,7 @@ localSignUp(passport);
 facebookAuth(passport);
 googleAuth(passport);
 slack(passport);
+gmail(passport);
 
 
 
