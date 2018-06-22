@@ -1,5 +1,4 @@
 const axios = require("axios");
-var passport = require("passport");
 var express = require("express");
 var router = express.Router();
 var transporter = require("./email").transporter;
@@ -25,7 +24,7 @@ router.post(
     const mailOptions = {
       from: req.user.gmail.email, // sender address
       to: "4ruslan.k@gmail.com", // list of receivers
-      subject: "Hello", // Subject line
+      subject: "IFTTT message", // Subject line
       text: req.body.message, // plain text body
       html: `<b>${req.body.message}</b>`, // html body
       auth: {

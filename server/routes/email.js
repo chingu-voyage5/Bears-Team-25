@@ -24,7 +24,7 @@ mailRouter.get(
   passport.authenticate("gmail", {
     scope: ["profile", "email", "https://mail.google.com/"], //scope that send mail
     accessType: "offline",
-    approvalPrompt: "force"
+    prompt: 'consent'
   })
 );
 
