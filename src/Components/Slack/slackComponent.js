@@ -74,21 +74,30 @@ class Slack extends Component {
         <form onSubmit= {(values) => handleSubmit(values)}>
             <Field  className='input-field'  name="message" component={renderTextField} label="Message" />
             <div>
-            <Field  name="Channel" component={renderSelectField} label="Favorite Color">
+            <Field  name="Channel" component={renderSelectField} label="Which Channel?">
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
               <MenuItem value='DM'>DM</MenuItem>
               <MenuItem  value='Channels'>Channels</MenuItem>
             </Field>
             </div>
             { (source === 'DM') &&
             <div>
-            <Field   name="DM" component={renderSelectField} label="Favorite Color">
+            <Field   name="DM" component={renderSelectField} label="User">
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
                 {usersToRender}
             </Field>
             </div>}
             
             { (source === 'Channels') &&
             <div>
-            <Field  name="channels" component={renderSelectField} label="Favorite Color">
+            <Field  name="channels" component={renderSelectField} label="Channel">
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
                 {channelsToRender}
             </Field>
             </div>
