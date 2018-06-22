@@ -62,27 +62,6 @@ const sendMailAndMessage = (values) => {
     });
 };
 
-
-
-
-const sendMail = (message) => {
-  axios
-  .post("http://localhost:3001/api/gmail/sendMail", 
-  {
-    message: message
-  },
-  {
-    withCredentials: true
-  })
-  .then(response => {
-    console.log('email sent')
-  })
-  .catch(error => {
-    console.log(error);
-  });
-}
-
-
 class Slack extends Component {
 
   constructor(props) {
@@ -118,7 +97,7 @@ class Slack extends Component {
       <MenuItem key = {`channel-${index}`} value={channel.id}>{channel.name}</MenuItem>)
     return (
       <div>
-        {isSlackToken && (
+        {isSlackToken && isGmailToken &&  (
         <form onSubmit= {(values) => handleSubmit(values)}>
             <Field  className='input-field'  name="message" component={renderTextField} label="Message" />
             <div>
@@ -141,7 +120,7 @@ class Slack extends Component {
             </Field>
             </div>
             }
-            <Button disabled = {!user && !channel} variant="raised" type="submit" color="primary">send message</Button>
+            <Button disabled = {(!user && !channel) || !isGmailToken} variant="raised" type="submit" color="primary">send message</Button>
         </form>)
         }
         {!isSlackToken && (
@@ -154,9 +133,6 @@ class Slack extends Component {
             <Button variant="raised">gmail connect</Button>
           </a>
             )}
-            {isGmailToken && (
-            <Button color="primary" disabled = {!message} onClick = {() => sendMail(message)} variant="raised">send mail</Button>
-          )}
       </div>
            
       

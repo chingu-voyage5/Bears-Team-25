@@ -45,20 +45,13 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// launches every time when new access token issued
+// if current access token expired, then new access token will be issued, and we can listen to this event and update
+// all users that have linked this gmail account
 transporter.on("token", token => {
-  User.findOne({ "gmail.email": token.user }, function(err, user) {
+  User.updateMany({ "gmail.email": token.user }, {"gmail.token": token.accessToken, "gmail.expires": token.expires},function(err, users) {
     if (err) {
       console.log(err);
       return next(err);
-    }
-    // if user with such email exist - send error message
-    if (user) {
-      user.gmail.token = token.accessToken;
-      user.gmail.expires = token.expires;
-      user.save().then(user, err => {
-        console.log(err);
-      });
     }
   });
 });
@@ -71,7 +64,7 @@ mailRouter.post("/sendMail", isLoggedIn, (req, res, next) => {
     text: req.body.message, // plain text body
     html: `<b>${req.body.message}</b>`, // html body
     auth: {
-      user: req.user.gmail.email,
+      user: req.user,
       refreshToken: req.user.gmail.refreshToken,
       accessToken: req.user.gmail.token,
       expires: req.user.gmail.expires
