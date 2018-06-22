@@ -14,6 +14,7 @@ const sendMailAndMessage = (values) => {
   let user = values.DM;
   let channel = values.channels;
   let message = values.message;
+  let email = values.email;
   let to = null;
   if (source === 'DM') {
     to = user;
@@ -23,7 +24,7 @@ const sendMailAndMessage = (values) => {
   }
   axios
     .post("http://localhost:3001/api/integrations/sendMessageThroughSlackAndGmail",
-     {to: to, message: message},
+     {to, message, email },
     {
       withCredentials: true
     })
@@ -61,7 +62,7 @@ class Slack extends Component {
       });
   };
   render() {
-    const { isSlackToken, source, handleSubmit, channel, user, isGmailToken, message} = this.props;
+    const { isSlackToken, source, handleSubmit, channel, user, isGmailToken, message, valid} = this.props;
     const {users, channels } = this.state;
    // console.log(source, channel, user);
     const usersToRender = users.map( (user, index) => 
@@ -73,11 +74,11 @@ class Slack extends Component {
         {isSlackToken && isGmailToken &&  (
         <form onSubmit= {(values) => handleSubmit(values)}>
             <Field  className='input-field'  name="message" component={renderTextField} label="Message" />
+            <h3>Mail Options</h3>
+            <Field  className='input-field'  name="email" component={renderTextField} label="Email" />
             <div>
+            <h3>Slack Options</h3>
             <Field  name="Channel" component={renderSelectField} label="Which Channel?">
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
               <MenuItem value='DM'>DM</MenuItem>
               <MenuItem  value='Channels'>Channels</MenuItem>
             </Field>
@@ -85,9 +86,6 @@ class Slack extends Component {
             { (source === 'DM') &&
             <div>
             <Field   name="DM" component={renderSelectField} label="User">
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
                 {usersToRender}
             </Field>
             </div>}
@@ -95,14 +93,11 @@ class Slack extends Component {
             { (source === 'Channels') &&
             <div>
             <Field  name="channels" component={renderSelectField} label="Channel">
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
                 {channelsToRender}
             </Field>
             </div>
             }
-            <Button disabled = {(!user && !channel) || !isGmailToken} variant="raised" type="submit" color="primary">send message</Button>
+            <Button disabled = {(!user && !channel) || !isGmailToken || !valid} variant="raised" type="submit" color="primary">send message</Button>
         </form>)
         }
         {!isSlackToken && (
@@ -115,9 +110,7 @@ class Slack extends Component {
             <Button variant="raised">gmail connect</Button>
           </a>
             )}
-      </div>
-           
-      
+      </div>  
     );
   }
 }

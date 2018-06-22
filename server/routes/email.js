@@ -42,7 +42,7 @@ transporter.on("token", token => {
 const mailOptions = (user, json) => {
   return {
     from: user.gmail.email, // sender address
-    to: "4ruslan.k@gmail.com", // list of receivers
+    to: json.email, // list of receivers
     subject: "IFTTT message", // Subject line
     text: json.message, // plain text body
     html: `<b>${json.message}</b>`, // html body

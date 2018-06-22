@@ -22,6 +22,7 @@ router.post(
     let token = req.user.slack.token;
     let message = req.body.message || "hello world";
     let to = req.body.to || 'general';
+    let email = req.body.email;
     let options = mailOptions(req.user, req.body)
     if (token) {
       async function sendMessageThroughSlackAndGmail() {
