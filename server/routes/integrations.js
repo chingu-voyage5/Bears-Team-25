@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var transporter = require("./email").transporter;
 var mailOptions = require('./email').mailOptions;
-var slackSendMessage = require('./slackRoute').slackSendMessage;
+var slackSendMessage = require('./slack').slackSendMessage;
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
