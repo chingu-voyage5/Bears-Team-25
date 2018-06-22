@@ -18,24 +18,6 @@ function isLoggedIn(req, res, next) {
   }
 }
 
-//getting the authentication with the following scope
-mailRouter.get(
-  "/auth",
-  passport.authenticate("gmail", {
-    scope: ["profile", "email", "https://mail.google.com/"], //scope that send mail
-    accessType: "offline",
-    prompt: 'consent'
-  })
-);
-
-mailRouter.get(
-  "/auth/callback",
-  passport.authenticate("gmail", {
-    failureRedirect: "http://localhost:3000/login"
-  }),
-  (req, res) => res.redirect("http://localhost:3000/") // Successful authentication, redirect home.
-);
-
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -56,23 +38,46 @@ transporter.on("token", token => {
   });
 });
 
-mailRouter.post("/sendMail", isLoggedIn, (req, res, next) => {
-  const mailOptions = {
-    from: req.user.gmail.email, // sender address
-    to: "4ruslan.k@gmail.com", // list of receivers
-    subject: "Hello", // Subject line
-    text: req.body.message, // plain text body
-    html: `<b>${req.body.message}</b>`, // html body
-    auth: {
-      user: req.user,
-      refreshToken: req.user.gmail.refreshToken,
-      accessToken: req.user.gmail.token,
-      expires: req.user.gmail.expires
-    }
-  };
 
+const mailOptions = (user, json) => {
+  return {
+    from: user.gmail.email, // sender address
+    to: "4ruslan.k@gmail.com", // list of receivers
+    subject: "IFTTT message", // Subject line
+    text: json.message, // plain text body
+    html: `<b>${json.message}</b>`, // html body
+    auth: {
+      user: user.gmail.email,
+      refreshToken: user.gmail.refreshToken,
+      accessToken: user.gmail.token,
+      expires: user.gmail.expires
+    }
+  }
+};
+
+//getting the authentication with the following scope
+mailRouter.get(
+  "/auth",
+  passport.authenticate("gmail", {
+    scope: ["profile", "email", "https://mail.google.com/"], //scope that send mail
+    accessType: "offline",
+    prompt: 'consent'
+  })
+);
+
+mailRouter.get(
+  "/auth/callback",
+  passport.authenticate("gmail", {
+    failureRedirect: "http://localhost:3000/login"
+  }),
+  (req, res) => res.redirect("http://localhost:3000/") // Successful authentication, redirect home.
+);
+
+
+mailRouter.post("/sendMail", isLoggedIn, (req, res, next) => {
+  let options = mailOptions(req.user, req.body)
   // send mail with defined transport object
-  transporter.sendMail(mailOptions, (error, info) => {
+  transporter.sendMail(options, (error, info) => {
     if (error) {
       console.log(error);
       return next(error);
@@ -91,3 +96,4 @@ mailRouter.post("/sendMail", isLoggedIn, (req, res, next) => {
 
 exports.mailRouter = mailRouter;
 exports.transporter = transporter;
+exports.mailOptions = mailOptions;

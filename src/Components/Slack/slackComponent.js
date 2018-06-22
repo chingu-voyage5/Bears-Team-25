@@ -9,33 +9,6 @@ const selector = formValueSelector('SlackForm')
 const axios = require("axios");
 
 
-const sendMessage = (values) => {
-  let source = values.Channel
-  let user = values.DM;
-  let channel = values.channels;
-  let message = values.message;
-  let to = null;
-  if (source === 'DM') {
-    to = user;
-  }
-  else {
-    to = channel;
-  }
-  axios
-    .post("http://localhost:3001/api/slack/sendMessage",
-     {to: to, message: message},
-    {
-      withCredentials: true
-    })
-    .then(response => {
-      console.log('message sent');
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
-
-
 const sendMailAndMessage = (values) => {
   let source = values.Channel
   let user = values.DM;

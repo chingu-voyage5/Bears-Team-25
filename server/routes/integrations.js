@@ -1,7 +1,8 @@
-const axios = require("axios");
 var express = require("express");
 var router = express.Router();
 var transporter = require("./email").transporter;
+var mailOptions = require('./email').mailOptions;
+var slackSendMessage = require('./slackRoute').slackSendMessage;
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -21,35 +22,12 @@ router.post(
     let token = req.user.slack.token;
     let message = req.body.message || "hello world";
     let to = req.body.to || 'general';
-    const mailOptions = {
-      from: req.user.gmail.email, // sender address
-      to: "4ruslan.k@gmail.com", // list of receivers
-      subject: "IFTTT message", // Subject line
-      text: req.body.message, // plain text body
-      html: `<b>${req.body.message}</b>`, // html body
-      auth: {
-        user: req.user.gmail.email,
-        refreshToken: req.user.gmail.refreshToken,
-        accessToken: req.user.gmail.token,
-        expires: req.user.gmail.expires
-      }
-    };
-
+    let options = mailOptions(req.user, req.body)
     if (token) {
-      async function sendMessage() {
+      async function sendMessageThroughSlackAndGmail() {
         try {
-          const mailPromise = transporter.sendMail(mailOptions);
-          const slackPromise = axios.post(
-            "https://slack.com/api/chat.postMessage",
-            {
-              channel: to,
-              text: message,
-              as_user: true
-            },
-            {
-              headers: { Authorization: "Bearer " + req.user.slack.token }
-            }
-          );
+          const mailPromise = transporter.sendMail(options);
+          const slackPromise = slackSendMessage(req.user.slack.token, message, to);
           const [slack, gmail] = await Promise.all([mailPromise, slackPromise]);
           res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
@@ -62,7 +40,7 @@ router.post(
           return next(err);
         }
       }
-      sendMessage();
+      sendMessageThroughSlackAndGmail();
     }
   }
 );
