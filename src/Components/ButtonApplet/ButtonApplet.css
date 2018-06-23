@@ -10,7 +10,7 @@
 .button-applet-card {
 	margin-left: auto;
 }
-.white-text {
+.button-applet-card .white-text {
 	height: fill-available;
 }
 .card-content-title {

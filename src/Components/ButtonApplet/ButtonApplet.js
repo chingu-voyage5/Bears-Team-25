@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-// import Avatar from "@material-ui/core/Avatar";
-// import AssignmentIcon from "@material-ui/icons/Assignment";
-// import Switch from "@material-ui/core/Switch";
-// import Grid from "@material-ui/core/Grid";
-// import Save from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
 import Typography from "@material-ui/core/Typography";
