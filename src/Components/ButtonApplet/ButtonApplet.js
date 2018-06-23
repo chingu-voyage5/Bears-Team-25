@@ -4,6 +4,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
 import Typography from "@material-ui/core/Typography";
+import Slack from '../Slack/slackComponent';
 import "./ButtonApplet.css";
 
 class ButtonApplet extends Component {
@@ -29,6 +30,9 @@ class ButtonApplet extends Component {
 					</CardContent>
 					<CardContent className="white-text">
 						<TextArea content={this.props.content} />
+					</CardContent>
+					<CardContent>
+						<Slack />
 					</CardContent>
 				</Card>
 			</div>
