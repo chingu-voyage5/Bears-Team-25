@@ -3,78 +3,97 @@ const nodemailer = require("nodemailer");
 const express = require("express");
 const passport = require("passport");
 const mailRouter = express.Router();
-const GoogleStrategy=require( 'passport-google-oauth2' ).Strategy;
+var User = require("../models/users");
 require("dotenv").config();
 const app = express();
 
-//getting the authentication with the following scope
-app.get(
-	"/",
-	passport.authenticate("oauth2", {
-		scope: ["https://www.googleapis.com/auth/gmail.send"],//scope that send mail
-		accessType: "offline",
-		approvalPrompt: "force"
-	})
-);
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    console.log("You are not logged in!");
+    res.statusCode = 401;
+    res.setHeader("Content-Type", "application/json");
+    res.json({ success: false, status: "You are not logged in!" });
+  }
+}
 
-passport.use(
-	new GoogleStrategy(
-		{
-			authorizationURL: "https://accounts.google.com/o/oauth2/auth",
-			tokenURL: "https://accounts.google.com/o/oauth2/token",
-			clientId: process.env.clientID,
-			clientSecret: process.env.clientSecret,
-			callbackURL: configAuth.googleAuth.callback2
-		},
-		function(accessToken, refreshToken, done) {
-			process.nextTick(function() {
-				//simple console logging to check the responses
-				console.log("Token is ");
-				console.log(util.inspect(accessToken, false, null));
-
-				console.log("Refresh is ");
-				console.log(util.inspect(refreshToken, false, null));
-			});
-		}
-	)
-);
-
-//creates a simple account to send mail
-nodemailer.createTestAccount((err, account) => {
-	// create reusable transporter object using the default SMTP transport
-	let transporter = nodemailer.createTransport({
-		service: "Gmail",
-		auth: {
-			// user: process.env.STRUSERNAME, // generated ethereal user
-			// pass: process.env.PASSWORD // generated ethereal password
-			type: "OAuth2",
-			user: process.env.STRUSERNAME,//replace with username of the user
-			scope: "https://www.googleapis.com/auth/gmail.send",
-			clientId: process.env.clientID,
-			clientSecret: process.env.clientSecret,
-			refreshToken: activeToken.refresh_token
-		}
-	});
-
-	// setup email data with unicode symbols
-	let mailOptions = {
-		from: "bearsteam25voyage5@gmail.com", // sender address
-		to: "anshuldubey2166@gmail.com", // list of receivers
-		subject: "Hello", // Subject line
-		text: "Hello world?", // plain text body
-		html: "<b>Hello world?</b>" // html body
-	};
-
-	// send mail with defined transport object
-	transporter.sendMail(mailOptions, (error, info) => {
-		if (error) {
-			return console.log(error);
-		}
-		console.log("Message sent: %s", info.messageId);
-		// Preview only available when sending through an Ethereal account
-		console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-
-		// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-		// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-	});
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    type: "OAuth2",
+    clientId: JSON.parse(process.env.googleAuth).clientID,
+    clientSecret: JSON.parse(process.env.googleAuth).clientSecret
+  }
 });
+
+// if current access token expired, then new access token will be issued, and we can listen to this event and update
+// all users that have linked this gmail account
+transporter.on("token", token => {
+  User.updateMany({ "gmail.email": token.user }, {"gmail.token": token.accessToken, "gmail.expires": token.expires},function(err, users) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+  });
+});
+
+
+const mailOptions = (user, json) => {
+  return {
+    from: user.gmail.email, // sender address
+    to: json.email, // list of receivers
+    subject: "IFTTT message", // Subject line
+    text: json.message, // plain text body
+    html: `<b>${json.message}</b>`, // html body
+    auth: {
+      user: user.gmail.email,
+      refreshToken: user.gmail.refreshToken,
+      accessToken: user.gmail.token,
+      expires: user.gmail.expires
+    }
+  }
+};
+
+//getting the authentication with the following scope
+mailRouter.get(
+  "/auth",
+  passport.authenticate("gmail", {
+    scope: ["profile", "email", "https://mail.google.com/"], //scope that send mail
+    accessType: "offline",
+    prompt: 'consent'
+  })
+);
+
+mailRouter.get(
+  "/auth/callback",
+  passport.authenticate("gmail", {
+    failureRedirect: "http://localhost:3000/login"
+  }),
+  (req, res) => res.redirect("http://localhost:3000/") // Successful authentication, redirect home.
+);
+
+
+mailRouter.post("/sendMail", isLoggedIn, (req, res, next) => {
+  let options = mailOptions(req.user, req.body)
+  // send mail with defined transport object
+  transporter.sendMail(options, (error, info) => {
+    if (error) {
+      console.log(error);
+      return next(error);
+    }
+    console.log("Message sent: %s", info.messageId);
+    // Preview only available when sending through an Ethereal account
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json({
+      success: true,
+      status: "Email successfully sent"
+    });
+  });
+});
+
+exports.mailRouter = mailRouter;
+exports.transporter = transporter;
+exports.mailOptions = mailOptions;

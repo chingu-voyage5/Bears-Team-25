@@ -9,11 +9,12 @@ const selector = formValueSelector('SlackForm')
 const axios = require("axios");
 
 
-const sendMessage = (values) => {
+const sendMailAndMessage = (values) => {
   let source = values.Channel
   let user = values.DM;
   let channel = values.channels;
   let message = values.message;
+  let email = values.email;
   let to = null;
   if (source === 'DM') {
     to = user;
@@ -21,10 +22,9 @@ const sendMessage = (values) => {
   else {
     to = channel;
   }
-  // console.log(source, user, channel, message)
   axios
-    .post("http://localhost:3001/api/slack/sendMessage",
-     {to: to, message: message},
+    .post("http://localhost:3001/api/integrations/sendMessageThroughSlackAndGmail",
+     {to, message, email },
     {
       withCredentials: true
     })
@@ -35,6 +35,7 @@ const sendMessage = (values) => {
       console.log(error);
     });
 };
+
 class Slack extends Component {
 
   constructor(props) {
@@ -61,47 +62,55 @@ class Slack extends Component {
       });
   };
   render() {
-    const { isSlackToken, source, handleSubmit, channel, user} = this.props;
+    const { isSlackToken, source, handleSubmit, channel, user, isGmailToken, message, valid} = this.props;
     const {users, channels } = this.state;
    // console.log(source, channel, user);
     const usersToRender = users.map( (user, index) => 
-      <MenuItem key = {`menuItem-${index}`} value={user.id}>{user.name}</MenuItem>)
+      <MenuItem key = {`user-${index}`} value={user.id}>{user.name}</MenuItem>)
     const channelsToRender = channels.map( (channel, index) => 
-      <MenuItem key = {`menuItem-${index}`} value={channel.id}>{channel.name}</MenuItem>)
+      <MenuItem key = {`channel-${index}`} value={channel.id}>{channel.name}</MenuItem>)
     return (
       <div>
-        {isSlackToken && (
+        {isSlackToken && isGmailToken &&  (
         <form onSubmit= {(values) => handleSubmit(values)}>
             <Field  className='input-field'  name="message" component={renderTextField} label="Message" />
+            <h3>Mail Options</h3>
+            <Field  className='input-field'  name="email" component={renderTextField} label="Email" />
             <div>
-            <Field  name="Channel" component={renderSelectField} label="Favorite Color">
+            <h3>Slack Options</h3>
+            <Field  name="Channel" component={renderSelectField} label="Which Channel?">
               <MenuItem value='DM'>DM</MenuItem>
               <MenuItem  value='Channels'>Channels</MenuItem>
             </Field>
             </div>
             { (source === 'DM') &&
             <div>
-            <Field   name="DM" component={renderSelectField} label="Favorite Color">
+            <Field   name="DM" component={renderSelectField} label="User">
                 {usersToRender}
             </Field>
             </div>}
             
             { (source === 'Channels') &&
             <div>
-            <Field  name="channels" component={renderSelectField} label="Favorite Color">
+            <Field  name="channels" component={renderSelectField} label="Channel">
                 {channelsToRender}
             </Field>
             </div>
             }
-            <Button disabled = {!user && !channel} variant="raised" type="submit" color="primary">send message</Button>
+            <Button disabled = {(!user && !channel) || !isGmailToken || !valid} variant="raised" type="submit" color="primary">send message</Button>
         </form>)
         }
         {!isSlackToken && (
           <a href="http://localhost:3001/api/slack/auth/">
-            <Button variant="raised">Slack</Button>
+            <Button variant="raised" style={{backgroundColor: '#49c4a1', color: 'white'}}>connect Slack </Button>
           </a>
         )}
-      </div>
+         {!isGmailToken && (
+        <a href="http://localhost:3001/api/gmail/auth/">
+            <Button variant="raised" style={{backgroundColor: '#db3236', color: 'white'}}>connect Gmail</Button>
+          </a>
+            )}
+      </div>  
     );
   }
 }
@@ -113,11 +122,13 @@ Slack = reduxForm({
 
 const mapStateToProps = state => {
   return {
-    onSubmit: (values)  => sendMessage(values),
+    onSubmit: (values)  => sendMailAndMessage(values),
     isSlackToken: state.auth.isSlackToken,
+    isGmailToken: state.auth.isGmailToken,
     source: selector(state, 'Channel'),
     channel: selector(state, 'channels'),
-    user: selector(state, 'DM')
+    user: selector(state, 'DM'),
+    message: selector(state, 'message')
   };
 };
 

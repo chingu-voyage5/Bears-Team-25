@@ -35,6 +35,12 @@ var userSchema = mongoose.Schema({
     ],
     slack: {
         token: String
+    },
+    gmail: {
+        token: String,
+        expires: String,
+        refreshToken: String,
+        email: String
     }
     
 });

@@ -19,8 +19,9 @@ function extractUserInfo(userFromReq) {
   (userFromReq.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
   (userFromReq.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
   (userFromReq.slack.token) ? (isSlackToken = true) : (isSlackToken = false);
+  (userFromReq.gmail.refreshToken) ? (isGmailToken = true) : (isGmailToken = false);
   return userInfo = { name: userFromReq.name, email: userFromReq.local.email, isGoogleLinked: isGoogleLinked, isFBLinked: isFBLinked,
-  isSlackToken: isSlackToken }
+  isSlackToken: isSlackToken, isGmailToken: isGmailToken }
 }
 
 // this route is just used to get the user basic info
@@ -229,7 +230,7 @@ router.post("/change_email", isLoggedIn, function(req, res, next) {
 // send to facebook to do the authentication
 router.get(
   "/auth/facebook",
-  passport.authenticate("facebook", {display: 'popup', scope: ["public_profile", "email"] })
+  passport.authenticate("facebook", { scope: ["public_profile", "email"] })
 );
 
 // handle the callback after facebook has authenticated the user
@@ -267,7 +268,7 @@ router.get("/auth/facebook/callback", function(req, res, next) {
 // send to google to do the authentication
 router.get(
   "/auth/google",
-  passport.authenticate("google", {display: 'popup', scope: ["profile", "email"] })
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
 

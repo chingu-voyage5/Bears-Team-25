@@ -15,6 +15,19 @@ function isLoggedIn(req, res, next) {
   }
 }
 
+const slackSendMessage = (token, message, to) =>
+  axios.post(
+    "https://slack.com/api/chat.postMessage",
+    {
+      channel: to,
+      text: message,
+      as_user: true
+    },
+    {
+      headers: { Authorization: "Bearer " + token }
+    }
+  );
+
 router.get("/auth", passport.authorize("Slack"));
 
 router.get(
@@ -28,8 +41,8 @@ router.get(
 router.post("/sendMessage", isLoggedIn, (req, res, next) => {
   let token = req.user.slack.token;
   let message = req.body.message || "hello world";
-  let to = req.body.to || 'general';
- //console.log(message, to)
+  let to = req.body.to || "general";
+  //console.log(message, to)
   if (token) {
     axios
       .post(
@@ -75,8 +88,11 @@ router.get("/fetchUsersAndChannels", isLoggedIn, (req, res, next) => {
         ]);
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        res.json({ users: users.data.members, channels: channels.data.channels });
-      } catch (e) {
+        res.json({
+          users: users.data.members,
+          channels: channels.data.channels
+        });
+      } catch (err) {
         console.log(err);
         return next(err);
       }
@@ -85,4 +101,6 @@ router.get("/fetchUsersAndChannels", isLoggedIn, (req, res, next) => {
   }
 });
 
-module.exports = router;
+exports.slackRouter = router;
+exports.slackSendMessage = slackSendMessage;
+
