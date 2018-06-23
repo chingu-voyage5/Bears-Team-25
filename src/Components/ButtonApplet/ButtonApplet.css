@@ -27,7 +27,7 @@
 .send-text {
 	padding-right: 3px;
 }
-.text p {
+.button-applet .text p {
 	color: white;
 }
 select {
