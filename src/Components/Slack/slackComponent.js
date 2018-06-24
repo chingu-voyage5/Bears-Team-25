@@ -102,12 +102,12 @@ class Slack extends Component {
         }
         {!isSlackToken && (
           <a href="http://localhost:3001/api/slack/auth/">
-            <Button variant="raised" style={{backgroundColor: '#49c4a1', color: 'white'}}>connect Slack </Button>
+            <Button variant="raised" className="slack-btn" style={{backgroundColor: '#49c4a1', color: 'white'}}>connect Slack </Button>
           </a>
         )}
          {!isGmailToken && (
         <a href="http://localhost:3001/api/gmail/auth/">
-            <Button variant="raised" style={{backgroundColor: '#db3236', color: 'white'}}>connect Gmail</Button>
+            <Button variant="raised" className="mail-btn" style={{backgroundColor: '#db3236', color: 'white'}}>connect Gmail</Button>
           </a>
             )}
       </div>  
