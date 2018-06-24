@@ -105,18 +105,6 @@ router.post("/signup", function(req, res, next) {
         if (err) {
           return next(err);
         }
-        console.log("Logging in");
-        console.log(req.user);
-        if (req.user.local!== undefined) {
-          User.findOneAndUpdate(
-            { _id: req.user._id },
-            {
-              $push: {
-                servicesSubscribed: "Local"
-              }
-            }
-          ).catch(err => next(err));
-        }
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
         res.json({
@@ -220,7 +208,6 @@ router.post("/change_email", isLoggedIn, function(req, res, next) {
       });
     }
 
-    //
     User.findById(req.user._id, function(err, user) {
       if (err) {
         return res.json({ success: false, status: err });
@@ -273,21 +260,7 @@ router.get("/auth/facebook/callback", function(req, res, next) {
           res.redirect("http://localhost:3000/" + info.message);
           console.log("Here in message");
         } else {
-          //find the particular user and store his details
-          console.log("Here in right");
-          console.log(req.user);
-          User.findOneAndUpdate(
-            { _id: req.user._id },
-            {
-              $push: {
-                servicesSubscribed: "Facebook"
-              }
-            }
-          )
-            .then(r => {
-              res.redirect("http://localhost:3000/");
-            })
-            .catch(err => next(err));
+          res.redirect("http://localhost:3000/");
         }
         return;
       });
@@ -323,23 +296,7 @@ router.get("/auth/google/callback", function(req, res, next) {
           console.log("Here in message");
           res.redirect("http://localhost:3000/" + info.message);
         } else {
-          console.log("Here in right");
-          console.log(req.user);
-          if (req.user.google === undefined) {
-            console.log("Here is undefined");
-            User.findOneAndUpdate(
-              { _id: req.user._id },
-              {
-                $push: {
-                  servicesSubscribed: "Google"
-                }
-              }
-            )
-              .then(r => {
-                res.redirect("http://localhost:3000/");
-              })
-              .catch(err => next(err));
-          }
+         res.redirect("http://localhost:3000/");
         }
       });
     } else {
