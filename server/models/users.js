@@ -41,8 +41,12 @@ var userSchema = mongoose.Schema({
         expires: String,
         refreshToken: String,
         email: String
-    }
-    
+    },
+    servicesSubscribed:[
+        {
+            type:String
+        }
+    ]
 });
 
 // generating a hash
