@@ -46,7 +46,11 @@ var userSchema = mongoose.Schema({
         {
             type:String
         }
-    ]
+    ],
+    github: {
+        token: String
+    }
+    
 });
 
 // generating a hash

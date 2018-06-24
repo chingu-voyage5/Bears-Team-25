@@ -109,6 +109,11 @@ class Slack extends Component {
             <Button variant="raised" className="mail-btn" style={{backgroundColor: '#db3236', color: 'white'}}>connect Gmail</Button>
           </a>
             )}
+
+                 
+        <a href="http://localhost:3001/api/github/auth/">
+            <Button variant="raised" >connect git</Button>
+          </a>
       </div>  
     );
   }
