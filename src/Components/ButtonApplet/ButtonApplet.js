@@ -10,7 +10,7 @@ import "./ButtonApplet.css";
 class ButtonApplet extends Component {
 	render() {
 		return (
-			<div className="button-applet-card">
+			<div className="button-applet-card text-center">
 				<Card className="card">
 					<CardContent className="card-content-title text">
 						<Typography component="p">
@@ -32,9 +32,10 @@ class ButtonApplet extends Component {
 						<TextArea content={this.props.content} />
 					</CardContent>
 					<CardContent>
-						<Slack />
+						
 					</CardContent>
 				</Card>
+				<Slack />
 			</div>
 		);
 	}
