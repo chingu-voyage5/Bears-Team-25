@@ -75,6 +75,7 @@ router.post("/login", function(req, res, next) {
           console.log("error when logging in");
           return next(err);
         }
+
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
         res.json({
@@ -103,6 +104,18 @@ router.post("/signup", function(req, res, next) {
       req.logIn(user, function(err) {
         if (err) {
           return next(err);
+        }
+        console.log("Logging in");
+        console.log(req.user);
+        if (req.user.local!== undefined) {
+          User.findOneAndUpdate(
+            { _id: req.user._id },
+            {
+              $push: {
+                servicesSubscribed: "Local"
+              }
+            }
+          ).catch(err => next(err));
         }
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
@@ -262,6 +275,7 @@ router.get("/auth/facebook/callback", function(req, res, next) {
         } else {
           //find the particular user and store his details
           console.log("Here in right");
+          console.log(req.user);
           User.findOneAndUpdate(
             { _id: req.user._id },
             {
@@ -310,18 +324,22 @@ router.get("/auth/google/callback", function(req, res, next) {
           res.redirect("http://localhost:3000/" + info.message);
         } else {
           console.log("Here in right");
-          User.findOneAndUpdate(
-            { _id: req.user._id },
-            {
-              $push: {
-                servicesSubscribed: "Google"
+          console.log(req.user);
+          if (req.user.google === undefined) {
+            console.log("Here is undefined");
+            User.findOneAndUpdate(
+              { _id: req.user._id },
+              {
+                $push: {
+                  servicesSubscribed: "Google"
+                }
               }
-            }
-          )
-            .then(r => {
-              res.redirect("http://localhost:3000/");
-            })
-            .catch(err => next(err));
+            )
+              .then(r => {
+                res.redirect("http://localhost:3000/");
+              })
+              .catch(err => next(err));
+          }
         }
       });
     } else {
