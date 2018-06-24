@@ -3,9 +3,14 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import ServiceCard from "../ServiceCard/ServiceCard";
+import * as serviceActions from "../../../actions/serviceActions";
+import { bindActionCreators } from "redux";
 import "./Step1.css";
 
 class Step1 extends Component {
+	componentWillMount(){
+		this.props.serviceActions.listServices();
+	}
 	constructor(props) {
 	  super(props);
 	
@@ -30,8 +35,12 @@ class Step1 extends Component {
 
 const mapStateToProps=state=>{
 	return{
-		serviceList:state.service
+		serviceList:state.service.serviceList
 	}
 }
-
-export default connect(mapStateToProps)(Step1);
+const mapActionsToProps = dispatch => {
+  return {
+    serviceActions: bindActionCreators(serviceActions, dispatch)
+  };
+};
+export default connect(mapStateToProps,mapActionsToProps)(Step1);

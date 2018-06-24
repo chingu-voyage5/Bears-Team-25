@@ -1,38 +1,39 @@
 const initialState = {
-	service: [
-		{
-			name: "Mail",
-			color: "maroon"
-		},
-		{
-			name: "Twitter",
-			color: "blue"
-		},
-		{
-			name: "Facebook",
-			color: "Green"
-		},
-		{
-			name: "Youtube",
-			color: "maroon"
-		},
-		{
-			name: "Instagram",
-			color: "blue"
-		},
-		{
-			name: "Github",
-			color: "green"
-		},
-		{
-			name: "Trello",
-			color: "blue"
-		},
-		{
-			name: "Date&Time",
-			color: "green"
-		}
-	],
+	service: {
+		serviceList:[
+		// {
+		// 	name: "Mail",
+		// 	color: "maroon"
+		// },
+		// {
+		// 	name: "Twitter",
+		// 	color: "blue"
+		// },
+		// {
+		// 	name: "Facebook",
+		// 	color: "Green"
+		// },
+		// {
+		// 	name: "Youtube",
+		// 	color: "maroon"
+		// },
+		// {
+		// 	name: "Instagram",
+		// 	color: "blue"
+		// },
+		// {
+		// 	name: "Github",
+		// 	color: "green"
+		// },
+		// {
+		// 	name: "Trello",
+		// 	color: "blue"
+		// },
+		// {
+		// 	name: "Date&Time",
+		// 	color: "green"
+		// }
+	]},
 	trigger: {
 		Trello: [
 			{
@@ -233,18 +234,4 @@ const initialState = {
 };
 
 export default initialState;
-// {
-// 			date: "Jun 08,2018",
-// 			time: "7:20 PM",
-// 			serviceName: "Instagram"
-// 		},
-// 		{
-// 			date: "Jun 05,2018",
-// 			time: "11:00 PM",
-// 			serviceName: "Github"
-// 		},
-// 		{
-// 			date: "Jun 01,2018",
-// 			time: "4:20 AM",
-// 			serviceName: "Twitter"
-// 		}
+
