@@ -15,7 +15,7 @@ class ServiceCard extends Component {
 	render() {
 		let serviceName = this.props.serviceName;
 		let serviceNameIcon = serviceName + "Icon";
-		console.log(serviceNameIcon);
+		// console.log(serviceNameIcon);
 		const IconName = Icons[serviceNameIcon];
 		return (
 			<div className="service-card">
@@ -52,6 +52,7 @@ class ServiceCard extends Component {
 												backgroundColor: "#db3236",
 												color: "white"
 											}}
+											onClick={(e)=>this.props.connect({serviceName},e)}
 										>
 											Connect the service
 										</Button>
