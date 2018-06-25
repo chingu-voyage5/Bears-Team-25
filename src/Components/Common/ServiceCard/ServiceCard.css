@@ -1,0 +1,50 @@
+ .applet-card textarea{
+	border: 0.25em solid #eee;
+	background: none;
+	color: white;
+    border-color: rgba(255,255,255,0.2);
+	border-radius: 10px;
+	width: -webkit-fill-available;
+	height:115px;
+	margin: 2.5%;
+	margin-right: 2.5%;
+	font-size: 1.125em;
+    line-height: 1.5;
+    font-family: "Avenir Next W01", "Avenir Next", "Avenir", helvetica, arial, sans-serif;
+    font-weight: 700;
+    padding: 1em;
+}
+.applet-card .card{
+	background-color: rgb(51,51,51)!important;
+	width:350px;
+	margin-top:5%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.card-footer{
+	background: rgba(0,0,0,0.2);
+	color:white;
+}
+.applet-card .center-button{
+	text-align: center;
+}
+.applet-card .submit-button{
+	margin-top: 2.5%!important;
+}
+.applet-card .submit-button>button{
+	border-radius: 30px!important;
+}
+.inline-text{
+	margin-right: 5px;
+}
+.inline{
+	position: relative;
+	top:2px;
+}
+.inline svg{
+	position: relative;
+	top:6px;
+}
+.applet-card .white-text{
+	height: inherit;
+}

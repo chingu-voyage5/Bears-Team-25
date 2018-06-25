@@ -1,39 +1,10 @@
 const initialState = {
 	service: {
-		serviceList:[
-		// {
-		// 	name: "Mail",
-		// 	color: "maroon"
-		// },
-		// {
-		// 	name: "Twitter",
-		// 	color: "blue"
-		// },
-		// {
-		// 	name: "Facebook",
-		// 	color: "Green"
-		// },
-		// {
-		// 	name: "Youtube",
-		// 	color: "maroon"
-		// },
-		// {
-		// 	name: "Instagram",
-		// 	color: "blue"
-		// },
-		// {
-		// 	name: "Github",
-		// 	color: "green"
-		// },
-		// {
-		// 	name: "Trello",
-		// 	color: "blue"
-		// },
-		// {
-		// 	name: "Date&Time",
-		// 	color: "green"
-		// }
-	]},
+		allServiceList:[
+		"Mail","Trello","Github","Facebook","Twitter","Instagram"
+	],
+	serviceList:[]
+},
 	trigger: {
 		Trello: [
 			{
