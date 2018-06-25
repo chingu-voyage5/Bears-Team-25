@@ -11,8 +11,7 @@ class Services extends Component{
 	  this.connectService=this.connectService.bind(this);
 	}
 	connectService(serviceName,event){
-		// serviceName.preventDefault();
-		console.log(serviceName);
+		console.log(serviceName.serviceName);
 	}
 	render() {
 		const serviceList=this.props.serviceList;
