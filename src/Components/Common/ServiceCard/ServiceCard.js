@@ -46,12 +46,9 @@ class ServiceCard extends Component {
 									<CardContent>
 											<h2>{serviceName}</h2>
 										<Button
-											variant="raised"	
+											variant="raised"
 											className="mail-btn"
-											style={{
-												backgroundColor: "#db3236",
-												color: "white"
-											}}
+											
 											onClick={(e)=>this.props.connect({serviceName},e)}
 										>
 											Connect the service
