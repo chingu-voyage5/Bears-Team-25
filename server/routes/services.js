@@ -10,6 +10,17 @@ var userObj = null;
 var async = require("async");
 //check if the user is authenticated
 
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    console.log("You are not logged in!");
+    res.statusCode = 401;
+    res.setHeader("Content-Type", "application/json");
+    res.json({ success: false, status: "You are not logged in!" });
+  }
+}
+
 function extractUserInfo(userFromReq) {
 	let isGoogleLinked, isFBLinked, isSlackToken;
 	userFromReq.google.id ? (isGoogleLinked = true) : (isGoogleLinked = false);
@@ -28,19 +39,8 @@ function extractUserInfo(userFromReq) {
 	});
 }
 
-serviceRouter.use(function(req, res, next) {
-	if (req.isAuthenticated()) {
-		return next();
-	} else {
-		console.log("You are not logged in here!");
-		res.statusCode = 401;
-		res.setHeader("Content-Type", "application/json");
-		res.json({ success: false, status: "You are not logged in here!" });
-	}
-});
-
 //find the particular user by their id
-serviceRouter.route("/").get((req, res, next) => {
+serviceRouter.get("/", isLoggedIn, (req, res, next) => {
 	let servicesSubscribed = [];
 	let userObj = extractUserInfo(req.user);
 	console.log(req.user);
