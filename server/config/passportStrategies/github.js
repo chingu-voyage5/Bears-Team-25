@@ -11,10 +11,11 @@ module.exports = function(passport) {
         passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
       },
       function(req, token, refreshToken, profile, done) {
-          console.log(refreshToken)
         var user = req.user;
         if (user) {
           user.github.token = token;
+          user.github.id = profile._json.id;
+          user.github.username = profile._json.login;
           user.save(function(err) {
             if (err) return done(err);
             return done(null, user);

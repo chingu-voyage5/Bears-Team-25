@@ -48,7 +48,9 @@ var userSchema = mongoose.Schema({
         }
     ],
     github: {
-        token: String
+        token: String,
+        username: String,
+        id: Number
     }
     
 });
