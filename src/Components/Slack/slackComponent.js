@@ -114,6 +114,10 @@ class Slack extends Component {
         <a href="http://localhost:3001/api/github/auth/">
             <Button variant="raised" >connect git</Button>
           </a>
+
+                  <a href="http://localhost:3001/api/trello/auth/">
+            <Button variant="raised" >connect trello</Button>
+          </a>
       </div>  
     );
   }

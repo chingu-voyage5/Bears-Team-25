@@ -51,6 +51,9 @@ var userSchema = mongoose.Schema({
         token: String,
         username: String,
         id: Number
+    },
+    trello: {
+        token: String
     }
     
 });

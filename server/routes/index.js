@@ -11,6 +11,8 @@ const mail = require('./email').mailRouter;
 const integrations = require('./integrations');
 const services = require('./services')
 const github = require('./github');
+const integrations = require('./integrations');
+const trello = require('./trello');
 // paths to subroutes (`api/${path}`)
 router.use('/users', users);
 router.use('/applets', applets);
@@ -21,5 +23,6 @@ router.use('/gmail', mail);
 router.use('/github', github);
 router.use('/integrations', integrations);
 router.use('/services', services);
+router.use('/trello', trello);
 
 module.exports = router;

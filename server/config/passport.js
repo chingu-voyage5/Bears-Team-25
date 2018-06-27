@@ -6,6 +6,7 @@ var googleAuth = require('./passportStrategies/googleAuth');
 var slack = require('./passportStrategies/slackStrategy');
 var gmail = require('./passportStrategies/gmail');
 var github = require('./passportStrategies/github');
+var trello = require('./passportStrategies/trello')
 var User = require("../models/users");
 
 // =========================================================================
@@ -34,6 +35,7 @@ googleAuth(passport);
 slack(passport);
 gmail(passport);
 github(passport);
+trello(passport);
 
 
 
