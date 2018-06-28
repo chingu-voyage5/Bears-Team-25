@@ -22,26 +22,10 @@ class ButtonApplet extends Component {
 							Press the button below to send the emergency message
 						</Typography>
 					</CardContent>
-					<CardContent className="white-text">
-						<TextArea content={this.props.content} />
-					</CardContent>
 					<CardContent>
 						<Slack />
 					</CardContent>
 				</Card>				
-			</div>
-		);
-	}
-}
-
-class TextArea extends Component {
-	render() {
-		return (
-			<div className="button-area">
-				<Button variant="contained" color="primary">
-					<span className="send-text">Send</span>
-					<Icon>send</Icon>
-				</Button>
 			</div>
 		);
 	}

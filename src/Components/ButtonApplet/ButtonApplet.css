@@ -46,3 +46,6 @@ select {
 .mail-btn{
 	margin-top:10px!important;
 }
+.card form{
+	z-index: 19!important;
+}
