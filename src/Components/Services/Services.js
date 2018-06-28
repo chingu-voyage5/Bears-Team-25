@@ -20,7 +20,7 @@ class Services extends Component{
 		));
 		return (
 			<div className="service-page">
-				<h1 className="text-center">Here is the list of services we offer</h1>
+				<h1 className="text-center" style={{margin:"80px 0px"}}>Here is the list of services we offer</h1>
 				{services}
 			</div>
 		);
