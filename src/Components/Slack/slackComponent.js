@@ -8,7 +8,6 @@ import {renderTextField, renderSelectField, validateMessage} from '../../commonF
 const selector = formValueSelector('SlackForm')
 const axios = require("axios");
 
-
 const sendMailAndMessage = (values) => {
   let source = values.Channel
   let user = values.DM;

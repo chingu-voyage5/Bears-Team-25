@@ -9,14 +9,19 @@ import * as Icons from "../Icons/Icons";
 import * as Colors from "../Colors/Colors";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import * as serviceButtons from "../ServiceButtons/ServiceButtons";
 import "./ServiceCard.css";
 
 class ServiceCard extends Component {
 	render() {
 		let serviceName = this.props.serviceName;
-		let serviceNameIcon = serviceName + "Icon";
-		// console.log(serviceNameIcon);
-		const IconName = Icons[serviceNameIcon];
+		let serviceNameButton = serviceName + "Button";
+		console.log("Service Button Name:" + serviceNameButton);
+		const ServiceButton = serviceButtons[serviceNameButton];
+
+		let iconName = serviceName + "Icon";
+		const IconName = Icons[iconName];
+
 		return (
 			<div className="service-card">
 				<Grid container spacing={24}>
@@ -45,14 +50,7 @@ class ServiceCard extends Component {
 								<Grid item md={10}>
 									<CardContent>
 											<h2>{serviceName}</h2>
-										<Button
-											variant="raised"
-											className="mail-btn"
-											
-											onClick={(e)=>this.props.connect({serviceName},e)}
-										>
-											Connect the service
-										</Button>
+											{ServiceButton}								
 										</CardContent>
 								</Grid>
 							</Grid>
