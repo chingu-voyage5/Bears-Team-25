@@ -21,21 +21,14 @@ class ButtonApplet extends Component {
 						<Typography component="p">
 							Press the button below to send the emergency message
 						</Typography>
-						<select>
-							<option value="volvo">Volvo</option>
-							<option value="saab">Saab</option>
-							<option value="mercedes">Mercedes</option>
-							<option value="audi">Audi</option>
-						</select>
 					</CardContent>
 					<CardContent className="white-text">
 						<TextArea content={this.props.content} />
 					</CardContent>
 					<CardContent>
-						
+						<Slack />
 					</CardContent>
-				</Card>
-				<Slack />
+				</Card>				
 			</div>
 		);
 	}
