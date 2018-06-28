@@ -45,9 +45,6 @@ serviceRouter.get("/", isLoggedIn, (req, res, next) => {
 	let userObj = extractUserInfo(req.user);
 	console.log(req.user);
 	console.log(userObj);
-	if(userObj.isGoogleLinked===true){
-		servicesSubscribed.push("Trello");
-	}
 	if (userObj.isFBLinked === true) {
 		servicesSubscribed.push("Facebook");
 	}
