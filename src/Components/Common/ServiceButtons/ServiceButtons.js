@@ -6,7 +6,7 @@ const SlackButton = (
 		<Button
 			variant="raised"
 			className="slack-btn"
-			style={{ backgroundColor: "#49c4a1", color: "white" }}
+			style={{ backgroundColor: "#db3236", color: "white" }}
 		>
 			connect Slack{" "}
 		</Button>

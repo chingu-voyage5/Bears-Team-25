@@ -1,7 +1,7 @@
 const initialState = {
 	service: {
 		allServiceList:[
-		"Mail","Trello","Github","Facebook","Twitter","Instagram"
+		"Mail","Trello","Github","Facebook","Twitter","Instagram","Slack"
 	],
 	serviceList:[]
 },

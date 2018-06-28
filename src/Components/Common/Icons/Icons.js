@@ -6,4 +6,5 @@ import InstagramIcon from "mdi-react/InstagramIcon";
 import GitIcon from "mdi-react/GitIcon";
 import TrelloIcon from "mdi-react/TrelloIcon";
 import ClockIcon from "mdi-react/ClockIcon";
-export {FacebookIcon,TwitterIcon,MailIcon,YoutubeIcon,InstagramIcon,GitIcon as GithubIcon,TrelloIcon,ClockIcon as DateTimeIcon};
+import SlackIcon from "mdi-react/SlackIcon";
+export {FacebookIcon,TwitterIcon,MailIcon,YoutubeIcon,InstagramIcon,GitIcon as GithubIcon,TrelloIcon,ClockIcon as DateTimeIcon,SlackIcon};

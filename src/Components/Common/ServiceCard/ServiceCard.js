@@ -40,8 +40,12 @@ class ServiceCard extends Component {
 											component="h1"
 										>
 											<Grid container spacing={24}>
-												<Grid item sm={8} className="icon-container">
-													<IconName className="icon"/>
+												<Grid
+													item
+													sm={8}
+													className="icon-container"
+												>
+													<IconName className="icon" />
 												</Grid>
 											</Grid>
 										</Typography>
@@ -49,9 +53,9 @@ class ServiceCard extends Component {
 								</Grid>
 								<Grid item md={10}>
 									<CardContent>
-											<h2>{serviceName}</h2>
-											{ServiceButton}								
-										</CardContent>
+										<h2>{serviceName}</h2>
+										{ServiceButton}
+									</CardContent>
 								</Grid>
 							</Grid>
 						</Card>
