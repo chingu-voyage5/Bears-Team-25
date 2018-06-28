@@ -60,6 +60,7 @@ class Slack extends Component {
         console.log(error);
       });
   };
+
   render() {
     const { isSlackToken, source, handleSubmit, channel, user, isGmailToken, message, valid} = this.props;
     const {users, channels } = this.state;
@@ -109,16 +110,8 @@ class Slack extends Component {
             <Button variant="raised" className="mail-btn" style={{backgroundColor: '#db3236', color: 'white'}}>connect Gmail</Button>
           </a>
             )}
+            </div>
 
-                 
-        <a href="http://localhost:3001/api/github/auth/">
-            <Button variant="raised" >connect git</Button>
-          </a>
-
-                  <a href="http://localhost:3001/api/trello/auth/">
-            <Button variant="raised" >connect trello</Button>
-          </a>
-      </div>  
     );
   }
 }

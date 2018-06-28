@@ -20,6 +20,7 @@ module.exports = function(passport) {
         var user = req.user;
         if (user) {
           user.trello.token = token;
+          user.trello.tokenSecret = tokenSecret;
           user.save(function(err) {
             if (err) return cb(err);
             return cb(null, user);
