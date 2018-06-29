@@ -19,13 +19,17 @@ class Step4 extends Component{
 		const service=this.props.service;
 		const serviceFrom=this.props.serviceFrom;
 		const serviceAction = this.props.serviceAction[service];
-
+		console.log("Here is the info");
+		console.log(serviceAction);
+		console.log(serviceFrom);
+		// console.log(serviceAction[serviceFrom]);
+		// console.log(serviceAction.serviceFrom);
 		if (this.props.currentStep !== 4) {
 			return null;
 		}
 		return(
 			<div className="step-4">
-				<ActionCard json={serviceAction} validate={this._validate}/>
+				<ActionCard json={serviceAction[serviceFrom]} validate={this._validate}/>
 			</div>
 		);
 	}

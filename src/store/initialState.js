@@ -26,7 +26,14 @@ const initialState = {
 		]
 	},
 	action: {
-		Mail: [],
+		Mail: {
+			Mail: [
+				{
+					heading: "Get a mail",
+					content: "When you get a mail from some specified address"
+				}
+			]
+		},
 		Twitter: [],
 		Facebook: [],
 		Github: [],
