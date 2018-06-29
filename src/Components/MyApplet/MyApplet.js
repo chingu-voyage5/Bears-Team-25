@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import AppletCard from "../Common/AppletCard/AppletCard";
 import * as myAppletActions from "../../actions/myAppletActions";
 import { bindActionCreators } from "redux";
+import ButtonApplet from "../ButtonApplet/ButtonApplet";
 import "./MyApplet.css";
 
 class MyApplet extends Component {
@@ -27,6 +28,9 @@ class MyApplet extends Component {
 					<h1>Your applets</h1>
 				</div>
 				<Grid container spacing={24}>
+				<Grid item sm={4}>
+					<ButtonApplet />
+				</Grid>
 					{AppletList}
 				</Grid>
 			</div>
