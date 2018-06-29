@@ -9,15 +9,15 @@ const selector = formValueSelector('TrelloForm')
 const axios = require("axios");
 
 
-const postCardToTrello = (values) => {
+const saveTrelloConfig = (values) => {
   axios
-    .post("http://localhost:3001/api/trello/postCard",
+    .post("http://localhost:3001/api/trello/saveTrelloConfig",
         values,
     {
       withCredentials: true
     })
     .then(response => {
-      console.log(response.data.newCard);
+      console.log(response.data.status);
     })
     .catch(error => {
       console.log(error);
@@ -49,20 +49,6 @@ class Trello extends Component {
       });
   };
 
-  postCard = () => {
-    axios
-      .post("http://localhost:3001/api/trello/postCard", {}, {
-        withCredentials: true
-      })
-      .then(response => {
-       console.log('post Card')
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-
 
   render() {
     const {  handleSubmit,  valid} = this.props;
@@ -79,13 +65,13 @@ class Trello extends Component {
             <Button variant="raised" >connect trello</Button>
           </a>
         <form onSubmit= {(values) => handleSubmit(values)}>
-            <Field  className='input-field'  name="cardTitle" component={renderTextField} label="Card Title" />
+            {/* <Field  className='input-field'  name="cardTitle" component={renderTextField} label="Card Title" /> */}
             <div>
             <Field  className='input-field'  name="listName" component={renderTextField} label="List Name" />
             </div>
-            <div>
+            {/* <div>
             <Field  className='input-field'  name="description" component={renderTextField} label="Description" />
-            </div>
+            </div> */}
             <div>
             <Field  name="position" component={renderSelectField} label="Position">
               <MenuItem value='top'>Top</MenuItem>
@@ -112,7 +98,7 @@ Trello = reduxForm({
 
 const mapStateToProps = state => {
   return {
-    onSubmit: (values)  => postCardToTrello(values),
+    onSubmit: (values)  => saveTrelloConfig(values),
     cardTitle: selector(state, 'cardTitle'),
     listName: selector(state, 'listName'),
     position: selector(state, 'position'),

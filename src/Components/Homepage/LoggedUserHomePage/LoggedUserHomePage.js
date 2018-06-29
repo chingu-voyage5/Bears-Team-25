@@ -25,7 +25,7 @@ class LoggedUserHomePage extends Component {
         <Grid container spacing={24}>
           {AppletList}
         </Grid>
-        <Slack />
+        {/* <Slack /> */}
         <Trello />
       </div>
     );

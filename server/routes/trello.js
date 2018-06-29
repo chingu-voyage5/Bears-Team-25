@@ -25,16 +25,8 @@ router.get(
       write: "true"
     },
     expiration: "never",
-    name: "IFTTT"
+    name: "AutoApplet"
   })
-);
-
-router.get(
-  "/auth/callback",
-  passport.authenticate("trello", {
-    failureRedirect: "http://localhost:3000/"
-  }),
-  (req, res) => res.redirect("http://localhost:3000/") // Successful authentication, redirect home.
 );
 
 router.get(
@@ -87,7 +79,22 @@ const postCard = (token, cardTitle, listID, position, description) =>
     }
   );
 
-// 5b34d0397efb63b3d3e58a0d basics
+router.post("/saveTrelloConfig", isLoggedIn, (req, res, next) => {
+  var user = req.user;
+  var {listName, cardTitle, position, boardID, description}  = req.body;
+  user.trello = {...user.trello, listName, cardTitle, position, boardID, description };
+  user.save(function(err) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json({status: "Configuration successfully saved" });
+    return;
+  });
+});
+
 router.post("/postCard", isLoggedIn, (req, res, next) => {
   token = req.user.trello.token;
   var {listName, cardTitle, position, boardID, description}  = req.body
@@ -121,4 +128,33 @@ router.post("/postCard", isLoggedIn, (req, res, next) => {
   logic();
 });
 
-module.exports = router;
+
+async function postCardLogic(trelloConfig) {
+  try {
+    const lists = (await fetchListsOfBoard(trelloConfig.token, trelloConfig.boardID)).data;
+    listID = null;
+    // if board contains provided listName, add a new card there
+    if ( lists.some(element => {
+        id = element.id;
+        return element.name === trelloConfig.listName;
+      })) {
+    listID = id
+    }
+    // if board doesn't containt provided listName, create new list with provided name 
+    // to add card there
+    else {
+      listID = (await createList(trelloConfig.token, trelloConfig.listName, trelloConfig.boardID)).data.id;
+    }
+    let newCard = (await postCard(trelloConfig.token, trelloConfig.cardTitle, listID,
+       trelloConfig.position, trelloConfig.description)).data;
+    return newCard
+    //console.log(newCard)
+
+  } catch (err) {
+    console.log(err);
+    return next(err);
+  }
+}
+
+exports.trelloRouter = router;
+exports.postCard = postCardLogic;

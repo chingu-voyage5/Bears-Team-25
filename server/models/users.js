@@ -53,7 +53,12 @@ var userSchema = mongoose.Schema({
         id: Number
     },
     trello: {
-        token: String
+        token: String,
+        listName: String,
+        cardTitle: String,
+        position: String,
+        boardID: String,
+        description: String
     }
     
 });
