@@ -121,6 +121,7 @@ class CreateApplet extends Component {
 					service={this.state.serviceTo}
 					afterValid={this._doubleNext}
 					step="4"
+					serviceFrom={this.state.serviceFrom}
 				/>
 				<Step5 currentStep={currentStep} afterValid={this._setAction} />
 				<Step6

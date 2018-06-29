@@ -18,13 +18,26 @@ const initialState = {
 		Instagram: [],
 		Github: [],
 		Slack: [],
-		Mail: []
+		Mail: [
+			{
+				heading: "Get a mail",
+				content: "When you get a mail from some specified address"
+			}
+		]
 	},
 	action: {
 		Mail: [],
 		Twitter: [],
 		Facebook: [],
-		Github: []
+		Github: [],
+		Slack: {
+			Mail: [
+				{
+					heading: "Get a mail",
+					content: "When you get a mail from some specified address"
+				}
+			]
+		}
 	},
 	create: {
 		appletList: []

@@ -17,6 +17,7 @@ class Step4 extends Component{
 	}
 	render(){
 		const service=this.props.service;
+		const serviceFrom=this.props.serviceFrom;
 		const serviceAction = this.props.serviceAction[service];
 
 		if (this.props.currentStep !== 4) {

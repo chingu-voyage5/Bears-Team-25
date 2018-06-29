@@ -19,6 +19,7 @@ class Step1 extends Component {
 	}
 	_validate(value) {
 		this.props.afterValid("serviceFrom",value);
+		console.log("Service from value is "+value);
 	}
 	render() {
 		if (this.props.currentStep !== 1) {

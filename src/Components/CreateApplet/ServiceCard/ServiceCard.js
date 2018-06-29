@@ -17,12 +17,13 @@ class ServiceCard extends Component {
 		this._validate = this._validate.bind(this);
 	}
 	_validate(service) {
-		let value = service.name;
+		let value = service;
 		console.log(value);
 		this.props.validate(value);
 	}
 	render() {
 		const ServiceList = this.props.json;
+		console.log("Showing the service list: "+ServiceList);
 		const createServiceList = ServiceList.map(function(service, index) {
 			let serviceName=service;
 			serviceName = serviceName.replace(/&/g,"");
