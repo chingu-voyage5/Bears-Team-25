@@ -51,19 +51,23 @@ class Trello extends Component {
 
 
   render() {
-    const {  handleSubmit,  valid} = this.props;
+    const {  handleSubmit,  valid, isGithubToken, isTrelloToken} = this.props;
     const {boards} = this.state;
     const boardsToRender = boards.map( (board, index) => 
       <MenuItem key = {`board-${index}`} value={board.id}>{board.name}</MenuItem>)
     return (
       <div>
+        {!isGithubToken &&
                  <a href="http://localhost:3001/api/github/auth/">
             <Button variant="raised" >connect git</Button>
           </a>
-
+        }
+        {!isTrelloToken &&
                   <a href="http://localhost:3001/api/trello/auth/">
             <Button variant="raised" >connect trello</Button>
           </a>
+        }
+        {isTrelloToken &&
         <form onSubmit= {(values) => handleSubmit(values)}>
             {/* <Field  className='input-field'  name="cardTitle" component={renderTextField} label="Card Title" /> */}
             <div>
@@ -83,6 +87,7 @@ class Trello extends Component {
             </Field>    
             <Button disabled={!valid} variant="raised" type="submit" color="primary">post to trello</Button>
         </form>
+        }
 
  
             </div>
@@ -99,6 +104,8 @@ Trello = reduxForm({
 const mapStateToProps = state => {
   return {
     onSubmit: (values)  => saveTrelloConfig(values),
+    isGithubToken: state.auth.isGithubToken,
+    isTrelloToken: state.auth.isTrelloToken,
     cardTitle: selector(state, 'cardTitle'),
     listName: selector(state, 'listName'),
     position: selector(state, 'position'),

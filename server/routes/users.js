@@ -15,21 +15,15 @@ function isLoggedIn(req, res, next) {
 }
 
 function extractUserInfo(userFromReq) {
-  let isGoogleLinked, isFBLinked, isSlackToken;
-  userFromReq.google.id ? (isGoogleLinked = true) : (isGoogleLinked = false);
-  userFromReq.facebook.id ? (isFBLinked = true) : (isFBLinked = false);
-  userFromReq.slack.token ? (isSlackToken = true) : (isSlackToken = false);
-  userFromReq.gmail.refreshToken
-    ? (isGmailToken = true)
-    : (isGmailToken = false);
-  return (userInfo = {
-    name: userFromReq.name,
-    email: userFromReq.local.email,
-    isGoogleLinked: isGoogleLinked,
-    isFBLinked: isFBLinked,
-    isSlackToken: isSlackToken,
-    isGmailToken: isGmailToken
-  });
+  let isGoogleLinked, isFBLinked, isSlackToken
+  (userFromReq.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
+  (userFromReq.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
+  (userFromReq.slack.token) ? (isSlackToken = true) : (isSlackToken = false);
+  (userFromReq.gmail.refreshToken) ? (isGmailToken = true) : (isGmailToken = false);
+  (userFromReq.trello.token) ? (isTrelloToken = true) : (isTrelloToken = false);
+  (userFromReq.github.token && userFromReq.github.isAppInstalled) ? (isGithubToken = true) : (isGithubToken = false);
+  return userInfo = { name: userFromReq.name, email: userFromReq.local.email, isGoogleLinked, isFBLinked,
+  isSlackToken, isGmailToken, isGithubToken, isTrelloToken }
 }
 
 // this route is just used to get the user basic info

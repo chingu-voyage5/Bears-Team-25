@@ -17,6 +17,8 @@ export function setUsersCredentials(user) {
       isGoogleLinked: user.isGoogleLinked,
       isSlackToken: user.isSlackToken,
       isGmailToken: user.isGmailToken,
+      isTrelloToken: user.isTrelloToken,
+      isGithubToken: user.isGithubToken,
       auth: true
     };
   }

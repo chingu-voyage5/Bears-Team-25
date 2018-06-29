@@ -60,6 +60,8 @@ export default function authReducer(state = {
                 isGoogleLinked: action.isGoogleLinked,
                 isSlackToken: action.isSlackToken,
                 isGmailToken: action.isGmailToken,
+                isGithubToken: action.isGithubToken,
+                isTrelloToken: action.isTrelloToken,
                 auth: action.auth,
                 success: true           
             }
