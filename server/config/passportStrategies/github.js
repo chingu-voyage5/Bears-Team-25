@@ -1,4 +1,5 @@
 var GitHubStrategy = require("passport-github").Strategy;
+var User = require("../../models/users");
 
 module.exports = function(passport) {
   passport.use(
@@ -16,10 +17,21 @@ module.exports = function(passport) {
           user.github.token = token;
           user.github.id = profile._json.id;
           user.github.username = profile._json.login;
-          user.save(function(err) {
+          isAppInstalled = false;
+          // check if app was installed on any other account ,that uses this git id,
+          // if app installed there, this means we already have webhooks for this user 
+          User.findOne({ "github.id": profile._json.id }, function(err, gitUser) {
             if (err) return done(err);
-            return done(null, user);
+            if (gitUser && gitUser.github.isAppInstalled) {
+              isAppInstalled = true;
+            }
+            user.github.isAppInstalled = isAppInstalled
+            user.save(function(err) {
+              if (err) return done(err);
+              return done(null, user);
+            });
           });
+     
         } else {
           const error = new Error("User should be logged in");
           return done(error, null);

@@ -50,7 +50,8 @@ var userSchema = mongoose.Schema({
     github: {
         token: String,
         username: String,
-        id: Number
+        id: Number,
+        isAppInstalled: Boolean
     },
     trello: {
         token: String,

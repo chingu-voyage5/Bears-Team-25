@@ -5,7 +5,7 @@ var router = express.Router();
 var GithubWebHook = require("express-github-webhook");
 var webhookHandler = GithubWebHook({ path: "/updates", secret: "secret" });
 var User = require("../models/users");
-var postCard = require("../routes/trello").postCard;
+var postTrelloCard = require("../routes/trello").postCard;
 
 router.use(webhookHandler); // use our middleware
 
@@ -17,20 +17,23 @@ webhookHandler.on("*", function(event, repo, data) {
 webhookHandler.on("issues", function(repo, data) {
   console.log("issue stuff");
   // console.log(repo)
-  console.log(data);
+  // console.log(data);
   let userGitID = data.sender.id;
   if (data.action === "opened") {
-    User.findOne({ "github.id": userGitID }, function(err, user) {
+    // find all users with this git ID
+    User.find({ "github.id": userGitID }, function(err, users) {
       if (err) return done(err);
-      if (user) {
-        if (user.trello.token && user.trello.listName) {
-          let cardTitle = `[${data.repository.full_name}]${data.issue.title}`
-          let description = `[Issue] \n\n Repo: [${data.repository.full_name}]\n\n` +
-          `IssueTitle: ${data.issue.title}\n\nBy ${data.issue.user.login}\n\n${data.issue.body}`
-          let trelloConfig = {...user.trello, cardTitle, description}
-          postCard(trelloConfig).then(card => {
-            console.log("success");
-          });
+      if (users.length !== 0) {
+        for (user of users) {
+          if (user.trello.token && user.trello.listName) {
+            let cardTitle = `[${data.repository.full_name}]${data.issue.title}`
+            let description = `[Issue] \n\n Repo: [${data.repository.full_name}]\n\n` +
+            `IssueTitle: ${data.issue.title}\n\nBy ${data.issue.user.login}\n\n${data.issue.body}`
+            let trelloConfig = {...user.trello, cardTitle, description}
+            postTrelloCard(trelloConfig).then(card => {
+              // console.log("success");
+            });
+          }
         }
       } else {
         console.log("User not found");
@@ -42,22 +45,39 @@ webhookHandler.on("issues", function(repo, data) {
 webhookHandler.on("installation", function(repo, data) {
   // console.log('repo', repo);
   // console.log('data', data);
-  let id = data.installation.account.id;
-  User.findOne({ "github.id": id }, function(err, user) {
-    if (err) return done(err);
-
-    if (user) {
-      console.log("User installed app and have git token in our DB");
-    } else {
-      console.log(
-        "User installed app, but doesn't have github account / or account itself in our DB"
-      );
-    }
-  });
-
+  let userGitID = data.installation.account.id;
   if (data.action == "created") {
+    // if app is installed to account with this id, we should update all account, that use this git id
+    User.find({ "github.id": userGitID }, function(err, users) {
+      if (err) return done(err);
+      if (users.length !== 0) {
+        for (user of users) {
+            user.github.isAppInstalled = true;
+            user.save(function(err) {
+              if (err) return next(err);
+            });
+        }
+      } else {
+        console.log("User not found");
+      }
+    });
   }
   if (data.action === "deleted") {
+    // if user uninstalls application, that means we should delete git tokens from all acccount that
+    // use this git ID
+    User.find({ "github.id": userGitID }, function(err, users) {
+      if (err) return done(err);
+      if (users.length !== 0) {
+        for (user of users) {
+            user.github = undefined;
+            user.save(function(err) {
+              if (err) return next(err);
+            });
+        }
+      } else {
+        console.log("User not found");
+      }
+    });
   }
   data.installation.id;
   data.installation.account; // .login .id .avatar_url;
