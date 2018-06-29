@@ -18,6 +18,10 @@ class Step2 extends Component{
 		const service=this.props.service;
 		console.log(service); 
 		const TriggerList = this.props.TriggerList[service];
+		if(TriggerList===undefined){
+			console.log("undefined list");
+			return null;
+		}
 		if (this.props.currentStep !== 2) {
 			return null;
 		}
