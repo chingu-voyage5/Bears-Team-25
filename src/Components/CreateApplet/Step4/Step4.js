@@ -22,8 +22,7 @@ class Step4 extends Component{
 		const service=this.props.service;
 		const serviceFrom=this.props.serviceFrom;
 		const serviceAction = this.props.serviceAction[service];
-		console.log("Info");
-		console.log(serviceAction.hasOwnProperty(serviceFrom));
+		//if the object does not have the functionality to do action from current trigger then return null
 		if(serviceAction.hasOwnProperty(serviceFrom)===false){
 			return null;
 		}

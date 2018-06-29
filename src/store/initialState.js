@@ -47,6 +47,9 @@ const initialState = {
 		Twitter: [],
 		Facebook: [],
 		Github: [],
+
+		//The following section means that for action service "slack" and for trigger service "mail", we have the following card for applets
+		//That is if you choose service "mail" in step1  and "slack" in step 3, then the action card would have this cards available
 		Slack: {
 			Mail: [
 				{

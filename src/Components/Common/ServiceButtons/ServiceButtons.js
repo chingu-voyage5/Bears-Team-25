@@ -1,6 +1,11 @@
+//list of all buttons through which we send request to particular api to connect to it
+//export the buttons from here and render them as required
+//For hints on how to render see the ServiceCards.js file in current directory
+
 import React from "react";
 import Button from "@material-ui/core/Button";
 
+//this ia slack button
 const SlackButton = (
 	<a href="http://localhost:3001/api/slack/auth/">
 		<Button

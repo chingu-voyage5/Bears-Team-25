@@ -1,3 +1,5 @@
+//renders a component in which the users can be able to connect to various different services
+//Bascially a component in which various service cards are mapped in.
 import React,{Component} from "react";
 import { connect } from 'react-redux';
 import ServiceCard from "../Common/ServiceCard/ServiceCard";
@@ -8,13 +10,10 @@ class Services extends Component{
 	  this.state = {};
 	  this.connectService=this.connectService.bind(this);
 	}
-	connectService(serviceName,event){
-		console.log(serviceName.serviceName);
-	}
 	render() {
 		const serviceList=this.props.serviceList;
 		const services = serviceList.map( (serviceName, i) => (
-			<ServiceCard key={i} connect={this.connectService} serviceName={serviceName} />
+			<ServiceCard key={i} serviceName={serviceName} />
 		));
 		return (
 			<div className="service-page">

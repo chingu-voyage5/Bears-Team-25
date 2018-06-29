@@ -13,13 +13,11 @@ class Step1 extends Component {
 	}
 	constructor(props) {
 	  super(props);
-	
 	  this.state = {};
 	  this._validate=this._validate.bind(this);
 	}
 	_validate(value) {
 		this.props.afterValid("serviceFrom",value);
-		console.log("Service from value is "+value);
 	}
 	render() {
 		if (this.props.currentStep !== 1) {

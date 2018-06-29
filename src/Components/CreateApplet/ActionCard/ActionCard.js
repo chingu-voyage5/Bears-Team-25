@@ -24,7 +24,6 @@ class ActionCard extends Component {
 		}
 	}
 	render() {
-		console.log(this.props.json);
 		const ActionList = this.props.json.map((action, i) => (
 				<Grid key = {`action-list-${i}`}item md={4} sm={6}>
 					<Card className="action-card" onClick={()=>this._validate(action)}>

@@ -1,3 +1,6 @@
+//renders the service cards for connection.
+//Connections are imported from servicebuttons
+//see serviceButtons for info
 import React, { Component } from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -12,7 +15,6 @@ class ServiceCard extends Component {
 	render() {
 		let serviceName = this.props.serviceName;
 		let serviceNameButton = serviceName + "Button";
-		console.log("Service Button Name:" + serviceNameButton);
 		const ServiceButton = serviceButtons[serviceNameButton];
 
 		let iconName = serviceName + "Icon";

@@ -5,7 +5,6 @@ import axios from "./axiosInstances"; // Pre configured axios instance
 
 //lists out all the user's applet
 export function myAppletActions() {
-	console.log("Inside myAppletActions");
 	   return dispatch => {
 		axios
 			.get("/myapplets",{ withCredentials: true })
