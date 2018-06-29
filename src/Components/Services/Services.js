@@ -8,7 +8,6 @@ class Services extends Component{
 	constructor(props) {
 	  super(props);
 	  this.state = {};
-	  this.connectService=this.connectService.bind(this);
 	}
 	render() {
 		const serviceList=this.props.serviceList;
