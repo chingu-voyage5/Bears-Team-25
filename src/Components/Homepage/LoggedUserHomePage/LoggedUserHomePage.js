@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import * as listAppletAction from "../../../actions/listAppletAction";
 import { bindActionCreators } from "redux";
 import "./LoggedUserHomePage.css";
-import Slack from '../../Slack/slackComponent';
 
 class LoggedUserHomePage extends Component {
   componentWillMount() {
@@ -23,8 +22,7 @@ class LoggedUserHomePage extends Component {
         </div>
         <Grid container spacing={24}>
           {AppletList}
-        </Grid>
-        <Slack />
+        </Grid>        
       </div>
     );
   }

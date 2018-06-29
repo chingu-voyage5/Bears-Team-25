@@ -16,8 +16,10 @@ class Step2 extends Component{
 	}
 	render(){
 		const service=this.props.service;
-		console.log(service); 
 		const TriggerList = this.props.TriggerList[service];
+		if(TriggerList===undefined){
+			return null;
+		}
 		if (this.props.currentStep !== 2) {
 			return null;
 		}

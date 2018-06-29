@@ -1,8 +1,8 @@
 .button-applet-card .card {
-	height: 350px;
+	height: fit-content;
 	background-color: rgb(51, 51, 51) !important;
 	width: 350px;
-	margin-top: 5%;
+	margin-top: 8%;
 	border-radius: 10%;
 	margin-left: auto;
 	margin-right: auto;
@@ -10,25 +10,27 @@
 .button-applet-card {
 	margin-left: auto;
 }
-.white-text {
-	height: fill-available;
+.button-applet-card .white-text{
+	padding: 10px;
 }
 .card-content-title {
 	margin-top: 10%;
 }
 .button-area {
 	text-align: center;
-	position: relative;
 }
 .button-area button {
 	color: white !important;
 	font-size: 20px;
+	padding: 0px;
 }
 .send-text {
 	padding-right: 3px;
 }
-.text p {
+.button-applet-card .text p{
 	color: white;
+	font-weight: 100;
+	font-size: 1.1rem;
 }
 select {
 	display: block;
@@ -36,4 +38,14 @@ select {
 	margin-top: 10%;
 	width: 265px;
 	height: 30px;
+}
+.slack-btn{
+	margin-right:15px!important;
+	margin-top:10px!important;
+}
+.mail-btn{
+	margin-top:10px!important;
+}
+.card form{
+	z-index: 19!important;
 }

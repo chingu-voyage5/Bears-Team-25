@@ -17,14 +17,13 @@ class ServiceCard extends Component {
 		this._validate = this._validate.bind(this);
 	}
 	_validate(service) {
-		let value = service.name;
-		console.log(value);
+		let value = service;
 		this.props.validate(value);
 	}
 	render() {
 		const ServiceList = this.props.json;
 		const createServiceList = ServiceList.map(function(service, index) {
-			let serviceName=service.name;
+			let serviceName=service;
 			serviceName = serviceName.replace(/&/g,"");
 			let serviceIcon=serviceName+"Icon";
 			const IconName=Icons[serviceIcon];
@@ -32,7 +31,7 @@ class ServiceCard extends Component {
 				<Grid key={`server-list-${index}`} item sm={3}>
 					<Card
 						className="card"
-						value={service.name}
+						value={serviceName}
 						style={{ backgroundColor: Colors[serviceName] }}
 						onClick={this._validate.bind(this,service)}
 					>
@@ -47,7 +46,7 @@ class ServiceCard extends Component {
 								component="h2"
 								style={{ color: "#fff" }}
 							>
-								{service.name}
+								{serviceName}
 							</Typography>
 						</CardContent>
 					</Card>

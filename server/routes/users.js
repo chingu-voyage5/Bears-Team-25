@@ -15,13 +15,21 @@ function isLoggedIn(req, res, next) {
 }
 
 function extractUserInfo(userFromReq) {
-  let isGoogleLinked, isFBLinked, isSlackToken
-  (userFromReq.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
-  (userFromReq.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
-  (userFromReq.slack.token) ? (isSlackToken = true) : (isSlackToken = false);
-  (userFromReq.gmail.refreshToken) ? (isGmailToken = true) : (isGmailToken = false);
-  return userInfo = { name: userFromReq.name, email: userFromReq.local.email, isGoogleLinked: isGoogleLinked, isFBLinked: isFBLinked,
-  isSlackToken: isSlackToken, isGmailToken: isGmailToken }
+  let isGoogleLinked, isFBLinked, isSlackToken;
+  userFromReq.google.id ? (isGoogleLinked = true) : (isGoogleLinked = false);
+  userFromReq.facebook.id ? (isFBLinked = true) : (isFBLinked = false);
+  userFromReq.slack.token ? (isSlackToken = true) : (isSlackToken = false);
+  userFromReq.gmail.refreshToken
+    ? (isGmailToken = true)
+    : (isGmailToken = false);
+  return (userInfo = {
+    name: userFromReq.name,
+    email: userFromReq.local.email,
+    isGoogleLinked: isGoogleLinked,
+    isFBLinked: isFBLinked,
+    isSlackToken: isSlackToken,
+    isGmailToken: isGmailToken
+  });
 }
 
 // this route is just used to get the user basic info
@@ -38,14 +46,14 @@ router.get("/user", isLoggedIn, (req, res, next) => {
 router.post("/unlink", isLoggedIn, (req, res, next) => {
   user = req.user;
   var social = req.body.social;
-  if (social)  {
+  if (social) {
     user[social] = undefined;
-    }
+  }
   user.save().then(
     () => {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
-      res.json({status: "Account successfully unlinked" });
+      res.json({ status: "Account successfully unlinked" });
       return;
     },
     err => {
@@ -67,6 +75,7 @@ router.post("/login", function(req, res, next) {
           console.log("error when logging in");
           return next(err);
         }
+
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
         res.json({
@@ -199,7 +208,6 @@ router.post("/change_email", isLoggedIn, function(req, res, next) {
       });
     }
 
-    //
     User.findById(req.user._id, function(err, user) {
       if (err) {
         return res.json({ success: false, status: err });
@@ -247,17 +255,17 @@ router.get("/auth/facebook/callback", function(req, res, next) {
           console.log("error when logging in");
           return next(err);
         }
-        message = info.message
+        message = info.message;
         if (message) {
-          res.redirect('http://localhost:3000/' + info.message);
-        }
-        else {
-          res.redirect('http://localhost:3000/')
+          res.redirect("http://localhost:3000/" + info.message);
+          console.log("Here in message");
+        } else {
+          res.redirect("http://localhost:3000/");
         }
         return;
       });
     } else {
-      res.redirect('http://localhost:3000/login')
+      res.redirect("http://localhost:3000/login");
       return;
     }
   })(req, res, next);
@@ -271,7 +279,6 @@ router.get(
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-
 router.get("/auth/google/callback", function(req, res, next) {
   passport.authenticate("google", function(err, user, info) {
     if (err) {
@@ -284,17 +291,16 @@ router.get("/auth/google/callback", function(req, res, next) {
           console.log("error when logging in");
           return next(err);
         }
-        message = info.message
+        message = info.message;
         if (message) {
-          res.redirect('http://localhost:3000/' + info.message)
+          console.log("Here in message");
+          res.redirect("http://localhost:3000/" + info.message);
+        } else {
+         res.redirect("http://localhost:3000/");
         }
-        else {
-          res.redirect('http://localhost:3000/')
-        }
-        return;
       });
     } else {
-      res.redirect('http://localhost:3000/login')
+      res.redirect("http://localhost:3000/login");
       return;
     }
   })(req, res, next);
