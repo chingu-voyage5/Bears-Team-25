@@ -16,10 +16,15 @@ class Step4 extends Component{
 		this.props.afterValid(key1,value1,key2,value2);
 	}
 	render(){
+		if (this.props.currentStep !== 4) {
+			return null;
+		}
 		const service=this.props.service;
 		const serviceFrom=this.props.serviceFrom;
 		const serviceAction = this.props.serviceAction[service];
-		if (this.props.currentStep !== 4) {
+		console.log("Info");
+		console.log(serviceAction.hasOwnProperty(serviceFrom));
+		if(serviceAction.hasOwnProperty(serviceFrom)===false){
 			return null;
 		}
 		return(

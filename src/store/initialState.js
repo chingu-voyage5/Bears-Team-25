@@ -16,8 +16,18 @@ const initialState = {
 		Facebook: [],
 		Twitter: [],
 		Instagram: [],
-		Github: [],
-		Slack: [],
+		Github: [
+			{
+				heading: "Issue Raised in repo",
+				content: "When an issue is raised in specified repo in github"
+			}
+		],
+		Slack: [
+			{
+				heading: "Recieved a message",
+				content: "When you get a DM from some specified username"
+			}
+		],
 		Mail: [
 			{
 				heading: "Get a mail",
@@ -40,8 +50,17 @@ const initialState = {
 		Slack: {
 			Mail: [
 				{
-					heading: "Get a mail",
+					heading: "Send a mail",
 					content: "When you get a mail from some specified address"
+				}
+			]
+		},
+		Trello: {
+			Github: [
+				{
+					heading: "Make a card in trello",
+					content:
+						"Make a card in your trello board with some message"
 				}
 			]
 		}
