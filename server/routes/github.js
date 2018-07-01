@@ -52,6 +52,10 @@ webhookHandler.on("installation", function(repo, data) {
       if (err) return done(err);
       if (users.length !== 0) {
         for (user of users) {
+            let index = user.servicesSubscribed.map(service => service.service).indexOf('Github');
+            if (index === -1) user.servicesSubscribed.push({service: 'Github', isWebhooks: true, isActions: false});
+            index = user.servicesNotSubscribed.indexOf('Github');
+            if (index !== -1) user.servicesNotSubscribed.splice(index, 1) ;
             user.github.isAppInstalled = true;
             user.save(function(err) {
               if (err) return next(err);
@@ -70,6 +74,10 @@ webhookHandler.on("installation", function(repo, data) {
       if (users.length !== 0) {
         for (user of users) {
             user.github = undefined;
+            let index = user.servicesSubscribed.map(service => service.service).indexOf('Github');
+            if (index !== -1)  user.servicesSubscribed.splice(index, 1);
+            index = user.servicesNotSubscribed.indexOf('Github');
+            if (index === -1) user.servicesNotSubscribed.push('Github');
             user.save(function(err) {
               if (err) return next(err);
             });
@@ -104,6 +112,27 @@ router.get(
   (req, res) =>
     res.redirect("https://github.com/apps/autoapplet/installations/new") // Successful authentication, redirect home.
 );
+
+router.get("/disconnect", isLoggedIn, (req, res, next) => {
+  var user = req.user;
+  user.github = undefined;
+  let index = user.servicesSubscribed.map(service => service.service).indexOf('Github');
+  if (index !== -1)  user.servicesSubscribed.splice(index, 1);
+  index = user.servicesNotSubscribed.indexOf('Github');
+  if (index === -1) user.servicesNotSubscribed.push('Github');
+  user.save().then(
+    () => {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.json({ status: "Github successfully disconnected" });
+      return;
+    },
+    err => {
+      console.log(err);
+      return next(err);
+    }
+  );
+});
 
 // router.post("/updates", function(req, res, next) {
 //   console.log(req.body.installation)

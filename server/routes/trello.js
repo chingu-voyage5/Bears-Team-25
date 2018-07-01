@@ -37,6 +37,27 @@ router.get(
   (req, res) => res.redirect("http://localhost:3000/") // Successful authentication, redirect home.
 );
 
+router.get("/disconnect", isLoggedIn, (req, res, next) => {
+  var user = req.user;
+  user.trello = undefined;
+  let index = user.servicesSubscribed.map(service => service.service).indexOf('Trello');
+  if (index !== -1)  user.servicesSubscribed.splice(index, 1);
+  index = user.servicesNotSubscribed.indexOf('Trello');
+  if (index === -1) user.servicesNotSubscribed.push('Trello');
+  user.save().then(
+    () => {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.json({ status: "Trello successfully disconnected" });
+      return;
+    },
+    err => {
+      console.log(err);
+      return next(err);
+    }
+  );
+});
+
 router.get("/fetchBoards", isLoggedIn, (req, res, next) => {
   var token = req.user.trello.token;
   axios

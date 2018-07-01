@@ -38,6 +38,27 @@ router.get(
   (req, res) => res.redirect("http://localhost:3000/") // Successful authentication, redirect home.
 );
 
+router.get("/disconnect", isLoggedIn, (req, res, next) => {
+  var user = req.user;
+  user.slack = undefined;
+  let index = user.servicesSubscribed.map(service => service.service).indexOf('Slack');
+  if (index !== -1)  user.servicesSubscribed.splice(index, 1);
+  index = user.servicesNotSubscribed.indexOf('Slack');
+  if (index === -1) user.servicesNotSubscribed.push('Slack');
+  user.save().then(
+    () => {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.json({ status: "Slack successfully disconnected" });
+      return;
+    },
+    err => {
+      console.log(err);
+      return next(err);
+    }
+  );
+});
+
 router.post("/sendMessage", isLoggedIn, (req, res, next) => {
   let token = req.user.slack.token;
   let message = req.body.message || "hello world";

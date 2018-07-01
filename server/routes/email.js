@@ -73,6 +73,28 @@ mailRouter.get(
   (req, res) => res.redirect("http://localhost:3000/") // Successful authentication, redirect home.
 );
 
+mailRouter.get("/disconnect", isLoggedIn, (req, res, next) => {
+  var user = req.user;
+  user.gmail = undefined;
+  let index = user.servicesSubscribed.map(service => service.service).indexOf('Gmail');
+  if (index !== -1)  user.servicesSubscribed.splice(index, 1);
+  index = user.servicesNotSubscribed.indexOf('Mail');
+  if (index === -1) user.servicesNotSubscribed.push('Mail');
+  user.save().then(
+    () => {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.json({ status: "Gmail successfully disconnected" });
+      return;
+    },
+    err => {
+      console.log(err);
+      return next(err);
+    }
+  );
+});
+
+
 
 mailRouter.post("/sendMail", isLoggedIn, (req, res, next) => {
   let options = mailOptions(req.user, req.body)
