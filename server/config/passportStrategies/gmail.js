@@ -18,7 +18,7 @@ module.exports = function(passport) {
           user.gmail.token = token;
           user.gmail.email = (profile.emails[0].value || "").toLowerCase();
           user.gmail.refreshToken = refreshToken;
-          let index = user.servicesSubscribed.indexOf('Mail');
+          let index = user.servicesSubscribed.map(service => service.service).indexOf('Mail');
           if (index === -1)  {user.servicesSubscribed.push({service: 'Mail', isWebhooks: false, isActions: true})};
           index = user.servicesNotSubscribed.indexOf('Mail');
           if (index !== -1) user.servicesNotSubscribed.splice(index, 1);

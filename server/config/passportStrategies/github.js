@@ -17,10 +17,10 @@ module.exports = function(passport) {
           user.github.token = token;
           user.github.id = profile._json.id;
           user.github.username = profile._json.login;
-          let index = user.servicesSubscribed.indexOf('Github')
-          if (index === -1) user.servicesSubscribed.push({service: 'Github', isWebhooks: true, isActions: false})
-          index = user.servicesNotSubscribed.indexOf('Github')
-          if (index !== -1) user.servicesNotSubscribed.splice(index, 1) 
+          let index = user.servicesSubscribed.map(service => service.service).indexOf('Github');
+          if (index === -1) user.servicesSubscribed.push({service: 'Github', isWebhooks: true, isActions: false});
+          index = user.servicesNotSubscribed.indexOf('Github');
+          if (index !== -1) user.servicesNotSubscribed.splice(index, 1) ;
           isAppInstalled = false;
           // check if app was installed on any other account ,that uses this git id,
           // if app installed there, this means we already have webhooks for this user 

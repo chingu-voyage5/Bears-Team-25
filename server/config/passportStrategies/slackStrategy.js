@@ -25,10 +25,10 @@ module.exports = function(passport) {
         var user = req.user;
         if (user) {
           user.slack.token = accessToken;
-          let index = user.servicesSubscribed.indexOf('Slack')
-          if (index === -1)  user.servicesSubscribed.push({service: 'Slack', isWebhooks: false, isActions: true})
-          index = user.servicesNotSubscribed.indexOf('Slack')
-          if (index !== -1) user.servicesNotSubscribed.splice(index, 1) 
+          let index = user.servicesSubscribed.map(service => service.service).indexOf('Slack');
+          if (index === -1)  user.servicesSubscribed.push({service: 'Slack', isWebhooks: false, isActions: true});
+          index = user.servicesNotSubscribed.indexOf('Slack');
+          if (index !== -1) user.servicesNotSubscribed.splice(index, 1); 
           user.save(function(err) {
             if (err) return done(err);
             return done(null, user);
