@@ -61,9 +61,17 @@ class Slack extends Component {
       });
   };
 
+  // checking if provided service is in array of subscribed services
+  isSubscribed(service) {
+    const {servicesSubscribed} = this.props;
+    return (servicesSubscribed.length !== 0) ? servicesSubscribed.some(element => element.service === service) : false;
+  }
+
   render() {
-    const { isSlackToken, source, handleSubmit, channel, user, isGmailToken, message, valid} = this.props;
+    const {source, handleSubmit, channel, user,  valid} = this.props;
     const {users, channels } = this.state;
+    const isSlack = this.isSubscribed('Slack');
+    const isGmail = this.isSubscribed('Mail');
    // console.log(source, channel, user);
     const usersToRender = users.map( (user, index) => 
       <MenuItem key = {`user-${index}`} value={user.id}>{user.name}</MenuItem>)
@@ -71,7 +79,7 @@ class Slack extends Component {
       <MenuItem key = {`channel-${index}`} value={channel.id}>{channel.name}</MenuItem>)
     return (
       <div>
-        {isSlackToken && isGmailToken &&  (
+        {isSlack && isGmail &&  (
         <form onSubmit= {(values) => handleSubmit(values)}>
             <Field  className='input-field'  name="message" component={renderTextField} label="Message" />
             <h3>Mail Options</h3>
@@ -97,15 +105,15 @@ class Slack extends Component {
             </Field>
             </div>
             }
-            <Button disabled = {(!user && !channel) || !isGmailToken || !valid} variant="raised" type="submit" color="primary">send message</Button>
+            <Button disabled = {(!user && !channel) || !this.isSubscribed('Mail') || !valid} variant="raised" type="submit" color="primary">send message</Button>
         </form>)
         }
-        {!isSlackToken && (
+        {!isSlack && (
           <a href="http://localhost:3001/api/slack/auth/">
             <Button variant="raised" className="slack-btn" style={{backgroundColor: '#49c4a1', color: 'white'}}>connect Slack </Button>
           </a>
         )}
-         {!isGmailToken && (
+         {!isGmail && (
         <a href="http://localhost:3001/api/gmail/auth/">
             <Button variant="raised" className="mail-btn" style={{backgroundColor: '#db3236', color: 'white'}}>connect Gmail</Button>
           </a>
@@ -124,8 +132,7 @@ Slack = reduxForm({
 const mapStateToProps = state => {
   return {
     onSubmit: (values)  => sendMailAndMessage(values),
-    isSlackToken: state.auth.isSlackToken,
-    isGmailToken: state.auth.isGmailToken,
+    servicesSubscribed: state.auth.servicesSubscribed,
     source: selector(state, 'Channel'),
     channel: selector(state, 'channels'),
     user: selector(state, 'DM'),

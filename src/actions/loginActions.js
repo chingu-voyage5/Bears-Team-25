@@ -15,10 +15,8 @@ export function setUsersCredentials(user) {
       email: user.email,
       isFBLinked: user.isFBLinked,
       isGoogleLinked: user.isGoogleLinked,
-      isSlackToken: user.isSlackToken,
-      isGmailToken: user.isGmailToken,
-      isTrelloToken: user.isTrelloToken,
-      isGithubToken: user.isGithubToken,
+      servicesNotSubscribed: user.servicesNotSubscribed,
+      servicesSubscribed: user.servicesSubscribed,
       auth: true
     };
   }

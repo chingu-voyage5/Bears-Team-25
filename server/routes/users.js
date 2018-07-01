@@ -15,15 +15,11 @@ function isLoggedIn(req, res, next) {
 }
 
 function extractUserInfo(userFromReq) {
-  let isGoogleLinked, isFBLinked, isSlackToken
+  const {servicesSubscribed, servicesNotSubscribed} = userFromReq;
   (userFromReq.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
   (userFromReq.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
-  (userFromReq.slack.token) ? (isSlackToken = true) : (isSlackToken = false);
-  (userFromReq.gmail.refreshToken) ? (isGmailToken = true) : (isGmailToken = false);
-  (userFromReq.trello.token) ? (isTrelloToken = true) : (isTrelloToken = false);
-  (userFromReq.github.token && userFromReq.github.isAppInstalled) ? (isGithubToken = true) : (isGithubToken = false);
-  return userInfo = { name: userFromReq.name, email: userFromReq.local.email, isGoogleLinked, isFBLinked,
-  isSlackToken, isGmailToken, isGithubToken, isTrelloToken }
+  return userInfo = { name: userFromReq.name, email: userFromReq.local.email,
+     isGoogleLinked, isFBLinked, servicesSubscribed, servicesNotSubscribed }
 }
 
 // this route is just used to get the user basic info
@@ -66,7 +62,7 @@ router.post("/login", function(req, res, next) {
     if (user) {
       req.logIn(user, function(err) {
         if (err) {
-          console.log("error when logging in");
+          console.log(err);
           return next(err);
         }
 

@@ -6,7 +6,9 @@ export default function authReducer(state = {
     signUp: { isFetching: false },
     profileSettings: {isFetching: false},
     isFBLinked: false,
-    isGoogleLinked: false
+    isGoogleLinked: false,
+    servicesSubscribed: [],
+    servicesNotSubscribed: []
 }, action) {
     switch (action.type) {
         case ACTIONS.UNLINK_FB:
@@ -58,10 +60,8 @@ export default function authReducer(state = {
                 email: action.email,
                 isFBLinked: action.isFBLinked,
                 isGoogleLinked: action.isGoogleLinked,
-                isSlackToken: action.isSlackToken,
-                isGmailToken: action.isGmailToken,
-                isGithubToken: action.isGithubToken,
-                isTrelloToken: action.isTrelloToken,
+                servicesNotSubscribed: action.servicesNotSubscribed,
+                servicesSubscribed: action.servicesSubscribed,
                 auth: action.auth,
                 success: true           
             }
