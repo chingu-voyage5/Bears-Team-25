@@ -11,7 +11,6 @@ const mail = require('./email').mailRouter;
 const integrations = require('./integrations');
 const services = require('./services')
 const github = require('./github');
-const integrations = require('./integrations');
 const trello = require('./trello').trelloRouter;
 // paths to subroutes (`api/${path}`)
 router.use('/users', users);

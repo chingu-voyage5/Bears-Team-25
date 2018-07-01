@@ -15,9 +15,9 @@ require('dotenv').load(); // loading .env file
 const index = require('./routes/index');
 const app = express();
 
-// mongoose.connect(process.env.URI);
-var url = 'mongodb://localhost:27017/voyage5';
-mongoose.connect(url);
+mongoose.connect(process.env.URI);
+// var url = 'mongodb://localhost:27017/voyage5';
+// mongoose.connect(url);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
