@@ -21,6 +21,10 @@ module.exports = function(passport) {
         if (user) {
           user.trello.token = token;
           user.trello.tokenSecret = tokenSecret;
+          let index = user.servicesSubscribed.indexOf('Trello')
+          if (index === -1)  user.servicesSubscribed.push({service: 'Trello', isWebhooks: false, isActions: true});
+          index = user.servicesNotSubscribed.indexOf('Trello')
+          if (index !== -1)user.servicesNotSubscribed.splice(index, 1) 
           user.save(function(err) {
             if (err) return cb(err);
             return cb(null, user);

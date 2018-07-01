@@ -50,6 +50,9 @@ router.get("/fetchBoards", isLoggedIn, (req, res, next) => {
       res.json({
         boards: response.data
       });
+    })
+    .catch(function (error) {
+      console.log(error);
     });
 });
 

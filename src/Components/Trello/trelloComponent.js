@@ -32,7 +32,7 @@ class Trello extends Component {
   }
 
   componentDidMount() {
-    this.fetchBoards();
+    // this.fetchBoards();
   }
 
   fetchBoards = () => {
