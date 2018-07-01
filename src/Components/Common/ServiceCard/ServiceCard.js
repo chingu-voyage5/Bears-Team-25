@@ -13,7 +13,7 @@ import "./ServiceCard.css";
 
 class ServiceCard extends Component {
 	render() {
-		let serviceName = this.props.serviceName;
+		const {isServiceConnected, serviceName} = this.props;
 		let serviceNameButton = serviceName + "Button";
 		const ServiceButton = serviceButtons[serviceNameButton];
 
@@ -53,7 +53,7 @@ class ServiceCard extends Component {
 								<Grid item md={10}>
 									<CardContent>
 										<h2>{serviceName}</h2>
-										{ServiceButton}
+										{ServiceButton(isServiceConnected)}
 									</CardContent>
 								</Grid>
 							</Grid>

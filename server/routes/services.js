@@ -43,8 +43,8 @@ function extractUserInfo(userFromReq) {
 serviceRouter.get("/", isLoggedIn, (req, res, next) => {
 	let servicesSubscribed = [];
 	let userObj = extractUserInfo(req.user);
-	console.log(req.user);
-	console.log(userObj);
+	// console.log(req.user);
+	// console.log(userObj);
 	if (userObj.isFBLinked === true) {
 		servicesSubscribed.push("Facebook");
 	}

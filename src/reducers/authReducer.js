@@ -29,7 +29,9 @@ export default function authReducer(state = {
                 name: null,
                 email: null,
                 isFBLinked: false,
-                isGoogleLinked: false
+                isGoogleLinked: false,
+                servicesNotSubscribed: [],
+                servicesSubscribed: []
             }
         case ACTIONS.LOGOUT_SUCCESS:
             return {

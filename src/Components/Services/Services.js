@@ -3,6 +3,7 @@
 import React,{Component} from "react";
 import { connect } from 'react-redux';
 import ServiceCard from "../Common/ServiceCard/ServiceCard";
+import { Redirect } from 'react-router';
 
 class Services extends Component{
 	constructor(props) {
@@ -10,14 +11,22 @@ class Services extends Component{
 	  this.state = {};
 	}
 	render() {
-		const serviceList=this.props.serviceList;
-		const services = serviceList.map( (serviceName, i) => (
-			<ServiceCard key={i} serviceName={serviceName} />
+		let name = localStorage.getItem('name');
+		if (!name) return <Redirect to='/' />;
+
+		const {servicesSubscribed, servicesNotSubscribed} = this.props
+		const connectedServices = servicesSubscribed.map( (service, i) => (
+			<ServiceCard key={i} serviceName={service.service} isServiceConnected = {true}/>
+		));
+		const notConnectedServices = servicesNotSubscribed.map( (service, i) => (
+			<ServiceCard key={i} isServiceConnected = {false} serviceName={service} />
 		));
 		return (
 			<div className="service-page">
-				<h1 className="text-center" style={{margin:"80px 0px"}}>Here is the list of services we offer</h1>
-				{services}
+				<h1 className="text-center" style={{margin:"80px 0px"}}>Already Connected Services</h1>
+				{connectedServices}
+				<h1 className="text-center" style={{margin:"80px 0px"}}>Not Yet Connected Services</h1>
+				{notConnectedServices}
 			</div>
 		);
 	}
@@ -25,7 +34,8 @@ class Services extends Component{
 
 const mapStateToProps=state=>{
 	return{
-		serviceList:state.service.allServiceList
+		servicesSubscribed:state.auth.servicesSubscribed,
+		servicesNotSubscribed: state.auth.servicesNotSubscribed
 	}
 }
 
