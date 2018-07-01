@@ -29,7 +29,7 @@ const MailButton = (
 	</a>
 );
 const TrelloButton = (
-	<a href="http://localhost:3001/api/gmail/auth/">
+	<a href="http://localhost:3001/api/trello/auth/">
 		<Button
 			variant="raised"
 			className="mail-btn"
@@ -51,7 +51,7 @@ const FacebookButton = (
 	</a>
 );
 const GithubButton = (
-	<a href="http://localhost:3001/api/gmail/auth/">
+	<a href="http://localhost:3001/api/github/auth/">
 		<Button
 			variant="raised"
 			className="mail-btn"

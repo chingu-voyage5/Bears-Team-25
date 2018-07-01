@@ -131,7 +131,7 @@ class Header extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <Link to="/new_applet">
+                  <Link to="/createapplet">
                     <MenuItem onClick={this.handleClose}>New Applet</MenuItem>
                   </Link>
                   <Link to="/services">
