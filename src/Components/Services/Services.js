@@ -4,22 +4,31 @@ import React,{Component} from "react";
 import { connect } from 'react-redux';
 import ServiceCard from "../Common/ServiceCard/ServiceCard";
 import { Redirect } from 'react-router';
+import {disconnectService} from '../../actions/serviceActions'
 
 class Services extends Component{
 	constructor(props) {
 	  super(props);
 	  this.state = {};
+	  
 	}
+
+	disconnect = (service) => {
+		const { disconnectService } = this.props;
+		disconnectService(service);
+	  }
+
+
 	render() {
 		let name = localStorage.getItem('name');
 		if (!name) return <Redirect to='/' />;
 
 		const {servicesSubscribed, servicesNotSubscribed} = this.props
 		const connectedServices = servicesSubscribed.map( (service, i) => (
-			<ServiceCard key={i} serviceName={service.service} isServiceConnected = {true}/>
+			<ServiceCard key={i} disconnectService = {() => this.disconnect(service.service)} serviceName={service.service} isServiceConnected = {true}/>
 		));
 		const notConnectedServices = servicesNotSubscribed.map( (service, i) => (
-			<ServiceCard key={i} isServiceConnected = {false} serviceName={service} />
+			<ServiceCard key={i} disconnectService = {() =>  this.disconnect(service.service)} isServiceConnected = {false} serviceName={service} />
 		));
 		return (
 			<div className="service-page">
@@ -39,4 +48,4 @@ const mapStateToProps=state=>{
 	}
 }
 
-export default connect(mapStateToProps)(Services);
+export default connect(mapStateToProps, {disconnectService})(Services);

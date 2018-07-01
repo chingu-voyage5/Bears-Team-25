@@ -7,6 +7,18 @@ var webhookHandler = GithubWebHook({ path: "/updates", secret: "secret" });
 var User = require("../models/users");
 var postTrelloCard = require("../routes/trello").postCard;
 
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    console.log("You are not logged in!");
+    res.statusCode = 401;
+    res.setHeader("Content-Type", "application/json");
+    res.json({ success: false, status: "You are not logged in!" });
+  }
+}
+
+
 router.use(webhookHandler); // use our middleware
 
 // Now could handle following events
@@ -121,10 +133,11 @@ router.get("/disconnect", isLoggedIn, (req, res, next) => {
   index = user.servicesNotSubscribed.indexOf('Github');
   if (index === -1) user.servicesNotSubscribed.push('Github');
   user.save().then(
-    () => {
+    (user) => {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
-      res.json({ status: "Github successfully disconnected" });
+      const {servicesNotSubscribed, servicesSubscribed} = req.user
+      res.json({ servicesNotSubscribed, servicesSubscribed });
       return;
     },
     err => {

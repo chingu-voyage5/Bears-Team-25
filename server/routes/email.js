@@ -76,15 +76,16 @@ mailRouter.get(
 mailRouter.get("/disconnect", isLoggedIn, (req, res, next) => {
   var user = req.user;
   user.gmail = undefined;
-  let index = user.servicesSubscribed.map(service => service.service).indexOf('Gmail');
+  let index = user.servicesSubscribed.map(service => service.service).indexOf('Mail');
   if (index !== -1)  user.servicesSubscribed.splice(index, 1);
   index = user.servicesNotSubscribed.indexOf('Mail');
   if (index === -1) user.servicesNotSubscribed.push('Mail');
   user.save().then(
-    () => {
+    (user) => {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
-      res.json({ status: "Gmail successfully disconnected" });
+      const {servicesNotSubscribed, servicesSubscribed} = user;
+      res.json({ servicesNotSubscribed, servicesSubscribed });
       return;
     },
     err => {

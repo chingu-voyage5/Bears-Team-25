@@ -12,7 +12,6 @@ export default function authReducer(state = {
 }, action) {
     switch (action.type) {
         case ACTIONS.UNLINK_FB:
-        console.log('unling fb')
         return {
           ...state,
           isFBLinked: false
@@ -93,6 +92,12 @@ export default function authReducer(state = {
             return {
               ...state,
               profileSettings: { isFetching: false, error: action.error },
+            }
+        case ACTIONS.DISCONNECT_SERVICE:
+            return {
+              ...state,
+              servicesNotSubscribed: action.servicesNotSubscribed,
+              servicesSubscribed: action.servicesSubscribed
             }
         default:
             return state;

@@ -46,10 +46,11 @@ router.get("/disconnect", isLoggedIn, (req, res, next) => {
   index = user.servicesNotSubscribed.indexOf('Slack');
   if (index === -1) user.servicesNotSubscribed.push('Slack');
   user.save().then(
-    () => {
+    (user) => {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
-      res.json({ status: "Slack successfully disconnected" });
+      const {servicesNotSubscribed, servicesSubscribed} = user;
+      res.json({ servicesNotSubscribed, servicesSubscribed });
       return;
     },
     err => {

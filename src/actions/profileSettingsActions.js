@@ -49,7 +49,7 @@ function unlinkGoogle() {
   };
 }
 
-function unlinkGoogle_success(error) {
+function unlinkGoogle_success() {
   return {
     type: ACTIONS.RENDER_SNACKBAR,
     styling: "success",

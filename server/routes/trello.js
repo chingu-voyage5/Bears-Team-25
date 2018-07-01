@@ -45,10 +45,11 @@ router.get("/disconnect", isLoggedIn, (req, res, next) => {
   index = user.servicesNotSubscribed.indexOf('Trello');
   if (index === -1) user.servicesNotSubscribed.push('Trello');
   user.save().then(
-    () => {
+    (user) => {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
-      res.json({ status: "Trello successfully disconnected" });
+      const {servicesNotSubscribed, servicesSubscribed} = req.user
+      res.json({ servicesNotSubscribed, servicesSubscribed });
       return;
     },
     err => {

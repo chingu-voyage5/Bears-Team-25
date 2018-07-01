@@ -6,78 +6,85 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 
 //this ia slack button
-const SlackButton = (isServiceConnected) => (
-	<a href={isServiceConnected ? "http://localhost:3001/api/slack/disconnect/" : "http://localhost:3001/api/slack/auth/"}>
+const SlackButton = (isServiceConnected, disconnectService) => (
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/slack/auth/"}>
 		<Button
 			variant="raised"
 			className="slack-btn"
 			style={{ backgroundColor: "#db3236", color: "white" }}
+			onClick = {isServiceConnected ? disconnectService : null}
 		>
 			{isServiceConnected ? 'disconnect Slack' : 'connect Slack'}
 		</Button>
 	</a>
 );
-const MailButton = (isServiceConnected) => (
-	<a href={isServiceConnected ? "http://localhost:3001/api/gmail/disconnect/": "http://localhost:3001/api/gmail/auth/"}>
+const MailButton = (isServiceConnected, disconnectService) => (
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/gmail/auth/"}>
 		<Button
 			variant="raised"
 			className="mail-btn"
 			style={{ backgroundColor: "#db3236", color: "white" }}
+			onClick = {isServiceConnected ? disconnectService : null}
 		>
 			{isServiceConnected ? 'disconnect Gmail' : 'connect Gmail'}
 		</Button>
 	</a>
 );
-const TrelloButton = (isServiceConnected) => (
-	<a href={isServiceConnected ? "http://localhost:3001/api/trello/disconnect/": "http://localhost:3001/api/trello/auth/"}>
+const TrelloButton = (isServiceConnected, disconnectService) => (
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/trello/auth/"}>
 		<Button
 			variant="raised"
 			className="mail-btn"
 			style={{ backgroundColor: "#db3236", color: "white" }}
+			onClick = {isServiceConnected ? disconnectService : null}
 		>
 			{isServiceConnected ? 'disconnect Trello' : 'connect Trello'}
 		</Button>
 	</a>
 );
-const FacebookButton = (isServiceConnected) => (
-	<a href={isServiceConnected ? "http://localhost:3001/api/gmail/disconnect/": "http://localhost:3001/api/gmail/auth/"}>
+const FacebookButton = (isServiceConnected, disconnectService) => (
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/gmail/auth/"}>
 		<Button
 			variant="raised"
 			className="mail-btn"
 			style={{ backgroundColor: "#db3236", color: "white" }}
+			onClick = {isServiceConnected ? disconnectService : null}
 		>
 			{isServiceConnected ? 'disconnect Facebook' : 'connect Facebook'}
 		</Button>
 	</a>
 );
-const GithubButton = (isServiceConnected) => (
-	<a href={isServiceConnected ? "http://localhost:3001/api/github/disconnect/": "http://localhost:3001/api/github/auth/"}>
+const GithubButton = (isServiceConnected, disconnectService) => (
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/github/auth/"}>
 		<Button
 			variant="raised"
 			className="mail-btn"
 			style={{ backgroundColor: "#db3236", color: "white" }}
+			onClick = {isServiceConnected ? disconnectService : null}
 		>
 			{isServiceConnected ? 'disconnect Github' : 'connect Github'}
 		</Button>
 	</a>
 );
-const TwitterButton = (isServiceConnected) => (
-	<a href={isServiceConnected ? "http://localhost:3001/api/gmail/disconnect/": "http://localhost:3001/api/gmail/auth/"}>
+const TwitterButton = (isServiceConnected, disconnectService) => (
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/gmail/auth/"}>
 		<Button
 			variant="raised"
 			className="mail-btn"
 			style={{ backgroundColor: "#db3236", color: "white" }}
+			onClick = {isServiceConnected ? disconnectService : null}
 		>
 		{isServiceConnected ? 'disconnect Twitter' : 'connect Twitter'}
 		</Button>
 	</a>
 );
-const InstagramButton = (isServiceConnected) => (
-	<a href={isServiceConnected ? "http://localhost:3001/api/gmail/disconnect/": "http://localhost:3001/api/gmail/auth/"}>
+const InstagramButton = (isServiceConnected, disconnectService) => (
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/gmail/auth/"}>
 		<Button
 			variant="raised"
 			className="mail-btn"
 			style={{ backgroundColor: "#db3236", color: "white" }}
+			onClick = {isServiceConnected ? disconnectService : null}
 		>
 			{isServiceConnected ? 'disconnect Instagram' : 'connect Instagram'}
 		</Button>
