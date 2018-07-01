@@ -13,22 +13,16 @@ class Services extends Component{
 	  
 	}
 
-	disconnect = (service) => {
-		const { disconnectService } = this.props;
-		disconnectService(service);
-	  }
-
-
 	render() {
 		let name = localStorage.getItem('name');
 		if (!name) return <Redirect to='/' />;
 
-		const {servicesSubscribed, servicesNotSubscribed} = this.props
+		const {servicesSubscribed, servicesNotSubscribed, disconnectService} = this.props
 		const connectedServices = servicesSubscribed.map( (service, i) => (
-			<ServiceCard key={i} disconnectService = {() => this.disconnect(service.service)} serviceName={service.service} isServiceConnected = {true}/>
+			<ServiceCard key={i} disconnectService = {() => disconnectService(service.service)} serviceName={service.service} isServiceConnected = {true}/>
 		));
 		const notConnectedServices = servicesNotSubscribed.map( (service, i) => (
-			<ServiceCard key={i} disconnectService = {() =>  this.disconnect(service.service)} isServiceConnected = {false} serviceName={service} />
+			<ServiceCard key={i} disconnectService = {() =>  disconnectService(service.service)} isServiceConnected = {false} serviceName={service} />
 		));
 		return (
 			<div className="service-page">
