@@ -33,9 +33,9 @@ router.get("/auth", passport.authorize("Slack"));
 router.get(
   "/auth/callback",
   passport.authenticate("Slack", {
-    failureRedirect: "http://localhost:3000/login"
+    failureRedirect: "http://localhost:3000/error/Something went wrong."
   }),
-  (req, res) => res.redirect("http://localhost:3000/") // Successful authentication, redirect home.
+  (req, res) => res.redirect("http://localhost:3000/success/Slack successfully connected.") // Successful authentication, redirect home.
 );
 
 router.get("/disconnect", isLoggedIn, (req, res, next) => {

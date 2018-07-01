@@ -32,9 +32,9 @@ router.get(
 router.get(
   "/auth/callback",
   passport.authenticate("trello", {
-    failureRedirect: "http://localhost:3000/"
+    failureRedirect: "http://localhost:3000/error/Something went wrong."
   }),
-  (req, res) => res.redirect("http://localhost:3000/") // Successful authentication, redirect home.
+  (req, res) => res.redirect("http://localhost:3000/success/Trello successfully connected.") // Successful authentication, redirect home.
 );
 
 router.get("/disconnect", isLoggedIn, (req, res, next) => {

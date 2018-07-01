@@ -119,7 +119,7 @@ router.get("/auth", passport.authenticate("github"));
 router.get(
   "/auth/callback",
   passport.authenticate("github", {
-    failureRedirect: "http://localhost:3000/"
+    failureRedirect: "http://localhost:3000/error/Something went wrong."
   }),
   (req, res) =>
     res.redirect("https://github.com/apps/autoapplet/installations/new") // Successful authentication, redirect home.

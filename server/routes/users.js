@@ -248,7 +248,6 @@ router.get("/auth/facebook/callback", function(req, res, next) {
         message = info.message;
         if (message) {
           res.redirect("http://localhost:3000/" + info.message);
-          console.log("Here in message");
         } else {
           res.redirect("http://localhost:3000/");
         }
@@ -283,7 +282,6 @@ router.get("/auth/google/callback", function(req, res, next) {
         }
         message = info.message;
         if (message) {
-          console.log("Here in message");
           res.redirect("http://localhost:3000/" + info.message);
         } else {
          res.redirect("http://localhost:3000/");

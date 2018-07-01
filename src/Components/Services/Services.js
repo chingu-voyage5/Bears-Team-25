@@ -32,9 +32,9 @@ class Services extends Component{
 		));
 		return (
 			<div className="service-page">
-				<h1 className="text-center" style={{margin:"80px 0px"}}>Already Connected Services</h1>
+				{connectedServices.length > 0 && <h1 className="text-center" style={{margin:"80px 0px"}}>Already Connected Services</h1>}
 				{connectedServices}
-				<h1 className="text-center" style={{margin:"80px 0px"}}>Not Yet Connected Services</h1>
+				{notConnectedServices.length > 0 && <h1 className="text-center" style={{margin:"80px 0px"}}>Not Yet Connected Services</h1>}
 				{notConnectedServices}
 			</div>
 		);
