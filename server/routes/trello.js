@@ -104,56 +104,6 @@ const postCard = (token, cardTitle, listID, position, description) =>
     }
   );
 
-router.post("/saveTrelloConfig", isLoggedIn, (req, res, next) => {
-  var user = req.user;
-  var {listName, cardTitle, position, boardID, description}  = req.body;
-  user.trello = {...user.trello, listName, cardTitle, position, boardID, description };
-  user.save(function(err) {
-    if (err) {
-      console.log(err);
-      return next(err);
-    }
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "application/json");
-    res.json({status: "Configuration successfully saved" });
-    return;
-  });
-});
-
-router.post("/postCard", isLoggedIn, (req, res, next) => {
-  token = req.user.trello.token;
-  var {listName, cardTitle, position, boardID, description}  = req.body
-
-  async function logic() {
-    try {
-      const lists = (await fetchListsOfBoard(token, boardID)).data;
-      listID = null;
-      // if board contains provided listName, add a new card there
-      if ( lists.some(element => {
-          id = element.id;
-          return element.name === listName;
-        })) {
-      listID = id
-      }
-      // if board doesn't containt provided listName, create new list with provided name 
-      // to add card there
-      else {
-        listID = (await createList(token, listName, boardID)).data.id;
-      }
-      let newCard = (await postCard(token, cardTitle, listID, position, description)).data;
-      //console.log(newCard)
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json({newCard});
-    } catch (err) {
-      console.log(err);
-      return next(err);
-    }
-  }
-  logic();
-});
-
-
 async function postCardLogic(trelloConfig) {
   try {
     const lists = (await fetchListsOfBoard(trelloConfig.token, trelloConfig.boardID)).data;
@@ -176,8 +126,8 @@ async function postCardLogic(trelloConfig) {
     //console.log(newCard)
 
   } catch (err) {
-    console.log(err);
-    return next(err);
+    console.log(err.response.data);
+    return (err.response.data);
   }
 }
 

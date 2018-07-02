@@ -36,6 +36,7 @@ appletRouter
 	.post((req, res, next) => {
 		let id = null;
 		let service = null;
+		req.body.user = req.user._id;
 		Applet.create(req.body)
 			.then(
 				applet => {

@@ -7,7 +7,12 @@ var appletSchema = mongoose.Schema({
 	action: {
 		id: String,
 		heading: String,
-		content: String
+		content: String,
+		trelloOptions: {
+			listName: String,
+			boardID: String,
+			position: String
+		}
 	},
 	trigger: {
 		id: String,

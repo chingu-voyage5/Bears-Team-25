@@ -31,8 +31,8 @@ class Trello extends Component {
     this.state = {boards: []}
   }
 
-  componentDidMount() {
-    // this.fetchBoards();
+  componentWillMount() {
+    this.fetchBoards();
   }
 
   fetchBoards = () => {
@@ -49,40 +49,18 @@ class Trello extends Component {
       });
   };
 
-  isSubscribed(service) {
-    const {servicesSubscribed} = this.props;
-    return (servicesSubscribed.length !== 0) ? servicesSubscribed.some(element => element.service === service) : false;
-  }
-
-
   render() {
-    const {  handleSubmit,  valid, isGithubToken, isTrelloToken, servicesSubscribed} = this.props;
+    const {  handleSubmit,  valid, listName, boardID, position, afterValid } = this.props;
+    const values = {listName, boardID, position}
     const {boards} = this.state;
-    const isTrello = this.isSubscribed('Trello');
-    const isGithub = this.isSubscribed('Github');
     const boardsToRender = boards.map( (board, index) => 
       <MenuItem key = {`board-${index}`} value={board.id}>{board.name}</MenuItem>)
     return (
       <div>
-        {!isGithub &&
-                 <a href="http://localhost:3001/api/github/auth/">
-            <Button variant="raised" >connect git</Button>
-          </a>
-        }
-        {!isTrello &&
-                  <a href="http://localhost:3001/api/trello/auth/">
-            <Button variant="raised" >connect trello</Button>
-          </a>
-        }
-        {isTrello &&
         <form onSubmit= {(values) => handleSubmit(values)}>
-            {/* <Field  className='input-field'  name="cardTitle" component={renderTextField} label="Card Title" /> */}
             <div>
             <Field  className='input-field'  name="listName" component={renderTextField} label="List Name" />
             </div>
-            {/* <div>
-            <Field  className='input-field'  name="description" component={renderTextField} label="Description" />
-            </div> */}
             <div>
             <Field  name="position" component={renderSelectField} label="Position">
               <MenuItem value='top'>Top</MenuItem>
@@ -92,11 +70,14 @@ class Trello extends Component {
             <Field  name="boardID" component={renderSelectField} label="Boards">
                 {boardsToRender}
             </Field>    
-            <Button disabled={!valid} variant="raised" type="submit" color="primary">post to trello</Button>
+            <Button
+								variant="raised"  color="primary"
+                disabled={!valid}
+								onClick={() => afterValid(values)}
+							>
+								Create action
+							</Button>
         </form>
-        }
-
- 
             </div>
 
     );
@@ -112,7 +93,6 @@ const mapStateToProps = state => {
   return {
     onSubmit: (values)  => saveTrelloConfig(values),
     servicesSubscribed: state.auth.servicesSubscribed,
-    cardTitle: selector(state, 'cardTitle'),
     listName: selector(state, 'listName'),
     position: selector(state, 'position'),
     boardID: selector(state, 'boardID')

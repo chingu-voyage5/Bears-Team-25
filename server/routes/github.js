@@ -31,19 +31,50 @@ webhookHandler.on("issues", function(repo, data) {
   // console.log(repo)
   // console.log(data);
   let userGitID = data.sender.id;
+  // if (data.action === "opened") {
+  //   // find all users with this git ID
+  //   User.find({ "github.id": userGitID }, function(err, users) {
+  //     if (err) return done(err);
+  //     if (users.length !== 0) {
+  //       for (user of users) {
+  //         if (user.trello.token && user.trello.listName) {
+  //           let cardTitle = `[${data.repository.full_name}]${data.issue.title}`
+  //           let description = `[Issue] \n\n Repo: [${data.repository.full_name}]\n\n` +
+  //           `IssueTitle: ${data.issue.title}\n\nBy ${data.issue.user.login}\n\n${data.issue.body}`
+  //           let trelloConfig = {...user.trello, cardTitle, description}
+  //           postTrelloCard(trelloConfig).then(card => {
+  //             // console.log("success");
+  //           });
+  //         }
+  //       }
+  //     } else {
+  //       console.log("User not found");
+  //     }
+  //   });
+  // }
+
   if (data.action === "opened") {
     // find all users with this git ID
-    User.find({ "github.id": userGitID }, function(err, users) {
+    User.find({ "github.id": userGitID })
+    .populate('appletIds')
+    .exec(function(err, users) {
       if (err) return done(err);
       if (users.length !== 0) {
+        let cardTitle = `[${data.repository.full_name}]${data.issue.title}`
+        let description = `[Issue] \n\n Repo: [${data.repository.full_name}]\n\n` +
+        `IssueTitle: ${data.issue.title}\n\nBy ${data.issue.user.login}\n\n${data.issue.body}`
         for (user of users) {
-          if (user.trello.token && user.trello.listName) {
-            let cardTitle = `[${data.repository.full_name}]${data.issue.title}`
-            let description = `[Issue] \n\n Repo: [${data.repository.full_name}]\n\n` +
-            `IssueTitle: ${data.issue.title}\n\nBy ${data.issue.user.login}\n\n${data.issue.body}`
-            let trelloConfig = {...user.trello, cardTitle, description}
+          let applets = user.appletIds;
+          applets = applets.filter(applet => applet.option.watchFrom === 'Github' && applet.isActive);
+
+          //trello actions
+          appletsWithTrelloActions = applets.filter(applet => applet.option.watchTo === 'Trello');
+          trelloToken = user.trello.token;
+          for (appletsWithTrelloAction of appletsWithTrelloActions) {
+            let trelloAction = appletsWithTrelloAction.action.trelloOptions;
+            let trelloConfig = {...trelloAction, token: trelloToken, cardTitle, description}
             postTrelloCard(trelloConfig).then(card => {
-              // console.log("success");
+              console.log("trello card posted");
             });
           }
         }
@@ -52,6 +83,7 @@ webhookHandler.on("issues", function(repo, data) {
       }
     });
   }
+
 });
 
 webhookHandler.on("installation", function(repo, data) {
