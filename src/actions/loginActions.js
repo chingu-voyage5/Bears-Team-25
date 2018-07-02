@@ -151,7 +151,6 @@ export function fetchUsersCredentials() {
       .get(`http://localhost:3001/api/users/user?timestamp=${new Date().getTime()}`, {withCredentials: true})
       .then(response => {
         let user = response.data.user;
-        console.log(user)
         if (user) {
           localStorage.setItem('name', user.name)
           if (user.email === undefined) {

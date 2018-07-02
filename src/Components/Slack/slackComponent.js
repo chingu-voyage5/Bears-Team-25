@@ -43,7 +43,8 @@ class Slack extends Component {
   }
 
   componentDidMount() {
-    this.fetchUsersAndChannels();
+    const isSlack = this.isSubscribed('Slack');
+    if (isSlack) this.fetchUsersAndChannels();
   }
 
   fetchUsersAndChannels = () => {
