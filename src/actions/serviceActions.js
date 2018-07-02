@@ -56,7 +56,6 @@ export function disconnectService(service) {
 	  axios
 		.get(`http://localhost:3001/api/${service}/disconnect`,{withCredentials: true})
 		.then((json) => {
-			console.log(json)
 			 const {servicesSubscribed, servicesNotSubscribed} = json.data;
 			 dispatch(disconnect_service(servicesSubscribed, servicesNotSubscribed));
 			 dispatch(disconnect_service_success(service));
