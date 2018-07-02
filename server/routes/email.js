@@ -95,28 +95,6 @@ mailRouter.get("/disconnect", isLoggedIn, (req, res, next) => {
   );
 });
 
-
-
-mailRouter.post("/sendMail", isLoggedIn, (req, res, next) => {
-  let options = mailOptions(req.user, req.body)
-  // send mail with defined transport object
-  transporter.sendMail(options, (error, info) => {
-    if (error) {
-      console.log(error);
-      return next(error);
-    }
-    console.log("Message sent: %s", info.messageId);
-    // Preview only available when sending through an Ethereal account
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "application/json");
-    res.json({
-      success: true,
-      status: "Email successfully sent"
-    });
-  });
-});
-
 exports.mailRouter = mailRouter;
 exports.transporter = transporter;
 exports.mailOptions = mailOptions;
