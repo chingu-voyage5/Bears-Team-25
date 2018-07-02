@@ -29,11 +29,7 @@ var userSchema = mongoose.Schema({
         email: String,
         name: String
     },
-    appletIds: [
-        {
-            type: String
-        }
-    ],
+    appletIds: [{ type: Schema.Types.ObjectId, ref: 'Applet' }],
     activity:[
     	{
     		date:{ type: Date, default: Date.now },

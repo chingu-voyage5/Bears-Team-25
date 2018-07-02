@@ -1,5 +1,6 @@
 // load the things we need
 var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
 
 // define the schema for our user model
 var appletSchema = mongoose.Schema({
@@ -19,7 +20,9 @@ var appletSchema = mongoose.Schema({
 		watchFor: String
 	},
 	content: String,
-	heading: String
+	heading: String,
+	isActive: {type: Boolean, default: true},
+	user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 // create the model for users and expose it to our app
