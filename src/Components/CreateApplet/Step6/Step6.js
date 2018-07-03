@@ -6,6 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 import AssignmentIcon from "@material-ui/icons/Assignment";
+import * as Icons from "../../Common/Icons/Icons";
 import "./Step6.css";
 
 
@@ -38,13 +39,17 @@ class ReviewCard extends Component {
 		const data=this.props.data;
 		const action=data.actionHeading;
 		const trigger=data.triggerHeading;
+		const serviceFrom = data.serviceFrom;
+		const serviceTo = data.serviceTo;
+		let iconNameTo = serviceTo + "Icon";
+		const IconNameTo = Icons[iconNameTo];
 
 		let content="If "+trigger+" then "+action;
 		return (
 			<div className="review-card">
 				<Card className="card">
 					<CardContent className="white-text">
-						<ServiceLogo />
+						<ServiceLogo serviceFrom={serviceFrom}/>
 						<TextArea content={content} />
 						<UserName />
 					</CardContent>
@@ -52,7 +57,7 @@ class ReviewCard extends Component {
 						<div className="right-align">
 							<span className="inline">
 								<span className="text-inline">Works with</span>{" "}
-								<AssignmentIcon />
+								<IconNameTo color='white' className="icon" />
 							</span>
 						</div>
 					</CardContent>
@@ -88,10 +93,13 @@ class TextArea extends Component {
 //Renders the logo 
 class ServiceLogo extends Component {
 	render() {
+		const {serviceFrom} = this.props;
+		let iconNameFrom = serviceFrom + "Icon";
+		const IconNameFrom = Icons[iconNameFrom];
 		return (
 			<div className="review-card">
 				<Avatar>
-					<AssignmentIcon />
+					<IconNameFrom color='white' className="icon"  />
 				</Avatar>
 			</div>
 		);
