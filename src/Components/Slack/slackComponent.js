@@ -65,7 +65,7 @@ class Slack extends Component {
   // checking if provided service is in array of subscribed services
   isSubscribed(service) {
     const {servicesSubscribed} = this.props;
-    return (servicesSubscribed.length !== 0) ? servicesSubscribed.some(element => element.service === service) : false;
+    return (servicesSubscribed) ? servicesSubscribed.some(element => element.service === service) : false;
   }
 
   render() {

@@ -82,7 +82,8 @@ class CreateApplet extends Component {
 				watchTo: obj.serviceTo,
 				watchFor: "None"
 			},
-			content: obj.content,
+			// content: obj.content,
+			content: "If "+obj.triggerHeading+" then "+obj.actionHeading,
 			heading: obj.heading
 		};
 		return appletData;

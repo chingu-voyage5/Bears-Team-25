@@ -28,7 +28,8 @@ class MyApplet extends Component {
 		}
 		const appletList =this.props.appletList;
 		const AppletList = appletList.map( (applet, i) => (
-			<AppletCard key={`applet-list-${i}`} content={applet.content} />
+			<AppletCard key={`applet-list-${i}`} content={applet.content}
+			 serviceFrom = {applet.option.watchFrom}  serviceTo = {applet.option.watchTo} />
 		));
 		return (
 			<div className="my-applet">
@@ -36,7 +37,7 @@ class MyApplet extends Component {
 					<h1>Your applets</h1>
 					<Link  to='/createapplet'> <Button variant="raised" color="primary">Create applet</Button></Link>
 				</div>
-				<Grid container spacing={24}>
+				<Grid  container spacing={24}>
 				<Grid item sm={4}>
 					<ButtonApplet />
 				</Grid>

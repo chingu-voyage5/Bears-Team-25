@@ -68,7 +68,9 @@ class ReviewCard extends Component {
 }
 
 //renders the username
-const UserName = props => <p className="user-name">by Anshul2166</p>;
+const UserName = props => {
+	let name = localStorage.getItem('name');
+	return <p className="user-name">by {name}</p>};
 
 //renders the text-area containing the action and trigger of applet
 class TextArea extends Component {

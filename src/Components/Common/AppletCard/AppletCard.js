@@ -5,24 +5,30 @@ import Avatar from "@material-ui/core/Avatar";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Switch from "@material-ui/core/Switch";
 import Grid from "@material-ui/core/Grid";
+import * as Icons from "../Icons/Icons";
 import './AppletCard.css';
+
 
 class AppletCard extends Component {
 	state = {
 		checkedA: true,
 		checkedB: true
 	};
+	
 
 	handleChange = name => event => {
 		this.setState({ [name]: event.target.checked });
 	};
 	render() {
+		const {serviceTo, serviceFrom} = this.props;
+		let iconNameTo = serviceTo + "Icon";
+		const IconNameTo = Icons[iconNameTo];
 		return (
 			<Grid item sm={4}>
 				<div className="applet-card">
 					<Card className="card">
 						<CardContent className="white-text">
-							<ServiceLogo />
+							<ServiceLogo serviceFrom={serviceFrom}/>
 							<TextArea content={this.props.content} />
 						</CardContent>
 						<CardContent className="card-footer">
@@ -45,7 +51,7 @@ class AppletCard extends Component {
 											<span className="text-inline">
 												Works with
 											</span>{" "}
-											<AssignmentIcon className="icon" />
+											<IconNameTo color='white' className="icon" />
 										</span>
 									</span>
 								</Grid>
@@ -70,10 +76,13 @@ class TextArea extends Component {
 
 class ServiceLogo extends Component {
 	render() {
+		const {serviceFrom} = this.props;
+		let iconNameFrom = serviceFrom + "Icon";
+		const IconNameFrom = Icons[iconNameFrom];
 		return (
 			<div className="review-card">
 				<Avatar>
-					<AssignmentIcon />
+					<IconNameFrom color='white' className="icon"  />
 				</Avatar>
 			</div>
 		);
