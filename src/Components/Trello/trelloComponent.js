@@ -50,26 +50,26 @@ class Trello extends Component {
   };
 
   render() {
-    const {  handleSubmit,  valid, listName, boardID, position, afterValid } = this.props;
+    const {  valid, listName, boardID, position, afterValid } = this.props;
     const values = {listName, boardID, position}
     const {boards} = this.state;
     const boardsToRender = boards.map( (board, index) => 
       <MenuItem key = {`board-${index}`} value={board.id}>{board.name}</MenuItem>)
     return (
-      <div>
-        <form onSubmit= {(values) => handleSubmit(values)}>
+      <div style = {{ width: '10em', margin: 'auto'}}>
+        <form>
             <div>
-            <Field  className='input-field'  name="listName" component={renderTextField} label="List Name" />
-            </div>
-            <div>
-            <Field  name="position" component={renderSelectField} label="Position">
+            <Field   className='input-field' name="position" component={renderSelectField} label="Position">
               <MenuItem value='top'>Top</MenuItem>
               <MenuItem  value='bottom'>Bottom</MenuItem>
             </Field>
             </div>
-            <Field  name="boardID" component={renderSelectField} label="Boards">
+            <Field  className='input-field' name="boardID" component={renderSelectField} label="Boards">
                 {boardsToRender}
             </Field>    
+            <div>
+            <Field  fullWidth  className='input-field'  name="listName" component={renderTextField} label="List Name" />
+            </div>
             <Button
 								variant="raised"  color="primary"
                 disabled={!valid}
@@ -78,8 +78,7 @@ class Trello extends Component {
 								Create action
 							</Button>
         </form>
-            </div>
-
+        </ div>
     );
   }
 }

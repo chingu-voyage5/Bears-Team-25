@@ -24,20 +24,21 @@ export const renderTextField = ({
   />
 );
 
-export  const renderSelectField = ({ input, label, meta: { touched, error }, children }) => (
+export  const renderSelectField = ({ input, label, meta: { touched, error }, children }, ...custom) => (
   <div>
     <FormControl >
   <InputLabel htmlFor={label + 'f'}>{label}</InputLabel>
   <Select
-    style = {{width: '10em', marginBottom: '0.3em'}}
-    className = 'select-field'
     inputProps={{
       name: label,
       id: label + 'f',
     }}
     error={touched && typeof error !== "undefined"}
+    children={children}
+    style ={{minWidth: '10em'}}
     {...input}
-    children={children}/>
+    {...custom}
+    />
     <FormHelperText  error>{touched && error}</FormHelperText>
     </FormControl>
     </div>

@@ -29,7 +29,7 @@ myactivtiyRouter.route("/").get((req, res, next) => {
 		res.setHeader("Content-Type", "application/json");
 		res.json(userObj.activity);
 	}).then(r => {
-		next();
+		// next();
 	});
 });
 
