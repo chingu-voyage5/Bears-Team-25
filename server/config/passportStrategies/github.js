@@ -1,5 +1,6 @@
 var GitHubStrategy = require("passport-github").Strategy;
 var User = require("../../models/users");
+var addToSubscribedRemoveFromNotSubscribed = require('../../commonFunctions').addToSubscribedRemoveFromNotSubscribed;
 
 module.exports = function(passport) {
   passport.use(
@@ -24,10 +25,8 @@ module.exports = function(passport) {
             if (err) return done(err);
             if (gitUser && gitUser.github.isAppInstalled) {
               isAppInstalled = true;
-              let index = user.servicesSubscribed.map(service => service.service).indexOf('Github');
-              if (index === -1) user.servicesSubscribed.push({service: 'Github', isWebhooks: true, isActions: false});
-              index = user.servicesNotSubscribed.indexOf('Github');
-              if (index !== -1) user.servicesNotSubscribed.splice(index, 1) ;
+              addToSubscribedRemoveFromNotSubscribed('Github', true, false,
+              user.servicesSubscribed, user.servicesNotSubscribed); 
             }
             user.github.isAppInstalled = isAppInstalled
             user.save(function(err) {

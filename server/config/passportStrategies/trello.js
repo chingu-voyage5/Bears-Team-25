@@ -1,5 +1,7 @@
 
-var OAuth1Strategy = require('passport-oauth1')
+var OAuth1Strategy = require('passport-oauth1');
+var addToSubscribedRemoveFromNotSubscribed = require('../../commonFunctions').addToSubscribedRemoveFromNotSubscribed;
+
 
 OAuth1Strategy.prototype.userAuthorizationParams = function(options) {
     return {scope:  ['read', 'write'], expiration: 'never', name: 'IFTTT'}
@@ -21,10 +23,8 @@ module.exports = function(passport) {
         if (user) {
           user.trello.token = token;
           user.trello.tokenSecret = tokenSecret;
-          let index = user.servicesSubscribed.map(service => service.service).indexOf('Trello');
-          if (index === -1)  user.servicesSubscribed.push({service: 'Trello', isWebhooks: false, isActions: true});
-          index = user.servicesNotSubscribed.indexOf('Trello')
-          if (index !== -1)user.servicesNotSubscribed.splice(index, 1) 
+          addToSubscribedRemoveFromNotSubscribed('Trello', false, true,
+           user.servicesSubscribed, user.servicesNotSubscribed);
           user.save(function(err) {
             if (err) return cb(err);
             return cb(null, user);

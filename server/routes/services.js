@@ -8,18 +8,7 @@ let User = require("../models/users");
 serviceRouter.use(bodyParser.json());
 var userObj = null;
 var async = require("async");
-//check if the user is authenticated
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  } else {
-    console.log("You are not logged in!");
-    res.statusCode = 401;
-    res.setHeader("Content-Type", "application/json");
-    res.json({ success: false, status: "You are not logged in!" });
-  }
-}
+var isLoggedIn = require('../commonFunctions').isLoggedIn;
 
 function extractUserInfo(userFromReq) {
 	let isGoogleLinked, isFBLinked, isSlackToken;

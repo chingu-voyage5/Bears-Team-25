@@ -3,17 +3,7 @@ var passport = require("passport");
 var express = require("express");
 var router = express.Router();
 var User = require("../models/users");
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  } else {
-    console.log("You are not logged in!");
-    res.statusCode = 401;
-    res.setHeader("Content-Type", "application/json");
-    res.json({ success: false, status: "You are not logged in!" });
-  }
-}
+var isLoggedIn = require('../commonFunctions').isLoggedIn;
 
 API_KEY = JSON.parse(process.env.trello).consumerKey;
 

@@ -1,5 +1,6 @@
 var User = require("../../models/users");
 var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+var addToSubscribedRemoveFromNotSubscribed = require('../../commonFunctions').addToSubscribedRemoveFromNotSubscribed;
 
 module.exports = function(passport) {
   passport.use(
@@ -18,10 +19,8 @@ module.exports = function(passport) {
           user.gmail.token = token;
           user.gmail.email = (profile.emails[0].value || "").toLowerCase();
           user.gmail.refreshToken = refreshToken;
-          let index = user.servicesSubscribed.map(service => service.service).indexOf('Mail');
-          if (index === -1)  {user.servicesSubscribed.push({service: 'Mail', isWebhooks: false, isActions: true})};
-          index = user.servicesNotSubscribed.indexOf('Mail');
-          if (index !== -1) user.servicesNotSubscribed.splice(index, 1);
+          addToSubscribedRemoveFromNotSubscribed('Mail', false, true,
+          user.servicesSubscribed, user.servicesNotSubscribed); 
           user.save(function(err) {
             if (err) return done(err);
             return done(null, user);
