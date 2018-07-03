@@ -1,6 +1,6 @@
 const cors = require('cors');
 
-const whitelist = ['http://localhost:3000', 'http://606fe196.ngrok.io/'];
+const whitelist = ['http://localhost:3000', 'http://bc3f0190.ngrok.io/'];
 var corsOptionsDelegate = (req, callback) => {
     var corsOptions;
     if (whitelist.indexOf(req.header('Origin')) !== -1) {
