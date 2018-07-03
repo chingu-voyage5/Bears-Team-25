@@ -7,7 +7,7 @@ var webhookHandler = GithubWebHook({ path: "/updates", secret: "secret" });
 var User = require("../models/users");
 var postTrelloCard = require("../routes/trello").postCard;
 var isLoggedIn = require('../commonFunctions').isLoggedIn;
-
+var addToNotSubscribedRemoveFromSubscribed = require('../commonFunctions').addToNotSubscribedRemoveFromSubscribed;
 
 router.use(webhookHandler); // use our middleware
 
@@ -64,10 +64,7 @@ webhookHandler.on("installation", function(repo, data) {
       if (err) return done(err);
       if (users.length !== 0) {
         for (user of users) {
-            let index = user.servicesSubscribed.map(service => service.service).indexOf('Github');
-            if (index === -1) user.servicesSubscribed.push({service: 'Github', isWebhooks: true, isActions: false});
-            index = user.servicesNotSubscribed.indexOf('Github');
-            if (index !== -1) user.servicesNotSubscribed.splice(index, 1) ;
+            addToNotSubscribedRemoveFromSubscribed('Github', user.servicesSubscribed, user.servicesNotSubscribed);
             user.github.isAppInstalled = true;
             user.save(function(err) {
               if (err) return next(err);

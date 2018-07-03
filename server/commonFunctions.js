@@ -17,6 +17,14 @@ function addToSubscribedRemoveFromNotSubscribed(serviceName, isWebhooks,
       if (index !== -1) servicesNotSubscribed.splice(index, 1) ;
     }
 
+function addToNotSubscribedRemoveFromSubscribed(serviceName, 
+  servicesSubscribed, servicesNotSubscribed) {
+    let index = servicesSubscribed.map(service => service.service).indexOf(serviceName);
+    if (index !== -1)  servicesSubscribed.splice(index, 1);
+    index = servicesNotSubscribed.indexOf(serviceName);
+    if (index === -1) servicesNotSubscribed.push(serviceName);   
+      } 
 
 exports.isLoggedIn = isLoggedIn;
 exports.addToSubscribedRemoveFromNotSubscribed = addToSubscribedRemoveFromNotSubscribed;
+exports.addToNotSubscribedRemoveFromSubscribed = addToNotSubscribedRemoveFromSubscribed;

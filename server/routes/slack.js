@@ -4,6 +4,7 @@ var express = require("express");
 var router = express.Router();
 var User = require("../models/users");
 var isLoggedIn = require('../commonFunctions').isLoggedIn;
+var addToNotSubscribedRemoveFromSubscribed = require('../commonFunctions').addToNotSubscribedRemoveFromSubscribed;
 
 const slackSendMessage = (token, message, to) =>
   axios.post(
@@ -31,10 +32,7 @@ router.get(
 router.get("/disconnect", isLoggedIn, (req, res, next) => {
   var user = req.user;
   user.slack = undefined;
-  let index = user.servicesSubscribed.map(service => service.service).indexOf('Slack');
-  if (index !== -1)  user.servicesSubscribed.splice(index, 1);
-  index = user.servicesNotSubscribed.indexOf('Slack');
-  if (index === -1) user.servicesNotSubscribed.push('Slack');
+  addToNotSubscribedRemoveFromSubscribed('Slack', user.servicesSubscribed, user.servicesNotSubscribed);
   user.save().then(
     (user) => {
       res.statusCode = 200;
