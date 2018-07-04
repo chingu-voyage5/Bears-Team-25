@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import Slack from '../Slack/slackComponent';
+import Options from '../Options/optionsComponent';
 import "./ButtonApplet.css";
 
 class ButtonApplet extends Component {
@@ -23,7 +23,7 @@ class ButtonApplet extends Component {
 						</Typography>
 					</CardContent>
 					<CardContent>
-						<Slack />
+						<Options />
 					</CardContent>
 				</Card>				
 			</div>

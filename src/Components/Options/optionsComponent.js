@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import MenuItem from "@material-ui/core/MenuItem";
 import { formValueSelector } from 'redux-form';
 import {renderTextField, renderSelectField, validateMessage} from '../../commonFunctions/formFunctions';
-const selector = formValueSelector('SlackForm')
+const selector = formValueSelector('ButtonAppletForm')
 const axios = require("axios");
 
 const sendMailAndMessage = (values) => {
@@ -35,7 +35,7 @@ const sendMailAndMessage = (values) => {
     });
 };
 
-class Slack extends Component {
+class Options extends Component {
 
   constructor(props) {
     super(props);
@@ -125,10 +125,10 @@ class Slack extends Component {
   }
 }
 
-Slack = reduxForm({
-  form: 'SlackForm', // a unique identifier for this form
+Options = reduxForm({
+  form: 'ButtonAppletForm', // a unique identifier for this form
   validate: validateMessage
-})(Slack);
+})(Options);
 
 const mapStateToProps = state => {
   return {
@@ -141,4 +141,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Slack);
+export default connect(mapStateToProps)(Options);
