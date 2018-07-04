@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Trello from '../../Trello/trelloComponent';
 import Slack from '../../Slack/slackComponent';
+import Mail from '../../Mail/mailComponent';
 import "./Step5.css";
 
 class Step5 extends Component {
@@ -20,6 +21,7 @@ class Step5 extends Component {
 				<div className="text-center">
 					{serviceTo === 'Trello' && <Trello afterValid={this.props.afterValid} />}
 					{serviceTo === 'Slack' && <Slack afterValid={this.props.afterValid} />}
+					{serviceTo === 'Mail' && <Mail afterValid={this.props.afterValid} />}
 					{!actionServices.includes(serviceTo) && <ActionFieldCard afterValid={this.props.afterValid}/>}
 				</div>
 			</div>

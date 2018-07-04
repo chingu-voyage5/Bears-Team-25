@@ -73,7 +73,16 @@ const initialState = {
 						"Make a card in your trello board with some message"
 				}
 			]
-		}
+		},
+		Mail: {
+			Github: [
+				{
+					heading: "Send email via Gmail",
+					content:
+						"Send a message to specified email"
+				}
+			]
+		},
 	},
 	create: {
 		appletList: []

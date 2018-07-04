@@ -26,7 +26,6 @@ class Slack extends Component {
         withCredentials: true
       })
       .then(response => {
-        console.log(response.data)
         let users = response.data.users;
         let channels = response.data.channels;
         this.setState({users: users, channels: channels})
@@ -41,7 +40,7 @@ class Slack extends Component {
     const {users, channels } = this.state;
     let to = null;
     (source === 'DM') ? to = user : to = channel;
-    const values = {to}
+    const values = {to};
     const usersToRender = users.map( (user, index) => 
       <MenuItem key = {`user-${index}`} value={user.id}>{user.name}</MenuItem>)
     const channelsToRender = channels.map( (channel, index) => 

@@ -7,6 +7,8 @@ var webhookHandler = GithubWebHook({ path: "/updates", secret: "secret" });
 var User = require("../models/users");
 var postTrelloCard = require("../routes/trello").postCard;
 var slackSendMessage = require("../routes/slack").slackSendMessage;
+var transporter = require('../routes/email').transporter;
+var mailOptions = require('../routes/email').mailOptions;
 var isLoggedIn = require('../commonFunctions').isLoggedIn;
 var addToNotSubscribedRemoveFromSubscribed = require('../commonFunctions').addToNotSubscribedRemoveFromSubscribed;
 
@@ -53,14 +55,25 @@ webhookHandler.on("issues", function(repo, data) {
           }
 
           //slack actions
-          appletsWithTrelloActions = applets.filter(applet => applet.option.watchTo === 'Slack');
+          appletsWithSlackActions = applets.filter(applet => applet.option.watchTo === 'Slack');
           slackToken = user.slack.token;
-          for (appletsWithTrelloAction of appletsWithTrelloActions) {
-            let slackOptions = appletsWithTrelloAction.action.slackOptions;
+          for (appletsWithSlackAction of appletsWithSlackActions) {
+            let slackOptions = appletsWithSlackAction.action.slackOptions;
             slackSendMessage(slackToken, message, slackOptions.to).then(message => {
               console.log("slack message sent");
             });
           }
+
+        //mail actions
+        appletsWithMailActions = applets.filter(applet => applet.option.watchTo === 'Mail');
+        gmailTolen = user.gmail.token;
+        for (appletsWithMailAction of appletsWithMailActions) {
+          let options = mailOptions(user, {email:  appletsWithMailAction.action.mailOptions.email,
+             message: message})
+          transporter.sendMail(options).then(message => {
+            console.log("email  sent");
+          });
+        }
 
         }
       } else {

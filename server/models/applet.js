@@ -16,6 +16,9 @@ var appletSchema = mongoose.Schema({
 		slackOptions: {
 			to: String,
 			message: String
+		},
+		mailOptions: {
+			email: String
 		}
 	},
 	trigger: {
