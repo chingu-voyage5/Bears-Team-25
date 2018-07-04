@@ -33,11 +33,16 @@ var T = new Twit({
 	strictSSL: true // optional - requires SSL certificates to be valid.
 });
 
-var stream = T.stream('user');
- 
-stream.on('user_event', function (eventMsg) {
-  console.log(eventMsg);
-})
+// var stream = T.stream('user');
+var stream = T.stream('user'); 
+
+stream.on('tweet', function (tweet) {
+ console.log(tweet);
+});
+
+// stream.on('user_update', function (eventMsg) {
+//   console.log("User updated");
+// })
 
 console.log("Done");
 // export default twitterRouter;
