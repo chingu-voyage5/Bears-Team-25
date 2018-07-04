@@ -33,16 +33,11 @@ var T = new Twit({
 	strictSSL: true // optional - requires SSL certificates to be valid.
 });
 
-T.get("search/tweets", { q: "banana since:2011-07-11", count: 100 }, function(
-	err,
-	data,
-	response
-) {
-	if (err) {
-		console.log("error " + err);
-	}
-	console.log(data);
-});
+var stream = T.stream('user');
+ 
+stream.on('user_event', function (eventMsg) {
+  console.log(eventMsg);
+})
 
 console.log("Done");
 // export default twitterRouter;
