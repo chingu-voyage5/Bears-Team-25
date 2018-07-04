@@ -3,6 +3,7 @@ import TextField from "@material-ui/core/TextField"
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 
 export const renderTextField = ({
@@ -23,20 +24,22 @@ export const renderTextField = ({
   />
 );
 
-export  const renderSelectField = ({ input, label, meta: { touched, error }, children }) => (
+export  const renderSelectField = ({ input, label, meta: { touched, error }, children }, ...custom) => (
   <div>
-    <FormControl>
+    <FormControl >
   <InputLabel htmlFor={label + 'f'}>{label}</InputLabel>
   <Select
-    style = {{width: '10em'}}
-    className = 'select-field'
     inputProps={{
       name: label,
       id: label + 'f',
     }}
     error={touched && typeof error !== "undefined"}
+    children={children}
+    style ={{minWidth: '10em'}}
     {...input}
-    children={children}/>
+    {...custom}
+    />
+    <FormHelperText  error>{touched && error}</FormHelperText>
     </FormControl>
     </div>
 )
@@ -66,6 +69,17 @@ export const validateMessage = values => {
   ) {
     errors.email = "Invalid email address";
   }
+  return errors;
+};
+
+export const validateTrello = values => {
+  const errors = {};
+  const requiredFields = ["position", 'boardID', 'cardTitle', 'listName', 'description'];
+  requiredFields.forEach(field => {
+    if (!values[field]) {
+      errors[field] = "Required";
+    }
+  });
   return errors;
 };
 

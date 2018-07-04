@@ -6,11 +6,12 @@ export default function authReducer(state = {
     signUp: { isFetching: false },
     profileSettings: {isFetching: false},
     isFBLinked: false,
-    isGoogleLinked: false
+    isGoogleLinked: false,
+    servicesSubscribed: [],
+    servicesNotSubscribed: []
 }, action) {
     switch (action.type) {
         case ACTIONS.UNLINK_FB:
-        console.log('unling fb')
         return {
           ...state,
           isFBLinked: false
@@ -27,7 +28,9 @@ export default function authReducer(state = {
                 name: null,
                 email: null,
                 isFBLinked: false,
-                isGoogleLinked: false
+                isGoogleLinked: false,
+                servicesNotSubscribed: [],
+                servicesSubscribed: []
             }
         case ACTIONS.LOGOUT_SUCCESS:
             return {
@@ -58,8 +61,8 @@ export default function authReducer(state = {
                 email: action.email,
                 isFBLinked: action.isFBLinked,
                 isGoogleLinked: action.isGoogleLinked,
-                isSlackToken: action.isSlackToken,
-                isGmailToken: action.isGmailToken,
+                servicesNotSubscribed: action.servicesNotSubscribed,
+                servicesSubscribed: action.servicesSubscribed,
                 auth: action.auth,
                 success: true           
             }
@@ -89,6 +92,12 @@ export default function authReducer(state = {
             return {
               ...state,
               profileSettings: { isFetching: false, error: action.error },
+            }
+        case ACTIONS.DISCONNECT_SERVICE:
+            return {
+              ...state,
+              servicesNotSubscribed: action.servicesNotSubscribed,
+              servicesSubscribed: action.servicesSubscribed
             }
         default:
             return state;

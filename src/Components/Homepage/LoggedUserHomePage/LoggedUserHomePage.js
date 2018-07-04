@@ -13,7 +13,8 @@ class LoggedUserHomePage extends Component {
   render() {
     const appletList = this.props.allAppletList;
     const AppletList = appletList.map((applet, i) => (
-      <AppletCard key={`appletCard-${i}`} content={applet.content} />
+      <AppletCard key={`appletCard-${i}`} content={applet.content} 
+      serviceFrom = {applet.option.watchFrom}  serviceTo = {applet.option.watchTo} />
     ));
     return (
       <div className="logged-home-page">
@@ -22,7 +23,7 @@ class LoggedUserHomePage extends Component {
         </div>
         <Grid container spacing={24}>
           {AppletList}
-        </Grid>        
+        </Grid>
       </div>
     );
   }
