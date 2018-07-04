@@ -59,8 +59,11 @@ class CreateApplet extends Component {
 				content: obj.field[0].content
 			});
 		}
-		else {
+		else if (this.state.serviceTo === 'Trello'){
 			this.setState({trelloOptions: obj})
+		}
+		else if (this.state.serviceTo === 'Slack'){
+			this.setState({slackOptions: obj})
 		}
 	}
 
@@ -70,7 +73,8 @@ class CreateApplet extends Component {
 				id: 4,
 				heading: obj.actionHeading,
 				content: obj.actionContent,
-				trelloOptions: obj.trelloOptions
+				trelloOptions: obj.trelloOptions,
+				slackOptions: obj.slackOptions
 			},
 			trigger: {
 				id: 4,

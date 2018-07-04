@@ -12,6 +12,10 @@ var appletSchema = mongoose.Schema({
 			listName: String,
 			boardID: String,
 			position: String
+		},
+		slackOptions: {
+			to: String,
+			message: String
 		}
 	},
 	trigger: {
