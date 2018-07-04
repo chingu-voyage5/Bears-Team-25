@@ -6,6 +6,9 @@ var GithubWebHook = require("express-github-webhook");
 var webhookHandler = GithubWebHook({ path: "/updates", secret: "secret" });
 var User = require("../models/users");
 var postTrelloCard = require("../routes/trello").postCard;
+var slackSendMessage = require("../routes/slack").slackSendMessage;
+var transporter = require('../routes/email').transporter;
+var mailOptions = require('../routes/email').mailOptions;
 var isLoggedIn = require('../commonFunctions').isLoggedIn;
 var addToNotSubscribedRemoveFromSubscribed = require('../commonFunctions').addToNotSubscribedRemoveFromSubscribed;
 
@@ -28,9 +31,14 @@ webhookHandler.on("issues", function(repo, data) {
     .exec(function(err, users) {
       if (err) return done(err);
       if (users.length !== 0) {
+        // trello options 
         let cardTitle = `[${data.repository.full_name}]${data.issue.title}`
         let description = `[Issue] \n\n Repo: [${data.repository.full_name}]\n\n` +
         `IssueTitle: ${data.issue.title}\n\nBy ${data.issue.user.login}\n\n${data.issue.body}`
+        // slack options 
+        let message = `[New Issue] Repo: [${data.repository.full_name}] ` +
+        `IssueTitle: ${data.issue.title} Author: ${data.issue.user.login}`
+
         for (user of users) {
           let applets = user.appletIds;
           applets = applets.filter(applet => applet.option.watchFrom === 'Github' && applet.isActive);
@@ -39,12 +47,34 @@ webhookHandler.on("issues", function(repo, data) {
           appletsWithTrelloActions = applets.filter(applet => applet.option.watchTo === 'Trello');
           trelloToken = user.trello.token;
           for (appletsWithTrelloAction of appletsWithTrelloActions) {
-            let trelloAction = appletsWithTrelloAction.action.trelloOptions;
-            let trelloConfig = {...trelloAction, token: trelloToken, cardTitle, description}
+            let trelloOptions = appletsWithTrelloAction.action.trelloOptions;
+            let trelloConfig = {...trelloOptions, token: trelloToken, cardTitle, description}
             postTrelloCard(trelloConfig).then(card => {
               console.log("trello card posted");
             });
           }
+
+          //slack actions
+          appletsWithSlackActions = applets.filter(applet => applet.option.watchTo === 'Slack');
+          slackToken = user.slack.token;
+          for (appletsWithSlackAction of appletsWithSlackActions) {
+            let slackOptions = appletsWithSlackAction.action.slackOptions;
+            slackSendMessage(slackToken, message, slackOptions.to).then(message => {
+              console.log("slack message sent");
+            });
+          }
+
+        //mail actions
+        appletsWithMailActions = applets.filter(applet => applet.option.watchTo === 'Mail');
+        gmailTolen = user.gmail.token;
+        for (appletsWithMailAction of appletsWithMailActions) {
+          let options = mailOptions(user, {email:  appletsWithMailAction.action.mailOptions.email,
+             message: message})
+          transporter.sendMail(options).then(message => {
+            console.log("email  sent");
+          });
+        }
+
         }
       } else {
         console.log("User not found");
@@ -96,19 +126,11 @@ webhookHandler.on("installation", function(repo, data) {
       }
     });
   }
-  data.installation.id;
-  data.installation.account; // .login .id .avatar_url;
-  data.repositories;
-  data.installation.repository_selection; // all  / selected
 });
 
 webhookHandler.on("installation_repositories", function(repo, data) {
   // console.log('repo', repo);
   // console.log('data', data);
-  data.action; // removed added
-  data.repositories_added; // [] can have many if from 'selected' to 'all'
-  data.repositories_removed; // [] data.repositories_removed[0].  id / name /full_name / private
-  // can have many if from 'all' to 'selected'
 });
 
 router.get("/auth", passport.authenticate("github"));
@@ -143,9 +165,5 @@ router.get("/disconnect", isLoggedIn, (req, res, next) => {
     }
   );
 });
-
-// router.post("/updates", function(req, res, next) {
-//   console.log(req.body.installation)
-// });
 
 module.exports = router;

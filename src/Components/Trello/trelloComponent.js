@@ -90,7 +90,6 @@ Trello = reduxForm({
 
 const mapStateToProps = state => {
   return {
-    onSubmit: (values)  => saveTrelloConfig(values),
     servicesSubscribed: state.auth.servicesSubscribed,
     listName: selector(state, 'listName'),
     position: selector(state, 'position'),
