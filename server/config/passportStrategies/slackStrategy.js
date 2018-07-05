@@ -1,4 +1,5 @@
 var SlackStrategy = require("passport-slack-oauth2").Strategy;
+var addToSubscribedRemoveFromNotSubscribed = require('../../commonFunctions').addToSubscribedRemoveFromNotSubscribed;
 
 module.exports = function(passport) {
   passport.use(
@@ -25,6 +26,8 @@ module.exports = function(passport) {
         var user = req.user;
         if (user) {
           user.slack.token = accessToken;
+          addToSubscribedRemoveFromNotSubscribed('Slack', false, true,
+          user.servicesSubscribed, user.servicesNotSubscribed); 
           user.save(function(err) {
             if (err) return done(err);
             return done(null, user);

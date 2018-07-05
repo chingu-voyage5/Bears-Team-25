@@ -15,7 +15,9 @@ class SuccessWithSocial extends Component {
   }
 
   render() {
-    return <Redirect to="/settings" />;
+    const { message } = this.props.match.params;
+    if (message[0] === 'Y') return <Redirect to="/settings" />;
+    return <Redirect to="/services" />
   }
 }
 

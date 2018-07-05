@@ -10,6 +10,8 @@ const slack = require('./slack').slackRouter;
 const mail = require('./email').mailRouter;
 const integrations = require('./integrations');
 const services = require('./services')
+const github = require('./github');
+const trello = require('./trello').trelloRouter;
 // paths to subroutes (`api/${path}`)
 router.use('/users', users);
 router.use('/applets', applets);
@@ -17,7 +19,9 @@ router.use('/myapplets',myapplets);
 router.use('/myactivity',myactivity);
 router.use('/slack', slack);
 router.use('/gmail', mail);
+router.use('/github', github);
 router.use('/integrations', integrations);
 router.use('/services', services);
+router.use('/trello', trello);
 
 module.exports = router;

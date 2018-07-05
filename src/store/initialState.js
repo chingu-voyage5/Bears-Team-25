@@ -56,6 +56,13 @@ const initialState = {
 					heading: "Send a mail",
 					content: "When you get a mail from some specified address"
 				}
+			],
+			Github: [
+				{
+					heading: "Send message via Slack",
+					content:
+						"Send a message to specified Slack channel or user"
+				}
 			]
 		},
 		Trello: {
@@ -66,7 +73,16 @@ const initialState = {
 						"Make a card in your trello board with some message"
 				}
 			]
-		}
+		},
+		Mail: {
+			Github: [
+				{
+					heading: "Send email via Gmail",
+					content:
+						"Send a message to specified email"
+				}
+			]
+		},
 	},
 	create: {
 		appletList: []

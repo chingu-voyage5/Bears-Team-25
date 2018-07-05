@@ -53,10 +53,21 @@ class CreateApplet extends Component {
 
 	_setAction(obj) {
 		this._changeStep();
-		this.setState({
-			heading: obj.field[0].heading,
-			content: obj.field[0].content
-		});
+		if (obj.field) {
+			this.setState({
+				heading: obj.field[0].heading,
+				content: obj.field[0].content
+			});
+		}
+		else if (this.state.serviceTo === 'Trello'){
+			this.setState({trelloOptions: obj})
+		}
+		else if (this.state.serviceTo === 'Slack'){
+			this.setState({slackOptions: obj})
+		}
+		else if (this.state.serviceTo === 'Mail'){
+			this.setState({mailOptions: obj})
+		}
 	}
 
 	modifyData(obj) {
@@ -64,7 +75,10 @@ class CreateApplet extends Component {
 			action: {
 				id: 4,
 				heading: obj.actionHeading,
-				content: obj.actionContent
+				content: obj.actionContent,
+				trelloOptions: obj.trelloOptions,
+				slackOptions: obj.slackOptions,
+				mailOptions: obj.mailOptions
 			},
 			trigger: {
 				id: 4,
@@ -76,7 +90,8 @@ class CreateApplet extends Component {
 				watchTo: obj.serviceTo,
 				watchFor: "None"
 			},
-			content: obj.content,
+			// content: obj.content,
+			content: "If "+obj.triggerHeading+" then "+obj.actionHeading,
 			heading: obj.heading
 		};
 		return appletData;
@@ -123,7 +138,7 @@ class CreateApplet extends Component {
 					step="4"
 					serviceFrom={this.state.serviceFrom}
 				/>
-				<Step5 currentStep={currentStep} afterValid={this._setAction} />
+				<Step5 currentStep={currentStep} afterValid={this._setAction} serviceTo={this.state.serviceTo}/>
 				<Step6
 					currentStep={currentStep}
 					data={this.state}

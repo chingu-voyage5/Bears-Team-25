@@ -2,34 +2,14 @@ var passport = require("passport");
 var express = require("express");
 var router = express.Router();
 var User = require("../models/users");
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  } else {
-    console.log("You are not logged in!");
-    res.statusCode = 401;
-    res.setHeader("Content-Type", "application/json");
-    res.json({ success: false, status: "You are not logged in!" });
-  }
-}
+var isLoggedIn = require('../commonFunctions').isLoggedIn;
 
 function extractUserInfo(userFromReq) {
-  let isGoogleLinked, isFBLinked, isSlackToken;
-  userFromReq.google.id ? (isGoogleLinked = true) : (isGoogleLinked = false);
-  userFromReq.facebook.id ? (isFBLinked = true) : (isFBLinked = false);
-  userFromReq.slack.token ? (isSlackToken = true) : (isSlackToken = false);
-  userFromReq.gmail.refreshToken
-    ? (isGmailToken = true)
-    : (isGmailToken = false);
-  return (userInfo = {
-    name: userFromReq.name,
-    email: userFromReq.local.email,
-    isGoogleLinked: isGoogleLinked,
-    isFBLinked: isFBLinked,
-    isSlackToken: isSlackToken,
-    isGmailToken: isGmailToken
-  });
+  const {servicesSubscribed, servicesNotSubscribed} = userFromReq;
+  (userFromReq.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
+  (userFromReq.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
+  return userInfo = { name: userFromReq.name, email: userFromReq.local.email,
+     isGoogleLinked, isFBLinked, servicesSubscribed, servicesNotSubscribed }
 }
 
 // this route is just used to get the user basic info
@@ -72,7 +52,7 @@ router.post("/login", function(req, res, next) {
     if (user) {
       req.logIn(user, function(err) {
         if (err) {
-          console.log("error when logging in");
+          console.log(err);
           return next(err);
         }
 
@@ -258,7 +238,6 @@ router.get("/auth/facebook/callback", function(req, res, next) {
         message = info.message;
         if (message) {
           res.redirect("http://localhost:3000/" + info.message);
-          console.log("Here in message");
         } else {
           res.redirect("http://localhost:3000/");
         }
@@ -293,7 +272,6 @@ router.get("/auth/google/callback", function(req, res, next) {
         }
         message = info.message;
         if (message) {
-          console.log("Here in message");
           res.redirect("http://localhost:3000/" + info.message);
         } else {
          res.redirect("http://localhost:3000/");

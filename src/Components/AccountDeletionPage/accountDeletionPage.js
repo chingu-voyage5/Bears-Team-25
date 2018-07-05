@@ -13,8 +13,7 @@ var AccountDeletionPage = props => {
     if (!name) {
         return <Redirect to='/' />
     }
-    else {
-        return (
+    return (
             <div className='screen-center deletion'>
                 <form onSubmit={(values => dispatch(handleSubmit(values)))}>
                     <h1 className='form-title'> Delete account</h1>
@@ -29,8 +28,7 @@ var AccountDeletionPage = props => {
                     </div>
                 </form >
             </div >
-        )
-    }
+    )
 }
 
 AccountDeletionPage = reduxForm({

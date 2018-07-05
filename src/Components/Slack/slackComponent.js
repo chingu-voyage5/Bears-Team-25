@@ -4,36 +4,9 @@ import Button from "@material-ui/core/Button";
 import { Field, reduxForm } from 'redux-form';
 import MenuItem from "@material-ui/core/MenuItem";
 import { formValueSelector } from 'redux-form';
-import {renderTextField, renderSelectField, validateMessage} from '../../commonFunctions/formFunctions';
+import {renderSelectField, validateMessage} from '../../commonFunctions/formFunctions';
 const selector = formValueSelector('SlackForm')
 const axios = require("axios");
-
-const sendMailAndMessage = (values) => {
-  let source = values.Channel
-  let user = values.DM;
-  let channel = values.channels;
-  let message = values.message;
-  let email = values.email;
-  let to = null;
-  if (source === 'DM') {
-    to = user;
-  }
-  else {
-    to = channel;
-  }
-  axios
-    .post("http://localhost:3001/api/integrations/sendMessageThroughSlackAndGmail",
-     {to, message, email },
-    {
-      withCredentials: true
-    })
-    .then(response => {
-      console.log('message sent');
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
 
 class Slack extends Component {
 
@@ -43,8 +16,9 @@ class Slack extends Component {
   }
 
   componentDidMount() {
-    this.fetchUsersAndChannels();
+    this.fetchUsersAndChannels()
   }
+
 
   fetchUsersAndChannels = () => {
     axios
@@ -60,23 +34,21 @@ class Slack extends Component {
         console.log(error);
       });
   };
+
   render() {
-    const { isSlackToken, source, handleSubmit, channel, user, isGmailToken, message, valid} = this.props;
+    const {source, channel, user, valid, afterValid} = this.props;
     const {users, channels } = this.state;
-   // console.log(source, channel, user);
+    let to = null;
+    (source === 'DM') ? to = user : to = channel;
+    const values = {to};
     const usersToRender = users.map( (user, index) => 
       <MenuItem key = {`user-${index}`} value={user.id}>{user.name}</MenuItem>)
     const channelsToRender = channels.map( (channel, index) => 
       <MenuItem key = {`channel-${index}`} value={channel.id}>{channel.name}</MenuItem>)
     return (
       <div>
-        {isSlackToken && isGmailToken &&  (
-        <form onSubmit= {(values) => handleSubmit(values)}>
-            <Field  className='input-field'  name="message" component={renderTextField} label="Message" />
-            <h3>Mail Options</h3>
-            <Field  className='input-field'  name="email" component={renderTextField} label="Email" />
+        <form>
             <div>
-            <h3>Slack Options</h3>
             <Field  name="Channel" component={renderSelectField} label="Which Channel?">
               <MenuItem value='DM'>DM</MenuItem>
               <MenuItem  value='Channels'>Channels</MenuItem>
@@ -96,20 +68,11 @@ class Slack extends Component {
             </Field>
             </div>
             }
-            <Button disabled = {(!user && !channel) || !isGmailToken || !valid} variant="raised" type="submit" color="primary">send message</Button>
-        </form>)
-        }
-        {!isSlackToken && (
-          <a href="http://localhost:3001/api/slack/auth/">
-            <Button variant="raised" className="slack-btn" style={{backgroundColor: '#49c4a1', color: 'white'}}>connect Slack </Button>
-          </a>
-        )}
-         {!isGmailToken && (
-        <a href="http://localhost:3001/api/gmail/auth/">
-            <Button variant="raised" className="mail-btn" style={{backgroundColor: '#db3236', color: 'white'}}>connect Gmail</Button>
-          </a>
-            )}
-      </div>  
+            <Button disabled = {(!user && !channel) || !valid} variant="raised" 
+            onClick={() => afterValid(values)} color="primary">Create action</Button>
+        </form>
+            </div>
+
     );
   }
 }
@@ -121,13 +84,9 @@ Slack = reduxForm({
 
 const mapStateToProps = state => {
   return {
-    onSubmit: (values)  => sendMailAndMessage(values),
-    isSlackToken: state.auth.isSlackToken,
-    isGmailToken: state.auth.isGmailToken,
     source: selector(state, 'Channel'),
     channel: selector(state, 'channels'),
-    user: selector(state, 'DM'),
-    message: selector(state, 'message')
+    user: selector(state, 'DM')
   };
 };
 

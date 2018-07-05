@@ -4,17 +4,25 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";	
 import Typography from "@material-ui/core/Typography";
+import Trello from '../../Trello/trelloComponent';
+import Slack from '../../Slack/slackComponent';
+import Mail from '../../Mail/mailComponent';
 import "./Step5.css";
 
 class Step5 extends Component {
 	render() {
+		const actionServices = ['Trello', 'Mail', 'Slack'];
 		if (this.props.currentStep !== 5) {
 			return null;
 		}
+		const {serviceTo} = this.props;
 		return (
 			<div className="step-5">
 				<div className="text-center">
-					<ActionFieldCard afterValid={this.props.afterValid}/>
+					{serviceTo === 'Trello' && <Trello afterValid={this.props.afterValid} />}
+					{serviceTo === 'Slack' && <Slack afterValid={this.props.afterValid} />}
+					{serviceTo === 'Mail' && <Mail afterValid={this.props.afterValid} />}
+					{!actionServices.includes(serviceTo) && <ActionFieldCard afterValid={this.props.afterValid}/>}
 				</div>
 			</div>
 		);

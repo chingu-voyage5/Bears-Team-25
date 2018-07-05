@@ -5,12 +5,13 @@ import { connect } from 'react-redux';
 import ServiceCard from "../ServiceCard/ServiceCard";
 import * as serviceActions from "../../../actions/serviceActions";
 import { bindActionCreators } from "redux";
+import { Redirect } from 'react-router';
 import "./Step1.css";
 
 class Step1 extends Component {
-	componentWillMount(){
-		this.props.serviceActions.listServices();
-	}
+	// componentWillMount(){
+	// 	this.props.serviceActions.listServices();
+	// }
 	constructor(props) {
 	  super(props);
 	  this.state = {};
@@ -20,13 +21,21 @@ class Step1 extends Component {
 		this.props.afterValid("serviceFrom",value);
 	}
 	render() {
+		let name = localStorage.getItem('name');
+		if (!name) return <Redirect to='/' />;
+
+		const {servicesSubscribed} = this.props;
+		let servicesWithWebhooks = servicesSubscribed.filter(service => service.isWebhooks)
+		// leave only array with service names
+		servicesWithWebhooks =  servicesWithWebhooks.map(service => service.service)
+
 		if (this.props.currentStep !== 1) {
 			return null;
 		}
-		const serviceList=this.props.serviceList;
+		// const serviceList=this.props.serviceList;
 		return (
 			<div className="step-1">
-				<ServiceCard json={serviceList} validate={this._validate}/>
+				<ServiceCard json={servicesWithWebhooks} validate={this._validate}/>
 			</div>
 		);
 	}
@@ -34,12 +43,14 @@ class Step1 extends Component {
 
 const mapStateToProps=state=>{
 	return{
-		serviceList:state.service.serviceList
+		// serviceList:state.service.serviceList,
+		servicesSubscribed: state.auth.servicesSubscribed
 	}
 }
 const mapActionsToProps = dispatch => {
   return {
-    serviceActions: bindActionCreators(serviceActions, dispatch)
+		//serviceActions: bindActionCreators(serviceActions, dispatch)
+		
   };
 };
 export default connect(mapStateToProps,mapActionsToProps)(Step1);

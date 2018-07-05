@@ -6,80 +6,87 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 
 //this ia slack button
-const SlackButton = (
-	<a href="http://localhost:3001/api/slack/auth/">
+const SlackButton = (isServiceConnected, disconnectService) => (
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/slack/auth/"}>
 		<Button
 			variant="raised"
 			className="slack-btn"
 			style={{ backgroundColor: "#db3236", color: "white" }}
+			onClick = {isServiceConnected ? disconnectService : null}
 		>
-			connect Slack{" "}
+			{isServiceConnected ? 'disconnect Slack' : 'connect Slack'}
 		</Button>
 	</a>
 );
-const MailButton = (
-	<a href="http://localhost:3001/api/gmail/auth/">
+const MailButton = (isServiceConnected, disconnectService) => (
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/gmail/auth/"}>
 		<Button
 			variant="raised"
 			className="mail-btn"
 			style={{ backgroundColor: "#db3236", color: "white" }}
+			onClick = {isServiceConnected ? disconnectService : null}
 		>
-			connect Gmail
+			{isServiceConnected ? 'disconnect Gmail' : 'connect Gmail'}
 		</Button>
 	</a>
 );
-const TrelloButton = (
-	<a href="http://localhost:3001/api/gmail/auth/">
+const TrelloButton = (isServiceConnected, disconnectService) => (
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/trello/auth/"}>
 		<Button
 			variant="raised"
 			className="mail-btn"
 			style={{ backgroundColor: "#db3236", color: "white" }}
+			onClick = {isServiceConnected ? disconnectService : null}
 		>
-			connect Trello
+			{isServiceConnected ? 'disconnect Trello' : 'connect Trello'}
 		</Button>
 	</a>
 );
-const FacebookButton = (
-	<a href="http://localhost:3001/api/gmail/auth/">
+const FacebookButton = (isServiceConnected, disconnectService) => (
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/gmail/auth/"}>
 		<Button
 			variant="raised"
 			className="mail-btn"
 			style={{ backgroundColor: "#db3236", color: "white" }}
+			onClick = {isServiceConnected ? disconnectService : null}
 		>
-			connect Facebook
+			{isServiceConnected ? 'disconnect Facebook' : 'connect Facebook'}
 		</Button>
 	</a>
 );
-const GithubButton = (
-	<a href="http://localhost:3001/api/gmail/auth/">
+const GithubButton = (isServiceConnected, disconnectService) => (
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/github/auth/"}>
 		<Button
 			variant="raised"
 			className="mail-btn"
 			style={{ backgroundColor: "#db3236", color: "white" }}
+			onClick = {isServiceConnected ? disconnectService : null}
 		>
-			connect Github
+			{isServiceConnected ? 'disconnect Github' : 'connect Github'}
 		</Button>
 	</a>
 );
-const TwitterButton = (
-	<a href="http://localhost:3001/api/gmail/auth/">
+const TwitterButton = (isServiceConnected, disconnectService) => (
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/gmail/auth/"}>
 		<Button
 			variant="raised"
 			className="mail-btn"
 			style={{ backgroundColor: "#db3236", color: "white" }}
+			onClick = {isServiceConnected ? disconnectService : null}
 		>
-			connect Twitter
+		{isServiceConnected ? 'disconnect Twitter' : 'connect Twitter'}
 		</Button>
 	</a>
 );
-const InstagramButton = (
-	<a href="http://localhost:3001/api/gmail/auth/">
+const InstagramButton = (isServiceConnected, disconnectService) => (
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/gmail/auth/"}>
 		<Button
 			variant="raised"
 			className="mail-btn"
 			style={{ backgroundColor: "#db3236", color: "white" }}
+			onClick = {isServiceConnected ? disconnectService : null}
 		>
-			connect Instagram
+			{isServiceConnected ? 'disconnect Instagram' : 'connect Instagram'}
 		</Button>
 	</a>
 );

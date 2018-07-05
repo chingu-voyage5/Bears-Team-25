@@ -13,7 +13,7 @@ import "./ServiceCard.css";
 
 class ServiceCard extends Component {
 	render() {
-		let serviceName = this.props.serviceName;
+		const {isServiceConnected, serviceName, disconnectService} = this.props;
 		let serviceNameButton = serviceName + "Button";
 		const ServiceButton = serviceButtons[serviceNameButton];
 
@@ -22,7 +22,7 @@ class ServiceCard extends Component {
 
 		return (
 			<div className="service-card">
-				<Grid container spacing={24}>
+				<Grid  style={{color:'white'}}container spacing={24}>
 					<Grid item md={2} />
 					<Grid item md={8}>
 						<Card
@@ -33,6 +33,7 @@ class ServiceCard extends Component {
 								<Grid item md={2}>
 									<CardContent>
 										<Typography
+										    color='inherit'
 											gutterBottom
 											variant="headline"
 											component="h1"
@@ -43,7 +44,7 @@ class ServiceCard extends Component {
 													sm={8}
 													className="icon-container"
 												>
-													<IconName className="icon" />
+													<IconName  color = 'white' className="icon" />
 												</Grid>
 											</Grid>
 										</Typography>
@@ -52,7 +53,7 @@ class ServiceCard extends Component {
 								<Grid item md={10}>
 									<CardContent>
 										<h2>{serviceName}</h2>
-										{ServiceButton}
+										{ServiceButton(isServiceConnected, disconnectService)}
 									</CardContent>
 								</Grid>
 							</Grid>

@@ -3,6 +3,13 @@ var mongoose = require("mongoose");
 var bcrypt = require("bcrypt-nodejs");
 var Schema = mongoose.Schema;
 // define the schema for our user model
+
+var serviceSchema = mongoose.Schema({
+    service: String,
+    isWebhooks: Boolean,
+    isActions: Boolean
+})
+
 var userSchema = mongoose.Schema({
     name: String,
     local: {
@@ -22,11 +29,7 @@ var userSchema = mongoose.Schema({
         email: String,
         name: String
     },
-    appletIds: [
-        {
-            type: String
-        }
-    ],
+    appletIds: [{ type: Schema.Types.ObjectId, ref: 'Applet' }],
     activity:[
     	{
     		date:{ type: Date, default: Date.now },
@@ -46,7 +49,31 @@ var userSchema = mongoose.Schema({
         {
             type:String
         }
-    ]
+    ],
+    github: {
+        token: String,
+        username: String,
+        id: Number,
+        isAppInstalled: Boolean
+    },
+    trello: {
+        token: String,
+        listName: String,
+        cardTitle: String,
+        position: String,
+        boardID: String,
+        description: String
+    },
+    servicesSubscribed: { type: [serviceSchema] },
+    servicesNotSubscribed: { type: [String],
+         default: ["Mail",
+                    "Trello",
+                    "Github",
+                    "Facebook",
+                    "Twitter",
+                    "Instagram",
+                    "Slack"]
+    }   
 });
 
 // generating a hash
