@@ -36,13 +36,20 @@ var T = new Twit({
 // var stream = T.stream('user');
 var stream = T.stream('user'); 
 
+//get all tweets from user
 stream.on('tweet', function (tweet) {
  console.log(tweet);
 });
 
-// stream.on('user_update', function (eventMsg) {
-//   console.log("User updated");
-// })
+//when tweet is favorited by user
+stream.on('favorite', function (event) {
+  console.log("favouited");
+});
+
+//updates on users
+stream.on('user_update', function (event) {
+  console.log("User updated");
+});
 
 console.log("Done");
 // export default twitterRouter;
