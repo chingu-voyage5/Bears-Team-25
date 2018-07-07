@@ -64,6 +64,10 @@ var userSchema = mongoose.Schema({
         boardID: String,
         description: String
     },
+    facebookApplet: {
+        token: String,
+        id: Number
+    },
     servicesSubscribed: { type: [serviceSchema] },
     servicesNotSubscribed: { type: [String],
          default: ["Mail",
