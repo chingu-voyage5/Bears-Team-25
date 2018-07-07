@@ -54,6 +54,9 @@ class Footer extends Component {
             </div>
           </div>
         </div>
+        <div className="text-center footer-credentials">
+            This webpage was created by Anshul, Ram and Sandun as part of "build to learn" project for chingu voygage 4.
+          </div>
       </div>
     );
   }

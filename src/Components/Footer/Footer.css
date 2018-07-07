@@ -4,6 +4,7 @@
   width: 100%;
   border-top: solid rgba(0,0,0,0.5);
   margin-top:10vh;
+  padding-bottom: 30px;
 }
 
 .footer {
@@ -72,4 +73,11 @@
   .footer__links__column {
     flex: 0 1 150px;
   }
+}
+.footer-credentials{
+  color:white;
+  margin-bottom: 25px;
+      margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
