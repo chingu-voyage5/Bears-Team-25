@@ -3,8 +3,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import ServiceCard from "../ServiceCard/ServiceCard";
-import * as serviceActions from "../../../actions/serviceActions";
-import { bindActionCreators } from "redux";
 import { Redirect } from 'react-router';
 import "./Step1.css";
 
