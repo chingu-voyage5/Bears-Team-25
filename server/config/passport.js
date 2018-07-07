@@ -8,6 +8,7 @@ var gmail = require('./passportStrategies/gmail');
 var github = require('./passportStrategies/github');
 var trello = require('./passportStrategies/trello')
 var facebookApplet = require('./passportStrategies/facebookApplet');
+var twitter = require('./passportStrategies/twitter');
 var User = require("../models/users");
 
 // =========================================================================
@@ -38,6 +39,7 @@ gmail(passport);
 github(passport);
 trello(passport);
 facebookApplet(passport);
+twitter(passport);
 
 
 

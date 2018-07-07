@@ -68,6 +68,12 @@ var userSchema = mongoose.Schema({
         token: String,
         id: Number
     },
+    twitter: {
+        token: String,
+        tokenSecret: String,
+        username: String,
+        id: Number
+    },
     servicesSubscribed: { type: [serviceSchema] },
     servicesNotSubscribed: { type: [String],
          default: ["Mail",
