@@ -1,7 +1,15 @@
-//reducer for all services
-
+//reducer for all activity-related
+import * as ACTIONS from "../actions/actionTypes";
 const activityReducer = (state = {}, action) => {
-  return state;
+	switch (action.type) {
+		case ACTIONS.SHOW_MY_ACTIVITY:
+			return {
+				...state,
+				activityList: action.payload
+			};
+		default:
+			return state;
+	}
 };
 
 export default activityReducer;

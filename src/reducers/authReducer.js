@@ -3,22 +3,45 @@ import * as ACTIONS from "../actions/actionTypes"
 export default function authReducer(state = {
     auth: false,
     login: { isFetching: false },
-    signUp: { isFetching: false }
+    signUp: { isFetching: false },
+    profileSettings: {isFetching: false},
+    isFBLinked: false,
+    isGoogleLinked: false,
+    servicesSubscribed: [],
+    servicesNotSubscribed: []
 }, action) {
     switch (action.type) {
+        case ACTIONS.UNLINK_FB:
+        return {
+          ...state,
+          isFBLinked: false
+        }
+        case ACTIONS.UNLINK_GOOGLE:
+         return {
+          ...state,
+          isGoogleLinked: false
+        }
         case ACTIONS.LOGOUT:
-            localStorage.removeItem('userEmail');
+        localStorage.removeItem('name');
             return {
                 ...state,
-                auth: false,
-                userEmail: null
+                name: null,
+                email: null,
+                isFBLinked: false,
+                isGoogleLinked: false,
+                servicesNotSubscribed: [],
+                servicesSubscribed: []
             }
-        case ACTIONS.SET_USER_FROM_LOCALSTORAGE:
+        case ACTIONS.LOGOUT_SUCCESS:
             return {
                 ...state,
-                userEmail: action.userEmail,
-                auth: true
+                auth: false
             }
+        case ACTIONS.LOGOUT_FAILURE:
+            return {
+                ...state,
+                auth: false
+            }     
         case ACTIONS.LOGIN:
             return {
                 ...state,
@@ -29,13 +52,19 @@ export default function authReducer(state = {
                 ...state,
                 login: { isFetching: false, error: action.error, isError: true }
             }
-        case ACTIONS.LOGIN_SUCCESS:
+        case ACTIONS.SET_USERS_CREDENTIALS:
             return {
                 ...state,
                 login: { isFetching: false },
-                userEmail: action.userEmail,
-                auth: true,
-                success: true
+                signUp: {isFetching: false},
+                name: action.name,
+                email: action.email,
+                isFBLinked: action.isFBLinked,
+                isGoogleLinked: action.isGoogleLinked,
+                servicesNotSubscribed: action.servicesNotSubscribed,
+                servicesSubscribed: action.servicesSubscribed,
+                auth: action.auth,
+                success: true           
             }
 
         case ACTIONS.SIGN_UP:
@@ -48,12 +77,27 @@ export default function authReducer(state = {
                 ...state,
                 signUp: { isFetching: false, error: action.error, isError: true }
             }
-        case ACTIONS.SIGN_UP_SUCCESS:
+        case ACTIONS.CHANGING_EMAIL:
             return {
-                ...state,
-                signUp: { isFetching: false, success: true },
-                userEmail: action.userEmail,
-                auth: true
+              ...state,
+              profileSettings: { isFetching: true},
+              email: action.email
+            }
+        case ACTIONS.CHANGING_EMAIL_FAILURE:
+            return {
+              ...state,
+              profileSettings: { isFetching: false, error: action.error },
+            }
+          case ACTIONS.CHANGING_EMAIL_SUCCESS:
+            return {
+              ...state,
+              profileSettings: { isFetching: false, error: action.error },
+            }
+        case ACTIONS.DISCONNECT_SERVICE:
+            return {
+              ...state,
+              servicesNotSubscribed: action.servicesNotSubscribed,
+              servicesSubscribed: action.servicesSubscribed
             }
         default:
             return state;

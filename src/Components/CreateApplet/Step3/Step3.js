@@ -15,13 +15,19 @@ class Step3 extends Component {
 		this.props.afterValid("serviceTo",value);
 	}
 	render() {
+		const {servicesSubscribed} = this.props;
+		let servicesWithActions = servicesSubscribed.filter(service => service.isActions)
+		// leave only array with service names
+		servicesWithActions =  servicesWithActions.map(service => service.service)
+
+
 		if (this.props.currentStep !== 3) {
 			return null;
 		}
-		const serviceList=this.props.serviceList;
+		// const serviceList=this.props.serviceList;
 		return (
 			<div className="step-3">
-				<ServiceCard json={serviceList} validate={this._validate}/>
+				<ServiceCard json={servicesWithActions} validate={this._validate}/>
 			</div>
 		);
 	}
@@ -29,7 +35,8 @@ class Step3 extends Component {
 
 const mapStateToProps=state=>{
 	return{
-		serviceList:state.service
+		servicesSubscribed: state.auth.servicesSubscribed
+		// serviceList:state.service.serviceList
 	}
 }
 

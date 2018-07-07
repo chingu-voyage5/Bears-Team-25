@@ -8,12 +8,12 @@ import { Redirect } from 'react-router'
 import {renderTextField, validateOnlyPass} from '../../commonFunctions/formFunctions';
 
 var AccountDeletionPage = props => {
-    const { handleSubmit, valid, isFetching, dispatch, auth } = props;
-    if (!auth) {
+    const { handleSubmit, valid, isFetching, dispatch} = props;
+    let name = localStorage.getItem('name')
+    if (!name) {
         return <Redirect to='/' />
     }
-    else {
-        return (
+    return (
             <div className='screen-center deletion'>
                 <form onSubmit={(values => dispatch(handleSubmit(values)))}>
                     <h1 className='form-title'> Delete account</h1>
@@ -28,8 +28,7 @@ var AccountDeletionPage = props => {
                     </div>
                 </form >
             </div >
-        )
-    }
+    )
 }
 
 AccountDeletionPage = reduxForm({
@@ -40,8 +39,7 @@ AccountDeletionPage = reduxForm({
 function mapStateToProps(state) {
     return {
         onSubmit: values => delete_account(values),
-        isFetching: state.accountDeletion.isFetching,
-        auth: state.auth.auth
+        isFetching: state.accountDeletion.isFetching
     }
 }
 

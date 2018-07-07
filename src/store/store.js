@@ -6,6 +6,7 @@ import serviceReducer from "../reducers/serviceReducer";
 import actionReducer from "../reducers/actionReducer";
 import triggerReducer from "../reducers/triggerReducer";
 import activityReducer from "../reducers/activityReducer";
+import appletReducer from '../reducers/appletReducer';
 import initialState from "./initialState";
 import authReducer from '../reducers/authReducer';
 import snackbarReducer from '../reducers/snackbarReducer';
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   create: createReducer,
   service:serviceReducer,
   trigger: triggerReducer,
+  applet:appletReducer,
   auth: authReducer,
   snackbar: snackbarReducer,
   changePassword: changePasswordReducer,
