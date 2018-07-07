@@ -17,10 +17,11 @@ router.get("/updates", (req, res, next) => {
 
 router.post("/updates", (req, res, next) => {
     console.log(req.body.entry[0].changed_fields);
+    res.statusCode = 200;
   });  
 
 
-router.get("/auth", passport.authorize("facebookApplet"));
+router.get("/auth", passport.authorize("facebookApplet", { scope: ["public_profile", "email", "manage_pages"] }));
 
 router.get(
   "/auth/callback",
