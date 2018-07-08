@@ -3,6 +3,7 @@ const express = require("express");
 const twitterRouter = express.Router();
 var passport = require("passport");
 var isLoggedIn = require('../commonFunctions').isLoggedIn;
+var User = require("../models/users");
 var addToNotSubscribedRemoveFromSubscribed = require('../commonFunctions').addToNotSubscribedRemoveFromSubscribed;
 
 twitterRouter.get("/auth", passport.authorize("twitter"));
@@ -34,15 +35,43 @@ twitterRouter.get("/disconnect", isLoggedIn, (req, res, next) => {
 	);
   });
 
+	User.find({ 'twitter.id': { $exists: true } })
+	.exec(function(err, users) {
+		if (err) return done(err);
+		consumer_key = JSON.parse(process.env.twitter).consumerKey;
+		consumer_secret = JSON.parse(process.env.twitter).consumerSecret;
+		if (users.length !== 0) {
+			for (let user of users) {
+				var T = new Twit({
+					consumer_key,
+					consumer_secret,
+					access_token: user.twitter.token,
+					access_token_secret: user.twitter.tokenSecret,
+					timeout_ms: 60 * 1000, // optional HTTP request timeout to apply to all requests.
+				});
 
-// var T = new Twit({
-// 	consumer_key: JSON.parse(process.env.twitter).consumerKey,
-// 	consumer_secret: JSON.parse(process.env.twitter).consumerSecret,
-// 	access_token: process.env.twitter_access_token,
-// 	access_token_secret: process.env.twitter_token_secret,
-// 	timeout_ms: 60 * 1000, // optional HTTP request timeout to apply to all requests.
-// 	strictSSL: true // optional - requires SSL certificates to be valid.
-// });
+				var stream = T.stream('user');
+
+				stream.on('tweet', function (tweet) {
+					console.log(tweet);
+					// twit.text
+					// twit.id
+					// twit.user.id
+					// twit.entities.hashtags
+					// twit.entities.urls
+				 });
+			}
+			} else {
+			console.log("User not found");
+		}
+	});
+		
+
+			
+
+			
+
+
 
 // T.get('account/verify_credentials', { skip_status: true })
 //   .catch(function (err) {
@@ -52,18 +81,10 @@ twitterRouter.get("/disconnect", isLoggedIn, (req, res, next) => {
 //     console.log('data', result);
 //   })
 
-// console.log("here in twiter router");
-// var T = new Twit({
-// 	consumer_key: process.env.twitter_api_key,
-// 	consumer_secret: process.env.twitter_api_secret,
-// 	access_token: process.env.twitter_access_token,
-// 	access_token_secret: process.env.twitter_token_secret,
-// 	timeout_ms: 60 * 1000, // optional HTTP request timeout to apply to all requests.
-// 	strictSSL: true // optional - requires SSL certificates to be valid.
-// });
 
-// // var stream = T.stream('user');
-// var stream = T.stream('user'); 
+
+// var stream = T.stream('user');
+
 
 // //get all tweets from user
 // stream.on('tweet', function (tweet) {

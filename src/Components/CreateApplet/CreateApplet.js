@@ -43,11 +43,12 @@ class CreateApplet extends Component {
 		});
 	}
 
-	_doubleNext(key1, value1, key2, value2) {
+	_doubleNext(key1, value1, key2, value2, values = {}) {
 		this._changeStep();
 		this.setState({
 			[key1]: value1,
-			[key2]: value2
+			[key2]: value2,
+			...values
 		});
 	}
 
@@ -83,7 +84,8 @@ class CreateApplet extends Component {
 			trigger: {
 				id: 4,
 				heading: obj.triggerHeading,
-				content: obj.triggerContent
+				content: obj.triggerContent,
+				twitterOptions: obj.twitterOptions
 			},
 			option: {
 				watchFrom: obj.serviceFrom,
@@ -98,9 +100,9 @@ class CreateApplet extends Component {
 	}
 
 	_finish(obj) {
-		this._changeStep();
 		let appletData=this.modifyData(this.state);
 		this.props.createActions.addApplet(appletData);
+		this.setState({currentStep: 1})
 	}
 
 	render() {
