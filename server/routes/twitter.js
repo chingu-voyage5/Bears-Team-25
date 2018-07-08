@@ -98,7 +98,7 @@ twitterRouter.get("/disconnect", isLoggedIn, (req, res, next) => {
 				streams[id] = stream;
 
 				stream.on('tweet', function (tweet) {
-					console.log(tweet)
+					// console.log(tweet)
 					let twitterID = tweet.user.id;
 					User.find({ "twitter.id": twitterID })
 					.populate('appletIds')
@@ -146,10 +146,34 @@ twitterRouter.get("/disconnect", isLoggedIn, (req, res, next) => {
 					})
 				 });
 
-				 stream.on('follow', function (follow) {
-					console.log(follow);
-					// tweet.source.id; tweet.target.name tweet.target.screen_name: // person who started following
-					// tweet.target.id  // person who was followed
+				 stream.on('follow', function (followAction) {
+					let personWhoFollows = followAction.source.name;
+					let personWhoisFollowed = followAction.target.name;
+					let twitterID = followAction.target.id;
+					User.find({ "twitter.id": twitterID })
+					.populate('appletIds')
+					.exec(function(err, users) {
+						if (err) return done(err);
+						if (users.length !== 0) {
+							for (user of users) {
+								let applets = user.appletIds;
+								applets = applets.filter(applet => applet.option.watchFrom === 'Twitter' 
+								&& applet.trigger.twitterOptions.byNewFollower && applet.isActive );
+
+								// trello options / actions
+								let cardTitle = `[New ${personWhoisFollowed}'s follower]`;
+								let description = `${personWhoFollows} started following ${personWhoisFollowed}`;
+								trelloActions(applets, user.trello.token, cardTitle, description);
+
+								//slack options / actions
+								let message = `${personWhoFollows} started following ${personWhoisFollowed}`;
+								slackActions(applets, user.slack.token, message);
+
+								//mail actions
+								mailActions (applets, message, user);
+							}
+						}
+					})
 				 });			 
 			}
 			} else {
