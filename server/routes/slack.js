@@ -76,6 +76,11 @@ router.get("/fetchUsersAndChannels", isLoggedIn, (req, res, next) => {
     }
     fetchUsersAndChannels();
   }
+  else {
+    res.statusCode = 401;
+		res.setHeader("Content-Type", "application/json");
+		res.json({ success: false, status: "You don't have access token!" });
+  }
 });
 
 exports.slackRouter = router;

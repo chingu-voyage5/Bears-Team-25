@@ -43,7 +43,7 @@ const TrelloButton = (isServiceConnected, disconnectService) => (
 	</a>
 );
 const FacebookButton = (isServiceConnected, disconnectService) => (
-	<a href={isServiceConnected ? null : "http://localhost:3001/api/gmail/auth/"}>
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/facebook/auth/"}>
 		<Button
 			variant="raised"
 			className="mail-btn"
@@ -67,7 +67,7 @@ const GithubButton = (isServiceConnected, disconnectService) => (
 	</a>
 );
 const TwitterButton = (isServiceConnected, disconnectService) => (
-	<a href={isServiceConnected ? null : "http://localhost:3001/api/gmail/auth/"}>
+	<a href={isServiceConnected ? null : "http://localhost:3001/api/twitter/auth/"}>
 		<Button
 			variant="raised"
 			className="mail-btn"
