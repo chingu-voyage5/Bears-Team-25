@@ -16,11 +16,10 @@ myappletRouter.get("/", isLoggedIn, (req, res, next) => {
 
 myappletRouter.delete("/:id", isLoggedIn, (req, res, next) => {
   var id = req.params.id.toString()
-  Applet.findOneAndDelete({ _id: id }).exec(function(err, applet) {
+  Applet.findOneAndDelete({ _id: id, user: req.user._id }).exec(function(err, applet) {
 	if (err) return next(err);
 	var user = req.user
 	applets = user.appletIds;
-	console.log(applets)
 	var i = 0;
     for (let applet of applets) {
 		if (applet._id.equals(id)) break;
