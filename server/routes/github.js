@@ -1,4 +1,3 @@
-const axios = require("axios");
 var passport = require("passport");
 var express = require("express");
 var router = express.Router();
@@ -10,7 +9,7 @@ var slackSendMessage = require("../routes/slack").slackSendMessage;
 var transporter = require('../routes/email').transporter;
 var mailOptions = require('../routes/email').mailOptions;
 var isLoggedIn = require('../commonFunctions').isLoggedIn;
-var addToNotSubscribedRemoveFromSubscribed = require('../commonFunctions').addToNotSubscribedRemoveFromSubscribed;
+var deleteApplets = require('../commonFunctions').deleteApplets;
 
 router.use(webhookHandler); // use our middleware
 
@@ -147,23 +146,7 @@ router.get(
 router.get("/disconnect", isLoggedIn, (req, res, next) => {
   var user = req.user;
   user.github = undefined;
-  let index = user.servicesSubscribed.map(service => service.service).indexOf('Github');
-  if (index !== -1)  user.servicesSubscribed.splice(index, 1);
-  index = user.servicesNotSubscribed.indexOf('Github');
-  if (index === -1) user.servicesNotSubscribed.push('Github');
-  user.save().then(
-    (user) => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      const {servicesNotSubscribed, servicesSubscribed} = req.user
-      res.json({ servicesNotSubscribed, servicesSubscribed });
-      return;
-    },
-    err => {
-      console.log(err);
-      return next(err);
-    }
-  );
+  deleteApplets('Github', user, res, next);
 });
 
 module.exports = router;

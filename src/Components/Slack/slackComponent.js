@@ -12,23 +12,24 @@ class Slack extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {users: [], channels: []}
+    this.state = {users: [], channels: []};
   }
 
-  componentDidMount() {
-    this.fetchUsersAndChannels()
+  componentWillMount() {
+    this.fetchUsersAndChannels();
   }
 
 
   fetchUsersAndChannels = () => {
+    console.log('slack 222')
     axios
       .get("http://localhost:3001/api/slack/fetchUsersAndChannels", {
         withCredentials: true
       })
       .then(response => {
-        let users = response.data.users;
-        let channels = response.data.channels;
-        this.setState({users: users, channels: channels})
+        console.log('response')
+        let {users, channels} = response.data
+        this.setState({users, channels})
       })
       .catch(error => {
         console.log(error);

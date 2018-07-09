@@ -24,7 +24,12 @@ var appletSchema = mongoose.Schema({
 	trigger: {
 		id: String,
 		heading: String,
-		content: String
+		content: String,
+		twitterOptions: {
+			hashtag: String,
+			byAnyTweet: Boolean,
+			byNewFollower: Boolean
+		}
 	},
 	option: {
 		watchFrom: String,

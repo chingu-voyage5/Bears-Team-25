@@ -5,7 +5,6 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
-import AssignmentIcon from "@material-ui/icons/Assignment";
 import * as Icons from "../../Common/Icons/Icons";
 import "./Step6.css";
 

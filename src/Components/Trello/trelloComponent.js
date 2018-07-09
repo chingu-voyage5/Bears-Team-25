@@ -9,21 +9,6 @@ const selector = formValueSelector('TrelloForm')
 const axios = require("axios");
 
 
-const saveTrelloConfig = (values) => {
-  axios
-    .post("http://localhost:3001/api/trello/saveTrelloConfig",
-        values,
-    {
-      withCredentials: true
-    })
-    .then(response => {
-      console.log(response.data.status);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
-
 class Trello extends Component {
 
   constructor(props) {

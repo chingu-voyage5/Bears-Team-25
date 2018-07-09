@@ -11,11 +11,11 @@ class Mail extends Component {
     const {valid, email, afterValid} = this.props;
     const values = {email};
     return (
-        <form>
+        <form onSubmit={() => afterValid(values)}>
           <div>
             <Field  className='input-field'  name="email" component={renderTextField} label="Email" />  
             </div>        
-            <Button disabled = {!valid}  onClick={() => afterValid(values)} variant="raised" color="primary">Create action</Button>
+            <Button disabled = {!valid}  type='submit' variant="raised" color="primary">Create action</Button>
         </form>
     );
   }

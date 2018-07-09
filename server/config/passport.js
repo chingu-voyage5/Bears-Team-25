@@ -7,6 +7,8 @@ var slack = require('./passportStrategies/slackStrategy');
 var gmail = require('./passportStrategies/gmail');
 var github = require('./passportStrategies/github');
 var trello = require('./passportStrategies/trello')
+var facebookApplet = require('./passportStrategies/facebookApplet');
+var twitter = require('./passportStrategies/twitter');
 var User = require("../models/users");
 
 // =========================================================================
@@ -22,7 +24,9 @@ passport.serializeUser(function(user, done) {
 
 // used to deserialize the user
 passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+  User.findById(id)
+  .populate('appletIds')
+  .exec(function(err, user) {
     done(err, user);
   });
 });
@@ -36,6 +40,8 @@ slack(passport);
 gmail(passport);
 github(passport);
 trello(passport);
+facebookApplet(passport);
+twitter(passport);
 
 
 

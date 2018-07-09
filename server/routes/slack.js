@@ -2,9 +2,8 @@ const axios = require("axios");
 var passport = require("passport");
 var express = require("express");
 var router = express.Router();
-var User = require("../models/users");
 var isLoggedIn = require('../commonFunctions').isLoggedIn;
-var addToNotSubscribedRemoveFromSubscribed = require('../commonFunctions').addToNotSubscribedRemoveFromSubscribed;
+var deleteApplets = require('../commonFunctions').deleteApplets;
 
 const slackSendMessage = (token, message, to) =>
   axios.post(
@@ -32,20 +31,7 @@ router.get(
 router.get("/disconnect", isLoggedIn, (req, res, next) => {
   var user = req.user;
   user.slack = undefined;
-  addToNotSubscribedRemoveFromSubscribed('Slack', user.servicesSubscribed, user.servicesNotSubscribed);
-  user.save().then(
-    (user) => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      const {servicesNotSubscribed, servicesSubscribed} = user;
-      res.json({ servicesNotSubscribed, servicesSubscribed });
-      return;
-    },
-    err => {
-      console.log(err);
-      return next(err);
-    }
-  );
+  deleteApplets('Slack', user, res, next);
 });
 
 router.get("/fetchUsersAndChannels", isLoggedIn, (req, res, next) => {
@@ -75,6 +61,11 @@ router.get("/fetchUsersAndChannels", isLoggedIn, (req, res, next) => {
       }
     }
     fetchUsersAndChannels();
+  }
+  else {
+    res.statusCode = 401;
+		res.setHeader("Content-Type", "application/json");
+		res.json({ success: false, status: "You don't have access token!" });
   }
 });
 
