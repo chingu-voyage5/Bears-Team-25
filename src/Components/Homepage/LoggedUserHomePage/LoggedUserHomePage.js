@@ -13,7 +13,7 @@ class LoggedUserHomePage extends Component {
   render() {
     const appletList = this.props.allAppletList;
     const AppletList = appletList.map((applet, i) => (
-      <AppletCard key={`appletCard-${i}`} content={applet.content} 
+      <AppletCard key={`appletCard-${i}`} content={applet.content} isHome = {true} 
       serviceFrom = {applet.option.watchFrom}  serviceTo = {applet.option.watchTo} />
     ));
     return (

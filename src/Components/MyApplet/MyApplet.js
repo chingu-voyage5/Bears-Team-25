@@ -28,8 +28,8 @@ class MyApplet extends Component {
 		}
 		const appletList =this.props.appletList;
 		const AppletList = appletList.map( (applet, i) => (
-			<AppletCard key={`applet-list-${i}`} content={applet.content}
-			 serviceFrom = {applet.option.watchFrom}  serviceTo = {applet.option.watchTo} />
+			<AppletCard key={`applet-list-${i}`} content={applet.content} deleteApplet = {this.props.myApplet.deletingApplet}
+			 serviceFrom = {applet.option.watchFrom}  serviceTo = {applet.option.watchTo} id = {applet._id} />
 		));
 		return (
 			<div className="my-applet">

@@ -4,6 +4,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 import Switch from "@material-ui/core/Switch";
 import Grid from "@material-ui/core/Grid";
+import DeleteIcon from "mdi-react/DeleteIcon";
 import * as Icons from "../Icons/Icons";
 import './AppletCard.css';
 
@@ -19,15 +20,19 @@ class AppletCard extends Component {
 		this.setState({ [name]: event.target.checked });
 	};
 	render() {
-		const {serviceTo, serviceFrom} = this.props;
+		const {serviceTo, serviceFrom, isHome, deleteApplet, id} = this.props;
 		let iconNameTo = serviceTo + "Icon";
 		const IconNameTo = Icons[iconNameTo];
+		let iconNameFrom = serviceFrom + "Icon";
+		const IconNameFrom = Icons[iconNameFrom];
 		return (
 			<Grid item sm={4}>
 				<div className="applet-card">
 					<Card className="card">
 						<CardContent className="white-text">
-							<ServiceLogo serviceFrom={serviceFrom}/>
+						<IconNameFrom color='white' className="icon"  />
+						{!isHome && <DeleteIcon onClick= {() => deleteApplet(id)}
+						color='red' className="delete-icon"  />}
 							<TextArea content={this.props.content} />
 						</CardContent>
 						<CardContent className="card-footer">

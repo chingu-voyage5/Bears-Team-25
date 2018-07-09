@@ -42,3 +42,5 @@ export const RENDER_SNACKBAR = 'RENDER_SNACKBAR';
 export const CLOSE  = 'CLOSE';
 
 export const DISCONNECT_SERVICE =  'DISCONNECT_SERVICE';
+
+export const DELETING_APPLET = 'DELETING_APPLET';

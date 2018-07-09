@@ -24,3 +24,46 @@ export function myAppletActions() {
 			});
 	};
 }
+
+
+function deletingApplet_success_snackbar() {
+  return {
+    type: ACTIONS.RENDER_SNACKBAR,
+    styling: "success",
+    text: "You've successfully deleted applet!"
+  };
+}
+
+function deletingApplet_failure_snackbar(error) {
+  return {
+    type: ACTIONS.RENDER_SNACKBAR,
+    styling: "error",
+    text: error
+  };
+}
+
+export function deletingApplet(id) {
+  return function(dispatch) {
+    axios
+	  .delete(`http://localhost:3001/api/myapplets/${id}`,
+	  {withCredentials: true})
+      .then(response => {
+        dispatch({
+					type: ACTIONS.SHOW_MY_APPLET,
+					payload: response.data
+				});
+        dispatch(deletingApplet_success_snackbar());
+      })
+      .catch(error => {
+        console.log(error)
+        if (error.response) {
+          error = error.response.data.status
+        } 
+        else {
+          error='Something wrong with server'
+        }
+        dispatch(deletingApplet_failure_snackbar(error));
+      });
+  };
+}
+

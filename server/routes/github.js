@@ -127,10 +127,10 @@ webhookHandler.on("installation", function(repo, data) {
   }
 });
 
-webhookHandler.on("installation_repositories", function(repo, data) {
-  // console.log('repo', repo);
-  // console.log('data', data);
-});
+// webhookHandler.on("installation_repositories", function(repo, data) {
+//   console.log('repo', repo);
+//   console.log('data', data);
+// });
 
 router.get("/auth", passport.authenticate("github"));
 

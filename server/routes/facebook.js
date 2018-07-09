@@ -1,8 +1,6 @@
-const axios = require("axios");
 var passport = require("passport");
 var express = require("express");
 var router = express.Router();
-var User = require("../models/users");
 var isLoggedIn = require('../commonFunctions').isLoggedIn;
 var addToNotSubscribedRemoveFromSubscribed = require('../commonFunctions').addToNotSubscribedRemoveFromSubscribed;
 

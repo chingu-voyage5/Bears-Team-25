@@ -21,13 +21,11 @@ class Slack extends Component {
 
 
   fetchUsersAndChannels = () => {
-    console.log('slack 222')
     axios
       .get("http://localhost:3001/api/slack/fetchUsersAndChannels", {
         withCredentials: true
       })
       .then(response => {
-        console.log('response')
         let {users, channels} = response.data
         this.setState({users, channels})
       })

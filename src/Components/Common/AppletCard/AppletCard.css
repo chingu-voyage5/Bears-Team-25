@@ -48,3 +48,11 @@
 .applet-card .white-text{
 	height: inherit;
 }
+
+.delete-icon {
+	margin-left: 13em;
+	text-align: right;
+	width: 36px!important;
+	height: 36px!important;
+	cursor: pointer;
+}
