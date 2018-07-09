@@ -1,4 +1,6 @@
 var TwitterStrategy = require('passport-twitter').Strategy;
+var openStreamsForTwitterUser = require('../../routes/twitter').openStreamsForTwitterUser;
+var streams = require('../../routes/twitter').streams;
 var addToSubscribedRemoveFromNotSubscribed = require('../../commonFunctions').addToSubscribedRemoveFromNotSubscribed;
 
 
@@ -19,7 +21,9 @@ module.exports = function(passport) {
           addToSubscribedRemoveFromNotSubscribed('Twitter', true, false,
            user.servicesSubscribed, user.servicesNotSubscribed);
           user.save(function(err) {
-            if (err) return cb(err);
+            if (err) return done(err);
+            // launching streaming api 
+            openStreamsForTwitterUser(user, streams)
             return done(null, user);
           });
         } else {

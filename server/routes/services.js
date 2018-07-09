@@ -1,13 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const passport = require("passport");
-let Applet = require("../models/applet");
 const serviceRouter = express.Router();
-let User = require("../models/users");
 serviceRouter.use(bodyParser.json());
-var userObj = null;
-var async = require("async");
 var isLoggedIn = require('../commonFunctions').isLoggedIn;
 
 function extractUserInfo(userFromReq) {
