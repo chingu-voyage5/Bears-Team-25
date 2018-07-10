@@ -35,13 +35,13 @@ class ActivityRow extends Component{
 		date=date.toLocaleString();//get date in user-readable format
 		return (
 			<div className="activity-row">
-				<Grid container spacing={24}>
-					<Grid item sm={1} className="icon">
+				<Grid  justify= 'center' container spacing={24}>
+					{/* <Grid item sm={1} className="icon">
 						<AssignmentIcon />
-					</Grid>
-					<Grid item sm={11}>
-						<CardContent>
-							<Typography variant="headline">
+					</Grid> */}
+					<Grid item sm={8}>
+						<CardContent style={{ paddingLeft: 0}}>
+							<Typography  variant="headline">
 								Service Connected
 							</Typography>
 							<Typography
@@ -53,8 +53,8 @@ class ActivityRow extends Component{
 						</CardContent>
 					</Grid>
 				</Grid>
-				<Grid container spacing={24}>
-					<Grid item sm={1} />
+				<Grid justify= 'center' container spacing={24}>
+					{/* <Grid item sm={1} /> */}
 					<Grid item sm={8}>
 						<ActivityCard serviceName={this.props.activity.serviceFrom} />
 					</Grid>
@@ -72,7 +72,7 @@ class ActivityCard extends Component {
 
 		return (
 			<div className="activity-card">
-				<Card className="card" style={{backgroundColor:Colors[serviceName]}}>
+				<Card className="card" style={{backgroundColor:Colors[serviceName], marginLeft: 0}}>
 					<CardContent>
 						<Typography
 							gutterBottom
