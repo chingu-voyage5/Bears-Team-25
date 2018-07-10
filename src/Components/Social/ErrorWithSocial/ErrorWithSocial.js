@@ -16,7 +16,7 @@ class ErrorWithSocial extends Component {
 
   render() {
     const { message } = this.props.match.params;
-    if (message[0] === 'T') return <Redirect to="/settings" />;
+    if (message[0] === "T") return <Redirect to="/settings" />;
     return <Redirect to="/services" />;
   }
 }

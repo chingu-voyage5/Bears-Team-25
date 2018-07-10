@@ -1,14 +1,14 @@
 var passport = require("passport");
 var localLogin = require("./passportStrategies/localLogin");
-var localSignUp = require('./passportStrategies/localSignUp');
-var facebookAuth = require('./passportStrategies/faceboookAuth');
-var googleAuth = require('./passportStrategies/googleAuth');
-var slack = require('./passportStrategies/slackStrategy');
-var gmail = require('./passportStrategies/gmail');
-var github = require('./passportStrategies/github');
-var trello = require('./passportStrategies/trello')
-var facebookApplet = require('./passportStrategies/facebookApplet');
-var twitter = require('./passportStrategies/twitter');
+var localSignUp = require("./passportStrategies/localSignUp");
+var facebookAuth = require("./passportStrategies/faceboookAuth");
+var googleAuth = require("./passportStrategies/googleAuth");
+var slack = require("./passportStrategies/slackStrategy");
+var gmail = require("./passportStrategies/gmail");
+var github = require("./passportStrategies/github");
+var trello = require("./passportStrategies/trello");
+var facebookApplet = require("./passportStrategies/facebookApplet");
+var twitter = require("./passportStrategies/twitter");
 var User = require("../models/users");
 
 // =========================================================================
@@ -25,10 +25,10 @@ passport.serializeUser(function(user, done) {
 // used to deserialize the user
 passport.deserializeUser(function(id, done) {
   User.findById(id)
-  .populate('appletIds')
-  .exec(function(err, user) {
-    done(err, user);
-  });
+    .populate("appletIds")
+    .exec(function(err, user) {
+      done(err, user);
+    });
 });
 
 // using configured strategies
@@ -42,6 +42,3 @@ github(passport);
 trello(passport);
 facebookApplet(passport);
 twitter(passport);
-
-
-

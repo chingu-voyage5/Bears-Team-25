@@ -15,7 +15,7 @@ import Button from "@material-ui/core/Button";
 import Hidden from "@material-ui/core/Hidden";
 import "./header.css";
 import { withRouter } from "react-router-dom";
-import { logout, fetchUsersCredentials  } from "../../actions/loginActions";
+import { logout, fetchUsersCredentials } from "../../actions/loginActions";
 
 class NavLinkContainer extends React.Component {
   render() {
@@ -38,9 +38,9 @@ class NavLinkContainer extends React.Component {
 
 class Header extends React.Component {
   componentDidMount() {
-		const {fetchUsersCredentials} = this.props;
-		fetchUsersCredentials();
-	}
+    const { fetchUsersCredentials } = this.props;
+    fetchUsersCredentials();
+  }
   state = {
     anchorEl: null
   };

@@ -1,10 +1,9 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField"
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-
+import TextField from "@material-ui/core/TextField";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 export const renderTextField = ({
   input,
@@ -24,25 +23,28 @@ export const renderTextField = ({
   />
 );
 
-export  const renderSelectField = ({ input, label, meta: { touched, error }, children }, ...custom) => (
+export const renderSelectField = (
+  { input, label, meta: { touched, error }, children },
+  ...custom
+) => (
   <div>
-    <FormControl >
-  <InputLabel htmlFor={label + 'f'}>{label}</InputLabel>
-  <Select
-    inputProps={{
-      name: label,
-      id: label + 'f',
-    }}
-    error={touched && typeof error !== "undefined"}
-    children={children}
-    style ={{minWidth: '10em'}}
-    {...input}
-    {...custom}
-    />
-    <FormHelperText  error>{touched && error}</FormHelperText>
+    <FormControl>
+      <InputLabel htmlFor={label + "f"}>{label}</InputLabel>
+      <Select
+        inputProps={{
+          name: label,
+          id: label + "f"
+        }}
+        error={touched && typeof error !== "undefined"}
+        children={children}
+        style={{ minWidth: "10em" }}
+        {...input}
+        {...custom}
+      />
+      <FormHelperText error>{touched && error}</FormHelperText>
     </FormControl>
-    </div>
-)
+  </div>
+);
 
 export const validatePassAndUsername = values => {
   const errors = {};
@@ -57,7 +59,7 @@ export const validatePassAndUsername = values => {
 
 export const validateMessage = values => {
   const errors = {};
-  const requiredFields = ["message", 'email'];
+  const requiredFields = ["message", "email"];
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = "Required";
@@ -74,7 +76,13 @@ export const validateMessage = values => {
 
 export const validateTrello = values => {
   const errors = {};
-  const requiredFields = ["position", 'boardID', 'cardTitle', 'listName', 'description'];
+  const requiredFields = [
+    "position",
+    "boardID",
+    "cardTitle",
+    "listName",
+    "description"
+  ];
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = "Required";
@@ -83,23 +91,22 @@ export const validateTrello = values => {
   return errors;
 };
 
-
 export const validatePassAndEmail = values => {
-    const errors = {};
-    const requiredFields = ["password", "email"];
-    requiredFields.forEach(field => {
-      if (!values[field]) {
-        errors[field] = "Required";
-      }
-    });
-    if (
-      values.email &&
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
-      errors.email = "Invalid email address";
+  const errors = {};
+  const requiredFields = ["password", "email"];
+  requiredFields.forEach(field => {
+    if (!values[field]) {
+      errors[field] = "Required";
     }
-    return errors;
-  };
+  });
+  if (
+    values.email &&
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+  ) {
+    errors.email = "Invalid email address";
+  }
+  return errors;
+};
 
 export const validateOnlyPass = values => {
   const errors = {};
@@ -127,18 +134,18 @@ export const validatePasswords = values => {
 };
 
 export const validatePassUsernameEmail = values => {
-    const errors = {};
-    const requiredFields = ["username", "password"];
-    requiredFields.forEach(field => {
-      if (!values[field]) {
-        errors[field] = "Required";
-      }
-    });
-    if (
-      values.email &&
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
-      errors.email = "Invalid email address";
+  const errors = {};
+  const requiredFields = ["username", "password"];
+  requiredFields.forEach(field => {
+    if (!values[field]) {
+      errors[field] = "Required";
     }
-    return errors;
-  };
+  });
+  if (
+    values.email &&
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+  ) {
+    errors.email = "Invalid email address";
+  }
+  return errors;
+};
