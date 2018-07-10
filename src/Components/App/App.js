@@ -24,7 +24,8 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Header />
-				<Switch>
+				<div className='main-content'>
+				<Switch >
 					<Route exact path="/" component={Homepage} />
 					<Route path='/login' component={SignInPage} />
 					<Route path='/sign_in' component={SignInUsingPasswordPage} />
@@ -40,6 +41,7 @@ class App extends Component {
 					<Route path="/button_applet" component={ButtonApplet} />
 					<Route path="/services" component={Services} />
 				</Switch>
+				</ div>
 				<Footer />
 				<Snackbar />
 			</div>
