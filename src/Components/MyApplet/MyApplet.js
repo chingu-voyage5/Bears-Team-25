@@ -38,9 +38,6 @@ class MyApplet extends Component {
 					<Link  to='/createapplet'> <Button variant="raised" color="primary">Create applet</Button></Link>
 				</div>
 				<Grid  container spacing={24}>
-				<Grid item sm={4}>
-					<ButtonApplet />
-				</Grid>
 					{AppletList}
 				</Grid>
 			</div>

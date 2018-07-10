@@ -39,7 +39,7 @@ class ActivityRow extends Component{
 					{/* <Grid item sm={1} className="icon">
 						<AssignmentIcon />
 					</Grid> */}
-					<Grid item sm={8}>
+					<Grid item xs={10} sm={8}>
 						<CardContent style={{ paddingLeft: 0}}>
 							<Typography  variant="headline">
 								Service Connected
@@ -55,7 +55,7 @@ class ActivityRow extends Component{
 				</Grid>
 				<Grid justify= 'center' container spacing={24}>
 					{/* <Grid item sm={1} /> */}
-					<Grid item sm={8}>
+					<Grid item xs={10} sm={8}>
 						<ActivityCard serviceName={this.props.activity.serviceFrom} />
 					</Grid>
 				</Grid>

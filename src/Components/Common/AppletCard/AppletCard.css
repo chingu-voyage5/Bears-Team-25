@@ -16,10 +16,7 @@
 }
 .applet-card .card{
 	background-color: rgb(51,51,51)!important;
-	width:350px;
 	margin-top:5%;
-	margin-left: auto;
-	margin-right: auto;
 }
 .card-footer{
 	background: rgba(0,0,0,0.2);
@@ -50,8 +47,6 @@
 }
 
 .delete-icon {
-	margin-left: 13em;
-	text-align: right;
 	width: 36px!important;
 	height: 36px!important;
 	cursor: pointer;

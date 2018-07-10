@@ -1,6 +1,6 @@
 .button-applet-card .card {
 	height: fit-content;
-	background-color: rgb(51, 51, 51) !important;
+	background-color: rgba(244, 242, 251, 0.918) !important;
 	width: 350px;
 	margin-top: 8%;
 	border-radius: 10%;
@@ -28,7 +28,6 @@
 	padding-right: 3px;
 }
 .button-applet-card .text p{
-	color: white;
 	font-weight: 100;
 	font-size: 1.1rem;
 }

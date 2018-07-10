@@ -7,7 +7,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import MenuItem from "@material-ui/core/MenuItem";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Visibility from "@material-ui/icons/Visibility";
-import Search from "@material-ui/icons/Search";
+import Mouse from "@material-ui/icons/Mouse";
 import Apps from "@material-ui/icons/Apps";
 import Subject from "@material-ui/icons/Subject";
 import Menu from "@material-ui/core/Menu";
@@ -85,9 +85,9 @@ class Header extends React.Component {
                   icon={<Visibility />}
                 />
                 <NavLinkContainer
-                  to="/search"
-                  title="Search"
-                  icon={<Search />}
+                  to="/button_applets"
+                  title="Button Applets"
+                  icon={<Mouse />}
                 />
                 <NavLinkContainer
                   to="/myapplets"

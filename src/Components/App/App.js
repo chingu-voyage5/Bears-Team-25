@@ -38,7 +38,7 @@ class App extends Component {
 					<Route path="/activity" component={Activity} />
 					<Route path="/error/:message" component={ErrorWithSocial} />
 					<Route path="/success/:message" component={SuccessWithSocial} />
-					<Route path="/button_applet" component={ButtonApplet} />
+					<Route path="/button_applets" component={ButtonApplet} />
 					<Route path="/services" component={Services} />
 				</Switch>
 				</ div>
