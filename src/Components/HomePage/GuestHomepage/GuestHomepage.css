@@ -1,9 +1,9 @@
 .guest-homepage{
 	margin-bottom: 10%;
+	display: block;
 }
 .logo{
-	margin-top:10%;
-	width:115%;
+	width:100%;
 }
 h1{
 	font-size:2.75rem;

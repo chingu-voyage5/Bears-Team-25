@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import video from "../../../Videos/How_IFTTT_Works.mp4";
+import { Link } from "react-router-dom";
 import "./GuestHomepage.css";
 
 const data = {
@@ -96,19 +97,21 @@ class TryItOutRow extends Component {
 		return (
 			<div className="try-out-row feature-row text">
 				<Grid container spacing={24}>
-					<Grid item sm={12}>
+					<Grid item xs ={12} sm={12}>
 						<div className="text-center">
 							<h1>{heading}</h1>
 						</div>
 					</Grid>
-					<Grid item sm={5} className="text">
+					<Grid item xs ={12} sm={5} className="text">
 						<p>{content}</p>
 					</Grid>
-					<Grid item sm={4} />
-					<Grid item sm={3}>
+					<Grid item xs ={12} sm={4} />
+					<Grid item xs ={12} sm={3}>
+					<Link to="/login">
 						<Button variant="outlined" className="try-it-button">
 							Try it out today
 						</Button>
+					</Link>
 					</Grid>
 				</Grid>
 			</div>
@@ -131,14 +134,15 @@ class FeatureRow extends Component {
 		//list first content according to whether image or text should be in first column
 		const FirstContent =
 			alt === "Y" ? (
-				<Grid item sm={5} >
+				<Grid item xs ={12} sm={12} lg={5} >
 					<img src={logo} className="logo" alt="logo"/>
 				</Grid>
 			) : (
-					<Grid item sm={4}>
+					<Grid item xs ={12} sm={12} lg={4}>
 						<div className="text">
 							<h1>{this.props.heading}</h1>
 							<p>{this.props.content}</p>
+							<Link to="/login">
 							<Button
 								variant="raised"
 								color="primary"
@@ -147,16 +151,18 @@ class FeatureRow extends Component {
 							>
 								Try it out
 						</Button>
+						</Link>
 						</div>
 					</Grid>
 				);
 
 		const SecondContent =
 			alt === "Y" ? (
-				<Grid item sm={5}>
+				<Grid item xs = {12} sm={12} lg={5}>
 					<div className="text">
 						<h1>{this.props.heading}</h1>
 						<p>{this.props.content}</p>
+						<Link to="/login">
 						<Button
 							variant="raised"
 							color="primary"
@@ -165,11 +171,12 @@ class FeatureRow extends Component {
 						>
 							Try it out
 						</Button>
+						</Link>
 					</div>
 				</Grid>
 			) : (
 
-				<Grid item sm={6}>
+				<Grid item xs = {12} sm={12} lg={6}>
 					<img src={logo} className="logo" alt="logo"/>
 				</Grid>
 			);
@@ -179,7 +186,7 @@ class FeatureRow extends Component {
 			<div className="feature-row">
 				<Grid container spacing={24}>
 					{FirstContent}
-					<Grid item sm={2} />
+					<Grid item xs ={12} sm={2} />
 					{SecondContent}
 				</Grid>
 			</div>
