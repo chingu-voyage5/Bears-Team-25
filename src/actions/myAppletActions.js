@@ -45,7 +45,7 @@ function deletingApplet_failure_snackbar(error) {
 export function deletingApplet(id) {
   return function(dispatch) {
     axios
-	  .delete(`http://localhost:3001/api/myapplets/${id}`,
+	  .delete(`/myapplets/${id}`,
 	  {withCredentials: true})
       .then(response => {
         dispatch({

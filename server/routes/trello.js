@@ -4,6 +4,7 @@ var express = require("express");
 var router = express.Router();
 var isLoggedIn = require("../commonFunctions").isLoggedIn;
 var deleteApplets = require("../commonFunctions").deleteApplets;
+var baseURL = require('../config/baseUrl')
 
 API_KEY = JSON.parse(process.env.trello).consumerKey;
 
@@ -22,10 +23,10 @@ router.get(
 router.get(
   "/auth/callback",
   passport.authenticate("trello", {
-    failureRedirect: "http://localhost:3000/error/Something went wrong."
+    failureRedirect: baseURL + "error/Something went wrong."
   }),
   (req, res) =>
-    res.redirect("http://localhost:3000/success/Trello successfully connected.") // Successful authentication, redirect home.
+    res.redirect(baseURL + "success/Trello successfully connected.") // Successful authentication, redirect home.
 );
 
 router.get("/disconnect", isLoggedIn, (req, res, next) => {

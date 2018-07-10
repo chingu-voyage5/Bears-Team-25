@@ -1,5 +1,5 @@
 import * as ACTIONS from "./actionTypes";
-const axios = require("axios");
+import axios from "./axiosInstances"; // Pre configured axios instance
 
 function change_password_on() {
   return {
@@ -49,7 +49,7 @@ export function change_password(values) {
     dispatch(change_password_on());
     axios
       .post(
-        "http://localhost:3001/api/users/change_password",
+        "/users/change_password",
         {
           oldPassword: values.currentPassword,
           password: values.password2

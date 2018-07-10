@@ -1,6 +1,6 @@
 import * as ACTIONS from "./actionTypes";
 import { setUsersCredentials } from "./loginActions";
-const axios = require("axios");
+import axios from "./axiosInstances"; // Pre configured axios instance
 
 function signUp_on() {
   return {
@@ -38,7 +38,7 @@ export function sign_up(values) {
     dispatch(signUp_on());
     axios
       .post(
-        "http://localhost:3001/api/users/signup",
+        "/users/signup",
         {
           username: values.username,
           password: values.password,

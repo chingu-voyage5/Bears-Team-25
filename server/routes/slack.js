@@ -4,6 +4,7 @@ var express = require("express");
 var router = express.Router();
 var isLoggedIn = require("../commonFunctions").isLoggedIn;
 var deleteApplets = require("../commonFunctions").deleteApplets;
+const baseURL = require('../config/baseUrl')
 
 const slackSendMessage = (token, message, to) =>
   axios.post(
@@ -23,10 +24,10 @@ router.get("/auth", passport.authorize("Slack"));
 router.get(
   "/auth/callback",
   passport.authenticate("Slack", {
-    failureRedirect: "http://localhost:3000/error/Something went wrong."
+    failureRedirect: baseURL + "error/Something went wrong."
   }),
   (req, res) =>
-    res.redirect("http://localhost:3000/success/Slack successfully connected.") // Successful authentication, redirect home.
+    res.redirect(baseURL + "success/Slack successfully connected.") // Successful authentication, redirect home.
 );
 
 router.get("/disconnect", isLoggedIn, (req, res, next) => {

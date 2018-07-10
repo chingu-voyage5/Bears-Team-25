@@ -1,10 +1,6 @@
 import axios from "axios";
+import baseURL from  '../baseUrl';
 
-// Dynamically set base url depending on "Development" vs "Production"
-const baseURL =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:3001/api/"
-    : "/api/";
 
 const axioInstance = axios.create({
   baseURL: baseURL

@@ -10,6 +10,7 @@ import {
   renderTextField,
   validatePassAndEmail
 } from "../../commonFunctions/formFunctions";
+import baseURL from '../../baseUrl';
 
 class ProfileSettingsPage extends React.Component {
   unlinkFb = () => {
@@ -86,7 +87,7 @@ class ProfileSettingsPage extends React.Component {
                     Google account is not linked
                   </span>
                   <a
-                    href="http://localhost:3001/api/users/auth/google"
+                    href={`${baseURL}users/auth/google`}
                     className="social-link"
                   >
                     Link
@@ -118,7 +119,7 @@ class ProfileSettingsPage extends React.Component {
                     Facebook account is not linked
                   </span>
                   <a
-                    href="http://localhost:3001/api/users/auth/facebook"
+                    href={`${baseURL}users/auth/facebook`}
                     className="social-link"
                   >
                     Link

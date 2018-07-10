@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import MenuItem from "@material-ui/core/MenuItem";
 import { formValueSelector } from 'redux-form';
 import {renderTextField, renderSelectField, validateMessage} from '../../commonFunctions/formFunctions';
+import baseURL from '../../baseUrl'
 const selector = formValueSelector('ButtonAppletForm')
 const axios = require("axios");
 
@@ -22,7 +23,7 @@ const sendMailAndMessage = (values) => {
     to = channel;
   }
   axios
-    .post("http://localhost:3001/api/integrations/sendMessageThroughSlackAndGmail",
+    .post(`${baseURL}integrations/sendMessageThroughSlackAndGmail`,
      {to, message, email },
     {
       withCredentials: true
@@ -49,7 +50,7 @@ class Options extends Component {
 
   fetchUsersAndChannels = () => {
     axios
-      .get("http://localhost:3001/api/slack/fetchUsersAndChannels", {
+      .get(`${baseURL}slack/fetchUsersAndChannels`, {
         withCredentials: true
       })
       .then(response => {
@@ -110,12 +111,12 @@ class Options extends Component {
         </form>)
         }
         {!isSlack && (
-          <a href="http://localhost:3001/api/slack/auth/">
+          <a href={`${baseURL}slack/auth/`}>
             <Button variant="raised" className="slack-btn" style={{backgroundColor: '#49c4a1', color: 'white'}}>connect Slack </Button>
           </a>
         )}
          {!isGmail && (
-        <a href="http://localhost:3001/api/gmail/auth/">
+        <a href={`${baseURL}gmail/auth/`}>
             <Button variant="raised" className="mail-btn" style={{backgroundColor: '#db3236', color: 'white'}}>connect Gmail</Button>
           </a>
             )}

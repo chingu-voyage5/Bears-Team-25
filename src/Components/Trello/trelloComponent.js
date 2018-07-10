@@ -9,6 +9,7 @@ import {
   renderSelectField,
   validateTrello
 } from "../../commonFunctions/formFunctions";
+import baseURL from '../../baseUrl';
 const selector = formValueSelector("TrelloForm");
 const axios = require("axios");
 
@@ -24,7 +25,7 @@ class Trello extends Component {
 
   fetchBoards = () => {
     axios
-      .get("http://localhost:3001/api/trello/fetchBoards", {
+      .get(`${baseURL}trello/fetchBoards`, {
         withCredentials: true
       })
       .then(response => {

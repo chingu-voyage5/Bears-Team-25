@@ -54,7 +54,7 @@ export function disconnectService(service) {
 		service = service.toLowerCase();
 		if (service === 'mail') service = 'gmail';
 	  axios
-		.get(`http://localhost:3001/api/${service}/disconnect`,{withCredentials: true})
+		.get(`${service}/disconnect`,{withCredentials: true})
 		.then((json) => {
 			 const {servicesSubscribed, servicesNotSubscribed} = json.data;
 			 dispatch(disconnect_service(servicesSubscribed, servicesNotSubscribed));

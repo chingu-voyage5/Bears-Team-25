@@ -1,5 +1,5 @@
 import * as ACTIONS from "./actionTypes";
-const axios = require("axios");
+import axios from "./axiosInstances"; // Pre configured axios instance
 
 function change_email_on() {
   return {
@@ -85,7 +85,7 @@ export function unlink(social) {
   return function(dispatch) {
     axios
       .post(
-        "http://localhost:3001/api/users/unlink",
+        "/users/unlink",
         {
           social: social
         },
@@ -118,7 +118,7 @@ export function change_email(values) {
     dispatch(change_email_on());
     axios
       .post(
-        "http://localhost:3001/api/users/change_email",
+        "/users/change_email",
         {
           email: values.email
         },

@@ -1,5 +1,5 @@
 import * as ACTIONS from "./actionTypes";
-const axios = require("axios");
+import axios from "./axiosInstances"; // Pre configured axios instance
 
 function login_on() {
   return {
@@ -85,7 +85,7 @@ export function logout(withoutSnackbar = false) {
     // First dispatch: the app state is updated to inform
     dispatch(logout_local());
     axios
-      .get("http://localhost:3001/api/users/logout", { withCredentials: true })
+      .get("/users/logout", { withCredentials: true })
       .then(() => {
         dispatch(logout_success());
         if (!withoutSnackbar) {
@@ -109,7 +109,7 @@ export function login(values) {
     dispatch(login_on());
     axios
       .post(
-        "http://localhost:3001/api/users/login",
+        "/users/login",
         {
           username: values.username,
           password: values.password,
@@ -144,7 +144,7 @@ export function fetchUsersCredentials() {
   return function(dispatch) {
     axios
       .get(
-        `http://localhost:3001/api/users/user?timestamp=${new Date().getTime()}`,
+        `/users/user?timestamp=${new Date().getTime()}`,
         { withCredentials: true }
       )
       .then(response => {

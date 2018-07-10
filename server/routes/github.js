@@ -10,6 +10,7 @@ var transporter = require("../routes/email").transporter;
 var mailOptions = require("../routes/email").mailOptions;
 var isLoggedIn = require("../commonFunctions").isLoggedIn;
 var deleteApplets = require("../commonFunctions").deleteApplets;
+const baseURL = require('../config/baseUrl');
 
 router.use(webhookHandler); // use our middleware
 
@@ -162,7 +163,7 @@ router.get("/auth", passport.authenticate("github"));
 router.get(
   "/auth/callback",
   passport.authenticate("github", {
-    failureRedirect: "http://localhost:3000/error/Something went wrong."
+    failureRedirect: baseURL + "error/Something went wrong."
   }),
   (req, res) =>
     res.redirect("https://github.com/apps/autoapplet/installations/new") // Successful authentication, redirect home.

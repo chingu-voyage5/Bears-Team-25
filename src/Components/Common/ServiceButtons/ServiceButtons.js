@@ -4,10 +4,11 @@
 
 import React from "react";
 import Button from "@material-ui/core/Button";
+import baseURL from '../../../baseUrl'
 
 //this ia slack button
 const SlackButton = (isServiceConnected, disconnectService) => (
-	<a href={isServiceConnected ? null : "http://localhost:3001/api/slack/auth/"}>
+	<a href={isServiceConnected ? null : `${baseURL}slack/auth/`}>
 		<Button
 			variant="raised"
 			className="slack-btn"
@@ -19,7 +20,7 @@ const SlackButton = (isServiceConnected, disconnectService) => (
 	</a>
 );
 const MailButton = (isServiceConnected, disconnectService) => (
-	<a href={isServiceConnected ? null : "http://localhost:3001/api/gmail/auth/"}>
+	<a href={isServiceConnected ? null : `${baseURL}gmail/auth/`}>
 		<Button
 			variant="raised"
 			className="mail-btn"
@@ -31,7 +32,7 @@ const MailButton = (isServiceConnected, disconnectService) => (
 	</a>
 );
 const TrelloButton = (isServiceConnected, disconnectService) => (
-	<a href={isServiceConnected ? null : "http://localhost:3001/api/trello/auth/"}>
+	<a href={isServiceConnected ? null : `${baseURL}trello/auth/`}>
 		<Button
 			variant="raised"
 			className="mail-btn"
@@ -43,7 +44,7 @@ const TrelloButton = (isServiceConnected, disconnectService) => (
 	</a>
 );
 const FacebookButton = (isServiceConnected, disconnectService) => (
-	<a href={isServiceConnected ? null : "http://localhost:3001/api/facebook/auth/"}>
+	<a href={isServiceConnected ? null : `${baseURL}facebook/auth/`}>
 		<Button
 			variant="raised"
 			className="mail-btn"
@@ -55,7 +56,7 @@ const FacebookButton = (isServiceConnected, disconnectService) => (
 	</a>
 );
 const GithubButton = (isServiceConnected, disconnectService) => (
-	<a href={isServiceConnected ? null : "http://localhost:3001/api/github/auth/"}>
+	<a href={isServiceConnected ? null : `${baseURL}github/auth/`}>
 		<Button
 			variant="raised"
 			className="mail-btn"
@@ -67,7 +68,7 @@ const GithubButton = (isServiceConnected, disconnectService) => (
 	</a>
 );
 const TwitterButton = (isServiceConnected, disconnectService) => (
-	<a href={isServiceConnected ? null : "http://localhost:3001/api/twitter/auth/"}>
+	<a href={isServiceConnected ? null : `${baseURL}twitter/auth/`}>
 		<Button
 			variant="raised"
 			className="mail-btn"
@@ -79,7 +80,7 @@ const TwitterButton = (isServiceConnected, disconnectService) => (
 	</a>
 );
 const InstagramButton = (isServiceConnected, disconnectService) => (
-	<a href={isServiceConnected ? null : "http://localhost:3001/api/gmail/auth/"}>
+	<a href={isServiceConnected ? null : `${baseURL}gmail/auth/`}>
 		<Button
 			variant="raised"
 			className="mail-btn"

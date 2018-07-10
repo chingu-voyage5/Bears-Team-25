@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router";
+import baseURL from '../../baseUrl';
 import "./signInPage.css";
 
 class SignInPage extends React.Component {
@@ -27,7 +28,7 @@ class SignInPage extends React.Component {
             </svg>
           </h2>
           <div>
-            <a href="http://localhost:3001/api/users/auth/google">
+            <a href={`${baseURL}users/auth/google`}>
               <Button
                 fullWidth
                 disabled={isFetching}
@@ -42,7 +43,7 @@ class SignInPage extends React.Component {
           </div>
           <div>
             <a
-              href="http://localhost:3001/api/users/auth/facebook"
+              href={`${baseURL}users/auth/facebook`}
               target="_self"
             >
               <Button

@@ -3,6 +3,7 @@ var express = require("express");
 var router = express.Router();
 var User = require("../models/users");
 var isLoggedIn = require("../commonFunctions").isLoggedIn;
+const baseURL = require('../config/baseUrl')
 
 function extractUserInfo(userFromReq) {
   const { servicesSubscribed, servicesNotSubscribed } = userFromReq;
@@ -243,14 +244,14 @@ router.get("/auth/facebook/callback", function(req, res, next) {
         }
         message = info.message;
         if (message) {
-          res.redirect("http://localhost:3000/" + info.message);
+          res.redirect(baseURL + info.message);
         } else {
-          res.redirect("http://localhost:3000/");
+          res.redirect(baseURL);
         }
         return;
       });
     } else {
-      res.redirect("http://localhost:3000/login");
+      res.redirect(baseURL + "login");
       return;
     }
   })(req, res, next);
@@ -278,13 +279,13 @@ router.get("/auth/google/callback", function(req, res, next) {
         }
         message = info.message;
         if (message) {
-          res.redirect("http://localhost:3000/" + info.message);
+          res.redirect(baseURL + info.message);
         } else {
-          res.redirect("http://localhost:3000/");
+          res.redirect(baseURL);
         }
       });
     } else {
-      res.redirect("http://localhost:3000/login");
+      res.redirect(baseURL + "login");
       return;
     }
   })(req, res, next);

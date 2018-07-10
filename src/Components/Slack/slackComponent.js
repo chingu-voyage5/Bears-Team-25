@@ -8,6 +8,8 @@ import {
   renderSelectField,
   validateMessage
 } from "../../commonFunctions/formFunctions";
+import baseURL from '../../baseUrl';
+
 const selector = formValueSelector("SlackForm");
 const axios = require("axios");
 
@@ -23,7 +25,7 @@ class Slack extends Component {
 
   fetchUsersAndChannels = () => {
     axios
-      .get("http://localhost:3001/api/slack/fetchUsersAndChannels", {
+      .get(`${baseURL}slack/fetchUsersAndChannels`, {
         withCredentials: true
       })
       .then(response => {

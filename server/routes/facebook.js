@@ -4,7 +4,7 @@ var router = express.Router();
 var isLoggedIn = require("../commonFunctions").isLoggedIn;
 var addToNotSubscribedRemoveFromSubscribed = require("../commonFunctions")
   .addToNotSubscribedRemoveFromSubscribed;
-
+const baseURL = require('../config/baseUrl');
 router.get("/updates", (req, res, next) => {
   console.log(req.query["hub.verify_token"]);
   if (req.query["hub.verify_token"] === "ifttt") {
@@ -27,11 +27,11 @@ router.get(
 router.get(
   "/auth/callback",
   passport.authenticate("facebookApplet", {
-    failureRedirect: "http://localhost:3000/error/Something went wrong."
+    failureRedirect: `${baseURL}error/Something went wrong.`
   }),
   (req, res) =>
     res.redirect(
-      "http://localhost:3000/success/Facebook successfully connected."
+      `${baseURL}success/Facebook successfully connected.`
     ) // Successful authentication, redirect home.
 );
 

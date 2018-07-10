@@ -11,6 +11,7 @@ var mailOptions = require("../routes/email").mailOptions;
 var deleteApplets = require("../commonFunctions").deleteApplets;
 var consumer_key = JSON.parse(process.env.twitter).consumerKey;
 var consumer_secret = JSON.parse(process.env.twitter).consumerSecret;
+var baseURL = require('../config/baseUrl')
 
 function trelloActions(applets, trelloToken, cardTitle, description) {
   appletsWithTrelloActions = applets.filter(
@@ -63,11 +64,11 @@ twitterRouter.get("/auth", passport.authorize("twitter"));
 twitterRouter.get(
   "/auth/callback",
   passport.authenticate("twitter", {
-    failureRedirect: "http://localhost:3000/error/Something went wrong."
+    failureRedirect: baseURL + "error/Something went wrong."
   }),
   (req, res) =>
     res.redirect(
-      "http://localhost:3000/success/Twitter successfully connected."
+      baseURL + "success/Twitter successfully connected."
     ) // Successful authentication, redirect home.
 );
 

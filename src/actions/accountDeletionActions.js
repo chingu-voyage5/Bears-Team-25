@@ -1,6 +1,7 @@
 import * as ACTIONS from "./actionTypes";
 import { logout } from "./loginActions";
-const axios = require("axios");
+import axios from "./axiosInstances"; // Pre configured axios instance
+
 
 function account_deletion_on() {
   return {
@@ -44,7 +45,7 @@ export function delete_account(values) {
     dispatch(account_deletion_on());
     axios
       .post(
-        "http://localhost:3001/api/users/delete_account",
+        "users/delete_account",
         {
           password: values.password
         },

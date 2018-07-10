@@ -5,7 +5,7 @@ const passport = require("passport");
 const mailRouter = express.Router();
 var User = require("../models/users");
 require("dotenv").config();
-const app = express();
+const baseUrl = require('../config/baseUrl')
 var isLoggedIn = require("../commonFunctions").isLoggedIn;
 var addToNotSubscribedRemoveFromSubscribed = require("../commonFunctions")
   .addToNotSubscribedRemoveFromSubscribed;
@@ -63,10 +63,10 @@ mailRouter.get(
 mailRouter.get(
   "/auth/callback",
   passport.authenticate("gmail", {
-    failureRedirect: "http://localhost:3000/error/Something went wrong."
+    failureRedirect: `${baseUrl}error/Something went wrong.`
   }),
   (req, res) =>
-    res.redirect("http://localhost:3000/success/Gmail successfully connected.") // Successful authentication, redirect home.
+    res.redirect(`${baseUrl}success/Gmail successfully connected.`) // Successful authentication, redirect home.
 );
 
 mailRouter.get("/disconnect", isLoggedIn, (req, res, next) => {

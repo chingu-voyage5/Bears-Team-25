@@ -47,9 +47,10 @@
     "react-scripts": "1.1.4"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"nodemon server/bin/www\"",
+    "dev": "set NODE_ENV=development &&  concurrently \"react-scripts start\" \"nodemon server/bin/www\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start": "set NODE_ENV=production && node server/bin/www"
   }
 }
