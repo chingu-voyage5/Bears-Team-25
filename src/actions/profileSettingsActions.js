@@ -25,7 +25,7 @@ function change_email_success_snackbar(email) {
     type: ACTIONS.RENDER_SNACKBAR,
     styling: "success",
     text: "You've successfully changed email!",
-    email : email
+    email: email
   };
 }
 
@@ -81,28 +81,32 @@ function unlinkGoogle_failure(error) {
   };
 }
 
-
 export function unlink(social) {
   return function(dispatch) {
     axios
-      .post("http://localhost:3001/api/users/unlink", {
-        social: social
-      }, {withCredentials: true})
-      .then((json) => {
+      .post(
+        "http://localhost:3001/api/users/unlink",
+        {
+          social: social
+        },
+        { withCredentials: true }
+      )
+      .then(json => {
         console.log(json.data);
-        (social === 'facebook') ? (dispatch(unlinkFB()) && dispatch(unlinkFB_success())): 
-        (dispatch(unlinkGoogle()) && dispatch(unlinkGoogle_success()));
+        social === "facebook"
+          ? dispatch(unlinkFB()) && dispatch(unlinkFB_success())
+          : dispatch(unlinkGoogle()) && dispatch(unlinkGoogle_success());
       })
       .catch(error => {
-        console.log(error)
+        console.log(error);
         if (error.response) {
-          error = error.response.data.status
-        } 
-        else {
-          error='Something wrong with server'
+          error = error.response.data.status;
+        } else {
+          error = "Something wrong with server";
         }
-        (social === 'facebook') ? dispatch(unlinkFB_failure(error)):
-         dispatch(unlinkGoogle_failure(error));
+        social === "facebook"
+          ? dispatch(unlinkFB_failure(error))
+          : dispatch(unlinkGoogle_failure(error));
       });
   };
 }
@@ -113,20 +117,23 @@ export function change_email(values) {
     // First dispatch: the app state is updated to inform
     dispatch(change_email_on());
     axios
-      .post("http://localhost:3001/api/users/change_email", {
-        email: values.email
-      }, {withCredentials: true})
-      .then((json) => {
-        let email = json.data.email
+      .post(
+        "http://localhost:3001/api/users/change_email",
+        {
+          email: values.email
+        },
+        { withCredentials: true }
+      )
+      .then(json => {
+        let email = json.data.email;
         dispatch(change_email_success(email));
         dispatch(change_email_success_snackbar());
       })
       .catch(error => {
         if (error.response) {
-          error = error.response.data.status
-        } 
-        else {
-          error='Something wrong with server'
+          error = error.response.data.status;
+        } else {
+          error = "Something wrong with server";
         }
         dispatch(change_email_failure(error));
         dispatch(change_email_failure_snackbar(error));

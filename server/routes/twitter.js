@@ -8,7 +8,7 @@ var postTrelloCard = require("../routes/trello").postCard;
 var slackSendMessage = require("../routes/slack").slackSendMessage;
 var transporter = require("../routes/email").transporter;
 var mailOptions = require("../routes/email").mailOptions;
-var deleteApplets = require('../commonFunctions').deleteApplets;
+var deleteApplets = require("../commonFunctions").deleteApplets;
 var consumer_key = JSON.parse(process.env.twitter).consumerKey;
 var consumer_secret = JSON.parse(process.env.twitter).consumerSecret;
 
@@ -74,14 +74,18 @@ twitterRouter.get(
 twitterRouter.get("/disconnect", isLoggedIn, (req, res, next) => {
   var user = req.user;
   user.twitter = undefined;
-  deleteApplets('Twitter', user, res, next);
+  deleteApplets("Twitter", user, res, next);
 });
 
 // launching streams for each user that have twitter account connected
 
 var streams = {};
 
-User.find({ "twitter.id": { $exists: true } }).exec(function(err, users) {
+User.find({
+  "twitter.id": {
+    $exists: true
+  }
+}).exec(function(err, users) {
   if (err) return done(err);
   if (users.length !== 0) {
     for (let user of users) {
@@ -105,12 +109,14 @@ function openStreamsForTwitterUser(user, streams) {
 
   var stream = T.stream("user");
   streams[id] = stream;
- // console.log(id);
+  // console.log(id);
   stream.on("tweet", function(tweet) {
     // console.log(tweet)
     let twitterID = tweet.user.id;
-   // console.log("twitterID", twitterID);
-    User.find({ "twitter.id": twitterID })
+    // console.log("twitterID", twitterID);
+    User.find({
+      "twitter.id": twitterID
+    })
       .populate("appletIds")
       .exec(function(err, users) {
         if (err) return done(err);
@@ -183,7 +189,9 @@ function openStreamsForTwitterUser(user, streams) {
     let personWhoFollows = followAction.source.name;
     let personWhoisFollowed = followAction.target.name;
     let twitterID = followAction.target.id;
-    User.find({ "twitter.id": twitterID })
+    User.find({
+      "twitter.id": twitterID
+    })
       .populate("appletIds")
       .exec(function(err, users) {
         if (err) return done(err);

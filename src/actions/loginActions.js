@@ -8,7 +8,7 @@ function login_on() {
 }
 
 export function setUsersCredentials(user) {
-  if (user){
+  if (user) {
     return {
       type: ACTIONS.SET_USERS_CREDENTIALS,
       name: user.name,
@@ -19,8 +19,7 @@ export function setUsersCredentials(user) {
       servicesSubscribed: user.servicesSubscribed,
       auth: true
     };
-  }
-  else {
+  } else {
     return {
       type: ACTIONS.SET_USERS_CREDENTIALS,
       name: null,
@@ -30,9 +29,7 @@ export function setUsersCredentials(user) {
       auth: false
     };
   }
- 
 }
-
 
 function login_success_snackbar() {
   return {
@@ -88,9 +85,9 @@ export function logout(withoutSnackbar = false) {
     // First dispatch: the app state is updated to inform
     dispatch(logout_local());
     axios
-      .get("http://localhost:3001/api/users/logout",{withCredentials: true})
+      .get("http://localhost:3001/api/users/logout", { withCredentials: true })
       .then(() => {
-        dispatch(logout_success())
+        dispatch(logout_success());
         if (!withoutSnackbar) {
           dispatch(logout_success_snackbar());
         }
@@ -105,8 +102,6 @@ export function logout(withoutSnackbar = false) {
       });
   };
 }
-
-
 
 export function login(values) {
   return function(dispatch) {
@@ -125,10 +120,10 @@ export function login(values) {
       .then(response => {
         let user = response.data.user;
         if (user) {
-          localStorage.setItem('name', user.name)
+          localStorage.setItem("name", user.name);
           if (user.email === undefined) {
             user.email = "";
-          }   
+          }
         }
         dispatch(setUsersCredentials(user));
         dispatch(login_success_snackbar());
@@ -148,15 +143,18 @@ export function login(values) {
 export function fetchUsersCredentials() {
   return function(dispatch) {
     axios
-      .get(`http://localhost:3001/api/users/user?timestamp=${new Date().getTime()}`, {withCredentials: true})
+      .get(
+        `http://localhost:3001/api/users/user?timestamp=${new Date().getTime()}`,
+        { withCredentials: true }
+      )
       .then(response => {
         let user = response.data.user;
         if (user) {
-          localStorage.setItem('name', user.name)
+          localStorage.setItem("name", user.name);
           if (user.email === undefined) {
             user.email = "";
           }
-        dispatch(setUsersCredentials(user));
+          dispatch(setUsersCredentials(user));
         }
       })
       .catch(error => {
@@ -165,7 +163,7 @@ export function fetchUsersCredentials() {
         } else {
           error = "Something wrong with server";
         }
-        localStorage.removeItem('name')
+        localStorage.removeItem("name");
         dispatch(setUsersCredentials(null));
       });
   };

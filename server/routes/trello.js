@@ -2,9 +2,8 @@ const axios = require("axios");
 var passport = require("passport");
 var express = require("express");
 var router = express.Router();
-var isLoggedIn = require('../commonFunctions').isLoggedIn;
-var deleteApplets = require('../commonFunctions').deleteApplets;
-
+var isLoggedIn = require("../commonFunctions").isLoggedIn;
+var deleteApplets = require("../commonFunctions").deleteApplets;
 
 API_KEY = JSON.parse(process.env.trello).consumerKey;
 
@@ -25,13 +24,14 @@ router.get(
   passport.authenticate("trello", {
     failureRedirect: "http://localhost:3000/error/Something went wrong."
   }),
-  (req, res) => res.redirect("http://localhost:3000/success/Trello successfully connected.") // Successful authentication, redirect home.
+  (req, res) =>
+    res.redirect("http://localhost:3000/success/Trello successfully connected.") // Successful authentication, redirect home.
 );
 
 router.get("/disconnect", isLoggedIn, (req, res, next) => {
   var user = req.user;
   user.trello = undefined;
-  deleteApplets('Trello', user, res, next);
+  deleteApplets("Trello", user, res, next);
 });
 
 router.get("/fetchBoards", isLoggedIn, (req, res, next) => {
@@ -48,7 +48,7 @@ router.get("/fetchBoards", isLoggedIn, (req, res, next) => {
         boards: response.data
       });
     })
-    .catch(function (error) {
+    .catch(function(error) {
       console.log(error);
     });
 });
@@ -81,28 +81,41 @@ const postCard = (token, cardTitle, listID, position, description) =>
 
 async function postCardLogic(trelloConfig) {
   try {
-    const lists = (await fetchListsOfBoard(trelloConfig.token, trelloConfig.boardID)).data;
+    const lists = (await fetchListsOfBoard(
+      trelloConfig.token,
+      trelloConfig.boardID
+    )).data;
     listID = null;
     // if board contains provided listName, add a new card there
-    if ( lists.some(element => {
+    if (
+      lists.some(element => {
         id = element.id;
         return element.name === trelloConfig.listName;
-      })) {
-    listID = id
+      })
+    ) {
+      listID = id;
     }
-    // if board doesn't containt provided listName, create new list with provided name 
+    // if board doesn't containt provided listName, create new list with provided name
     // to add card there
     else {
-      listID = (await createList(trelloConfig.token, trelloConfig.listName, trelloConfig.boardID)).data.id;
+      listID = (await createList(
+        trelloConfig.token,
+        trelloConfig.listName,
+        trelloConfig.boardID
+      )).data.id;
     }
-    let newCard = (await postCard(trelloConfig.token, trelloConfig.cardTitle, listID,
-       trelloConfig.position, trelloConfig.description)).data;
-    return newCard
+    let newCard = (await postCard(
+      trelloConfig.token,
+      trelloConfig.cardTitle,
+      listID,
+      trelloConfig.position,
+      trelloConfig.description
+    )).data;
+    return newCard;
     //console.log(newCard)
-
   } catch (err) {
     console.log(err.response.data);
-    return (err.response.data);
+    return err.response.data;
   }
 }
 

@@ -68,7 +68,6 @@ class ActivityCard extends Component {
 	render() {
 		let serviceName=this.props.serviceName;
 		let serviceNameIcon = serviceName + "Icon";
-		console.log(serviceNameIcon);
 		const IconName = Icons[serviceNameIcon];
 
 		return (

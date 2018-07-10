@@ -8,12 +8,12 @@ export default function snackbarReducer(state = { open: false }, action) {
         styling: action.styling,
         text: action.text,
         open: true
-      }
+      };
     case ACTIONS.CLOSE:
       return {
         ...state,
         open: false
-      }
+      };
     default:
       return state;
   }

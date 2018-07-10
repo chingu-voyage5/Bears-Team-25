@@ -2,14 +2,20 @@ var passport = require("passport");
 var express = require("express");
 var router = express.Router();
 var User = require("../models/users");
-var isLoggedIn = require('../commonFunctions').isLoggedIn;
+var isLoggedIn = require("../commonFunctions").isLoggedIn;
 
 function extractUserInfo(userFromReq) {
-  const {servicesSubscribed, servicesNotSubscribed} = userFromReq;
-  (userFromReq.google.id) ? (isGoogleLinked = true) : (isGoogleLinked = false);
-  (userFromReq.facebook.id) ? (isFBLinked = true) : (isFBLinked = false);
-  return userInfo = { name: userFromReq.name, email: userFromReq.local.email,
-     isGoogleLinked, isFBLinked, servicesSubscribed, servicesNotSubscribed }
+  const { servicesSubscribed, servicesNotSubscribed } = userFromReq;
+  userFromReq.google.id ? (isGoogleLinked = true) : (isGoogleLinked = false);
+  userFromReq.facebook.id ? (isFBLinked = true) : (isFBLinked = false);
+  return (userInfo = {
+    name: userFromReq.name,
+    email: userFromReq.local.email,
+    isGoogleLinked,
+    isFBLinked,
+    servicesSubscribed,
+    servicesNotSubscribed
+  });
 }
 
 // this route is just used to get the user basic info
@@ -274,7 +280,7 @@ router.get("/auth/google/callback", function(req, res, next) {
         if (message) {
           res.redirect("http://localhost:3000/" + info.message);
         } else {
-         res.redirect("http://localhost:3000/");
+          res.redirect("http://localhost:3000/");
         }
       });
     } else {

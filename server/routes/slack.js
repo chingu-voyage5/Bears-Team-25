@@ -2,8 +2,8 @@ const axios = require("axios");
 var passport = require("passport");
 var express = require("express");
 var router = express.Router();
-var isLoggedIn = require('../commonFunctions').isLoggedIn;
-var deleteApplets = require('../commonFunctions').deleteApplets;
+var isLoggedIn = require("../commonFunctions").isLoggedIn;
+var deleteApplets = require("../commonFunctions").deleteApplets;
 
 const slackSendMessage = (token, message, to) =>
   axios.post(
@@ -25,13 +25,14 @@ router.get(
   passport.authenticate("Slack", {
     failureRedirect: "http://localhost:3000/error/Something went wrong."
   }),
-  (req, res) => res.redirect("http://localhost:3000/success/Slack successfully connected.") // Successful authentication, redirect home.
+  (req, res) =>
+    res.redirect("http://localhost:3000/success/Slack successfully connected.") // Successful authentication, redirect home.
 );
 
 router.get("/disconnect", isLoggedIn, (req, res, next) => {
   var user = req.user;
   user.slack = undefined;
-  deleteApplets('Slack', user, res, next);
+  deleteApplets("Slack", user, res, next);
 });
 
 router.get("/fetchUsersAndChannels", isLoggedIn, (req, res, next) => {
@@ -61,14 +62,12 @@ router.get("/fetchUsersAndChannels", isLoggedIn, (req, res, next) => {
       }
     }
     fetchUsersAndChannels();
-  }
-  else {
+  } else {
     res.statusCode = 401;
-		res.setHeader("Content-Type", "application/json");
-		res.json({ success: false, status: "You don't have access token!" });
+    res.setHeader("Content-Type", "application/json");
+    res.json({ success: false, status: "You don't have access token!" });
   }
 });
 
 exports.slackRouter = router;
 exports.slackSendMessage = slackSendMessage;
-
