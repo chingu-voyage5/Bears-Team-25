@@ -5,16 +5,18 @@
  **/
 import React, { Component } from "react";
 // import logo from "../Common/Images/ifttt-banner.png";
+import GithubCircleIcon from "mdi-react/GithubCircleIcon";
+import Hidden from "@material-ui/core/Hidden";
 import "./Footer.css";
 
 class Footer extends Component {
   render() {
     return (
       <div className="footer-overlay">
-        <div className="footer">
-          {/* <div className="footer__logo1">
+        {/* <div className="footer">
+          <div className="footer__logo1">
               <img src={logo} alt="Project Showcase" />
-          </div> */}
+          </div>
           <div className="footer__links">
             <div className="footer__links__column">
               <div>CONNECT</div>
@@ -53,10 +55,18 @@ class Footer extends Component {
               </ul>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="text-center footer-credentials">
-            This web application was created by Anshul and Ruslan as part of "build to learn" project for chingu voygage 5.
+        <Hidden smDown>
+                    <div style={{marginTop: 30}}> This web application was created by Anshul and Ruslan as part of "build to learn" project for chingu voygage 5.</div>
+        </Hidden>
+            <div>
+              <a target="_blank" href='https://github.com/chingu-voyage5/Bears-Team-25'> 
+            <GithubCircleIcon  color = 'white' className="git-icon" />
+            </a>
+            </div>
           </div>
+         
       </div>
     );
   }

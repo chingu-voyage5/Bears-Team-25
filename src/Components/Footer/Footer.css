@@ -76,8 +76,17 @@
 }
 .footer-credentials{
   color:white;
-  margin-bottom: 25px;
-      margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-family:  cursive;
+  font-size: 1em;
+}
+
+.git-icon {
+  cursor: pointer;
+	width: 64px!important;
+  height: 64px!important;
+  margin-top: 26px;
+
 }
