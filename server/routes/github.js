@@ -10,7 +10,11 @@ var transporter = require("../routes/email").transporter;
 var mailOptions = require("../routes/email").mailOptions;
 var isLoggedIn = require("../commonFunctions").isLoggedIn;
 var deleteApplets = require("../commonFunctions").deleteApplets;
-const baseURL = require('../config/baseUrl');
+const baseURL = require("../config/baseUrl");
+var addToNotSubscribedRemoveFromSubscribed = require("../commonFunctions")
+  .addToNotSubscribedRemoveFromSubscribed;
+var addToSubscribedRemoveFromNotSubscribed = require("../commonFunctions")
+  .addToSubscribedRemoveFromNotSubscribed;
 
 router.use(webhookHandler); // use our middleware
 
@@ -20,9 +24,6 @@ webhookHandler.on("*", function(event, repo, data) {
 });
 
 webhookHandler.on("issues", function(repo, data) {
-  console.log("issue stuff");
-  // console.log(repo)
-  // console.log(data);
   let userGitID = data.sender.id;
   if (data.action === "opened") {
     // find all users with this git ID
@@ -103,9 +104,7 @@ webhookHandler.on("issues", function(repo, data) {
   }
 });
 
-webhookHandler.on("installation", function(repo, data) {
-  // console.log('repo', repo);
-  // console.log('data', data);
+webhookHandler.on("installation", function(repo, data) {;
   let userGitID = data.installation.account.id;
   if (data.action == "created") {
     // if app is installed to account with this id, we should update all account, that use this git id
@@ -113,8 +112,10 @@ webhookHandler.on("installation", function(repo, data) {
       if (err) return done(err);
       if (users.length !== 0) {
         for (user of users) {
-          addToNotSubscribedRemoveFromSubscribed(
+          addToSubscribedRemoveFromNotSubscribed(
             "Github",
+            true,
+            false,
             user.servicesSubscribed,
             user.servicesNotSubscribed
           );
@@ -136,12 +137,11 @@ webhookHandler.on("installation", function(repo, data) {
       if (users.length !== 0) {
         for (user of users) {
           user.github = undefined;
-          let index = user.servicesSubscribed
-            .map(service => service.service)
-            .indexOf("Github");
-          if (index !== -1) user.servicesSubscribed.splice(index, 1);
-          index = user.servicesNotSubscribed.indexOf("Github");
-          if (index === -1) user.servicesNotSubscribed.push("Github");
+          addToNotSubscribedRemoveFromSubscribed(
+            "Github",
+            user.servicesSubscribed,
+            user.servicesNotSubscribed
+          );
           user.save(function(err) {
             if (err) return next(err);
           });
@@ -152,11 +152,6 @@ webhookHandler.on("installation", function(repo, data) {
     });
   }
 });
-
-// webhookHandler.on("installation_repositories", function(repo, data) {
-//   console.log('repo', repo);
-//   console.log('data', data);
-// });
 
 router.get("/auth", passport.authenticate("github"));
 

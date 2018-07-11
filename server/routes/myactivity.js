@@ -1,13 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const passport = require("passport");
-let Applet = require("../models/applet");
 const myactivtiyRouter = express.Router();
 let User = require("../models/users");
 myactivtiyRouter.use(bodyParser.json());
 var userObj = null;
-var async = require("async");
 
 //check if the user is authenticated
 myactivtiyRouter.use(function(req, res, next) {

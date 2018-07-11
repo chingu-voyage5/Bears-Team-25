@@ -1,4 +1,3 @@
-var User = require("../../models/users");
 var FacebookStrategy = require("passport-facebook").Strategy;
 var addToSubscribedRemoveFromNotSubscribed = require("../../commonFunctions")
   .addToSubscribedRemoveFromNotSubscribed;

@@ -1,4 +1,3 @@
-var User = require("../../models/users");
 var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 var addToSubscribedRemoveFromNotSubscribed = require("../../commonFunctions")
   .addToSubscribedRemoveFromNotSubscribed;
