@@ -23,8 +23,8 @@ class ServiceCard extends Component {
 		return (
 			<div className="service-card">
 				<Grid  style={{color:'white'}}container spacing={24}>
-					<Grid item md={2} />
-					<Grid item md={8}>
+					<Grid item sm={2} md = {3}/>
+					<Grid item xs={12} sm={8} md = {6}>
 						<Card
 							className="card"
 							style={{ backgroundColor: Colors[serviceName] }}

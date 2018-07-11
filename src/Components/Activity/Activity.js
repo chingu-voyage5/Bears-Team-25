@@ -80,7 +80,7 @@ class ActivityCard extends Component {
 							component="h1"
 						>
 							<Grid container spacing={24}>
-							<Grid item sm={8}>
+							<Grid item  xs={10} sm={8}>
 								<IconName /><span className="service-name">{serviceName}</span>
 							</Grid>
 							</Grid>
