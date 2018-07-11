@@ -6,14 +6,12 @@ var addToNotSubscribedRemoveFromSubscribed = require("../commonFunctions")
   .addToNotSubscribedRemoveFromSubscribed;
 const baseURL = require('../config/baseUrl');
 router.get("/updates", (req, res, next) => {
-  console.log(req.query["hub.verify_token"]);
   if (req.query["hub.verify_token"] === "ifttt") {
     res.send(req.query["hub.challenge"]);
   }
 });
 
 router.post("/updates", (req, res, next) => {
-  console.log(req.body.entry[0].changed_fields);
   res.statusCode = 200;
 });
 

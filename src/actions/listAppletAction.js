@@ -9,7 +9,6 @@ export function listApplets() {
 		axios
 			.get("/applets",{ withCredentials: true })
 			.then(allApplets => {
-				console.log("Done");
 				dispatch({
 					type: ACTIONS.LIST_APPLET,
 					payload: allApplets.data

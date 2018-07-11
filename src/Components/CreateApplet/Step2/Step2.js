@@ -45,7 +45,6 @@ class Step2 extends Component {
 
   render() {
     const { open, values } = this.state;
-    // console.log(values)
     const service = this.props.service;
     const TriggerList = this.props.TriggerList[service];
     if (TriggerList === undefined) {

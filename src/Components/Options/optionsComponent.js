@@ -74,7 +74,6 @@ class Options extends Component {
     const {users, channels } = this.state;
     const isSlack = this.isSubscribed('Slack');
     const isGmail = this.isSubscribed('Mail');
-   // console.log(source, channel, user);
     const usersToRender = users.map( (user, index) => 
       <MenuItem key = {`user-${index}`} value={user.id}>{user.name}</MenuItem>)
     const channelsToRender = channels.map( (channel, index) => 

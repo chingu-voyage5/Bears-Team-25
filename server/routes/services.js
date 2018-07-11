@@ -37,8 +37,6 @@ serviceRouter.get("/", isLoggedIn, (req, res, next) => {
 	if (userObj.isGmailToken === true) {
 		servicesSubscribed.push("Mail");
 	}
-	console.log("Showing all services");
-	console.log(servicesSubscribed);
 	res.statusCode = 200;
 	res.setHeader("Content-Type", "application/json");
 	res.json(servicesSubscribed);

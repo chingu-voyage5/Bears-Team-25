@@ -110,11 +110,8 @@ function openStreamsForTwitterUser(user, streams) {
 
   var stream = T.stream("user");
   streams[id] = stream;
-  // console.log(id);
   stream.on("tweet", function(tweet) {
-    // console.log(tweet)
     let twitterID = tweet.user.id;
-    // console.log("twitterID", twitterID);
     User.find({
       "twitter.id": twitterID
     })

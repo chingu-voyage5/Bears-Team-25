@@ -32,7 +32,6 @@ function signUp_failure_snackbar(error) {
 }
 
 export function sign_up(values) {
-  console.log(values);
   return function(dispatch) {
     // First dispatch: the app state is updated to inform
     dispatch(signUp_on());

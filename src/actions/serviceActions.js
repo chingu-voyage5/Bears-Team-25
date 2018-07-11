@@ -9,7 +9,6 @@ export function listServices() {
 		axios
 			.get("/services",{ withCredentials: true })
 			.then(services => {
-				console.log("Done");
 				dispatch({
 					type: ACTIONS.SHOW_SERVICES,
 					payload: services.data

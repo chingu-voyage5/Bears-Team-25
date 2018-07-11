@@ -43,7 +43,6 @@ export function successOff() {
 }
 
 export function change_password(values) {
-  console.log(values);
   return function(dispatch) {
     // First dispatch: the app state is updated to inform
     dispatch(change_password_on());
@@ -57,7 +56,6 @@ export function change_password(values) {
         { withCredentials: true }
       )
       .then(json => {
-        console.log(json);
         dispatch(change_password_success());
         dispatch(change_password_success_snackbar());
       })

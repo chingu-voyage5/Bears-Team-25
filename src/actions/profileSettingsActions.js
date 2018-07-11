@@ -112,7 +112,6 @@ export function unlink(social) {
 }
 
 export function change_email(values) {
-  console.log(values);
   return function(dispatch) {
     // First dispatch: the app state is updated to inform
     dispatch(change_email_on());

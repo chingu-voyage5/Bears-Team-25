@@ -87,7 +87,7 @@ class ProfileSettingsPage extends React.Component {
                     Google account is not linked
                   </span>
                   <a
-                    href={`${baseURL}users/auth/google`}
+                    href={baseURL + "users/auth/google"}
                     className="social-link"
                   >
                     Link
@@ -119,7 +119,7 @@ class ProfileSettingsPage extends React.Component {
                     Facebook account is not linked
                   </span>
                   <a
-                    href={`${baseURL}users/auth/facebook`}
+                    href={baseURL + "users/auth/facebook"}
                     className="social-link"
                   >
                     Link

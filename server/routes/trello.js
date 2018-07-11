@@ -113,9 +113,7 @@ async function postCardLogic(trelloConfig) {
       trelloConfig.description
     )).data;
     return newCard;
-    //console.log(newCard)
   } catch (err) {
-    console.log(err.response.data);
     return err.response.data;
   }
 }
