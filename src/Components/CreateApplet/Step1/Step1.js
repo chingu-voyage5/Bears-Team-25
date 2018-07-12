@@ -4,6 +4,8 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import ServiceCard from "../ServiceCard/ServiceCard";
 import { Redirect } from 'react-router';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 import "./Step1.css";
 
 class Step1 extends Component {
@@ -32,8 +34,13 @@ class Step1 extends Component {
 		}
 		// const serviceList=this.props.serviceList;
 		return (
-			<div className="step-1">
-				<ServiceCard json={servicesWithWebhooks} validate={this._validate}/>
+			<div>
+				<div className="text-center">
+					<Link  to='/services'> <Button variant="raised" color="primary">Add more services</Button></Link>
+				</div>
+				<div className="step-1">
+					<ServiceCard json={servicesWithWebhooks} validate={this._validate}/>
+				</div>
 			</div>
 		);
 	}
