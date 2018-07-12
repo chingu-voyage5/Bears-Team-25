@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import AppletCard from "../Common/AppletCard/AppletCard";
 import * as myAppletActions from "../../actions/myAppletActions";
 import { bindActionCreators } from "redux";
-import ButtonApplet from "../ButtonApplet/ButtonApplet";
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
@@ -22,10 +21,8 @@ class MyApplet extends Component {
 		this.state = {};
 	}
 	render() {
-		let name = localStorage.getItem('name')
-		if (!name) {
-			return <Redirect to='/' />
-		}
+	    let name = localStorage.getItem("name");
+   		if (!name) return <Redirect to="/" />;
 		const appletList =this.props.appletList;
 		const AppletList = appletList.map( (applet, i) => (
 			<AppletCard key={`applet-list-${i}`} content={applet.content} deleteApplet = {this.props.myApplet.deletingApplet}

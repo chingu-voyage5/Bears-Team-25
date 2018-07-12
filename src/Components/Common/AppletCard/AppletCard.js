@@ -5,18 +5,30 @@ import Avatar from "@material-ui/core/Avatar";
 import Switch from "@material-ui/core/Switch";
 import Grid from "@material-ui/core/Grid";
 import DeleteIcon from "mdi-react/DeleteIcon";
+import ConfirmationDialog from '../ConfirmationDialog/confirmationDialog';
 import * as Icons from "../Icons/Icons";
 import "./AppletCard.css";
 
 class AppletCard extends Component {
   state = {
     checkedA: true,
-    checkedB: true
+    checkedB: true,
+    open: false
   };
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.checked });
   };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+
   render() {
     const { serviceTo, serviceFrom, isHome, deleteApplet, id } = this.props;
     let iconNameTo = serviceTo + "Icon";
@@ -36,7 +48,8 @@ class AppletCard extends Component {
                 <Grid item xs={2}>
                   {!isHome && (
                     <DeleteIcon
-                      onClick={() => deleteApplet(id)}
+                      // onClick={() => deleteApplet(id)}
+                      onClick= {this.handleClickOpen} 
                       color="red"
                       className="delete-icon"
                     />
@@ -71,6 +84,14 @@ class AppletCard extends Component {
             </CardContent>
           </Card>
         </div>
+        <ConfirmationDialog
+          open={this.state.open}
+          handleClose={this.handleClose}
+          message="This action will delete your applet."
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+          action = {() => deleteApplet(id)}
+        /> 
       </Grid>
     );
   }
