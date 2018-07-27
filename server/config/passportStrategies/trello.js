@@ -3,7 +3,7 @@ var addToSubscribedRemoveFromNotSubscribed = require("../../commonFunctions")
   .addToSubscribedRemoveFromNotSubscribed;
 
 OAuth1Strategy.prototype.userAuthorizationParams = function(options) {
-  return { scope: ["read", "write"], expiration: "never", name: "IFTTT" };
+  return { scope: ["read", "write"], expiration: "never", name: "AutoApplet" };
 };
 
 module.exports = function(passport) {
