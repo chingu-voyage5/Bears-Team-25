@@ -29,3 +29,10 @@
 googleButton:hover {
     background-color: green!important;
 }
+
+.app-title {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 800;
+    font-size: 1.1em;
+    color: #262326;
+}

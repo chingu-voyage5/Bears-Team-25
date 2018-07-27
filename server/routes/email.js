@@ -38,7 +38,7 @@ const mailOptions = (user, json) => {
   return {
     from: user.gmail.email, // sender address
     to: json.email, // list of receivers
-    subject: "IFTTT message", // Subject line
+    subject: "AutoApplet message", // Subject line
     text: json.message, // plain text body
     html: `<b>${json.message}</b>`, // html body
     auth: {

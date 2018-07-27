@@ -12,7 +12,7 @@ const data = {
 		{
 			heading: "A world that works for you",
 			content:
-				"IFTTT is the free way to get all your apps and devices talking to each other. Not everything on the internet plays nice, so we're on a mission to build a more connected world.",
+				"AutoApplet is the free way to get all your apps and devices talking to each other. Not everything on the internet plays nice, so we're on a mission to build a more connected world.",
 			alt: "N",
 			img: require('../../Common/Images/world.jpg')
 		}
@@ -23,7 +23,7 @@ const data = {
 			content:
 				"Build a smart home that responds to every cue—from locking your front door to welcoming the delivery guy.",
 			alt: "Y",
-			img: require('../../Common/Images/dominos-ifttt.jpg')
+			img: require('../../Common/Images/light_home.jpg')
 		},
 		{
 			heading: "Post your photo anywhere and see it everywhere",
@@ -37,7 +37,7 @@ const data = {
 			content:
 				"Just say the word, and we’ll help you stay in-sync across systems as you go through your day.",
 			alt: "Y",
-			img: require('../../Common/Images/AssistantIFTTT.jpg')
+			img: require('../../Common/Images/home_automation.png')
 		}
 	]
 };
@@ -91,7 +91,7 @@ class VideoRow extends Component {
 class TryItOutRow extends Component {
 	render() {
 		const heading =
-			"IFTTT helps your apps and devices work together in new ways";
+			"AutoApplet helps your apps and devices work together in new ways";
 		const content =
 			"We’ll show you some of our favorite pairings. Just turn on what you like and we’ll make it happen for you.";
 		return (

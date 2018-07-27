@@ -5,10 +5,13 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Options from '../Options/optionsComponent';
+import { Redirect } from "react-router";
 import "./ButtonApplet.css";
 
 class ButtonApplet extends Component {
 	render() {
+		let name = localStorage.getItem("name");
+		if (!name) return <Redirect to="/" />;
 		return (
 			<div className="button-applet-card text-center">
 				<Card className="card">

@@ -1,4 +1,4 @@
-.ifttt-logo {
+.AUTOAPPLET-logo {
     margin-left: 10em;
     margin-right: 2.5em;
 }
@@ -14,8 +14,14 @@
     margin-right: 10em;
 }
 
+.logo-title {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 800;
+    font-size: 1.1em;
+}
+
 @media screen and (max-width: 1025px) {
-    .ifttt-logo {
+    .AUTOAPPLET-logo {
         margin-left: 0;
         font-size: 10px;
         size: 1em;

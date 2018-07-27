@@ -66,16 +66,8 @@ class Header extends React.Component {
       <div className="header-container">
         <AppBar position="static" color={auth ? "primary" : "default"}>
           <Toolbar>
-            <Link className="ifttt-logo" to="/">
-              <svg
-                fill={auth ? "white" : "#262326"}
-                height="1.7em"
-                viewBox="0 0 332 88"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <title>Home</title>
-                <path d={IFTTT_ICON} />
-              </svg>
+            <Link className="AUTOAPPLET-logo" to="/">             
+              <i style={auth ? {color: "white"} : {color: "#262326"}} className='logo-title'>AutoApplet</i>
             </Link>
             {auth && (
               <i>
@@ -177,5 +169,5 @@ export default withRouter(
   )(Header)
 );
 
-const IFTTT_ICON =
+const AUTOAPPLET_ICON =
   "M0 0h28v88H0V0zm64 88H36V0h68v28H64v8h28v28H64v24zm70.5-88H112v28h20v60h28V28h20V0h-45.5zM212 0h-24v28h20v60h28V28h20V0h-44zm76 0h-24v28h20v60h28V28h20V0h-44z";
